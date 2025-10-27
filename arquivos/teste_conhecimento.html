@@ -1,0 +1,1608 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teste Seu Conhecimento - Cálculos Trabalhistas (50 Questões Agrupadas)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Estilo para a Logo */
+        .logo-trt {
+            max-height: 60px;
+            /* Definindo uma altura máxima menor para a logo */
+            width: auto;
+        }
+
+        /* Título Principal */
+        .main-title {
+            color: #00678F;
+            border-bottom: 2px solid #ddd;
+        }
+
+        /* Títulos de Seção: Cor das fontes igual do titulo FAQ */
+        .main-sub-title {
+            color: #00678F;
+            /* Cor do título principal */
+            background-color: transparent;
+            /* Removendo fundo verde musgo pastel */
+            border-left: none;
+            /* Removendo borda */
+            padding: 0.5rem 0.40rem;
+            border-radius: 0.25rem;
+            margin-top: 0.5rem;
+            margin-bottom: 0.5rem;
+            font-size: medium;
+        }
+
+        /* Títulos de Seção: Cor das fontes igual do titulo FAQ */
+        .section-title {
+            color: #00678F;
+            /* Cor do título principal */
+            background-color: transparent;
+            /* Removendo fundo verde musgo pastel */
+            border-left: none;
+            /* Removendo borda */
+            padding: 0.5rem 0.75rem;
+            border-radius: 0.25rem;
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Títulos de Seção: Cor das fontes igual do titulo FAQ */
+        .section-sub-title {
+            color: #00678F;
+            /* Cor do título principal */
+            background-color: transparent;
+            /* Removendo fundo verde musgo pastel */
+            border-left: none;
+            /* Removendo borda */
+            padding: 0.5rem 0.75rem;
+            border-radius: 0.25rem;
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+            font-size: x-small;
+        }
+
+
+        /* Estilos base herdados do layout de referência */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f4f8;
+            /* Cor de fundo do rsr.html */
+            color: #1a202c;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 2rem auto;
+            /* Ajuste para o espaçamento do rsr.html */
+            padding: 2rem;
+            background-color: #ffffff;
+            border-radius: 1.5rem;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Estilos específicos do Quiz */
+        .question-box {
+            break-inside: avoid-page;
+            /* Ajuda a evitar quebra de página em impressão */
+            margin-bottom: 1rem;
+            /* Adiciona espaçamento entre as perguntas */
+        }
+
+        .option {
+            margin: 8px 0;
+            cursor: pointer;
+            padding: 8px;
+            border-radius: 6px;
+            transition: background-color 0.2s;
+        }
+
+        .option:hover {
+            background-color: #f1f5f9;
+            /* Cor leve para hover, similar ao drawer */
+        }
+
+        .feedback {
+            margin-top: 10px;
+            font-weight: bold;
+            display: none;
+            padding: 10px;
+            border-radius: 8px;
+            border-left-width: 4px;
+        }
+
+        .correct {
+            color: #156540;
+            /* Verde escuro */
+            background-color: #e6f7ef;
+            border-left-color: #38a169;
+            /* Verde Tonalidade 600 */
+        }
+
+        .incorrect {
+            color: #991b1b;
+            /* Vermelho escuro */
+            background-color: #fff1f2;
+            border-left-color: #ef4444;
+            /* Vermelho Tonalidade 500 */
+        }
+
+        /* Estilos para a Gaveta Expansível */
+        .drawer-container {
+            margin-bottom: 0.75rem;
+            border: 1px solid #f0f4f8;
+            border-radius: 0.5rem;
+            background-color: #ffffff;
+        }
+
+        .drawer-header {
+            background-color: #f0f4f8;
+            color: #333;
+            padding: 1rem 1.5rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 1.25rem;
+            font-weight: 700;
+            transition: background-color 0.2s;
+        }
+
+        .drawer-header:hover {
+            background-color: #eef;
+        }
+
+        .drawer-header .arrow {
+            transition: transform 0.3s;
+        }
+
+        .drawer-header.active .arrow {
+            transform: rotate(180deg);
+        }
+
+        .drawer-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-in-out, padding 0.3s ease-in-out;
+            padding: 0 1.5rem;
+            background-color: #f8fafc;
+        }
+
+        .drawer-content.expanded {
+            /* max-height será definido via JS para a altura real */
+            padding-top: 1.5rem;
+            padding-bottom: 1.5rem;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+
+        <div class="text-center mb-6">
+            <img src="https://site.trt19.jus.br/portalTRT19/sites/default/files/logo-trt19.png" alt="Logo TRT"
+                class="mx-auto logo-trt">
+        </div>
+
+        <h1 class="main-title text-3xl font-bold mb-6 pb-3 text-center">
+            Teste Seu Conhecimento - Cálculos Trabalhistas (50 Questões)
+            <p class="main-sub-title">Responda às 50 perguntas. Clique no título da seção para expandir e ver as
+                questões. O feedback será imediato ao selecionar
+                a resposta.</p>
+
+        </h1>
+
+        <form id="quizForm">
+
+            <div class="drawer-container">
+                <div class="drawer-header" id="section-1-header">
+                    1. Liquidação de Sentença (3 Questões)
+                    <span class="arrow">▼</span>
+                </div>
+                <div class="drawer-content" id="section-1-content">
+                    <div class="inner-content">
+                        <div class="question-box p-4 bg-white border border-gray-200 rounded-lg shadow-sm" id="q1">
+                            <div class="question-title text-lg font-semibold text-gray-800 mb-2">1. Qual princípio
+                                fundamental deve ser observado na fase de liquidação de sentença, que proíbe modificar
+                                ou inovar o que foi decidido?</div>
+                            <div class="option"><label class="flex items-center"><input type="radio" name="q1" value="a"
+                                        onclick="checkAnswer(1)" class="mr-2 text-[#00678F] focus:ring-[#00678F]"> a)
+                                    Princípio da Celeridade Processual.</label></div>
+                            <div class="option"><label class="flex items-center"><input type="radio" name="q1" value="b"
+                                        onclick="checkAnswer(1)" class="mr-2 text-[#00678F] focus:ring-[#00678F]"> b)
+                                    Princípio da Vedação ao Enriquecimento Ilícito.</label></div>
+                            <div class="option"><label class="flex items-center"><input type="radio" name="q1" value="c"
+                                        onclick="checkAnswer(1)" class="mr-2 text-[#00678F] focus:ring-[#00678F]"> c)
+                                    Princípio da Inalterabilidade da Decisão Liquidanda.</label></div>
+                            <div class="option"><label class="flex items-center"><input type="radio" name="q1" value="d"
+                                        onclick="checkAnswer(1)" class="mr-2 text-[#00678F] focus:ring-[#00678F]"> d)
+                                    Princípio da Razoabilidade.</label></div>
+                            <div class="feedback"></div>
+                        </div>
+
+                        <div class="question-box p-4 bg-white border border-gray-200 rounded-lg shadow-sm" id="q2">
+                            <div class="question-title text-lg font-semibold text-gray-800 mb-2">2. Quais são os dois
+                                elementos essenciais do crédito principal que devem ser incluídos na liquidação, mesmo
+                                que omissos na decisão?</div>
+                            <div class="option"><label class="flex items-center"><input type="radio" name="q2" value="a"
+                                        onclick="checkAnswer(2)" class="mr-2 text-[#00678F] focus:ring-[#00678F]"> a)
+                                    Contribuições Previdenciárias e Custas Processuais.</label></div>
+                            <div class="option"><label class="flex items-center"><input type="radio" name="q2" value="b"
+                                        onclick="checkAnswer(2)" class="mr-2 text-[#00678F] focus:ring-[#00678F]"> b)
+                                    Honorários Periciais e Imposto de Renda.</label></div>
+                            <div class="option"><label class="flex items-center"><input type="radio" name="q2" value="c"
+                                        onclick="checkAnswer(2)" class="mr-2 text-[#00678F] focus:ring-[#00678F]"> c)
+                                    Correção Monetária e Juros de Mora.</label></div>
+                            <div class="option"><label class="flex items-center"><input type="radio" name="q2" value="d"
+                                        onclick="checkAnswer(2)" class="mr-2 text-[#00678F] focus:ring-[#00678F]"> d)
+                                    FGTS e Multa do Art. 477 da CLT.</label></div>
+                            <div class="feedback"></div>
+                        </div>
+
+                        <div class="question-box p-4 bg-white border border-gray-200 rounded-lg shadow-sm" id="q3">
+                            <div class="question-title text-lg font-semibold text-gray-800 mb-2">3. A modalidade de
+                                liquidação que exige a alegação e prova de **fato novo**, essencial para determinar o
+                                valor da condenação, é a:</div>
+                            <div class="option"><label class="flex items-center"><input type="radio" name="q3" value="a"
+                                        onclick="checkAnswer(3)" class="mr-2 text-[#00678F] focus:ring-[#00678F]"> a)
+                                    Liquidação por Cálculo.</label></div>
+                            <div class="option"><label class="flex items-center"><input type="radio" name="q3" value="b"
+                                        onclick="checkAnswer(3)" class="mr-2 text-[#00678F] focus:ring-[#00678F]"> b)
+                                    Liquidação por Artigos (ou Procedimento Comum).</label></div>
+                            <div class="option"><label class="flex items-center"><input type="radio" name="q3" value="c"
+                                        onclick="checkAnswer(3)" class="mr-2 text-[#00678F] focus:ring-[#00678F]"> c)
+                                    Liquidação por Arbitramento.</label></div>
+                            <div class="option"><label class="flex items-center"><input type="radio" name="q3" value="d"
+                                        onclick="checkAnswer(3)" class="mr-2 text-[#00678F] focus:ring-[#00678F]"> d)
+                                    Liquidação Simplificada.</label></div>
+                            <div class="feedback"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="drawer-container">
+                <div class="drawer-header" id="section-2-header">
+                    2. Jornada de Trabalho e Horas Extras (5 Questões)
+                    <span class="arrow">▼</span>
+                </div>
+                <div class="drawer-content" id="section-2-content">
+                    <div class="inner-content">
+                        <div class="question-box p-4 bg-white border border-gray-200 rounded-lg shadow-sm" id="q6">
+                            <div class="question-title text-lg font-semibold text-gray-800 mb-2">4. A hora noturna
+                                (trabalho entre 22h e 5h) é computada como quantos minutos para fins de cálculo de
+                                duração do trabalho?</div>
+                            <div class="option"><label class="flex items-center"><input type="radio" name="q6" value="a"
+                                        onclick="checkAnswer(4)" class="mr-2 text-[#00678F] focus:ring-[#00678F]"> a) 60
+                                    minutos (hora normal).</label></div>
+                            <div class="option"><label class="flex items-center"><input type="radio" name="q6" value="b"
+                                        onclick="checkAnswer(4)" class="mr-2 text-[#00678F] focus:ring-[#00678F]"> b) 52
+                                    minutos e 30 segundos.</label></div>
+                            <div class="option"><label class="flex items-center"><input type="radio" name="q6" value="c"
+                                        onclick="checkAnswer(4)" class="mr-2 text-[#00678F] focus:ring-[#00678F]"> c) 45
+                                    minutos e 30 segundos.</label></div>
+                            <div class="option"><label class="flex items-center"><input type="radio" name="q6" value="d"
+                                        onclick="checkAnswer(4)" class="mr-2 text-[#00678F] focus:ring-[#00678F]"> d) 55
+                                    minutos.</label></div>
+                            <div class="feedback"></div>
+                        </div>
+
+                        <div class="question-box p-4 bg-white border border-gray-200 rounded-lg shadow-sm" id="q9">
+                            <div class="question-title text-lg font-semibold text-gray-800 mb-2">5. A base de cálculo
+                                das horas extras deve ser composta pelo salário normal acrescido de quais outros tipos
+                                de parcelas?</div>
+                            <div class="option"><label class="flex items-center"><input type="radio" name="q9" value="a"
+                                        onclick="checkAnswer(5)" class="mr-2 text-[#00678F] focus:ring-[#00678F]"> a)
+                                    Apenas o salário base.</label></div>
+                            <div class="option"><label class="flex items-center"><input type="radio" name="q9" value="b"
+                                        onclick="checkAnswer(5)" class="mr-2 text-[#00678F] focus:ring-[#00678F]"> b) O
+                                    salário normal acrescido de todas as parcelas de natureza indenizatória.</label>
+                            </div>
+                            <div class="option"><label class="flex items-center"><input type="radio" name="q9" value="c"
+                                        onclick="checkAnswer(5)" class="mr-2 text-[#00678F] focus:ring-[#00678F]"> c) O
+                                    salário normal mais verbas de natureza salarial e adicionais legais, contratuais ou
+                                    coletivos.</label></div>
+                            <div class="option"><label class="flex items-center"><input type="radio" name="q9" value="d"
+                                        onclick="checkAnswer(5)" class="mr-2 text-[#00678F] focus:ring-[#00678F]"> d) O
+                                    salário base mais o adicional de periculosidade ou insalubridade,
+                                    exclusivamente.</label></div>
+                            <div class="feedback"></div>
+                        </div>
+
+                        <div class="question-box p-4 bg-white border border-gray-200 rounded-lg shadow-sm" id="q51">
+                            <div class="question-title text-lg font-semibold text-gray-800 mb-2">6. O reflexo das horas
+                                extras habituais no DSR (Descanso Semanal Remunerado) deve, por sua vez, gerar reflexos
+                                em outras verbas como férias e 13º salário?</div>
+                            <div class="option"><label class="flex items-center"><input type="radio" name="q51"
+                                        value="a" onclick="checkAnswer(6)"
+                                        class="mr-2 text-[#00678F] focus:ring-[#00678F]"> a) Sim, conforme a Súmula 437
+                                    do TST.</label></div>
+                            <div class="option"><label class="flex items-center"><input type="radio" name="q51"
+                                        value="b" onclick="checkAnswer(6)"
+                                        class="mr-2 text-[#00678F] focus:ring-[#00678F]"> b) Sim, para fins de cálculo
+                                    de FGTS.</label></div>
+                            <div class="option"><label class="flex items-center"><input type="radio" name="q51"
+                                        value="c" onclick="checkAnswer(6)"
+                                        class="mr-2 text-[#00678F] focus:ring-[#00678F]"> c) Não, sob pena de *bis in
+                                    idem* (dupla condenação).</label></div>
+                            <div class="option"><label class="flex items-center"><input type="radio" name="q51"
+                                        value="d" onclick="checkAnswer(6)"
+                                        class="mr-2 text-[#00678F] focus:ring-[#00678F]"> d) Apenas se houver previsão
+                                    em norma coletiva.</label></div>
+                            <div class="feedback"></div>
+                        </div>
+
+                        <div class="question-box p-4 bg-white border border-gray-200 rounded-lg shadow-sm" id="q52">
+                            <div class="question-title text-lg font-semibold text-gray-800 mb-2">7. Qual é o percentual
+                                mínimo de adicional legal para as horas extras trabalhadas em dias úteis, conforme a
+                                Constituição Federal?</div>
+                            <div class="option"><label class="flex items-center"><input type="radio" name="q52"
+                                        value="a" onclick="checkAnswer(7)"
+                                        class="mr-2 text-[#00678F] focus:ring-[#00678F]"> a) 20%.</label></div>
+                            <div class="option"><label class="flex items-center"><input type="radio" name="q52"
+                                        value="b" onclick="checkAnswer(7)"
+                                        class="mr-2 text-[#00678F] focus:ring-[#00678F]"> b) 40%.</label></div>
+                            <div class="option"><label class="flex items-center"><input type="radio" name="q52"
+                                        value="c" onclick="checkAnswer(7)"
+                                        class="mr-2 text-[#00678F] focus:ring-[#00678F]"> c) 50%.</label></div>
+                            <div class="option"><label class="flex items-center"><input type="radio" name="q52"
+                                        value="d" onclick="checkAnswer(7)"
+                                        class="mr-2 text-[#00678F] focus:ring-[#00678F]"> d) 100%.</label></div>
+                            <div class="feedback"></div>
+                        </div>
+
+                        <div class="question-box p-4 bg-white border border-gray-200 rounded-lg shadow-sm" id="q28">
+                            <div class="question-title text-lg font-semibold text-gray-800 mb-2">8. O desrespeito ao
+                                intervalo interjornada (11 horas de descanso) gera, como regra, o pagamento do período
+                                suprimido com o adicional de:</div>
+                            <div class="option"><label class="flex items-center"><input type="radio" name="q28"
+                                        value="a" onclick="checkAnswer(8)"
+                                        class="mr-2 text-[#00678F] focus:ring-[#00678F]"> a) 50% (Horas extras).</label>
+                            </div>
+                            <div class="option"><label class="flex items-center"><input type="radio" name="q28"
+                                        value="b" onclick="checkAnswer(8)"
+                                        class="mr-2 text-[#00678F] focus:ring-[#00678F]"> b) 100% (Hora
+                                    dobrada).</label></div>
+                            <div class="option"><label class="flex items-center"><input type="radio" name="q28"
+                                        value="c" onclick="checkAnswer(8)"
+                                        class="mr-2 text-[#00678F] focus:ring-[#00678F]"> c) 25% (Adicional
+                                    legal).</label></div>
+                            <div class="option"><label class="flex items-center"><input type="radio" name="q28"
+                                        value="d" onclick="checkAnswer(8)"
+                                        class="mr-2 text-[#00678F] focus:ring-[#00678F]"> d) 75% (Adicional
+                                    diferenciado).</label></div>
+                            <div class="feedback"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="drawer-container">
+                <div class="drawer-header" id="section-3-header">
+                    3. Gratificações e Adicionais (7 Questões)
+                    <span class="arrow">▼</span>
+                </div>
+                <div class="drawer-content" id="section-3-content">
+                    <div class="inner-content">
+                        <div class="question-box p-4 bg-white border border-gray-200 rounded-lg shadow-sm" id="q15">
+                            <div class="question-title text-lg font-semibold text-gray-800 mb-2">9. Qual é o percentual
+                                legalmente fixado para o adicional de periculosidade?</div>
+                            <div class="option"><label class="flex items-center"><input type="radio" name="q15"
+                                        value="a" onclick="checkAnswer(9)"
+                                        class="mr-2 text-[#00678F] focus:ring-[#00678F]"> a) 10% (grau mínimo), 20%
+                                    (grau médio) ou 40% (grau máximo).</label></div>
+                            <div class="option"><label class="flex items-center"><input type="radio" name="q15"
+                                        value="b" onclick="checkAnswer(9)"
+                                        class="mr-2 text-[#00678F] focus:ring-[#00678F]"> b) 30%.</label></div>
+                            <div class="option"><label class="flex items-center"><input type="radio" name="q15"
+                                        value="c" onclick="checkAnswer(9)"
+                                        class="mr-2 text-[#00678F] focus:ring-[#00678F]"> c) 25%.</label></div>
+                            <div class="option"><label class="flex items-center"><input type="radio" name="q15"
+                                        value="d" onclick="checkAnswer(9)"
+                                        class="mr-2 text-[#00678F] focus:ring-[#00678F]"> d) Variável entre 15% e 45%, a
+                                    depender do risco.</label></div>
+                            <div class="feedback"></div>
+                        </div>
+
+                        <div class="question-box p-4 bg-white border border-gray-200 rounded-lg shadow-sm" id="q19">
+                            <div class="question-title text-lg font-semibold text-gray-800 mb-2">10. A base de cálculo
+                                do adicional de periculosidade é:</div>
+                            <div class="option"><label class="flex items-center"><input type="radio" name="q19"
+                                        value="a" onclick="checkAnswer(10)"
+                                        class="mr-2 text-[#00678F] focus:ring-[#00678F]"> a) O salário contratual,
+                                    excluídas as gratificações.</label></div>
+                            <div class="option"><label class="flex items-center"><input type="radio" name="q19"
+                                        value="b" onclick="checkAnswer(10)"
+                                        class="mr-2 text-[#00678F] focus:ring-[#00678F]"> b) O salário base (sem os
+                                    acréscimos resultantes de gratificações, prêmios ou participações nos
+                                    lucros).</label></div>
+                            <div class="option"><label class="flex items-center"><input type="radio" name="q19"
+                                        value="c" onclick="checkAnswer(10)"
+                                        class="mr-2 text-[#00678F] focus:ring-[#00678F]"> c) A remuneração integral do
+                                    empregado.</label></div>
+                            <div class="option"><label class="flex items-center"><input type="radio" name="q19"
+                                        value="d" onclick="checkAnswer(10)"
+                                        class="mr-2 text-[#00678F] focus:ring-[#00678F]"> d) O salário mínimo.</label>
+                            </div>
+                            <div class="feedback"></div>
+                        </div>
+
+                        <div class="question-box p-4 bg-white border border-gray-200 rounded-lg shadow-sm" id="q53">
+                            <div class="question-title text-lg font-semibold text-gray-800 mb-2">11. Qual é a natureza
+                                jurídica do 13º salário (Gratificação Natalina) para fins de incidência de encargos
+                                sociais (INSS e IRRF)?</div>
+                            <div class="option"><label class="flex items-center"><input type="radio" name="q53"
+                                        value="a" onclick="checkAnswer(11)"
+                                        class="mr-2 text-[#00678F] focus:ring-[#00678F]"> a) Indenizatória.</label>
+                            </div>
+                            <div class="option"><label class="flex items-center"><input type="radio" name="q53"
+                                        value="b" onclick="checkAnswer(11)"
+                                        class="mr-2 text-[#00678F] focus:ring-[#00678F]"> b) Mista (50% salarial/50%
+                                    indenizatória).</label></div>
+                            <div class="option"><label class="flex items-center"><input type="radio" name="q53"
+                                        value="c" onclick="checkAnswer(11)"
+                                        class="mr-2 text-[#00678F] focus:ring-[#00678F]"> c) Salarial.</label></div>
+                            <div class="option"><label class="flex items-center"><input type="radio" name="q53"
+                                        value="d" onclick="checkAnswer(11)"
+                                        class="mr-2 text-[#00678F] focus:ring-[#00678F]"> d) Não tem natureza
+                                    definida.</label></div>
+                            <div class="feedback"></div>
+                        </div>
+
+                        <div class="question-box p-4 bg-white border border-gray-200 rounded-lg shadow-sm" id="q54">
+                            <div class="question-title text-lg font-semibold text-gray-800 mb-2">12. Qual é o percentual
+                                legal mínimo do Adicional Noturno em relação à hora diurna?</div>
+                            <div class="option"><label class="flex items-center"><input type="radio" name="q54"
+                                        value="a" onclick="checkAnswer(12)"
+                                        class="mr-2 text-[#00678F] focus:ring-[#00678F]"> a) 10%.</label></div>
+                            <div class="option"><label class="flex items-center"><input type="radio" name="q54"
+                                        value="b" onclick="checkAnswer(12)"
+                                        class="mr-2 text-[#00678F] focus:ring-[#00678F]"> b) 20%.</label></div>
+                            <div class="option"><label class="flex items-center"><input type="radio" name="q54"
+                                        value="c" onclick="checkAnswer(12)"
+                                        class="mr-2 text-[#00678F] focus:ring-[#00678F]"> c) 30%.</label></div>
+                            <div class="option"><label class="flex items-center"><input type="radio" name="q54"
+                                        value="d" onclick="checkAnswer(12)"
+                                        class="mr-2 text-[#00678F] focus:ring-[#00678F]"> d) 50%.</label></div>
+                            <div class="feedback"></div>
+                        </div>
+
+                        <div class="question-box p-4 bg-white border border-gray-200 rounded-lg shadow-sm" id="q55">
+                            <div class="question-title text-lg font-semibold text-gray-800 mb-2">13. Qual é o limite
+                                máximo que a gratificação de função deve ter para ser considerada de confiança (e não
+                                ter direito às horas extras da jornada padrão), conforme a CLT?</div>
+                            <div class="option"><label class="flex items-center"><input type="radio" name="q55"
+                                        value="a" onclick="checkAnswer(13)"
+                                        class="mr-2 text-[#00678F] focus:ring-[#00678F]"> a) 30% do salário.</label>
+                            </div>
+                            <div class="option"><label class="flex items-center"><input type="radio" name="q55"
+                                        value="b" onclick="checkAnswer(13)"
+                                        class="mr-2 text-[#00678F] focus:ring-[#00678F]"> b) 40% do salário
+                                    efetivo.</label></div>
+                            <div class="option"><label class="flex items-center"><input type="radio" name="q55"
+                                        value="c" onclick="checkAnswer(13)"
+                                        class="mr-2 text-[#00678F] focus:ring-[#00678F]"> c) 50% do salário.</label>
+                            </div>
+                            <div class="option"><label class="flex items-center"><input type="radio" name="q55"
+                                        value="d" onclick="checkAnswer(13)"
+                                        class="mr-2 text-[#00678F] focus:ring-[#00678F]"> d) Não há limite
+                                    legal.</label></div>
+                            <div class="feedback"></div>
+                        </div>
+
+                        <div class="question-box p-4 bg-white border border-gray-200 rounded-lg shadow-sm" id="q56">
+                            <div class="question-title text-lg font-semibold text-gray-800 mb-2">14. Em regra geral, o
+                                empregado tem direito de receber cumulativamente os adicionais de insalubridade e
+                                periculosidade?</div>
+                            <div class="option"><label class="flex items-center"><input type="radio" name="q56"
+                                        value="a" onclick="checkAnswer(14)"
+                                        class="mr-2 text-[#00678F] focus:ring-[#00678F]"> a) Sim, se houver previsão em
+                                    norma coletiva.</label></div>
+                            <div class="option"><label class="flex items-center"><input type="radio" name="q56"
+                                        value="b" onclick="checkAnswer(14)"
+                                        class="mr-2 text-[#00678F] focus:ring-[#00678F]"> b) Sim, se houver exposição a
+                                    ambos os agentes.</label></div>
+                            <div class="option"><label class="flex items-center"><input type="radio" name="q56"
+                                        value="c" onclick="checkAnswer(14)"
+                                        class="mr-2 text-[#00678F] focus:ring-[#00678F]"> c) Não, o empregado deve optar
+                                    por um dos dois.</label></div>
+                            <div class="option"><label class="flex items-center"><input type="radio" name="q56"
+                                        value="d" onclick="checkAnswer(14)"
+                                        class="mr-2 text-[#00678F] focus:ring-[#00678F]"> d) Apenas se o adicional de
+                                    insalubridade for no grau máximo.</label></div>
+                            <div class="feedback"></div>
+                        </div>
+
+                        <div class="question-box p-4 bg-white border border-gray-200 rounded-lg shadow-sm" id="q57">
+                            <div class="question-title text-lg font-semibold text-gray-800 mb-2">15. A base de cálculo
+                                do DSR (Descanso Semanal Remunerado) inclui:</div>
+                            <div class="option"><label class="flex items-center"><input type="radio" name="q57"
+                                        value="a" onclick="checkAnswer(15)"
+                                        class="mr-2 text-[#00678F] focus:ring-[#00678F]"> a) Apenas o salário
+                                    base.</label></div>
+                            <div class="option"><label class="flex items-center"><input type="radio" name="q57"
+                                        value="b" onclick="checkAnswer(15)"
+                                        class="mr-2 text-[#00678F] focus:ring-[#00678F]"> b) O salário base mais as
+                                    verbas indenizatórias.</label></div>
+                            <div class="option"><label class="flex items-center"><input type="radio" name="q57"
+                                        value="c" onclick="checkAnswer(15)"
+                                        class="mr-2 text-[#00678F] focus:ring-[#00678F]"> c) O salário contratual, horas
+                                    extras habituais, adicionais e outras verbas salariais habituais.</label></div>
+                            <div class="option"><label class="flex items-center"><input type="radio" name="q57"
+                                        value="d" onclick="checkAnswer(15)"
+                                        class="mr-2 text-[#00678F] focus:ring-[#00678F]"> d) Apenas o valor das horas
+                                    extras.</label></div>
+                            <div class="feedback"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="drawer-container">
+                <div class="drawer-header" id="section-4-header">
+                    4. Verbas Remuneratórias e Base de Cálculo (10 Questões)
+                    <span class="arrow">▼</span>
+                </div>
+                <div class="drawer-content" id="section-4-content">
+                    <div class="inner-content">
+                        <div class="question-box p-4 bg-white border border-gray-200 rounded-lg shadow-sm" id="q7">
+                            <div class="question-title text-lg font-semibold text-gray-800 mb-2">16. A formação da base
+                                de cálculo das verbas (horas extras, 13º, férias) é composta por quais componentes
+                                principais de natureza salarial?</div>
+                            <div class="option"><label class="flex items-center"><input type="radio" name="q7" value="a"
+                                        onclick="checkAnswer(16)" class="mr-2 text-[#00678F] focus:ring-[#00678F]"> a)
+                                    Salário, Vale-transporte e Ajuda-alimentação.</label></div>
+                            <div class="option"><label class="flex items-center"><input type="radio" name="q7" value="b"
+                                        onclick="checkAnswer(16)" class="mr-2 text-[#00678F] focus:ring-[#00678F]"> b)
+                                    Salário, FGTS e Multas.</label></div>
+                            <div class="option"><label class="flex items-center"><input type="radio" name="q7" value="c"
+                                        onclick="checkAnswer(16)" class="mr-2 text-[#00678F] focus:ring-[#00678F]"> c)
+                                    Salário, Gratificações e Adicionais.</label></div>
+                            <div class="option"><label class="flex items-center"><input type="radio" name="q7" value="d"
+                                        onclick="checkAnswer(16)" class="mr-2 text-[#00678F] focus:ring-[#00678F]"> d)
+                                    Salário, Juros de Mora e Correção Monetária.</label></div>
+                            <div class="feedback"></div>
+                        </div>
+
+                        <div class="question-box p-4 bg-white border border-gray-200 rounded-lg shadow-sm" id="q8">
+                            <div class="question-title text-lg font-semibold text-gray-800 mb-2">17. Para que uma verba
+                                controversa integre a base de cálculo de outras parcelas (reflexos), além do deferimento
+                                em sentença, é fundamental checar a:</div>
+                            <div class="option"><label class="flex items-center"><input type="radio" name="q8" value="a"
+                                        onclick="checkAnswer(17)" class="mr-2 text-[#00678F] focus:ring-[#00678F]"> a) O
+                                    valor da verba.</label></div>
+                            <div class="option"><label class="flex items-center"><input type="radio" name="q8" value="b"
+                                        onclick="checkAnswer(17)" class="mr-2 text-[#00678F] focus:ring-[#00678F]"> b) O
+                                    período de duração do contrato.</label></div>
+                            <div class="option"><label class="flex items-center"><input type="radio" name="q8" value="c"
+                                        onclick="checkAnswer(17)" class="mr-2 text-[#00678F] focus:ring-[#00678F]"> c) A
+                                    habitualidade e a natureza salarial do pagamento.</label></div>
+                            <div class="option"><label class="flex items-center"><input type="radio" name="q8" value="d"
+                                        onclick="checkAnswer(17)" class="mr-2 text-[#00678F] focus:ring-[#00678F]"> d) A
+                                    prescrição quinquenal.</label></div>
+                            <div class="feedback"></div>
+                        </div>
+
+                        <div class="question-box p-4 bg-white border border-gray-200 rounded-lg shadow-sm" id="q11">
+                            <div class="question-title text-lg font-semibold text-gray-800 mb-2">18. Enquanto não
+                                sobrevier lei dispondo de forma diversa, qual é a base de cálculo do adicional de
+                                insalubridade?</div>
+                            <div class="option"><label class="flex items-center"><input type="radio" name="q11"
+                                        value="a" onclick="checkAnswer(18)"
+                                        class="mr-2 text-[#00678F] focus:ring-[#00678F]"> a) O salário contratual do
+                                    empregado.</label></div>
+                            <div class="option"><label class="flex items-center"><input type="radio" name="q11"
+                                        value="b" onclick="checkAnswer(18)"
+                                        class="mr-2 text-[#00678F] focus:ring-[#00678F]"> b) O salário mínimo.</label>
+                            </div>
+                            <div class="option"><label class="flex items-center"><input type="radio" name="q11"
+                                        value="c" onclick="checkAnswer(18)"
+                                        class="mr-2 text-[#00678F] focus:ring-[#00678F]"> c) O valor da remuneração,
+                                    excluídas as verbas indenizatórias.</label></div>
+                            <div class="option"><label class="flex items-center"><input type="radio" name="q11"
+                                        value="d" onclick="checkAnswer(18)"
+                                        class="mr-2 text-[#00678F] focus:ring-[#00678F]"> d) O piso salarial da
+                                    categoria profissional.</label></div>
+                            <div class="feedback"></div>
+                        </div>
+
+                        <div class="question-box p-4 bg-white border border-gray-200 rounded-lg shadow-sm" id="q12">
+                            <div class="question-title text-lg font-semibold text-gray-800 mb-2">19. Ao calcular a
+                                indenização do Seguro-Desemprego, a base de cálculo (remuneração percebida) deve
+                                incluir:</div>
+                            <div class="option"><label class="flex items-center"><input type="radio" name="q12"
+                                        value="a" onclick="checkAnswer(19)"
+                                        class="mr-2 text-[#00678F] focus:ring-[#00678F]"> a) Apenas o salário
+                                    base.</label></div>
+                            <div class="option"><label class="flex items-center"><input type="radio" name="q12"
+                                        value="b" onclick="checkAnswer(19)"
+                                        class="mr-2 text-[#00678F] focus:ring-[#00678F]"> b) Todos os adicionais
+                                    percebidos de forma habitual, como horas extras e adicional noturno.</label></div>
+                            <div class="option"><label class="flex items-center"><input type="radio" name="q12"
+                                        value="c" onclick="checkAnswer(19)"
+                                        class="mr-2 text-[#00678F] focus:ring-[#00678F]"> c) Somente os adicionais
+                                    expressamente previstos em norma coletiva.</label></div>
+                            <div class="option"><label class="flex items-center"><input type="radio" name="q12"
+                                        value="d" onclick="checkAnswer(19)"
+                                        class="mr-2 text-[#00678F] focus:ring-[#00678F]"> d) O salário base e as verbas
+                                    rescisórias.</label></div>
+                            <div class="feedback"></div>
+                        </div>
+
+                        <div class="question-box p-4 bg-white border border-gray-200 rounded-lg shadow-sm" id="q25">
+                            <div class="question-title text-lg font-semibold text-gray-800 mb-2">20. A pensão mensal
+                                vitalícia, quando devida por dano material decorrente de acidente de trabalho, é
+                                calculada com base em qual parâmetro?</div>
+                            <div class="option"><label class="flex items-center"><input type="radio" name="q25"
+                                        value="a" onclick="checkAnswer(20)"
+                                        class="mr-2 text-[#00678F] focus:ring-[#00678F]"> a) No teto do INSS (Regime
+                                    Geral de Previdência Social).</label></div>
+                            <div class="option"><label class="flex items-center"><input type="radio" name="q25"
+                                        value="b" onclick="checkAnswer(20)"
+                                        class="mr-2 text-[#00678F] focus:ring-[#00678F]"> b) Na redução da capacidade
+                                    laboral e na remuneração do empregado na época do acidente.</label></div>
+                            <div class="option"><label class="flex items-center"><input type="radio" name="q25"
+                                        value="c" onclick="checkAnswer(20)"
+                                        class="mr-2 text-[#00678F] focus:ring-[#00678F]"> c) No salário mínimo nacional
+                                    multiplicado pela idade do reclamante.</label></div>
+                            <div class="option"><label class="flex items-center"><input type="radio" name="q25"
+                                        value="d" onclick="checkAnswer(20)"
+                                        class="mr-2 text-[#00678F] focus:ring-[#00678F]"> d) No percentual de
+                                    insalubridade ou periculosidade.</label></div>
+                            <div class="feedback"></div>
+                        </div>
+
+                        <div class="question-box p-4 bg-white border border-gray-200 rounded-lg shadow-sm" id="q31">
+                            <div class="question-title text-lg font-semibold text-gray-800 mb-2">21. De acordo com o
+                                Art. 457, § 2º da CLT (alterado pela Lei 13.467/17), qual verba, mesmo que paga
+                                habitualmente, possui **natureza indenizatória** e, portanto, **não integra** a
+                                remuneração para fins de reflexos em férias, 13º, FGTS e encargos?</div>
+                            <div class="option"><label class="flex items-center"><input type="radio" name="q31"
+                                        value="a" onclick="checkAnswer(21)"
+                                        class="mr-2 text-[#00678F] focus:ring-[#00678F]"> a) Adicional de
+                                    insalubridade.</label></div>
+                            <div class="option"><label class="flex items-center"><input type="radio" name="q31"
+                                        value="b" onclick="checkAnswer(21)"
+                                        class="mr-2 text-[#00678F] focus:ring-[#00678F]"> b) Comissões pagas por metas
+                                    atingidas.</label></div>
+                            <div class="option"><label class="flex items-center"><input type="radio" name="q31"
+                                        value="c" onclick="checkAnswer(21)"
+                                        class="mr-2 text-[#00678F] focus:ring-[#00678F]"> c) Ajuda de custo,
+                                    auxílio-alimentação (não pago em dinheiro) e prêmios (ex: bonificações).</label>
+                            </div>
+                            <div class="option"><label class="flex items-center"><input type="radio" name="q31"
+                                        value="d" onclick="checkAnswer(21)"
+                                        class="mr-2 text-[#00678F] focus:ring-[#00678F]"> d) Adicional noturno.</label>
+                            </div>
+                            <div class="feedback"></div>
+                        </div>
+
+                        <div class="question-box p-4 bg-white border border-gray-200 rounded-lg shadow-sm" id="q32">
+                            <div class="question-title text-lg font-semibold text-gray-800 mb-2">22. Em termos de
+                                cálculos trabalhistas, a **Remuneração** é a base de cálculo mais ampla, pois inclui o
+                                **Salário** acrescido de:</div>
+                            <div class="option"><label class="flex items-center"><input type="radio" name="q32"
+                                        value="a" onclick="checkAnswer(22)"
+                                        class="mr-2 text-[#00678F] focus:ring-[#00678F]"> a) Apenas as verbas de
+                                    natureza indenizatória, como diárias de viagem e vale-transporte.</label></div>
+                            <div class="option"><label class="flex items-center"><input type="radio" name="q32"
+                                        value="b" onclick="checkAnswer(22)"
+                                        class="mr-2 text-[#00678F] focus:ring-[#00678F]"> b) Apenas os descontos legais
+                                    (INSS e IRRF).</label></div>
+                            <div class="option"><label class="flex items-center"><input type="radio" name="q32"
+                                        value="c" onclick="checkAnswer(22)"
+                                        class="mr-2 text-[#00678F] focus:ring-[#00678F]"> c) Gratificações, Comissões,
+                                    Adicionais (de insalubridade, periculosidade, noturno) e outras parcelas habituais
+                                    de natureza salarial.</label></div>
+                            <div class="option"><label class="flex items-center"><input type="radio" name="q32"
+                                        value="d" onclick="checkAnswer(22)"
+                                        class="mr-2 text-[#00678F] focus:ring-[#00678F]"> d) O saldo de FGTS e a multa
+                                    de 40%.</label></div>
+                            <div class="feedback"></div>
+                        </div>
+
+                        <div class="question-box p-4 bg-white border border-gray-200 rounded-lg shadow-sm" id="q33">
+                            <div class="question-title text-lg font-semibold text-gray-800 mb-2">23. Qual é a principal
+                                restrição constitucional para o uso do salário mínimo como base de cálculo na Justiça do
+                                Trabalho (exceto para o adicional de insalubridade)?</div>
+                            <div class="option"><label class="flex items-center"><input type="radio" name="q33"
+                                        value="a" onclick="checkAnswer(23)"
+                                        class="mr-2 text-[#00678F] focus:ring-[#00678F]"> a) A vedação de vinculação
+                                    para qualquer fim, salvo expressa previsão legal ou constitucional.</label></div>
+                            <div class="option"><label class="flex items-center"><input type="radio" name="q33"
+                                        value="b" onclick="checkAnswer(23)"
+                                        class="mr-2 text-[#00678F] focus:ring-[#00678F]"> b) Apenas a vedação de uso
+                                    para pensão alimentícia.</label></div>
+                            <div class="option"><label class="flex items-center"><input type="radio" name="q33"
+                                        value="c" onclick="checkAnswer(23)"
+                                        class="mr-2 text-[#00678F] focus:ring-[#00678F]"> c) Não pode ser usado como
+                                    indexador para dívidas federais.</label></div>
+                            <div class="option"><label class="flex items-center"><input type="radio" name="q33"
+                                        value="d" onclick="checkAnswer(23)"
+                                        class="mr-2 text-[#00678F] focus:ring-[#00678F]"> d) Pode ser usado livremente,
+                                    desde que seja o valor do Salário Mínimo Regional.</label></div>
+                            <div class="feedback"></div>
+                        </div>
+
+                        <div class="question-box p-4 bg-white border border-gray-200 rounded-lg shadow-sm" id="q34">
+                            <div class="question-title text-lg font-semibold text-gray-800 mb-2">24. Qual é o percentual
+                                legalmente estabelecido para o adicional de insalubridade nos graus Mínimo, Médio e
+                                Máximo, respectivamente? (Súmula 460 do STF e Art. 192 da CLT)</div>
+                            <div class="option"><label class="flex items-center"><input type="radio" name="q34"
+                                        value="a" onclick="checkAnswer(24)"
+                                        class="mr-2 text-[#00678F] focus:ring-[#00678F]"> a) 10%, 20% e 40%.</label>
+                            </div>
+                            <div class="option"><label class="flex items-center"><input type="radio" name="q34"
+                                        value="b" onclick="checkAnswer(24)"
+                                        class="mr-2 text-[#00678F] focus:ring-[#00678F]"> b) 15%, 25% e 45%.</label>
+                            </div>
+                            <div class="option"><label class="flex items-center"><input type="radio" name="q34"
+                                        value="c" onclick="checkAnswer(24)"
+                                        class="mr-2 text-[#00678F] focus:ring-[#00678F]"> c) 20%, 30% e 50%.</label>
+                            </div>
+                            <div class="option"><label class="flex items-center"><input type="radio" name="q34"
+                                        value="d" onclick="checkAnswer(24)"
+                                        class="mr-2 text-[#00678F] focus:ring-[#00678F]"> d) 10%, 30% e 50%.</label>
+                            </div>
+                            <div class="feedback"></div>
+                        </div>
+
+                        <div class="question-box p-4 bg-white border border-gray-200 rounded-lg shadow-sm" id="q35">
+                            <div class="question-title text-lg font-semibold text-gray-800 mb-2">25. Para um empregado
+                                que recebe o salário mínimo, qual o limite máximo de descontos que podem ser efetuados
+                                na sua remuneração, respeitando a intangibilidade salarial?</div>
+                            <div class="option"><label class="flex items-center"><input type="radio" name="q35"
+                                        value="a" onclick="checkAnswer(25)"
+                                        class="mr-2 text-[#00678F] focus:ring-[#00678F]"> a) Não há limite, desde que o
+                                    empregado tenha autorizado por escrito. </label></div>
+                            <div class="option"><label class="flex items-center"><input type="radio" name="q35"
+                                        value="b" onclick="checkAnswer(25)"
+                                        class="mr-2 text-[#00678F] focus:ring-[#00678F]"> b) 50% do salário
+                                    contratual.</label></div>
+                            <div class="option"><label class="flex items-center"><input type="radio" name="q35"
+                                        value="c" onclick="checkAnswer(25)"
+                                        class="mr-2 text-[#00678F] focus:ring-[#00678F]"> c) O total de descontos deve
+                                    ser igual ao valor da contribuição previdenciária. </label></div>
+                            <div class="option"><label class="flex items-center"><input type="radio" name="q35"
+                                        value="d" onclick="checkAnswer(25)"
+                                        class="mr-2 text-[#00678F] focus:ring-[#00678F]"> d) O desconto não pode
+                                    ultrapassar 70% da remuneração, devendo ser garantido ao empregado, no mínimo, 30%
+                                    do seu salário (princípio da intangibilidade).</label></div>
+                            <div class="feedback"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="drawer-container">
+                <div class="drawer-header" id="section-5-header">
+                    5. Verbas Rescisórias e Indenizatórias (15 Questões)
+                    <span class="arrow">▼</span>
+                </div>
+                <div class="drawer-content" id="section-5-content">
+                    <div class="inner-content">
+                        <div class="question-box p-4 bg-white border border-gray-200 rounded-lg shadow-sm" id="q4">
+                            <div class="question-title text-lg font-semibold text-gray-800 mb-2">26. No caso de aviso
+                                prévio indenizado, o período correspondente deve ser considerado para quais fins?</div>
+                            <div class="option"><label class="flex items-center"><input type="radio" name="q4" value="a"
+                                        onclick="checkAnswer(26)" class="mr-2 text-[#00678F] focus:ring-[#00678F]"> a)
+                                    Apenas para fins de remuneração.</label></div>
+                            <div class="option"><label class="flex items-center"><input type="radio" name="q4" value="b"
+                                        onclick="checkAnswer(26)" class="mr-2 text-[#00678F] focus:ring-[#00678F]"> b)
+                                    Apenas para fins de tempo de serviço.</label></div>
+                            <div class="option"><label class="flex items-center"><input type="radio" name="q4" value="c"
+                                        onclick="checkAnswer(26)" class="mr-2 text-[#00678F] focus:ring-[#00678F]"> c)
+                                    Como tempo de serviço para todos os efeitos (inclusive 13º, férias, etc.).</label>
+                            </div>
+                            <div class="option"><label class="flex items-center"><input type="radio" name="q4" value="d"
+                                        onclick="checkAnswer(26)" class="mr-2 text-[#00678F] focus:ring-[#00678F]"> d)
+                                    Apenas para fins de prescrição.</label></div>
+                            <div class="feedback"></div>
+                        </div>
+
+                        <div class="question-box p-4 bg-white border border-gray-200 rounded-lg shadow-sm" id="q13">
+                            <div class="question-title text-lg font-semibold text-gray-800 mb-2">27. Se a sentença
+                                deferir as férias e abono pecuniário (vencidos e não gozados), a base de cálculo
+                                (remuneração) das férias e do abono deve ser:</div>
+                            <div class="option"><label class="flex items-center"><input type="radio" name="q13"
+                                        value="a" onclick="checkAnswer(27)"
+                                        class="mr-2 text-[#00678F] focus:ring-[#00678F]"> a) A remuneração do mês de
+                                    concessão das férias.</label></div>
+                            <div class="option"><label class="flex items-center"><input type="radio" name="q13"
+                                        value="b" onclick="checkAnswer(27)"
+                                        class="mr-2 text-[#00678F] focus:ring-[#00678F]"> b) A remuneração do mês da
+                                    extinção do contrato.</label></div>
+                            <div class="option"><label class="flex items-center"><input type="radio" name="q13"
+                                        value="c" onclick="checkAnswer(27)"
+                                        class="mr-2 text-[#00678F] focus:ring-[#00678F]"> c) A remuneração na data da
+                                    liquidação ou sentença, atualizada até a data do pagamento.</label></div>
+                            <div class="option"><label class="flex items-center"><input type="radio" name="q13"
+                                        value="d" onclick="checkAnswer(27)"
+                                        class="mr-2 text-[#00678F] focus:ring-[#00678F]"> d) O salário base da época,
+                                    sem qualquer acréscimo.</label></div>
+                            <div class="feedback"></div>
+                        </div>
+
+                        <div class="question-box p-4 bg-white border border-gray-200 rounded-lg shadow-sm" id="q14">
+                            <div class="question-title text-lg font-semibold text-gray-800 mb-2">28. Em caso de rescisão
+                                sem justa causa, qual é o prazo legal máximo para o pagamento das verbas rescisórias?
+                            </div>
+                            <div class="option"><label class="flex items-center"><input type="radio" name="q14"
+                                        value="a" onclick="checkAnswer(28)"
+                                        class="mr-2 text-[#00678F] focus:ring-[#00678F]"> a) 1 dia útil após o término
+                                    do contrato.</label></div>
+                            <div class="option"><label class="flex items-center"><input type="radio" name="q14"
+                                        value="b" onclick="checkAnswer(28)"
+                                        class="mr-2 text-[#00678F] focus:ring-[#00678F]"> b) 5 dias úteis após a
+                                    demissão.</label></div>
+                            <div class="option"><label class="flex items-center"><input type="radio" name="q14"
+                                        value="c" onclick="checkAnswer(28)"
+                                        class="mr-2 text-[#00678F] focus:ring-[#00678F]"> c) 10 dias a contar do término
+                                    do contrato (independente do cumprimento ou indenização do Aviso Prévio).</label>
+                            </div>
+                            <div class="option"><label class="flex items-center"><input type="radio" name="q14"
+                                        value="d" onclick="checkAnswer(28)"
+                                        class="mr-2 text-[#00678F] focus:ring-[#00678F]"> d) O dia da homologação da
+                                    rescisão.</label></div>
+                            <div class="feedback"></div>
+                        </div>
+
+                        <div class="question-box p-4 bg-white border border-gray-200 rounded-lg shadow-sm" id="q18">
+                            <div class="question-title text-lg font-semibold text-gray-800 mb-2">29. A multa do Art.
+                                477, § 8º da CLT, devida pelo atraso no pagamento das verbas rescisórias, incide sobre
+                                quais parcelas da rescisória?</div>
+                            <div class="option"><label class="flex items-center"><input type="radio" name="q18"
+                                        value="a" onclick="checkAnswer(29)"
+                                        class="mr-2 text-[#00678F] focus:ring-[#00678F]"> a) Apenas sobre o 13º Salário
+                                    e Férias.</label></div>
+                            <div class="option"><label class="flex items-center"><input type="radio" name="q18"
+                                        value="b" onclick="checkAnswer(29)"
+                                        class="mr-2 text-[#00678F] focus:ring-[#00678F]"> b) Todas as parcelas de
+                                    natureza indenizatória.</label></div>
+                            <div class="option"><label class="flex items-center"><input type="radio" name="q18"
+                                        value="c" onclick="checkAnswer(29)"
+                                        class="mr-2 text-[#00678F] focus:ring-[#00678F]"> c) O valor equivalente ao
+                                    salário nominal do empregado.</label></div>
+                            <div class="option"><label class="flex items-center"><input type="radio" name="q18"
+                                        value="d" onclick="checkAnswer(29)"
+                                        class="mr-2 text-[#00678F] focus:ring-[#00678F]"> d) Apenas sobre o Saldo de
+                                    Salário.</label></div>
+                            <div class="feedback"></div>
+                        </div>
+
+                        <div class="question-box p-4 bg-white border border-gray-200 rounded-lg shadow-sm" id="q21">
+                            <div class="question-title text-lg font-semibold text-gray-800 mb-2">30. Qual é a regra
+                                geral para o cálculo da base de férias (gozadas ou indenizadas) do empregado mensalista
+                                (que recebe salário fixo)?</div>
+                            <div class="option"><label class="flex items-center"><input type="radio" name="q21"
+                                        value="a" onclick="checkAnswer(30)"
+                                        class="mr-2 text-[#00678F] focus:ring-[#00678F]"> a) O salário base do mês da
+                                    concessão, sem acréscimo de 1/3.</label></div>
+                            <div class="option"><label class="flex items-center"><input type="radio" name="q21"
+                                        value="b" onclick="checkAnswer(30)"
+                                        class="mr-2 text-[#00678F] focus:ring-[#00678F]"> b) A média das últimas 12
+                                    remunerações.</label></div>
+                            <div class="option"><label class="flex items-center"><input type="radio" name="q21"
+                                        value="c" onclick="checkAnswer(30)"
+                                        class="mr-2 text-[#00678F] focus:ring-[#00678F]"> c) O salário contratual,
+                                    acrescido da média das parcelas variáveis habituais (horas extras, comissões,
+                                    etc.).</label></div>
+                            <div class="option"><label class="flex items-center"><input type="radio" name="q21"
+                                        value="d" onclick="checkAnswer(30)"
+                                        class="mr-2 text-[#00678F] focus:ring-[#00678F]"> d) A remuneração do mês
+                                    anterior à concessão.</label></div>
+                            <div class="feedback"></div>
+                        </div>
+
+                        <div class="question-box p-4 bg-white border border-gray-200 rounded-lg shadow-sm" id="q22">
+                            <div class="question-title text-lg font-semibold text-gray-800 mb-2">31. Em caso de
+                                Reclamação Trabalhista, o cálculo do Imposto de Renda Retido na Fonte (IRRF) sobre as
+                                verbas salariais deve observar qual regime?</div>
+                            <div class="option"><label class="flex items-center"><input type="radio" name="q22"
+                                        value="a" onclick="checkAnswer(31)"
+                                        class="mr-2 text-[#00678F] focus:ring-[#00678F]"> a) Regime de Competência,
+                                    aplicando as tabelas e deduções mensais, e não o regime de caixa.</label></div>
+                            <div class="option"><label class="flex items-center"><input type="radio" name="q22"
+                                        value="b" onclick="checkAnswer(31)"
+                                        class="mr-2 text-[#00678F] focus:ring-[#00678F]"> b) Regime de Caixa, aplicando
+                                    a alíquota de acordo com o total bruto da condenação.</label></div>
+                            <div class="option"><label class="flex items-center"><input type="radio" name="q22"
+                                        value="c" onclick="checkAnswer(31)"
+                                        class="mr-2 text-[#00678F] focus:ring-[#00678F]"> c) O IRRF não é devido em
+                                    Reclamações Trabalhistas.</label></div>
+                            <div class="option"><label class="flex items-center"><input type="radio" name="q22"
+                                        value="d" onclick="checkAnswer(31)"
+                                        class="mr-2 text-[#00678F] focus:ring-[#00678F]"> d) A alíquota fixa de 27,5%
+                                    sobre o total.</label></div>
+                            <div class="feedback"></div>
+                        </div>
+
+                        <div class="question-box p-4 bg-white border border-gray-200 rounded-lg shadow-sm" id="q23">
+                            <div class="question-title text-lg font-semibold text-gray-800 mb-2">32. Qual é o valor da
+                                indenização devida ao empregado demitido sem justa causa nos 30 dias que antecedem a
+                                data-base de sua categoria (Lei 6.708/79, Art. 9º)?</div>
+                            <div class="option"><label class="flex items-center"><input type="radio" name="q23"
+                                        value="a" onclick="checkAnswer(32)"
+                                        class="mr-2 text-[#00678F] focus:ring-[#00678F]"> a) Metade do salário
+                                    mensal.</label></div>
+                            <div class="option"><label class="flex items-center"><input type="radio" name="q23"
+                                        value="b" onclick="checkAnswer(32)"
+                                        class="mr-2 text-[#00678F] focus:ring-[#00678F]"> b) Um salário mensal.</label>
+                            </div>
+                            <div class="option"><label class="flex items-center"><input type="radio" name="q23"
+                                        value="c" onclick="checkAnswer(32)"
+                                        class="mr-2 text-[#00678F] focus:ring-[#00678F]"> c) Um salário por ano de
+                                    serviço.</label></div>
+                            <div class="option"><label class="flex items-center"><input type="radio" name="q23"
+                                        value="d" onclick="checkAnswer(32)"
+                                        class="mr-2 text-[#00678F] focus:ring-[#00678F]"> d) O aviso prévio
+                                    integral.</label></div>
+                            <div class="feedback"></div>
+                        </div>
+
+                        <div class="question-box p-4 bg-white border border-gray-200 rounded-lg shadow-sm" id="q26">
+                            <div class="question-title text-lg font-semibold text-gray-800 mb-2">33. Qual parcela, na
+                                rescisão do contrato, não é devida ao empregado que pediu demissão (por sua iniciativa)
+                                e **NÃO** cumpriu o aviso prévio?</div>
+                            <div class="option"><label class="flex items-center"><input type="radio" name="q26"
+                                        value="a" onclick="checkAnswer(33)"
+                                        class="mr-2 text-[#00678F] focus:ring-[#00678F]"> a) Férias Proporcionais +
+                                    1/3.</label></div>
+                            <div class="option"><label class="flex items-center"><input type="radio" name="q26"
+                                        value="b" onclick="checkAnswer(33)"
+                                        class="mr-2 text-[#00678F] focus:ring-[#00678F]"> b) Saque do FGTS e multa de
+                                    40%.</label></div>
+                            <div class="option"><label class="flex items-center"><input type="radio" name="q26"
+                                        value="c" onclick="checkAnswer(33)"
+                                        class="mr-2 text-[#00678F] focus:ring-[#00678F]"> c) Desconto do Aviso Prévio (o
+                                    empregador pode descontar o valor)</label></div>
+                            <div class="option"><label class="flex items-center"><input type="radio" name="q26"
+                                        value="d" onclick="checkAnswer(33)"
+                                        class="mr-2 text-[#00678F] focus:ring-[#00678F]"> d) Saldo de Salário.</label>
+                            </div>
+                            <div class="feedback"></div>
+                        </div>
+
+                        <div class="question-box p-4 bg-white border border-gray-200 rounded-lg shadow-sm" id="q27">
+                            <div class="question-title text-lg font-semibold text-gray-800 mb-2">34. A multa do Art. 467
+                                da CLT, que exige o pagamento da parte incontroversa da rescisão na primeira audiência,
+                                é de quantos por cento sobre essas verbas?</div>
+                            <div class="option"><label class="flex items-center"><input type="radio" name="q27"
+                                        value="a" onclick="checkAnswer(34)"
+                                        class="mr-2 text-[#00678F] focus:ring-[#00678F]"> a) 50%.</label></div>
+                            <div class="option"><label class="flex items-center"><input type="radio" name="q27"
+                                        value="b" onclick="checkAnswer(34)"
+                                        class="mr-2 text-[#00678F] focus:ring-[#00678F]"> b) 100%.</label></div>
+                            <div class="option"><label class="flex items-center"><input type="radio" name="q27"
+                                        value="c" onclick="checkAnswer(34)"
+                                        class="mr-2 text-[#00678F] focus:ring-[#00678F]"> c) 25%.</label></div>
+                            <div class="option"><label class="flex items-center"><input type="radio" name="q27"
+                                        value="d" onclick="checkAnswer(34)"
+                                        class="mr-2 text-[#00678F] focus:ring-[#00678F]"> d) 40%.</label></div>
+                            <div class="feedback"></div>
+                        </div>
+
+                        <div class="question-box p-4 bg-white border border-gray-200 rounded-lg shadow-sm" id="q30">
+                            <div class="question-title text-lg font-semibold text-gray-800 mb-2">35. O cálculo do Aviso
+                                Prévio Proporcional (Lei 12.506/2011) exige a soma dos 30 dias mínimos com quantos dias
+                                adicionais por ano completo de serviço na mesma empresa?</div>
+                            <div class="option"><label class="flex items-center"><input type="radio" name="q30"
+                                        value="a" onclick="checkAnswer(35)"
+                                        class="mr-2 text-[#00678F] focus:ring-[#00678F]"> a) 5 dias.</label></div>
+                            <div class="option"><label class="flex items-center"><input type="radio" name="q30"
+                                        value="b" onclick="checkAnswer(35)"
+                                        class="mr-2 text-[#00678F] focus:ring-[#00678F]"> b) 3 dias, limitado a um total
+                                    de 90 dias.</label></div>
+                            <div class="option"><label class="flex items-center"><input type="radio" name="q30"
+                                        value="c" onclick="checkAnswer(35)"
+                                        class="mr-2 text-[#00678F] focus:ring-[#00678F]"> c) 10 dias, limitado a um
+                                    total de 60 dias.</label></div>
+                            <div class="option"><label class="flex items-center"><input type="radio" name="q30"
+                                        value="d" onclick="checkAnswer(35)"
+                                        class="mr-2 text-[#00678F] focus:ring-[#00678F]"> d) 7 dias, sem limite.</label>
+                            </div>
+                            <div class="feedback"></div>
+                        </div>
+
+                        <div class="question-box p-4 bg-white border border-gray-200 rounded-lg shadow-sm" id="q36">
+                            <div class="question-title text-lg font-semibold text-gray-800 mb-2">36. Em caso de Reversão
+                                da Justa Causa em Juízo, quais parcelas rescisórias de natureza indenizatória, antes não
+                                devidas, se tornam obrigatórias?</div>
+                            <div class="option"><label class="flex items-center"><input type="radio" name="q36"
+                                        value="a" onclick="checkAnswer(36)"
+                                        class="mr-2 text-[#00678F] focus:ring-[#00678F]"> a) Apenas Férias Proporcionais
+                                    + 1/3 e 13º Proporcional.</label></div>
+                            <div class="option"><label class="flex items-center"><input type="radio" name="q36"
+                                        value="b" onclick="checkAnswer(36)"
+                                        class="mr-2 text-[#00678F] focus:ring-[#00678F]"> b) Aviso Prévio, Férias
+                                    Vencidas e Proporcionais, 13º Salário, Saque do FGTS com Multa de 40% e
+                                    Seguro-Desemprego.</label></div>
+                            <div class="option"><label class="flex items-center"><input type="radio" name="q36"
+                                        value="c" onclick="checkAnswer(36)"
+                                        class="mr-2 text-[#00678F] focus:ring-[#00678F]"> c) Apenas a indenização do
+                                    Art. 477, § 8º da CLT.</label></div>
+                            <div class="option"><label class="flex items-center"><input type="radio" name="q36"
+                                        value="d" onclick="checkAnswer(36)"
+                                        class="mr-2 text-[#00678F] focus:ring-[#00678F]"> d) Apenas o Saldo de
+                                    Salário.</label></div>
+                            <div class="feedback"></div>
+                        </div>
+
+                        <div class="question-box p-4 bg-white border border-gray-200 rounded-lg shadow-sm" id="q37">
+                            <div class="question-title text-lg font-semibold text-gray-800 mb-2">37. Na base de cálculo
+                                do 13º Salário (Gratificação Natalina), qual parâmetro deve ser utilizado para
+                                determinar se o avo é devido ou não?</div>
+                            <div class="option"><label class="flex items-center"><input type="radio" name="q37"
+                                        value="a" onclick="checkAnswer(37)"
+                                        class="mr-2 text-[#00678F] focus:ring-[#00678F]"> a) A fração igual ou superior
+                                    a 15 dias de trabalho no mês.</label></div>
+                            <div class="option"><label class="flex items-center"><input type="radio" name="q37"
+                                        value="b" onclick="checkAnswer(37)"
+                                        class="mr-2 text-[#00678F] focus:ring-[#00678F]"> b) O trabalho de, no mínimo,
+                                    20 dias no mês.</label></div>
+                            <div class="option"><label class="flex items-center"><input type="radio" name="q37"
+                                        value="c" onclick="checkAnswer(37)"
+                                        class="mr-2 text-[#00678F] focus:ring-[#00678F]"> c) O trabalho de, no mínimo,
+                                    10 dias no mês.</label></div>
+                            <div class="option"><label class="flex items-center"><input type="radio" name="q37"
+                                        value="d" onclick="checkAnswer(37)"
+                                        class="mr-2 text-[#00678F] focus:ring-[#00678F]"> d) O mês completo, sem
+                                    fração.</label></div>
+                            <div class="feedback"></div>
+                        </div>
+
+                        <div class="question-box p-4 bg-white border border-gray-200 rounded-lg shadow-sm" id="q38">
+                            <div class="question-title text-lg font-semibold text-gray-800 mb-2">38. Ao formalizar o
+                                **pedido de demissão** (iniciativa do empregado), qual verba rescisória de natureza
+                                indenizatória o trabalhador **não** tem direito de receber?</div>
+                            <div class="option"><label class="flex items-center"><input type="radio" name="q38"
+                                        value="a" onclick="checkAnswer(38)"
+                                        class="mr-2 text-[#00678F] focus:ring-[#00678F]"> a) 13º Salário
+                                    Proporcional.</label></div>
+                            <div class="option"><label class="flex items-center"><input type="radio" name="q38"
+                                        value="b" onclick="checkAnswer(38)"
+                                        class="mr-2 text-[#00678F] focus:ring-[#00678F]"> b) Saldo de Salário.</label>
+                            </div>
+                            <div class="option"><label class="flex items-center"><input type="radio" name="q38"
+                                        value="c" onclick="checkAnswer(38)"
+                                        class="mr-2 text-[#00678F] focus:ring-[#00678F]"> c) Aviso Prévio Indenizado (e
+                                    multa do FGTS).</label></div>
+                            <div class="option"><label class="flex items-center"><input type="radio" name="q38"
+                                        value="d" onclick="checkAnswer(38)"
+                                        class="mr-2 text-[#00678F] focus:ring-[#00678F]"> d) Férias Proporcionais +
+                                    1/3.</label></div>
+                            <div class="feedback"></div>
+                        </div>
+
+                        <div class="question-box p-4 bg-white border border-gray-200 rounded-lg shadow-sm" id="q39">
+                            <div class="question-title text-lg font-semibold text-gray-800 mb-2">39. A regra de apuração
+                                do 13º Salário Proporcional (Lei 4.090/62) exige que a fração igual ou superior a 15
+                                dias de trabalho no mês seja computada como:</div>
+                            <div class="option"><label class="flex items-center"><input type="radio" name="q39"
+                                        value="a" onclick="checkAnswer(39)"
+                                        class="mr-2 text-[#00678F] focus:ring-[#00678F]"> a) Meio avo.</label></div>
+                            <div class="option"><label class="flex items-center"><input type="radio" name="q39"
+                                        value="b" onclick="checkAnswer(39)"
+                                        class="mr-2 text-[#00678F] focus:ring-[#00678F]"> b) Um avo (mês
+                                    inteiro).</label></div>
+                            <div class="option"><label class="flex items-center"><input type="radio" name="q39"
+                                        value="c" onclick="checkAnswer(39)"
+                                        class="mr-2 text-[#00678F] focus:ring-[#00678F]"> c) Um terço de avo.</label>
+                            </div>
+                            <div class="option"><label class="flex items-center"><input type="radio" name="q39"
+                                        value="d" onclick="checkAnswer(39)"
+                                        class="mr-2 text-[#00678F] focus:ring-[#00678F]"> d) Zero, pois não atingiu 30
+                                    dias.</label></div>
+                            <div class="feedback"></div>
+                        </div>
+
+                        <div class="question-box p-4 bg-white border border-gray-200 rounded-lg shadow-sm" id="q40">
+                            <div class="question-title text-lg font-semibold text-gray-800 mb-2">40. Qual a regra da
+                                Reforma Trabalhista (Lei 13.467/17) para a rescisão do contrato por **Acordo** entre
+                                empregado e empregador?</div>
+                            <div class="option"><label class="flex items-center"><input type="radio" name="q40"
+                                        value="a" onclick="checkAnswer(40)"
+                                        class="mr-2 text-[#00678F] focus:ring-[#00678F]"> a) Não há previsão legal para
+                                    rescisão por acordo.</label></div>
+                            <div class="option"><label class="flex items-center"><input type="radio" name="q40"
+                                        value="b" onclick="checkAnswer(40)"
+                                        class="mr-2 text-[#00678F] focus:ring-[#00678F]"> b) Aviso Prévio e Multa do
+                                    FGTS são reduzidos pela metade (20%), mas o empregado **NÃO** tem direito ao
+                                    Seguro-Desemprego.</label></div>
+                            <div class="option"><label class="flex items-center"><input type="radio" name="q40"
+                                        value="c" onclick="checkAnswer(40)"
+                                        class="mr-2 text-[#00678F] focus:ring-[#00678F]"> c) Todas as verbas são devidas
+                                    integralmente, e o empregado tem direito ao Seguro-Desemprego.</label></div>
+                            <div class="option"><label class="flex items-center"><input type="radio" name="q40"
+                                        value="d" onclick="checkAnswer(40)"
+                                        class="mr-2 text-[#00678F] focus:ring-[#00678F]"> d) Apenas a Multa do FGTS é
+                                    reduzida para 20%, mantendo-se integral o Aviso Prévio, e o empregado tem direito ao
+                                    Seguro-Desemprego.</label></div>
+                            <div class="feedback"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="drawer-container">
+                <div class="drawer-header" id="section-6-header">
+                    6. PJe-Calc: Prática, Telas e Funcionalidades (10 Questões)
+                    <span class="arrow">▼</span>
+                </div>
+                <div class="drawer-content" id="section-6-content">
+                    <div class="inner-content">
+                        <div class="question-box p-4 bg-white border border-gray-200 rounded-lg shadow-sm" id="q16">
+                            <div class="question-title text-lg font-semibold text-gray-800 mb-2">41. Qual a regra de
+                                juros de mora aplicável, por padrão, aos cálculos na Justiça do Trabalho (Art. 39 da Lei
+                                8.177/91)?</div>
+                            <div class="option"><label class="flex items-center"><input type="radio" name="q16"
+                                        value="a" onclick="checkAnswer(41)"
+                                        class="mr-2 text-[#00678F] focus:ring-[#00678F]"> a) Juros de 1% ao mês,
+                                    capitalizados anualmente.</label></div>
+                            <div class="option"><label class="flex items-center"><input type="radio" name="q16"
+                                        value="b" onclick="checkAnswer(41)"
+                                        class="mr-2 text-[#00678F] focus:ring-[#00678F]"> b) Juros de 0,5% ao mês, a
+                                    partir da data do ajuizamento.</label></div>
+                            <div class="option"><label class="flex items-center"><input type="radio" name="q16"
+                                        value="c" onclick="checkAnswer(41)"
+                                        class="mr-2 text-[#00678F] focus:ring-[#00678F]"> c) Juros de 1% ao mês,
+                                    aplicados pro rata die, a partir da data do ajuizamento da ação (ou da constituição
+                                    do crédito).</label></div>
+                            <div class="option"><label class="flex items-center"><input type="radio" name="q16"
+                                        value="d" onclick="checkAnswer(41)"
+                                        class="mr-2 text-[#00678F] focus:ring-[#00678F]"> d) Juros de 6% ao ano,
+                                    aplicados a partir da citação.</label></div>
+                            <div class="feedback"></div>
+                        </div>
+
+                        <div class="question-box p-4 bg-white border border-gray-200 rounded-lg shadow-sm" id="q20">
+                            <div class="question-title text-lg font-semibold text-gray-800 mb-2">42. Em qual aba do
+                                PJe-Calc o usuário insere as parcelas (verbas) pagas pela reclamada que devem ser
+                                abatidas do total devido, como o TRCT (Termo de Rescisão do Contrato de Trabalho)?</div>
+                            <div class="option"><label class="flex items-center"><input type="radio" name="q20"
+                                        value="a" onclick="checkAnswer(42)"
+                                        class="mr-2 text-[#00678F] focus:ring-[#00678F]"> a) Aba "Verbas".</label></div>
+                            <div class="option"><label class="flex items-center"><input type="radio" name="q20"
+                                        value="b" onclick="checkAnswer(42)"
+                                        class="mr-2 text-[#00678F] focus:ring-[#00678F]"> b) Aba "Parâmetros".</label>
+                            </div>
+                            <div class="option"><label class="flex items-center"><input type="radio" name="q20"
+                                        value="c" onclick="checkAnswer(42)"
+                                        class="mr-2 text-[#00678F] focus:ring-[#00678F]"> c) Aba
+                                    "Deduções/Pagamentos".</label></div>
+                            <div class="option"><label class="flex items-center"><input type="radio" name="q20"
+                                        value="d" onclick="checkAnswer(42)"
+                                        class="mr-2 text-[#00678F] focus:ring-[#00678F]"> d) Aba "Memória".</label>
+                            </div>
+                            <div class="feedback"></div>
+                        </div>
+
+                        <div class="question-box p-4 bg-white border border-gray-200 rounded-lg shadow-sm" id="q24">
+                            <div class="question-title text-lg font-semibold text-gray-800 mb-2">43. Qual o "Tipo de
+                                Verba" deve ser utilizado no PJe-Calc para uma verba deferida que possui valor fixo por
+                                mês, como diárias de viagem ou ajuda de custo?</div>
+                            <div class="option"><label class="flex items-center"><input type="radio" name="q24"
+                                        value="a" onclick="checkAnswer(43)"
+                                        class="mr-2 text-[#00678F] focus:ring-[#00678F]"> a) Verba de Horas.</label>
+                            </div>
+                            <div class="option"><label class="flex items-center"><input type="radio" name="q24"
+                                        value="b" onclick="checkAnswer(43)"
+                                        class="mr-2 text-[#00678F] focus:ring-[#00678F]"> b) Verba de
+                                    Médias/Remuneração.</label></div>
+                            <div class="option"><label class="flex items-center"><input type="radio" name="q24"
+                                        value="c" onclick="checkAnswer(43)"
+                                        class="mr-2 text-[#00678F] focus:ring-[#00678F]"> c) Verba de Valor
+                                    Fixo.</label></div>
+                            <div class="option"><label class="flex items-center"><input type="radio" name="q24"
+                                        value="d" onclick="checkAnswer(43)"
+                                        class="mr-2 text-[#00678F] focus:ring-[#00678F]"> d) Verba de
+                                    Percentual.</label></div>
+                            <div class="feedback"></div>
+                        </div>
+
+                        <div class="question-box p-4 bg-white border border-gray-200 rounded-lg shadow-sm" id="q42">
+                            <div class="question-title text-lg font-semibold text-gray-800 mb-2">44. Qual a principal
+                                função da aba "Parâmetros de Cálculo" no PJe-Calc?</div>
+                            <div class="option"><label class="flex items-center"><input type="radio" name="q42"
+                                        value="a" onclick="checkAnswer(44)"
+                                        class="mr-2 text-[#00678F] focus:ring-[#00678F]"> a) Cadastrar as verbas
+                                    deferidas.</label></div>
+                            <div class="option"><label class="flex items-center"><input type="radio" name="q42"
+                                        value="b" onclick="checkAnswer(44)"
+                                        class="mr-2 text-[#00678F] focus:ring-[#00678F]"> b) Visualizar os valores
+                                    totais.</label></div>
+                            <div class="option"><label class="flex items-center"><input type="radio" name="q42"
+                                        value="c" onclick="checkAnswer(44)"
+                                        class="mr-2 text-[#00678F] focus:ring-[#00678F]"> c) Definir o divisor de horas,
+                                    percentual de adicional noturno, feriados, DSR e outros fatores globais que afetam o
+                                    cálculo das verbas.</label></div>
+                            <div class="option"><label class="flex items-center"><input type="radio" name="q42"
+                                        value="d" onclick="checkAnswer(44)"
+                                        class="mr-2 text-[#00678F] focus:ring-[#00678F]"> d) Inserir os comprovantes de
+                                    pagamento.</label></div>
+                            <div class="feedback"></div>
+                        </div>
+
+                        <div class="question-box p-4 bg-white border border-gray-200 rounded-lg shadow-sm" id="q44">
+                            <div class="question-title text-lg font-semibold text-gray-800 mb-2">45. Se o empregador já
+                                pagou a um empregado parte das verbas deferidas na sentença (ex: horas extras), como
+                                deve ser realizado o abatimento desse valor no PJe-Calc?</div>
+                            <div class="option"><label class="flex items-center"><input type="radio" name="q44"
+                                        value="a" onclick="checkAnswer(45)"
+                                        class="mr-2 text-[#00678F] focus:ring-[#00678F]"> a) Na aba "Verbas", inserindo
+                                    o valor pago como uma dedução na própria verba. </label></div>
+                            <div class="option"><label class="flex items-center"><input type="radio" name="q44"
+                                        value="b" onclick="checkAnswer(45)"
+                                        class="mr-2 text-[#00678F] focus:ring-[#00678F]"> b) Cadastrar um novo pagamento
+                                    na aba "Deduções/Pagamentos" e vincular às verbas devidas, marcando a opção
+                                    "Abatimento de valores globais".</label></div>
+                            <div class="option"><label class="flex items-center"><input type="radio" name="q44"
+                                        value="c" onclick="checkAnswer(45)"
+                                        class="mr-2 text-[#00678F] focus:ring-[#00678F]"> c) O abatimento é automático,
+                                    desde que a data do pagamento seja anterior ao ajuizamento da ação.</label></div>
+                            <div class="option"><label class="flex items-center"><input type="radio" name="q44"
+                                        value="d" onclick="checkAnswer(45)"
+                                        class="mr-2 text-[#00678F] focus:ring-[#00678F]"> d) Não é possível abater
+                                    valores já pagos. </label></div>
+                            <div class="feedback"></div>
+                        </div>
+
+                        <div class="question-box p-4 bg-white border border-gray-200 rounded-lg shadow-sm" id="q45">
+                            <div class="question-title text-lg font-semibold text-gray-800 mb-2">46. Onde devem ser
+                                inseridos os percentuais de Honorários de Sucumbência (advogado do reclamante e/ou da
+                                reclamada) no PJe-Calc?</div>
+                            <div class="option"><label class="flex items-center"><input type="radio" name="q45"
+                                        value="a" onclick="checkAnswer(46)"
+                                        class="mr-2 text-[#00678F] focus:ring-[#00678F]"> a) No "Resumo Geral", após a
+                                    conclusão dos cálculos.</label></div>
+                            <div class="option"><label class="flex items-center"><input type="radio" name="q45"
+                                        value="b" onclick="checkAnswer(46)"
+                                        class="mr-2 text-[#00678F] focus:ring-[#00678F]"> b) Na aba "Principal".</label>
+                            </div>
+                            <div class="option"><label class="flex items-center"><input type="radio" name="q45"
+                                        value="c" onclick="checkAnswer(46)"
+                                        class="mr-2 text-[#00678F] focus:ring-[#00678F]"> c) Na aba "Honorários de
+                                    Sucumbência".</label></div>
+                            <div class="option"><label class="flex items-center"><input type="radio" name="q45"
+                                        value="d" onclick="checkAnswer(46)"
+                                        class="mr-2 text-[#00678F] focus:ring-[#00678F]"> d) Na aba
+                                    "Configurações".</label></div>
+                            <div class="feedback"></div>
+                        </div>
+
+                        <div class="question-box p-4 bg-white border border-gray-200 rounded-lg shadow-sm" id="q46">
+                            <div class="question-title text-lg font-semibold text-gray-800 mb-2">47. Ao cadastrar uma
+                                verba na aba "Verbas", qual deve ser a "Natureza Jurídica" (Salarial ou Indenizatório)
+                                para que o sistema realize automaticamente a retenção de INSS e o recolhimento de FGTS?
+                            </div>
+                            <div class="option"><label class="flex items-center"><input type="radio" name="q46"
+                                        value="a" onclick="checkAnswer(47)"
+                                        class="mr-2 text-[#00678F] focus:ring-[#00678F]"> a) Indenizatório.</label>
+                            </div>
+                            <div class="option"><label class="flex items-center"><input type="radio" name="q46"
+                                        value="b" onclick="checkAnswer(47)"
+                                        class="mr-2 text-[#00678F] focus:ring-[#00678F]"> b) Salarial.</label></div>
+                            <div class="option"><label class="flex items-center"><input type="radio" name="q46"
+                                        value="c" onclick="checkAnswer(47)"
+                                        class="mr-2 text-[#00678F] focus:ring-[#00678F]"> c) Mista (50% Salarial e 50%
+                                    Indenizatório).</label></div>
+                            <div class="option"><label class="flex items-center"><input type="radio" name="q46"
+                                        value="d" onclick="checkAnswer(47)"
+                                        class="mr-2 text-[#00678F] focus:ring-[#00678F]"> d) Não importa a natureza
+                                    jurídica.</label></div>
+                            <div class="feedback"></div>
+                        </div>
+
+                        <div class="question-box p-4 bg-white border border-gray-200 rounded-lg shadow-sm" id="q48">
+                            <div class="question-title text-lg font-semibold text-gray-800 mb-2">48. Qual é o regime
+                                utilizado pelo PJe-Calc para apurar as contribuições previdenciárias e o Imposto de
+                                Renda sobre os rendimentos de Reclamação Trabalhista (excluído o 13º salário)?</div>
+                            <div class="option"><label class="flex items-center"><input type="radio" name="q48"
+                                        value="a" onclick="checkAnswer(48)"
+                                        class="mr-2 text-[#00678F] focus:ring-[#00678F]"> a) Regime de Caixa (apuração
+                                    única no mês de pagamento).</label></div>
+                            <div class="option"><label class="flex items-center"><input type="radio" name="q48"
+                                        value="b" onclick="checkAnswer(48)"
+                                        class="mr-2 text-[#00678F] focus:ring-[#00678F]"> b) Regime de Competência
+                                    (Cálculo separado por mês/competência).</label></div>
+                            <div class="option"><label class="flex items-center"><input type="radio" name="q48"
+                                        value="c" onclick="checkAnswer(48)"
+                                        class="mr-2 text-[#00678F] focus:ring-[#00678F]"> c) Regime de
+                                    Compensação.</label></div>
+                            <div class="option"><label class="flex items-center"><input type="radio" name="q48"
+                                        value="d" onclick="checkAnswer(48)"
+                                        class="mr-2 text-[#00678F] focus:ring-[#00678F]"> d) Alíquota fixa de 27,5% (IR)
+                                    e 20% (INSS).</label></div>
+                            <div class="feedback"></div>
+                        </div>
+
+                        <div class="question-box p-4 bg-white border border-gray-200 rounded-lg shadow-sm" id="q49">
+                            <div class="question-title text-lg font-semibold text-gray-800 mb-2">49. Qual é a data que o
+                                PJe-Calc considera, por padrão, para calcular o início da aplicação dos Juros de Mora
+                                (Lei 8.177/91)?</div>
+                            <div class="option"><label class="flex items-center"><input type="radio" name="q49"
+                                        value="a" onclick="checkAnswer(49)"
+                                        class="mr-2 text-[#00678F] focus:ring-[#00678F]"> a) Data de Vencimento do
+                                    Título.</label></div>
+                            <div class="option"><label class="flex items-center"><input type="radio" name="q49"
+                                        value="b" onclick="checkAnswer(49)"
+                                        class="mr-2 text-[#00678F] focus:ring-[#00678F]"> b) Data do Ajuizamento da
+                                    Ação.</label></div>
+                            <div class="option"><label class="flex items-center"><input type="radio" name="q49"
+                                        value="c" onclick="checkAnswer(49)"
+                                        class="mr-2 text-[#00678F] focus:ring-[#00678F]"> c) Data da
+                                    Distribuição.</label></div>
+                            <div class="option"><label class="flex items-center"><input type="radio" name="q49"
+                                        value="d" onclick="checkAnswer(49)"
+                                        class="mr-2 text-[#00678F] focus:ring-[#00678F]"> d) Data da Extinção do
+                                    Contrato.</label></div>
+                            <div class="feedback"></div>
+                        </div>
+
+                        <div class="question-box p-4 bg-white border border-gray-200 rounded-lg shadow-sm" id="q50">
+                            <div class="question-title text-lg font-semibold text-gray-800 mb-2">50. Qual a regra do
+                                PJe-Calc para o cálculo das contribuições previdenciárias (INSS) sobre as parcelas
+                                deferidas (regime de competência)?</div>
+                            <div class="option"><label class="flex items-center"><input type="radio" name="q50"
+                                        value="a" onclick="checkAnswer(50)"
+                                        class="mr-2 text-[#00678F] focus:ring-[#00678F]"> a) O cálculo é feito com base
+                                    na alíquota de 20% sobre o total das verbas.</label></div>
+                            <div class="option"><label class="flex items-center"><input type="radio" name="q50"
+                                        value="b" onclick="checkAnswer(50)"
+                                        class="mr-2 text-[#00678F] focus:ring-[#00678F]"> b) O cálculo considera a
+                                    alíquota mensal do empregado e o teto máximo de contribuição, somando-se as verbas
+                                    salariais e o salário base no mês de competência.</label></div>
+                            <div class="option"><label class="flex items-center"><input type="radio" name="q50"
+                                        value="c" onclick="checkAnswer(50)"
+                                        class="mr-2 text-[#00678F] focus:ring-[#00678F]"> c) O INSS é calculado apenas
+                                    sobre a diferença entre o salário de contribuição e o total do crédito.</label>
+                            </div>
+                            <div class="option"><label class="flex items-center"><input type="radio" name="q50"
+                                        value="d" onclick="checkAnswer(50)"
+                                        class="mr-2 text-[#00678F] focus:ring-[#00678F]"> d) O INSS não é devido sobre
+                                    verbas deferidas em juízo.</label></div>
+                            <div class="feedback"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </form>
+
+        <script>
+            // Objeto com as respostas corretas (chave: ID da questão, valor: letra da opção)
+            const questions = {
+                // 1. Liquidação de Sentença (3 Questões)
+                'q1': 'c', // 1. Princípio da Inalterabilidade da Decisão Liquidanda.
+                'q2': 'c', // 2. Correção Monetária e Juros de Mora.
+                'q3': 'b', // 3. Liquidação por Artigos.
+
+                // NOVO 2. Jornada de Trabalho e Horas Extras (5 Questões)
+                'q6': 'b', // 4. 52 minutos e 30 segundos.
+                'q9': 'c', // 5. O salário normal mais verbas de natureza salarial e adicionais legais, contratuais ou coletivos.
+                'q51': 'c', // 6. Não, sob pena de bis in idem (dupla condenação). (NOVA Q)
+                'q52': 'c', // 7. 50%. (NOVA Q)
+                'q28': 'a', // 8. 50% (Horas extras).
+
+                // NOVO 3. Gratificações e Adicionais (7 Questões)
+                'q15': 'b', // 9. 30%.
+                'q19': 'b', // 10. O salário base (sem os acréscimos resultantes de gratificações, prêmios ou participações nos lucros).
+                'q53': 'c', // 11. Salarial. (NOVA Q)
+                'q54': 'b', // 12. 20%. (NOVA Q)
+                'q55': 'b', // 13. 40% do salário efetivo. (NOVA Q)
+                'q56': 'c', // 14. Não, o empregado deve optar por um dos dois. (NOVA Q)
+                'q57': 'c', // 15. O salário contratual, horas extras habituais, adicionais e outras verbas salariais habituais. (NOVA Q)
+
+
+                // 4. Verbas Remuneratórias e Base de Cálculo (10 Questões)
+                'q7': 'c', // 16. Salário, Gratificações e Adicionais.
+                'q8': 'c', // 17. A habitualidade e a natureza salarial do pagamento.
+                'q11': 'b', // 18. O salário mínimo.
+                'q12': 'b', // 19. Todos os adicionais percebidos de forma habitual, como horas extras e adicional noturno.
+                'q25': 'b', // 20. Na redução da capacidade laboral e na remuneração do empregado na época do acidente.
+                'q31': 'c', // 21. Ajuda de custo, auxílio-alimentação (não pago em dinheiro) e prêmios (ex: bonificações).
+                'q32': 'c', // 22. Gratificações, Comissões, Adicionais... e outras parcelas habituais de natureza salarial.
+                'q33': 'a', // 23. A vedação de vinculação para qualquer fim, salvo expressa previsão legal ou constitucional.
+                'q34': 'a', // 24. 10%, 20% e 40%.
+                'q35': 'd', // 25. O desconto não pode ultrapassar 70% da remuneração...
+
+                // 5. Verbas Rescisórias e Indenizatórias (15 Questões)
+                'q4': 'c', // 26. Como tempo de serviço para todos os efeitos (inclusive 13º, férias, etc.).
+                'q13': 'c', // 27. A remuneração na data da liquidação ou sentença, atualizada até a data do pagamento.
+                'q14': 'c', // 28. 10 dias a contar do término do contrato...
+                'q18': 'c', // 29. O valor equivalente ao salário nominal do empregado.
+                'q21': 'c', // 30. O salário contratual, acrescido da média das parcelas variáveis habituais (horas extras, comissões, etc.).
+                'q22': 'a', // 31. Regime de Competência, aplicando as tabelas e deduções mensais, e não o regime de caixa.
+                'q23': 'b', // 32. Um salário mensal.
+                'q26': 'b', // 33. Saque do FGTS e multa de 40%.
+                'q27': 'a', // 34. 50%.
+                'q30': 'b', // 35. 3 dias, limitado a um total de 90 dias.
+                'q36': 'b', // 36. Aviso Prévio, Férias Vencidas e Proporcionais, 13º Salário, Saque do FGTS com Multa de 40% e Seguro-Desemprego.
+                'q37': 'a', // 37. A fração igual ou superior a 15 dias de trabalho no mês.
+                'q38': 'c', // 38. Aviso Prévio Indenizado (e multa do FGTS).
+                'q39': 'b', // 39. Um avo (mês inteiro).
+                'q40': 'b', // 40. Aviso Prévio e Multa do FGTS são reduzidos pela metade (20%), mas o empregado NÃO tem direito ao Seguro-Desemprego.
+
+                // 6. PJe-Calc: Prática, Telas e Funcionalidades (10 Questões)
+                'q16': 'c', // 41. Juros de 1% ao mês, aplicados pro rata die, a partir da data do ajuizamento da ação (ou da constituição do crédito).
+                'q20': 'c', // 42. Aba "Deduções/Pagamentos".
+                'q24': 'c', // 43. Verba de Valor Fixo.
+                'q42': 'c', // 44. Definir o divisor de horas, percentual de adicional noturno, feriados, DSR e outros fatores globais...
+                'q44': 'b', // 45. Cadastrar um novo pagamento na aba "Deduções/Pagamentos" e vincular às verbas devidas, marcando a opção "Abatimento de valores globais".
+                'q45': 'c', // 46. Na aba "Honorários de Sucumbência".
+                'q46': 'b', // 47. Salarial.
+                'q48': 'b', // 48. Regime de Competência (Cálculo separado por mês/competência).
+                'q49': 'b', // 49. Data do Ajuizamento da Ação.
+                'q50': 'b' // 50. O cálculo considera a alíquota mensal do empregado e o teto máximo de contribuição...
+            };
+
+            const totalQuestions = 50; // ATUALIZADO para 50
+            let score = 0;
+
+            // Mapeamento do número visual da pergunta para o ID do elemento (qX)
+            function getQuestionId(visualNumber) {
+                // Seção 1 (1-3): q1, q2, q3
+                if (visualNumber >= 1 && visualNumber <= 3) return 'q' + visualNumber;
+
+                // Seção 2 (4-8): q6, q9, q51, q52, q28
+                if (visualNumber === 4) return 'q6';
+                if (visualNumber === 5) return 'q9';
+                if (visualNumber === 6) return 'q51'; // NOVO
+                if (visualNumber === 7) return 'q52'; // NOVO
+                if (visualNumber === 8) return 'q28';
+
+                // Seção 3 (9-15): q15, q19, q53, q54, q55, q56, q57
+                if (visualNumber === 9) return 'q15';
+                if (visualNumber === 10) return 'q19';
+                if (visualNumber === 11) return 'q53'; // NOVO
+                if (visualNumber === 12) return 'q54'; // NOVO
+                if (visualNumber === 13) return 'q55'; // NOVO
+                if (visualNumber === 14) return 'q56'; // NOVO
+                if (visualNumber === 15) return 'q57'; // NOVO
+
+                // Seção 4 (16-25) - Antiga Seção 3: q7, q8, q11, q12, q25, q31, q32, q33, q34, q35
+                if (visualNumber === 16) return 'q7';
+                if (visualNumber === 17) return 'q8';
+                if (visualNumber === 18) return 'q11';
+                if (visualNumber === 19) return 'q12';
+                if (visualNumber === 20) return 'q25';
+                if (visualNumber === 21) return 'q31';
+                if (visualNumber === 22) return 'q32';
+                if (visualNumber === 23) return 'q33';
+                if (visualNumber === 24) return 'q34';
+                if (visualNumber === 25) return 'q35';
+
+                // Seção 5 (26-40) - Antiga Seção 4: q4, q13, q14, q18, q21, q22, q23, q26, q27, q30, q36, q37, q38, q39, q40
+                if (visualNumber === 26) return 'q4';
+                if (visualNumber === 27) return 'q13';
+                if (visualNumber === 28) return 'q14';
+                if (visualNumber === 29) return 'q18';
+                if (visualNumber === 30) return 'q21';
+                if (visualNumber === 31) return 'q22';
+                if (visualNumber === 32) return 'q23';
+                if (visualNumber === 33) return 'q26';
+                if (visualNumber === 34) return 'q27';
+                if (visualNumber === 35) return 'q30';
+                if (visualNumber === 36) return 'q36';
+                if (visualNumber === 37) return 'q37';
+                if (visualNumber === 38) return 'q38';
+                if (visualNumber === 39) return 'q39';
+                if (visualNumber === 40) return 'q40';
+
+                // Seção 6 (41-50) - Antiga Seção 5: q16, q20, q24, q42, q44, q45, q46, q48, q49, q50
+                if (visualNumber === 41) return 'q16';
+                if (visualNumber === 42) return 'q20';
+                if (visualNumber === 43) return 'q24';
+                if (visualNumber === 44) return 'q42';
+                if (visualNumber === 45) return 'q44';
+                if (visualNumber === 46) return 'q45';
+                if (visualNumber === 47) return 'q46';
+                if (visualNumber === 48) return 'q48';
+                if (visualNumber === 49) return 'q49';
+                if (visualNumber === 50) return 'q50';
+
+                return null; // Caso não encontre
+            }
+
+
+            function checkAnswer(visualNumber) {
+                const questionId = getQuestionId(visualNumber);
+                if (!questionId) return;
+
+                const correct = questions[questionId];
+                const selected = document.querySelector(`input[name="${questionId}"]:checked`);
+                const feedback = document.getElementById(questionId).querySelector('.feedback');
+
+                // Desabilita todas as opções para evitar re-cliques
+                const options = document.getElementById(questionId).querySelectorAll('input[type="radio"]');
+                options.forEach(radio => radio.disabled = true);
+
+                // Remove classes de feedback anteriores
+                feedback.classList.remove('correct', 'incorrect');
+                feedback.style.display = 'block';
+
+                if (selected) {
+                    if (selected.value === correct) {
+                        feedback.textContent = 'RESPOSTA CORRETA!';
+                        feedback.classList.add('correct');
+                    } else {
+                        feedback.textContent = `RESPOSTA INCORRETA. A resposta correta é a opção ${correct.toUpperCase()}.`;
+                        feedback.classList.add('incorrect');
+                    }
+                } else {
+                    // Este caso não deve ocorrer se for acionado por clique, mas por segurança
+                    feedback.textContent = 'Selecione uma opção.';
+                    feedback.classList.add('incorrect');
+                }
+
+                // Reavalia o score global
+                updateScore();
+            }
+
+            function updateScore() {
+                score = 0;
+                let answeredQuestions = 0;
+                for (let i = 1; i <= totalQuestions; i++) {
+                    const questionId = getQuestionId(i);
+                    const selected = document.querySelector(`input[name="${questionId}"]:checked`);
+
+                    if (selected) {
+                        answeredQuestions++;
+                        if (selected.value === questions[questionId]) {
+                            score++;
+                        }
+                    }
+                }
+
+                const summaryElement = document.getElementById('quiz-summary');
+                summaryElement.textContent = `Progresso: Você acertou ${score} de ${answeredQuestions} perguntas respondidas (${totalQuestions} no total).`;
+
+                // if (answeredQuestions === totalQuestions) {
+                //     summaryElement.textContent = `FIM DO TESTE: Você acertou ${score} de ${totalQuestions} perguntas.`;
+                // }
+            }
+
+            // Lógica para as gavetas expansíveis
+            function setupDrawer(sectionNumber) {
+                const header = document.getElementById(`section-${sectionNumber}-header`);
+                const content = document.getElementById(`section-${sectionNumber}-content`);
+                if (header && content) {
+                    header.addEventListener('click', () => {
+                        const isExpanded = header.classList.toggle('active');
+
+                        // Toggle da classe CSS para o conteúdo
+                        content.classList.toggle('expanded');
+
+                        if (isExpanded) {
+                            // Define a altura máxima para a altura de rolagem para animar a abertura
+                            // Inclui padding-top e padding-bottom definidos no CSS (.drawer-content.expanded)
+                            content.style.maxHeight = (content.scrollHeight + 50) + "px";
+                        } else {
+                            // Colapsa a gaveta
+                            content.style.maxHeight = '0';
+                        }
+                    });
+
+                    // Inicia todas as gavetas fechadas
+                    content.style.maxHeight = '0';
+                }
+            }
+
+            // Configura todas as 6 seções como gavetas expansíveis (ATUALIZADO PARA 6)
+            document.addEventListener('DOMContentLoaded', () => {
+                for (let i = 1; i <= 6; i++) {
+                    setupDrawer(i);
+                }
+            });
+
+        </script>
+</body>
+
+</html>

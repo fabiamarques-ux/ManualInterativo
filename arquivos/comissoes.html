@@ -1,0 +1,773 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cálculo de Comissões</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f4f8;
+            color: #1a202c;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 2rem;
+            background-color: #ffffff;
+            border-radius: 1rem;
+            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.05);
+        }
+
+        .copy-btn {
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
+            padding: 0;
+            margin-left: 1rem;
+        }
+
+        .copy-btn svg {
+            width: 1.5rem;
+            height: 1.5rem;
+            fill: #00678F;
+            transition: fill 0.3s ease;
+        }
+
+        .copy-btn:hover svg {
+            fill: #004562;
+        }
+
+        /* Estilo do Spinner de Carregamento (Mantido, mas não usado) */
+        .loading-spinner {
+            border: 4px solid rgba(0, 103, 143, 0.1);
+            border-top: 4px solid #00678F;
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            animation: spin 1s linear infinite;
+            margin-right: 0.5rem;
+            display: none;
+            /* Inicia oculto */
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* Estilos para os Drawers (Acordeão) */
+        .drawer-container {
+            padding: 1rem;
+            background-color: #f0f4f8;
+            border-radius: 0.75rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+            margin-top: 1.5rem;
+        }
+
+        .drawer-header {
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .drawer-content {
+            overflow: hidden;
+            transition: all 0.5s ease-in-out;
+            max-height: 0;
+        }
+
+        .drawer-header .arrow-icon {
+            transition: transform 0.5s ease-in-out;
+        }
+
+        .drawer-header.active .arrow-icon {
+            transform: rotate(180deg);
+        }
+
+        /* NOVO ESTILO PARA AS FÓRMULAS */
+        .formula-block {
+            margin-top: 0.75rem;
+            margin-left: 1.5rem;
+            padding: 0.75rem;
+            background-color: #f7fbfc;
+            border-left: 4px solid #00678F;
+            border-radius: 0.25rem;
+            font-family: 'Consolas', 'Courier New', monospace;
+            color: #004562;
+            font-size: 0.9rem;
+            line-height: 1.8;
+        }
+
+        .formula-block p {
+            margin: 0;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container my-8 relative">
+        <img src="https://site.trt19.jus.br/sites/default/files/logo-trt19.png" alt="Logo do TRT19"
+            class="absolute top-4 right-4 w-36 h-auto">
+
+        <section id="secao-comissoes" class="content-section">
+            <h2 class="text-3xl font-bold text-[#00678F] mb-4">Comissão</h2>
+            <p class="text-gray-700 leading-relaxed text-justify">A Comissão é a remuneração variável paga ao empregado
+                em função do atingimento de metas de vendas ou participação em negócios. Por possuir natureza salarial,
+                ela é considerada parte integrante do salário para todos os efeitos legais (CLT), como férias, 13º
+                salário e FGTS. Geralmente é feito aplicando-se um percentual sobre o valor das vendas (brutas ou
+                líquidas).</p>
+
+            <div id="conceitos-adicionais-comissao" class="mt-8">
+
+                <h4 class="text-xl font-semibold text-gray-800">Modalidades de Comissionistas</h4>
+                <p class="text-gray-700 leading-relaxed text-justify mt-2">Existem duas modalidades principais de
+                    comissionistas no regime da CLT:</p>
+
+                <table
+                    class="w-full mt-4 text-sm text-gray-700 border-collapse border border-gray-300 rounded-md overflow-hidden">
+                    <thead>
+                        <tr class="bg-[#e0f7ff]">
+                            <th class="py-2 px-4 text-left border-b border-gray-300 w-1/4">Tipo de Comissionista</th>
+                            <th class="py-2 px-4 text-left border-b border-gray-300 w-1/2">Descrição</th>
+                            <th class="py-2 px-4 text-left border-b border-gray-300 w-1/4">Garantia Mínima</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="border-b border-gray-300">
+                            <td class="py-2 px-4 font-bold">Comissionista Misto</td>
+                            <td class="py-2 px-4">Recebe um salário fixo (base) mais as comissões sobre as vendas ou
+                                metas alcançadas.</td>
+                            <td class="py-2 px-4">Salário Fixo + Comissões.</td>
+                        </tr>
+                        <tr class="border-b border-gray-300">
+                            <td class="py-2 px-4 font-bold">Comissionista Puro</td>
+                            <td class="py-2 px-4">Recebe a remuneração exclusivamente por comissões.</td>
+                            <td class="py-2 px-4">Tem a garantia de receber, no mínimo, o salário mínimo legal ou o piso
+                                salarial da categoria profissional, caso o valor total das comissões apuradas no mês
+                                seja inferior a esse mínimo.</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h4 class="text-xl font-semibold text-gray-800 mt-6">A Distinção entre Comissão e Prêmio (Pós-Reforma
+                    Trabalhista)</h4>
+                <p class="text-gray-700 leading-relaxed text-justify mt-2">A Reforma Trabalhista (Lei nº 13.467/2017)
+                    trouxe uma diferenciação importante entre Comissão e Prêmio, afetando a natureza jurídica de cada
+                    verba:</p>
+
+                <ul class="list-disc list-inside text-gray-700 leading-relaxed mt-2 pl-4">
+                    <li><strong>Comissão:</strong> É parte do salário, paga como contraprestação pelo serviço e
+                        vinculada ao desempenho esperado (ex: vender produtos). Integra a remuneração e gera todos os
+                        encargos trabalhistas e previdenciários (INSS, FGTS, etc.).</li>
+                    <li><strong>Prêmio:</strong> É uma liberalidade concedida pelo empregador em razão de desempenho
+                        superior ao ordinariamente esperado (ex: bater uma meta extraordinária). O Art. 457, § 2º e § 4º
+                        da CLT estabelece que os prêmios, mesmo que habituais, não integram a remuneração e, portanto,
+                        não constituem base de incidência de qualquer encargo trabalhista e previdenciário (exceto
+                        IRPF).</li>
+                </ul>
+
+                <blockquote class="p-3 mt-4 border-l-4 border-yellow-500 bg-yellow-100 text-sm text-gray-700">
+                    <p class="font-bold">Atenção:</p>
+                    <p>Se um pagamento é rotulado como "prêmio", mas é concedido pelo cumprimento da meta normal de
+                        trabalho ou com regularidade excessiva e previsível, a Justiça do Trabalho pode considerar que
+                        ele possui natureza salarial (de comissão) e determinar a integração à remuneração.</p>
+                </blockquote>
+
+                <h4 class="text-xl font-semibold text-gray-800 mt-6">Exigibilidade e Prazo de Pagamento</h4>
+                <p class="text-gray-700 leading-relaxed text-justify mt-2">O Artigo 466 da CLT estabelece que o
+                    pagamento das comissões só é exigível após a finalização do negócio (ultimada a transação). O
+                    pagamento deve ser feito imediatamente após a liquidação da venda (a quitação do valor pelo cliente)
+                    ou mensalmente, conforme o acordo contratual. É crucial que a base e o gatilho de pagamento
+                    (geralmente faturamento ou recebimento do cliente - *cash-in*) sejam claros no contrato.</p>
+
+                <h4 class="text-xl font-semibold text-gray-800 mt-4">Estorno de Comissões (Devolução)</h4>
+                <p class="text-gray-700 leading-relaxed text-justify mt-2">A lei proíbe o estorno (devolução) da
+                    comissão se a venda for cancelada por motivos alheios à vontade ou culpa do empregado, como
+                    cancelamento por parte do empregador ou insolvência/inadimplência do cliente. O estorno só é
+                    permitido se o negócio não for concluído por culpa comprovada do empregado (como erro no pedido ou
+                    fraude).</p>
+            </div>
+            <div id="base-legal-drawer" class="drawer-container">
+                <div id="base-legal-header" class="drawer-header">
+                    <h4 class="text-xl font-semibold text-[#00678F]">Base Legal e Jurisprudência</h4>
+                    <svg class="arrow-icon w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                    </svg>
+                </div>
+                <div id="base-legal-content" class="drawer-content">
+                    <p class="text-gray-700 leading-relaxed text-justify mt-4">O regime jurídico das comissões e sua
+                        natureza salarial, bem como a distinção legal entre comissão e prêmio, estão amparados pela
+                        legislação e jurisprudência a seguir:</p>
+
+                    <h5 class="text-lg font-semibold text-gray-800 mt-4">Fontes Normativas</h5>
+
+                    <hr class="my-4 border-gray-300">
+                    <h5 class="text-base font-semibold text-gray-800">Consolidação das Leis do Trabalho (CLT):</h5>
+                    <ul class="list-disc list-inside text-gray-700 leading-relaxed mt-2 ml-4 space-y-3">
+                        <li><strong>Art. 457, § 1º (Natureza Salarial da Comissão):</strong>
+                            <p class="text-sm italic mt-1 ml-4 border-l-2 border-gray-400 pl-3">"Integram o salário a
+                                importância fixa estipulada, as gratificações legais e as comissões pagas pelo
+                                empregador."</p>
+                        </li>
+                        <li><strong>Art. 457, § 2º e § 4º (Natureza Indenizatóriado Prêmio):</strong>
+                            <p class="text-sm italic mt-1 ml-4 border-l-2 border-gray-400 pl-3">"§ 2º As importâncias,
+                                ainda que habituais, pagas a título de ajuda de custo, auxílio-alimentação, diárias para
+                                viagem, prêmios e abonos não integram a remuneração do empregado, não se incorporam ao
+                                contrato de trabalho e não constituem base de incidência de qualquer encargo trabalhista
+                                e previdenciário. [...] § 4º Consideram-se prêmios as liberalidades concedidas pelo
+                                empregador em forma de bens, serviços ou valor em dinheiro a empregado ou a grupo de
+                                empregados, em razão de desempenho superior ao ordinariamente esperado no exercício de
+                                suas atividades."</p>
+                        </li>
+                        <li><strong>Art. 466 (Exigibilidade da Comissão):</strong>
+                            <p class="text-sm italic mt-1 ml-4 border-l-2 border-gray-400 pl-3">"O pagamento de
+                                comissões e percentagens só é exigível depois de ultimada a transação a que se referem."
+                            </p>
+                            <p class="text-sm italic mt-2 ml-4 border-l-2 border-gray-400 pl-3"><strong>§ 1º.</strong>
+                                Em caso de rescisão de contrato, a cessação das relações de trabalho não prejudica a
+                                percepção das comissões e percentagens devidas na forma estabelecida por este artigo.
+                            </p>
+                            <p class="text-sm italic mt-2 ml-4 border-l-2 border-gray-400 pl-3"><strong>§ 2º.</strong> A
+                                aceitação do negócio pelo empregador importa a definitividade da transação, para fins de
+                                exigibilidade das comissões ou percentagens.</p>
+                        </li>
+                    </ul>
+
+                    <hr class="my-6 border-gray-300">
+
+                    <h5 class="text-lg font-semibold text-gray-800">Jurisprudência</h5>
+
+                    <h6 class="text-base font-semibold text-gray-800 mt-4">Integração da Comissão na Remuneração</h6>
+                    <div class="p-4 bg-gray-100 rounded-md mt-2 border border-gray-300">
+                        <p class="font-bold text-sm">Súmula nº 27 do TST (Reflexos da Comissão):</p>
+                        <p class="text-sm mt-1 italic">"As comissões constituem a remuneração do empregado, devendo,
+                            portanto, integrar o salário para todos os efeitos legais, inclusive para o cálculo do aviso
+                            prévio, 13º salário, férias e FGTS."</p>
+                    </div>
+
+                    <h6 class="text-base font-semibold text-gray-800 mt-6">Natureza Salarial vs. Indenizatória (Prêmios)
+                    </h6>
+                    <div class="p-4 bg-gray-100 rounded-md mt-2 border border-gray-300">
+                        <p class="font-bold text-sm">Precedente sobre a Descaracterização do Prêmio:</p>
+                        <p class="text-sm mt-1 italic">"Embora a Reforma Trabalhista tenha estabelecido a natureza
+                            indenizatória dos prêmios, o pagamento habitual de verbas por atingimento de metas
+                            ordinárias ou meramente esperadas configura, na verdade, comissão. Em tais casos, é
+                            reconhecida a natureza salarial da parcela, com consequente integração à remuneração para
+                            todos os fins."</p>
+                        <p class="text-xs mt-2 text-gray-600">*(Nota: A Justiça do Trabalho, com base no princípio da
+                            primazia da realidade, pode descaracterizar o prêmio se este não estiver atrelado a um
+                            desempenho extraordinário.)*</p>
+                    </div>
+                </div>
+            </div>
+
+            <div id="base-calculo-drawer" class="drawer-container">
+                <div id="base-calculo-header" class="drawer-header">
+                    <h4 class="text-xl font-semibold text-[#00678F]">Base de Cálculo e Deduções</h4>
+                    <svg class="arrow-icon w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                    </svg>
+                </div>
+                <div id="base-calculo-content" class="drawer-content">
+
+                    <div class="p-3 mt-2 mb-4 bg-yellow-50 border-l-4 border-yellow-500 rounded-r-md">
+                        <p class="text-gray-900 leading-relaxed text-justify font-medium">
+                            IMPORTANTE: O valor total da Comissão Bruta deve integrar o valor da Remuneração
+                            Total (Salário-Base + Adicionais + H. Extras + Gratificações ) para fins de cálculo das
+                            deduções obrigatórias fiscais e para formação da base de cálculo das Verbas Reflexas.
+                        </p>
+                    </div>
+
+                    <hr class="mb-6 mt-0 border-[#00678F]">
+                    <h4 class="text-xl font-semibold text-[#00678F]">Definição e Critérios da Base de Cálculo</h4>
+                    <p class="text-gray-700 leading-relaxed text-justify mt-2">O modo como a comissão é calculada é
+                        definido pelo empregador, respeitando o contrato de trabalho e as convenções coletivas. A Base
+                        de Cálculo é o montante sobre o qual incidirá o percentual de comissão.</p>
+
+                    <h6 class="text-lg font-bold text-[#00678F] mt-4">Composição e Critérios da Base de Cálculo:</h6>
+
+                    <ul class="list-disc list-inside text-gray-700 leading-relaxed mt-2 pl-4 space-y-4">
+                        <li>
+                            <strong>Percentual sobre o Valor da Venda (Mais Comum):</strong> O percentual é aplicado
+                            sobre o valor total do produto ou serviço vendido (bruto ou líquido, conforme definido em
+                            contrato).
+                            <div class="formula-block">
+                                <p>
+                                    <strong>Fórmula:</strong> Comissão = Valor da Venda $\times$ Percentual
+                                </p>
+                            </div>
+                        </li>
+                        <li>
+                            <strong>Percentual sobre a Margem de Lucro:</strong> Cálculo sobre a diferença entre o preço
+                            de venda e o custo (margem de lucro).
+                            <div class="formula-block">
+                                <p>
+                                    <strong>Fórmula:</strong> Margem de Lucro = Preço de Venda $-$ Custo do Produto
+                                    <br>
+                                    Comissão = Margem de Lucro $\times$ Percentual
+                                </p>
+                            </div>
+                        </li>
+                        <li>
+                            <strong>Valor Fixo por Unidade/Negócio:</strong> Um valor fixo é pago por cada unidade
+                            vendida ou contrato fechado.
+                            <div class="formula-block">
+                                <p>
+                                    <strong>Fórmula:</strong> Comissão = Valor Fixo $\times$ Quantidade de Unidades
+                                    Vendidas
+                                </p>
+                            </div>
+                        </li>
+                    </ul>
+
+                    <div class="p-3 mt-4 bg-gray-100 border-l-4 border-[#00678F]/50 rounded-r-md">
+                        <p class="text-sm text-gray-700 leading-relaxed text-justify">
+                            <strong class="text-gray-900">Base e Gatilho de Pagamento:</strong> A comissão é geralmente
+                            calculada sobre o <strong>Valor Bruto da Venda</strong>. O ponto chave é o <strong>Gatilho
+                                de Pagamento</strong> (quando o pagamento é exigível), que deve ser claramente definido
+                            (geralmente faturamento ou recebimento do cliente - *cash-in*).
+                        </p>
+                    </div>
+
+
+                    <hr class="my-6 border-gray-300">
+
+                    <h5 class="text-lg font-semibold text-gray-800">Exemplo Prático (Valor Bruto)</h5>
+                    <p class="text-gray-700 leading-relaxed text-justify mt-2">A comissão bruta é o resultado direto da
+                        aplicação do percentual acordado sobre a base de cálculo (valor da venda).</p>
+                    <p class="text-gray-700 leading-relaxed text-justify mt-2 font-mono font-semibold">Fórmula: Comissão
+                        Bruta = Valor da Venda * Percentual de Comissão</p>
+
+                    <hr class="my-4 border-gray-300">
+
+                    <p class="text-gray-700 leading-relaxed text-justify mt-2">Um empregado vendeu R$ 5.000,00 em
+                        produtos e tem uma taxa de comissão de 3%.</p>
+
+                    <table
+                        class="w-full mt-4 text-sm text-gray-700 border-collapse border border-gray-300 rounded-md overflow-hidden">
+                        <thead>
+                            <tr class="bg-gray-200">
+                                <th class="py-2 px-4 text-left border-b border-gray-300">Item</th>
+                                <th class="py-2 px-4 text-left border-b border-gray-300">Valor / Detalhe</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="border-b border-gray-300">
+                                <td class="py-2 px-4">Valor da Venda (Base)</td>
+                                <td class="py-2 px-4">R$ 5.000,00</td>
+                            </tr>
+                            <tr class="border-b border-gray-300">
+                                <td class="py-2 px-4">Percentual de Comissão</td>
+                                <td class="py-2 px-4">3%</td>
+                            </tr>
+                            <tr class="border-b border-gray-300">
+                                <td class="py-2 px-4">Cálculo</td>
+                                <td class="py-2 px-4">R$ 5.000,00 * 0,03</td>
+                            </tr>
+                            <tr>
+                                <td class="py-2 px-4 font-bold bg-gray-100">Comissão Bruta</td>
+                                <td class="py-2 px-4 font-bold bg-gray-100">R$ 150,00</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <hr class="my-6 border-[#00678F]">
+
+                    <h4 class="text-xl font-semibold text-[#00678F]">Deduções da Base e Cálculo</h4>
+
+                    <h6 class="text-lg font-bold text-[#00678F] mt-4">Deduções Fiscais e Previdenciárias:</h6>
+                    <p class="text-gray-700 leading-relaxed text-justify mt-2">O desconto da contribuição para o
+                        Instituto Nacional do Seguro Social (INSS) e do Imposto de Renda Retido na Fonte (IRPF) é
+                        obrigatório, pois a comissão possui natureza salarial.</p>
+
+                    <h6 class="text-lg font-bold text-[#00678F] mt-4">Deduções de Valores Pagos e Descontos Autorizados:
+                    </h6>
+                    <ul class="list-disc list-inside text-gray-700 leading-relaxed mt-2 pl-4 space-y-2">
+                        <li><strong>Adiantamentos de Comissão:</strong> Valores antecipados ao empregado no mês.</li>
+                        <li><strong>Descontos Autorizados:</strong> Descontos autorizados por lei, contrato ou acordo
+                            coletivo (ex: Vale-Transporte, planos de saúde).</li>
+                    </ul>
+
+                    <hr class="my-4 border-gray-300">
+                    <h5 class="text-lg font-semibold text-gray-800">Exemplo Prático (Valor Bruto - Deduções = Valor
+                        Líquido)</h5>
+                    <p class="text-gray-700 leading-relaxed text-justify mt-2">Considerando uma Comissão Bruta de R$
+                        2.000,00 e a aplicação de deduções fiscais e previdenciárias fictícias (sem descontos adicionais
+                        como VT/Adiantamento neste exemplo):</p>
+                    <table
+                        class="w-full mt-4 text-sm text-gray-700 border-collapse border border-gray-300 rounded-md overflow-hidden">
+                        <thead>
+                            <tr class="bg-gray-200">
+                                <th class="py-2 px-4 text-left border-b border-gray-300">Item</th>
+                                <th class="py-2 px-4 text-left border-b border-gray-300">Valor</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="border-b border-gray-300">
+                                <td class="py-2 px-4 font-bold bg-gray-50">Comissão Bruta</td>
+                                <td class="py-2 px-4 font-bold bg-gray-50">R$ 2.000,00</td>
+                            </tr>
+                            <tr class="border-b border-gray-300">
+                                <td class="py-2 px-4 text-red-600">(-) Dedução INSS (9% Fictício)</td>
+                                <td class="py-2 px-4 text-red-600">R$ 180,00</td>
+                            </tr>
+                            <tr class="border-b border-gray-300">
+                                <td class="py-2 px-4 text-red-600">(-) Dedução IRPF (Isento Fictício)</td>
+                                <td class="py-2 px-4 text-red-600">R$ 0,00</td>
+                            </tr>
+                            <tr>
+                                <td class="py-2 px-4 font-bold bg-gray-100">Total Deduções (INSS + IRPF)</td>
+                                <td class="py-2 px-4 font-bold bg-gray-100">R$ 180,00</td>
+                            </tr>
+                            <tr>
+                                <td class="py-2 px-4 font-bold bg-[#00678F]/10 text-[#00678F]">Comissão Líquida</td>
+                                <td class="py-2 px-4 font-bold bg-[#00678F]/10 text-[#00678F]">R$ 1.820,00</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div id="reflexos-comissao-drawer" class="drawer-container">
+                <div id="reflexos-comissao-header" class="drawer-header">
+                    <h4 class="text-xl font-semibold text-[#00678F]">Verbas Reflexas</h4> <svg
+                        class="arrow-icon w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                    </svg>
+                </div>
+                <div id="reflexos-comissao-content" class="drawer-content">
+                    <p class="text-gray-700 leading-relaxed text-justify mt-4">Devido à sua natureza salarial (Art. 457,
+                        §1º da CLT), as comissões pagas habitualmente geram "reflexos", ou seja, integram a base de
+                        cálculo de outras verbas trabalhistas.</p>
+                    <p class="text-gray-700 leading-relaxed text-justify mt-2">O cálculo dos reflexos é geralmente feito
+                        pela <strong>média aritmética</strong> das comissões recebidas nos últimos 12 meses, conforme a
+                        verba:</p>
+
+                    <table
+                        class="w-full mt-4 text-sm text-gray-700 border-collapse border border-gray-300 rounded-md overflow-hidden">
+                        <thead>
+                            <tr class="bg-gray-200">
+                                <th class="py-2 px-4 text-left border-b border-gray-300 w-1/3">Verbas Reflexas</th>
+                                <th class="py-2 px-4 text-left border-b border-gray-300 w-2/3">Relação com a Comissão
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="border-b border-gray-300">
+                                <td class="py-2 px-4 font-medium">Férias e Abono (1/3)</td>
+                                <td class="py-2 px-4">A média de comissões deve ser incluída na base de cálculo das
+                                    férias e do respectivo abono constitucional.</td>
+                            </tr>
+                            <tr class="border-b border-gray-300">
+                                <td class="py-2 px-4 font-medium">13º Salário</td>
+                                <td class="py-2 px-4">O valor médio das comissões é pago proporcionalmente ao 13º
+                                    salário.</td>
+                            </tr>
+                            <tr class="border-b border-gray-300">
+                                <td class="py-2 px-4 font-medium">FGTS (8%)</td>
+                                <td class="py-2 px-4">As comissões (junto com a média) devem ser consideradas na base de
+                                    cálculo mensal do depósito de 8%.</td>
+                            </tr>
+                            <tr class="border-b border-gray-300">
+                                <td class="py-2 px-4 font-medium">Aviso Prévio (Indenizado ou Trabalhado)</td>
+                                <td class="py-2 px-4">A média das comissões deve integrar a base de cálculo do aviso
+                                    prévio no caso de rescisão.</td>
+                            </tr>
+                            <tr>
+                                <td class="py-2 px-4 font-medium">Multa de 40% do FGTS</td>
+                                <td class="py-2 px-4">O valor da comissão e seus reflexos compõem a base para o cálculo
+                                    da multa rescisória.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <hr class="my-4 border-gray-300">
+                    <div class="p-4 bg-gray-100 rounded-md mt-4 border border-gray-300">
+                        <p class="font-bold text-sm">Regra Comum de Média (Exemplo):</p>
+                        <p class="text-sm mt-1">Se a média dos últimos 12 meses de comissões for R$ 1.500,00, este valor
+                            será somado ao salário fixo para compor a base de cálculo das verbas como 13º e Férias.</p>
+                    </div>
+
+                    <p class="text-gray-700 leading-relaxed text-justify mt-4"><strong>Atenção:</strong> A Súmula nº 27
+                        do TST confirma que as comissões integram o salário para todos os efeitos legais (aviso prévio,
+                        13º salário, férias e FGTS).</p>
+                </div>
+            </div>
+
+            <div id="calculadora-comissao-drawer" class="drawer-container">
+                <div id="calculadora-comissao-header" class="drawer-header">
+                    <h4 class="text-xl font-semibold text-[#00678F]">Calculadora (Simulação)</h4>
+                    <svg class="arrow-icon w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                    </svg>
+                </div>
+                <div id="calculadora-comissao-content" class="drawer-content">
+                    <p class="text-gray-700 leading-relaxed text-justify mt-4">Utilize esta ferramenta para calcular o
+                        valor da comissão bruta com base no valor da venda e na taxa percentual acordada.</p>
+
+                    <div class="p-4 bg-white rounded-lg shadow-inner mt-4">
+                        <h5 class="text-md font-semibold text-gray-800">Cálculo Simples (Bruto)</h5>
+                        <p class="text-gray-600 text-sm mb-2">Comissão = Valor da Venda $\times$ Percentual</p>
+                        <div class="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4">
+                            <div class="flex-1">
+                                <label for="valorVendaInput" class="block text-sm text-gray-700">Valor Bruto da Venda
+                                    (R$):</label>
+                                <input type="text" id="valorVendaInput"
+                                    class="mt-1 block w-full rounded-md border-gray-300 p-2 focus:ring-[#00678F] focus:border-[#00678F]"
+                                    placeholder="Ex: 10.000,00">
+                            </div>
+                            <div class="flex-1">
+                                <label for="percentualComissaoInput" class="block text-sm text-gray-700">Percentual de
+                                    Comissão (%):</label>
+                                <input type="number" id="percentualComissaoInput"
+                                    class="mt-1 block w-full rounded-md border-gray-300 p-2 focus:ring-[#00678F] focus:border-[#00678F]"
+                                    placeholder="Ex: 5 (para 5%)">
+                            </div>
+                        </div>
+                        <button id="calculateBtn"
+                            class="mt-4 w-full px-4 py-2 bg-[#00678F] text-white rounded-md hover:bg-[#004562] transition duration-300 shadow-md flex items-center justify-center">
+                            <span>Calcular Comissão Bruta</span>
+                        </button>
+                        <div class="mt-4">
+                            <div class="flex items-center">
+                                <p id="result" class="text-base font-bold text-gray-800"></p>
+                                <button id="copyResult" class="copy-btn hidden" aria-label="Copiar valor">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                        <path
+                                            d="M16 1H4C2.9 1 2 1.9 2 3v14h2V3h12V1zm3 4H8C6.9 5 6 5.9 6 7v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z" />
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="pje-calc-drawer" class="drawer-container">
+                <div id="pje-calc-header" class="drawer-header">
+                    <h4 class="text-xl font-semibold text-[#00678F]">Lançamento no PJe-Calc </h4>
+                    <svg class="arrow-icon w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                    </svg>
+                </div>
+                <div id="pje-calc-content" class="drawer-content">
+                    <p class="text-gray-700 leading-relaxed text-justify mt-4">A seguir, confira o passo a passo para o
+                        lançamento da verba no PJe-Calc, utilizando a opção "Expresso":</p>
+
+                    <ol class="list-decimal list-inside text-gray-700 leading-relaxed mt-4 ml-4 space-y-3">
+                        <li>
+                            <strong class="text-gray-800">Acessar Verbas e Escolher Lançamento:</strong> No menu de
+                            navegação à esquerda, clique na opção <u>Verbas</u> para iniciar o lançamento. Após o
+                            comando,
+                            será exibida a tela para escolha do Lançamento da Verba. Escolha a opção <u>Expresso</u>.
+                            <img src="imagens/verbas.png"
+                                alt="Tela do PJe-Calc - Passo 1: Acessar a opção Verbas no menu lateral e clicar em Expresso na seção Lançamento."
+                                class="w-full h-auto my-4 rounded-lg shadow-md">
+                        </li>
+                        <li>
+                            <strong class="text-gray-800">Seleção da Verba:</strong> O sistema abrirá as opções de
+                            verbas, escolha a verba <u>Comissão</u> e clique no botão <u>Salvar</u>
+                            <img src="imagens/comissao1.png"
+                                alt="Tela do PJe-Calc - Verbas Principais: Selecionar Saldo de Salário"
+                                class="w-full h-auto my-4 rounded-lg shadow-md">
+                        </li>
+                        <li>
+                            <strong class="text-gray-800">Quadro de Verbas e Ações:</strong> O sistema exibirá um quadro
+                            com os campos:
+                            <ul class="list-disc list-inside text-gray-700 leading-relaxed mt-2 ml-4">
+                                <li class="ml-8 flex items-center">
+                                <li>Ações - contendo as opções de configurações da verba selecionada (parâmetros,
+                                    ocorrências e
+                                    exclusão)
+                                    <img src="imagens/telaacoes.png"
+                                        alt="Ícones de Ações: Parâmetros (folha com seta), Ocorrências (folha com checks), Excluir (X vermelho)"
+                                        class="icon-small" style="width: 72px; height: auto;">
+                                </li>
+                                <li class="ml-8 flex items-center">
+                                    - Parâmetros da Verba <img src="imagens/telaparametros.png"
+                                        alt="Ícone de Parâmetros" class="icon-small">
+                                </li>
+                                <li class="ml-8 flex items-center">
+                                    - Ocorrências da Verba <img src="imagens/telaocorrencias.png"
+                                        alt="Ícone de Ocorrências" class="icon-small">
+                                </li>
+                                <li class="ml-8 flex items-center">
+                                    - Excluir <img src="imagens/telaexcluir.png" alt="Ícone de Excluir"
+                                        class="icon-small">
+                                </li>
+                                <li>Verba Principal - verba selecionada para lançamento.</li>
+                                <li>Verba Reflexa - em que ao clicar no botão <u>Exibir</u> serão listadas todas as
+                                    verbas
+                                    reflexas ligadas a Verba Principal.</li>
+                            </ul>
+                            <img src="imagens/comissao2.png"
+                                alt="Tela do PJe-Calc - Verba Saldo de Salário selecionada com as opções de Ações e Verba Reflexa."
+                                class="w-full h-auto my-4 rounded-lg shadow-md">
+                        </li>
+                        <li>
+                            <strong class="text-gray-800">Parametrização da Verba:</strong> Ao clicar no botão
+                            <u>Parâmetros da Verba</u> serão exibidas todas as configurações necessárias para a
+                            parametrização
+                            da Verba Principal.
+                            <img src="imagens/comissao3.png"
+                                alt="Tela do PJe-Calc - Detalhes da Verba Saldo de Salário: Parâmetros, Base de Cálculo, Divisor e Multiplicador."
+                                class="w-full h-auto my-4 rounded-lg shadow-md">
+                        </li>
+                        <li>
+                            <strong class="text-gray-800">Registro de Ocorrências:</strong> Ao clicar no botão
+                            <u>Ocorrências da Verba</u> serão exibidas todas as configurações necessárias para registro
+                            das
+                            ocorrências da Verba Principal.
+                            <img src="imagens/comissao4.png"
+                                alt="Tela do PJe-Calc - Dados de Ocorrências: Detalhamento da data inicial, data final e valor calculado da verba."
+                                class="w-full h-auto my-4 rounded-lg shadow-md">
+                        </li>
+                    </ol>
+
+                </div>
+
+        </section>
+    </div>
+
+
+    <script>
+        // Função para formatar o valor da venda conforme o usuário digita (padrão brasileiro)
+        function formatMonetaryInput() {
+            const valorVendaInput = document.getElementById('valorVendaInput');
+            valorVendaInput.addEventListener('input', (e) => {
+                let value = e.target.value;
+                // 1. Remove todos os caracteres que não são dígitos
+                value = value.replace(/\D/g, '');
+
+                // 2. Formata com a vírgula para centavos e pontos para milhares
+                if (value.length > 2) {
+                    value = value.replace(/(\d+)(\d{2})$/, '$1,$2');
+                }
+                if (value.length > 6) {
+                    // Adiciona pontos para milhares, exceto antes da vírgula
+                    value = value.replace(/(\d)(?=(\d{3})+,)/g, '$1.');
+                }
+                e.target.value = value;
+            });
+        }
+
+        formatMonetaryInput();
+
+        // Função para calcular a comissão (valor bruto)
+        function calculateCommission() {
+            const valorVendaInput = document.getElementById('valorVendaInput');
+            const percentualComissaoInput = document.getElementById('percentualComissaoInput');
+            const resultDiv = document.getElementById('result');
+            const copyBtn = document.getElementById('copyResult');
+
+            // Converte a entrada formatada (Ex: 10.000,00) para um float (10000.00)
+            const rawVenda = valorVendaInput.value.replace(/\./g, '').replace(',', '.');
+            const valorVenda = parseFloat(rawVenda);
+            const percentualComissao = parseFloat(percentualComissaoInput.value);
+
+            if (isNaN(valorVenda) || valorVenda < 0 || isNaN(percentualComissao) || percentualComissao < 0) {
+                resultDiv.textContent = 'Por favor, insira valores válidos para o valor da venda e o percentual de comissão.';
+                copyBtn.classList.add('hidden');
+                return;
+            }
+
+            const taxa = percentualComissao / 100;
+            const valorComissao = valorVenda * taxa;
+
+            // Formata o resultado para moeda brasileira (R$ 0.000,00)
+            const resultText = `Comissão Bruta Calculada: ${valorComissao.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}`;
+
+            resultDiv.textContent = resultText;
+            copyBtn.classList.remove('hidden');
+        }
+
+        // Função para copiar o texto do resultado
+        function copyText(elementId) {
+            const element = document.getElementById(elementId);
+            if (!element) return;
+            // Pega apenas o valor (remove o prefixo "Comissão Bruta Calculada: ")
+            const textToCopy = element.textContent.replace('Comissão Bruta Calculada: ', '');
+
+            const tempInput = document.createElement('input');
+            tempInput.value = textToCopy;
+            document.body.appendChild(tempInput);
+            tempInput.select();
+            try {
+                // Comando de cópia funciona no ambiente Canvas
+                document.execCommand('copy');
+                console.log('Texto copiado com sucesso!');
+                // Pequeno feedback visual
+                const originalText = element.textContent;
+                element.textContent = "Copiado!";
+                setTimeout(() => {
+                    element.textContent = originalText;
+                }, 1000);
+
+            } catch (err) {
+                console.error('Falha ao copiar o texto:', err);
+            } finally {
+                document.body.removeChild(tempInput);
+            }
+        }
+
+        // Configuração dos Event Listeners
+        document.getElementById('calculateBtn').addEventListener('click', calculateCommission);
+        document.getElementById('copyResult').addEventListener('click', () => copyText('result'));
+
+        // Lógica para os drawers expansíveis
+        function setupDrawer(drawerId) {
+            const header = document.getElementById(`${drawerId}-header`);
+            const content = document.getElementById(`${drawerId}-content`);
+
+            header.addEventListener('click', () => {
+                const isExpanded = header.classList.toggle('active');
+                if (isExpanded) {
+                    // Quando expandido, define a altura real para permitir a transição
+                    content.style.maxHeight = content.scrollHeight + "px";
+                } else {
+                    content.style.maxHeight = '0';
+                }
+                // Ajusta a altura de todos os drawers abertos após a expansão de um
+                document.querySelectorAll('.drawer-content').forEach(dc => {
+                    const dh = document.getElementById(dc.id.replace('-content', '-header'));
+                    // Garante que só recalcula o tamanho de quem está ativo (e não é o que está fechando agora)
+                    if (dh.classList.contains('active') && dc.id !== content.id) {
+                        // Precisa verificar se está visível para não dar erro
+                        if (dc.scrollHeight > 0) {
+                            dc.style.maxHeight = dc.scrollHeight + "px";
+                        }
+                    }
+                });
+            });
+        }
+
+        // Inicializa todos os drawers
+        setupDrawer('base-legal');
+        setupDrawer('base-calculo'); // ID Atualizado
+        setupDrawer('reflexos-comissao');
+        setupDrawer('calculadora-comissao');
+        setupDrawer('pje-calc');
+    </script>
+</body>
+
+</html>

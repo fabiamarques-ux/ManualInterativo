@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guia de Criação do Histórico Salarial Pje-Calc</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Estilos Gerais - Minimalista */
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 40px 20px;
+            background-color: #f8f9fa; /* Fundo mais claro */
+            color: #343a40; /* Texto escuro */
+            counter-reset: main-step; 
+        }
+        .container {
+            max-width: 900px;
+            margin: auto;
+            background: white;
+            padding: 30px 40px;
+            border-radius: 12px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08); /* Sombra mais suave e moderna */
+        }
+        
+        /* Títulos */
+        h1 {
+            color: #0056b3; /* Azul marinho */
+            border-bottom: 2px solid #e9ecef; /* Separador sutil */
+            padding-bottom: 15px;
+            margin-bottom: 30px;
+            font-size: 2.2em;
+            font-weight: 700;
+            text-align: center;
+        }
+        h2 {
+            color: #343a40;
+            margin-top: 40px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #dee2e6;
+            font-size: 1.6em;
+            font-weight: 600;
+        }
+        h3 {
+            color: #0056b3;
+            margin-top: 30px;
+            margin-bottom: 20px;
+            position: relative;
+            padding-left: 45px;
+            font-size: 1.8em;
+            font-weight: 600;
+            line-height: 1.2;
+        }
+        h3::before {
+            /* Destaque numérico dos Métodos - Mais integrado */
+            counter-increment: main-step;
+            content: counter(main-step) ".";
+            position: absolute;
+            left: 0;
+            top: 0;
+            font-size: 1.2em;
+            color: #495057; /* Cinza escuro */
+            font-weight: 700;
+        }
+
+        /* Passo a Passo - "Card" style */
+        .step {
+            margin-bottom: 25px;
+            padding: 20px;
+            background-color: #ffffff; /* Fundo branco para os passos */
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05); /* Sombra leve */
+            border: 1px solid #e9ecef; /* Borda sutil */
+        }
+        .step strong {
+            /* Título da subseção/fase do passo */
+            color: #0056b3;
+            font-weight: 700;
+            display: block;
+            margin-bottom: 10px;
+            font-size: 1.15em;
+        }
+        
+        /* Listas (Passos Detalhados) - Mais limpas */
+        .step ul, .step ol {
+            padding-left: 20px;
+            margin-top: 10px;
+            font-size: 1em;
+            list-style: none; /* Remove o padrão para customizar */
+        }
+        .step ul li, .step ol li {
+            margin-bottom: 8px;
+            padding-left: 0;
+            position: relative;
+        }
+        .step ul li::before {
+            /* Círculo discreto ao invés de seta forte */
+            content: "•"; 
+            color: #0056b3;
+            font-weight: bold;
+            margin-right: 10px;
+            display: inline-block;
+            font-size: 1.2em;
+            line-height: 1;
+            vertical-align: middle;
+        }
+        .step ol {
+            list-style-type: decimal;
+            padding-left: 20px;
+        }
+        .step ol li {
+            margin-left: 0;
+            padding-left: 5px; /* Ajuste para o número da lista */
+        }
+        .step ol li::before {
+            content: none; /* Remove o ícone customizado para lista ordenada */
+        }
+
+        /* Alertas e Dicas - Estilos mais suaves */
+        .alert, .tip {
+            padding: 15px;
+            border-radius: 6px;
+            margin-top: 20px;
+            font-size: 0.95em;
+            line-height: 1.4;
+        }
+        .alert {
+            background-color: #fff3f5; /* Fundo rosa claro */
+            border: 1px solid #dc3545; /* Borda vermelha de alerta */
+            color: #dc3545;
+        }
+        .tip {
+            background-color: #e6f7ff; /* Fundo azul claro suave */
+            border: 1px solid #007bff; /* Borda azul de informação */
+            color: #0056b3;
+        }
+        .alert strong, .tip strong {
+            font-weight: 700;
+            color: inherit; /* Mantém a cor do texto do alerta/dica */
+        }
+        
+        /* Imagens (Screenshots) */
+        .screenshot {
+            max-width: 100%;
+            height: auto;
+            border: 1px solid #ced4da; /* Borda cinza suave */
+            margin: 20px 0;
+            display: block;
+            border-radius: 6px; /* Bordas levemente arredondadas */
+            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+        }
+        
+        /* Reset de Contador */
+        .outras-formas { 
+            counter-reset: main-step; 
+            border: none;
+            margin-top: 30px;
+            margin-bottom: 30px;
+        } 
+
+        /* Linha de separação mais clean */
+        hr {
+            border: 0;
+            height: 1px;
+            background-color: #e9ecef;
+            margin: 40px 0;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Guia de Criação do Histórico Salarial no Pje-Calc</h1>
+
+    <p>O menu "Histórico salarial" permite cadastrar a evolução remuneratória do empregado. Ele é crucial para formação da base de cálculo para cálculo de diversos direitos trabalhistas, tais como: Saldo de Salário, Aviso Prévio, Férias, Décimo, entre outras.</p>
+
+    <h2>Acesso Inicial</h2>
+    
+    <div class="step">
+        <strong>1. Acessar e Criar Novo Histórico</strong>
+        <ol>
+            <li>No menu principal, vá para Cálculo.</li>
+            <li>Selecione Histórico Salarial.</li>
+            <li>Na tela, clique no botão "Novo" para iniciar um novo cadastro.</li>
+        </ol>
+        <img src="imagens/historicosalarial1.png" alt="Tela inicial do Histórico Salarial, mostrando o menu Cálculo > Histórico Salarial e os botões Novo e Grade de Ocorrências." class="screenshot">
+        <p>A tela principal de cadastro (exibida abaixo) oferece as três formas de inclusão de dados.</p>
+        <img src="imagens/historicosalarial2.png" alt="Tela principal de cadastro do Histórico Salarial, mostrando as opções de Tipo do Valor: Informado ou Calculado, e Importação por CSV." class="screenshot">
+    </div>
+
+    <hr>
+
+    <h2>Métodos de Inclusão de Dados</h2>
+
+    <h3>Método A: Inserção Manual (Tipo do Valor: Informado)</h3>
+    <div class="step">
+        <strong>1. Configuração de Detalhes</strong>
+        <p>Selecione "Informado" no campo Tipo do Valor.</p>
+        <ul>
+            <li>Preencha o campo Nome da parcela.</li>
+            <li>Marque o tipo de Parcela (Fixa ou Variável). *Esta definição é importante para o cálculo da média dos reflexos*.</li>
+            <li>Marque as opções de Incidência (FGTS e/ou Contribuição Social).</li>
+        </ul>
+        
+        <strong>2. Lançamento e Geração</strong>
+        <ul>
+            <li>Informe o Período (Competência Inicial e Final) e o Valor da base.</li>
+            <li>Clique no ícone para gerar as ocorrências (sinal de "mais").</li>
+        </ul>
+        <img src="imagens/historicosalarial10.png" alt="Detalhe da tela de Histórico Salarial para inserção manual, mostrando os campos de Período e Valor." class="screenshot">
+
+        <strong>3. Finalização</strong>
+        <ul>
+            <li>O sistema exibirá a grade de meses e valores.</li>
+            <img src="imagens/historicosalarial11.png" alt="Grade de ocorrências mensais geradas manualmente, mostrando o valor de R$ 4.000,00 replicado." class="screenshot">
+            <li>Clique em "Salvar".</li>
+        </ul>
+        <div class="tip">
+            <p><strong>Dica de Lote:</strong> Para alterar ou acrescentar ocorrências já salvas, informe um novo período/valor e clique novamente no ícone "gerar ocorrências".</p>
+        </div>
+    </div>
+
+    <hr>
+
+    <h3>Método B: Importação por Arquivo Externo (.csv)</h3>
+    <div class="step">
+        <strong>1. Preparação e Importação</strong>
+        <p>Método válido desde a versão 2.5.6 do sistema Pje-Calc.</p>
+        <ul>
+            <li>Clique em "Escolher Arquivo..." e selecione a planilha .csv.</li>
+            <li>O arquivo de exemplo pode ser baixado diretamente na tela para garantir a formatação correta.</li>
+            <li>A planilha deve incluir as colunas para FGTS e contribuição social.</li>
+            <li>Clique em "Confirmar".</li>
+        </ul>
+        <img src="imagens/historicosalarial7.png" alt="Tela de Importação de Histórico Salarial, mostrando a área para Selecionar Arquivo CSV." class="screenshot">
+        
+        <div class="alert">
+            <p><strong>Atenção:</strong> Ao importar, as informações lançadas manualmente anteriormente naquele histórico serão excluídas.</p>
+        </div>
+    </div>
+
+    <hr>
+
+    <h3>Método C: Criação por Tabela (Salário Mínimo ou Piso Salarial)</h3>
+    <div class="step">
+        <strong>1. Configuração da Base Calculada</strong>
+        <p>Ideal para valores que evoluem de acordo com tabelas oficiais.</p>
+        <ul>
+            <li>Selecione a opção "Calculado" no campo Tipo do Valor.</li>
+            <li>Informe a Quantidade (ex: 1,5 salários mínimos) e selecione a Base de Referência (Piso Salarial ou Salário Mínimo).</li>
+            <li>Clique no ícone para gerar as ocorrências.</li>
+        </ul>
+        <img src="imagens/historicosalarial12.png" alt="Tela de Histórico Salarial com a opção Tipo do Valor: Calculado selecionada e a Base de Referência em Salário Mínimo." class="screenshot">
+        
+        <strong>2. Resultado</strong>
+        <p>O sistema exibirá os valores reajustados automaticamente para cada competência.</p>
+        <img src="imagens/historicosalarial15.png" alt="Lista de ocorrências mensais geradas, mostrando a evolução do Salário Mínimo." class="screenshot">
+    </div>
+
+    <hr class="outras-formas">
+
+    <h2>Outras Formas de Gestão</h2>
+
+    <h3>Criação Automática por "Última Remuneração"</h3>
+    <div class="step">
+        <p>Recomendado para casos de remuneração constante durante todo o pacto laboral.</p>
+        <ul>
+            <li>Preencha o campo "última remuneração" localizado na tela "parâmetros do cálculo" (menu cálculo).</li>
+            <li>O histórico será criado automaticamente, utilizando todo o período do cálculo.</li>
+        </ul>
+        <img src="Dadosdocalculoparametros.png" alt="Tela Parâmetros do Cálculo, com o campo Última Remuneração destacado." class="screenshot">
+        
+        <div class="alert">
+            <p><strong>Ajuste Crucial:</strong> Por padrão, o histórico criado terá a incidência de contribuição social marcada. Desmarque esta opção, pois a Justiça do Trabalho não tem competência para a execução de contribuição social sobre salários pagos.</p>
+            <p><strong>Exclusão:</strong> Para excluir este histórico, limpe o campo "última remuneração" que deu origem a sua criação.</p>
+        </div>
+    </div>
+
+    <h3>Visualização e Exclusão</h3>
+    <div class="step">
+        <p>Para gerenciar ou alterar ocorrências em lote, utilize o menu "Grade de Ocorrências".</p>
+        
+        <strong>1. Acessar a Grade</strong>
+        <ul>
+            <li>No menu Histórico Salarial, clique em Grade de Ocorrências.</li>
+        </ul>
+        <img src="imagens/gradedeocorrenciahistoricosalarial1.1.png" alt="Tela da Grade de Ocorrências, mostrando a lista de históricos salariais criados." class="screenshot">
+        <p>A tela permite que você visualize e edite todos os valores e incidências de todas as parcelas em uma única visualização.</p>
+        <img src="imagens/gradedeocorrenciahistoricosalarial2.png" alt="Visualização detalhada da Grade de Ocorrências, mostrando as colunas para cada competência e o valor da parcela." class="screenshot">
+        
+        <strong>2. Exclusão</strong>
+        <ul>
+            <li>Para excluir um registro, clique no "X" ao lado dele na tela de Histórico Salarial e confirme.</li>
+        </ul>
+        <div class="alert">
+            <p><strong>Restrição:</strong> Se o histórico estiver vinculado a alguma verba, você deve desvinculá-lo antes de excluí-lo, caso contrário o sistema retornará um erro.</p>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Horas Extras</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f4f8;
+            color: #1a202c;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 2rem;
+            background-color: #ffffff;
+            border-radius: 1rem;
+            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.05);
+        }
+
+        /* INÍCIO DO CSS ATUALIZADO PARA ESTILO (Copy with Feedback) */
+        .copy-container {
+            display: flex;
+            align-items: center;
+            position: relative;
+        }
+
+        .copy-btn {
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
+            padding: 0;
+            margin-left: 0.5rem;
+            /* Ajustado para consistência */
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .copy-btn svg {
+            width: 1.5rem;
+            height: 1.5rem;
+            fill: #00678F;
+            transition: fill 0.3s ease;
+        }
+
+        .copy-btn:hover svg {
+            fill: #004562;
+        }
+
+        .copy-message {
+            position: absolute;
+            left: 100%;
+            top: 50%;
+            transform: translate(10px, -50%);
+            background-color: #00678F;
+            color: white;
+            padding: 0.25rem 0.5rem;
+            border-radius: 0.5rem;
+            font-size: 0.75rem;
+            white-space: nowrap;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        /* FIM DO CSS ATUALIZADO PARA ESTILO (Copy) */
+
+        .loading-spinner {
+            border: 4px solid rgba(0, 103, 143, 0.1);
+            border-top: 4px solid #00678F;
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            animation: spin 1s linear infinite;
+            margin-right: 0.5rem;
+            display: none;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        .drawer-container {
+            padding: 1rem;
+            background-color: #f0f4f8;
+            border-radius: 0.75rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+            margin-top: 1.5rem;
+        }
+
+        .drawer-header {
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .drawer-content {
+            overflow: hidden;
+            transition: all 0.5s ease-in-out;
+            max-height: 0;
+        }
+
+        .drawer-header .arrow-icon {
+            transition: transform 0.5s ease-in-out;
+        }
+
+        .drawer-header.active .arrow-icon {
+            transform: rotate(180deg);
+        }
+
+        /* NOVOS ESTILOS PARA TABELA PADRÃO */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th,
+        td {
+            padding: 0.75rem;
+            text-align: left;
+            border-bottom: 1px solid #d1d5db;
+        }
+
+        th {
+            background-color: #00678F;
+            color: white;
+        }
+
+        tr:nth-child(odd) {
+            background-color: #f0f4f8;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container my-8 relative">
+        <img src="https://site.trt19.jus.br/sites/default/files/logo-trt19.png" alt="Logo do TRT19"
+            class="absolute top-4 right-4 w-36 h-auto">
+
+        <section id="horas-extras" class="content-section">
+            <h2 class="text-3xl font-bold text-[#00678F] mb-4">Horas Extras</h2>
+            <p class="text-gray-700 leading-relaxed text-justify">A hora extra é o período de trabalho que excede a
+                jornada normal do empregado, definida em contrato de trabalho ou por lei. Sua remuneração é superior à da
+                hora normal de trabalho, com um adicional que varia conforme a legislação e acordos coletivos.</p>
+            <p class="text-gray-700 leading-relaxed text-justify">O cálculo da hora extra leva em conta o valor da hora
+                normal do empregado, acrescido de um percentual adicional. O percentual mínimo estabelecido pela
+                Constituição Federal é de 50%, mas pode ser maior, a depender de convenção ou acordo coletivo de
+                trabalho.</p>
+
+            <div id="base-legal-drawer" class="drawer-container">
+                <div id="base-legal-header" class="drawer-header">
+                    <h4 class="text-xl font-semibold text-[#00678F]">Base Legal e Jurisprudência</h4>
+                    <svg class="arrow-icon w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                    </svg>
+                </div>
+                <div id="base-legal-content" class="drawer-content">
+                    <p class="text-gray-700 leading-relaxed text-justify mt-4">A remuneração das horas extras é
+                        fundamentada na Consolidação das Leis do Trabalho (CLT) e na Constituição Federal.</p>
+
+                    <h5 class="text-lg font-semibold text-gray-800 mt-4">Fontes Normativas</h5>
+                    <hr class="my-4 border-gray-300">
+
+                    <h6 class="text-base font-semibold text-gray-800">CLT - Consolidação das Leis do Trabalho - Art. 59:
+                    </h6>
+                    <ul class="list-disc list-inside text-gray-700 leading-relaxed mt-2 ml-4 space-y-3">
+                        <li><strong>Artigo 59:</strong>
+                            <p class="text-sm italic mt-1 ml-4 border-l-2 border-gray-400 pl-3">Define o limite de duas
+                                horas suplementares, mediante acordo, e o adicional mínimo de 50%.</p>
+                        </li>
+                    </ul>
+                    <h6 class="text-base font-semibold text-gray-800 mt-4">Constituição Federal de 1988 - Art. 7º, Inciso
+                        XVI:</h6>
+                    <ul class="list-disc list-inside text-gray-700 leading-relaxed mt-2 ml-4 space-y-3">
+                        <li><strong>Inciso XVI:</strong>
+                            <p class="text-sm italic mt-1 ml-4 border-l-2 border-gray-400 pl-3">Estabelece o adicional
+                                mínimo de 50% sobre o valor da hora normal para o serviço extraordinário.</p>
+                        </li>
+                    </ul>
+                    <hr class="my-6 border-gray-300">
+
+                    <h5 class="text-lg font-semibold text-gray-800">Jurisprudência Consolidada</h5>
+
+                    <h6 class="text-base font-semibold text-gray-800 mt-4">Súmula nº 264 do TST</h6>
+                    <div class="p-4 bg-gray-100 rounded-md mt-2 border border-gray-300">
+                        <p class="font-bold text-sm">Tese (Base de Cálculo):</p>
+                        <p class="text-sm mt-1 italic">"A remuneração do serviço suplementar é composta do valor da hora
+                            normal, integrado por parcelas de natureza salarial e acrescido do adicional previsto em lei,
+                            contrato, acordo ou convenção coletiva."</p>
+                    </div>
+                    <p class="text-gray-700 leading-relaxed text-justify mt-2"><strong>O que isso significa:</strong> O
+                        cálculo da hora extra deve incluir não apenas o salário base, mas também outras parcelas que têm
+                        natureza salarial e são pagas com habitualidade (adicionais, gratificações, etc.). Essa
+                        interpretação garante que o cálculo seja feito sobre a remuneração completa do empregado.</p>
+                    <h6 class="text-base font-semibold text-gray-800 mt-6">Súmula nº 172 do TST</h6>
+                    <div class="p-4 bg-gray-100 rounded-md mt-2 border border-gray-300">
+                        <p class="font-bold text-sm">Tese (Reflexo sobre RSR):</p>
+                        <p class="text-sm mt-1 italic">"Computam-se no cálculo do repouso remunerado as horas extras
+                            habitualmente prestadas."</p>
+                    </div>
+                    </div>
+            </div>
+
+            <div id="base-calculo-drawer" class="drawer-container">
+                <div id="base-calculo-header" class="drawer-header">
+                    <h4 class="text-xl font-semibold text-[#00678F]">Base de Cálculo e Deduções</h4>
+                    <svg class="arrow-icon w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                    </svg>
+                </div>
+                <div id="base-calculo-content" class="drawer-content">
+                    <p class="text-gray-700 leading-relaxed text-justify mt-4">A base de cálculo para a hora extra é o
+                        salário mensal do empregado. O valor da hora normal é obtido dividindo-se o salário mensal pelo
+                        número de horas da jornada de trabalho. A este valor, aplica-se o percentual de adicional.</p>
+                    <hr class="my-4 border-gray-300">
+                    <h5 class="text-lg font-semibold text-gray-800">Fórmula e Exemplo Prático de Horas Extras:</h5>
+                    <p class="text-gray-700 leading-relaxed text-justify mt-2">Um empregado tem um salário mensal de R$
+                        3.000,00 e uma jornada de 220 horas mensais. Para calcular o valor da sua hora extra, a fórmula
+                        é: </p>
+                    <p class="text-gray-700 mt-2 font-mono">Valor da Hora Normal = R$ 3.000,00 / 220 = R$ 13,64</p>
+                    <p class="text-gray-700 leading-relaxed text-justify mt-2">Dessa forma, o valor da sua hora extra
+                        (com adicional de 50%) será: </p>
+                    <p class="text-gray-700 mt-2 font-mono">Valor da Hora Extra = (R$ 13,64 + 50%) = R$ 20,46</p>
+                    <hr class="my-4 border-gray-300">
+                    <p class="text-gray-700 leading-relaxed text-justify mt-2">Um segundo exemplo: um empregado com
+                        salário de R$ 3.000,00 e jornada de 220 horas mensais trabalhou 10 horas extras em um mês. O
+                        valor da sua hora extra é R$ 20,46. O cálculo total pode ser visualizado na tabela abaixo:</p>
+                    <table
+                        class="w-full mt-4 text-sm text-gray-700 border-collapse border border-gray-300 rounded-md overflow-hidden">
+                        <thead>
+                            <tr class="bg-gray-200">
+                                <th class="py-2 px-4 text-left border-b border-gray-300">Item</th>
+                                <th class="py-2 px-4 text-left border-b border-gray-300">Valor</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="border-b border-gray-300">
+                                <td class="py-2 px-4">Salário Mensal</td>
+                                <td class="py-2 px-4">R$ 3.000,00</td>
+                            </tr>
+                            <tr class="border-b border-gray-300">
+                                <td class="py-2 px-4">Jornada Mensal</td>
+                                <td class="py-2 px-4">220 horas</td>
+                            </tr>
+                            <tr class="border-b border-gray-300">
+                                <td class="py-2 px-4">Horas Extras</td>
+                                <td class="py-2 px-4">10 horas</td>
+                            </tr>
+                            <tr class="border-b border-gray-300">
+                                <td class="py-2 px-4">Valor da Hora Extra</td>
+                                <td class="py-2 px-4">R$ 20,46</td>
+                            </tr>
+                            <tr>
+                                <td class="py-2 px-4 font-bold bg-gray-100">Total a Pagar (Bruto)</td>
+                                <td class="py-2 px-4 font-bold bg-gray-100">R$ 204,60</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <hr class="my-6 border-gray-400">
+                    <h4 class="text-xl font-semibold text-[#00678F] mt-4">Deduções Incidentes</h4>
+                    <p class="text-gray-700 leading-relaxed text-justify mt-4">Sobre o valor total das horas extras,
+                        incidem as deduções legais, sendo as principais a contribuição para o <strong>INSS (Instituto
+                            Nacional do Seguro Social)</strong> e o <strong>Imposto de Renda (IRPF)</strong>. Essas
+                        deduções são calculadas sobre o valor bruto das horas extras, somado ao salário normal e a
+                        outras verbas salariais.</p>
+                    <hr class="my-4 border-gray-300">
+                    <h5 class="text-lg font-semibold text-gray-800">Exemplo Prático de Deduções:</h5>
+                    <p class="text-gray-700 leading-relaxed text-justify mt-2">Considerando um valor total de R$ 204,60
+                        em horas extras (bruto), as deduções são aplicadas da seguinte forma (valores fictícios para o
+                        exemplo):</p>
+                    <ul class="list-disc list-inside text-gray-700 leading-relaxed mt-2">
+                        <li><strong>Dedução do INSS:</strong> Se a alíquota de INSS for de 8%, a dedução será de
+                            <strong>R$ 16,37</strong>.</li>
+                        <li><strong>Dedução do IRPF:</strong> A base de cálculo do IRPF é o valor total das horas extras
+                            menos o INSS. Ex: R$ 204,60 - R$ 16,37 = R$ 188,23. Se a alíquota do IRPF for de 7.5%, a
+                            dedução será de <strong>R$ 14,12</strong>.</li>
+                    </ul>
+                    <p class="text-gray-700 leading-relaxed text-justify mt-2">O valor líquido a ser recebido pelo
+                        empregado, neste caso, seria de R$ 174,11 (R$ 204,60 - R$ 16,37 - R$ 14,12).</p>
+                </div>
+            </div>
+
+            <div id="verbas-reflexas-drawer" class="drawer-container">
+                <div id="verbas-reflexas-header" class="drawer-header">
+                    <h4 class="text-xl font-semibold text-[#00678F]">Verbas Reflexas</h4>
+                    <svg class="arrow-icon w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                    </svg>
+                </div>
+                <div id="verbas-reflexas-content" class="drawer-content">
+                    <p class="text-gray-700 leading-relaxed text-justify mt-4">A remuneração de **horas extras**, quando
+                        paga com habitualidade, possui **natureza salarial** (Súmula 264 do TST), integrando o salário
+                        para todos os efeitos legais e gerando reflexos nas verbas abaixo. É crucial notar que as horas
+                        extras habituais também refletem no **Repouso Semanal Remunerado (RSR) e Feriados** (OJ 394 da
+                        SDI-1 do TST).</p>
+                    <p class="text-gray-700 leading-relaxed text-justify mt-2">O cálculo dos reflexos é feito pela
+                        integração do valor médio das horas extras ao salário-base, resultando na **remuneração
+                        completa** que serve como base de cálculo das verbas.</p>
+
+                    <table
+                        class="w-full mt-4 text-sm text-gray-700 border-collapse border border-gray-300 rounded-md overflow-hidden">
+                        <thead>
+                            <tr class="bg-gray-200">
+                                <th class="py-2 px-4 text-left border-b border-gray-300 w-1/3">Verba Trabalhista</th>
+                                <th class="py-2 px-4 text-left border-b border-gray-300 w-2/3">Reflexo das Horas Extras
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="border-b border-gray-300">
+                                <td class="py-2 px-4 font-medium">Repouso Semanal Remunerado (RSR) e Feriados</td>
+                                <td class="py-2 px-4">O valor das horas extras habituais deve ser integrado ao cálculo do
+                                    RSR e dos Feriados. O reflexo deve ser calculado sobre as horas extras e pago de
+                                    forma destacada (reflexo sobre a própria remuneração mensal). **OJ 394 da SDI-1 do
+                                    TST.**</td>
+                            </tr>
+                            <tr class="border-b border-gray-300">
+                                <td class="py-2 px-4 font-medium">13º Salário</td>
+                                <td class="py-2 px-4">Integra a base de cálculo do 13º Salário (integral e
+                                    proporcional), computando-se a média das horas extras pagas no período.</td>
+                            </tr>
+                            <tr class="border-b border-gray-300">
+                                <td class="py-2 px-4 font-medium">Férias + 1/3</td>
+                                <td class="py-2 px-4">Integra a base de cálculo das Férias (vencidas e proporcionais) e o
+                                    adicional constitucional de 1/3, computando-se a média das horas extras pagas no
+                                    período.</td>
+                            </tr>
+                            <tr class="border-b border-gray-300">
+                                <td class="py-2 px-4 font-medium">Aviso Prévio</td>
+                                <td class="py-2 px-4">Integra a base de remuneração para cálculo do Aviso Prévio
+                                    (trabalhado ou indenizado), computando-se a média das horas extras pagas no período.
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="py-2 px-4 font-medium">FGTS (Depósito Mensal e Multa)</td>
+                                <td class="py-2 px-4">Incide sobre o valor das horas extras (e seus reflexos em
+                                    RSR/Feriados), compondo a base de cálculo para o depósito mensal de 8% e para a Multa
+                                    de 40%.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <hr class="my-4 border-gray-300">
+                    <p class="text-gray-700 leading-relaxed text-justify mt-2"><strong>Atenção:</strong> A Súmula 172 do
+                        TST estabelece que o Repouso Semanal Remunerado (DSR) calculado sobre as horas extras integra o
+                        cálculo das férias, 13º salário, aviso prévio e FGTS. Essa regra visa evitar o chamado
+                        **"bis in idem"** (cálculo em duplicidade).</p>
+                </div>
+            </div>
+            <div id="calculadora-simulacao-drawer" class="drawer-container">
+                <div id="calculadora-simulacao-header" class="drawer-header">
+                    <h4 class="text-xl font-semibold text-[#00678F]">Calculadora (Simulação)</h4>
+                    <svg class="arrow-icon w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                    </svg>
+                </div>
+                <div id="calculadora-simulacao-content" class="drawer-content">
+                    <p class="text-gray-700 leading-relaxed text-justify mt-4">Utilize esta ferramenta para calcular o
+                        valor de suas horas de trabalho.</p>
+
+                    <div class="p-4 bg-white rounded-lg shadow-inner mt-4">
+                        <h5 class="text-md font-semibold text-gray-800">Cálculo Simples</h5>
+                        <p class="text-gray-600 text-sm mb-2">Informe os dados para calcular o valor bruto das horas
+                            extras.</p>
+                        <div class="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4">
+                            <div class="flex-1">
+                                <label for="salarioBase" class="block text-sm text-gray-700">Salário Base (R$):</label>
+                                <input type="text" id="salarioBase"
+                                    class="mt-1 block w-full rounded-md border-gray-300 p-2 focus:ring-[#00678F] focus:border-[#00678F]">
+                            </div>
+                            <div class="flex-1">
+                                <label for="jornadaMensal" class="block text-sm text-gray-700">Jornada Mensal
+                                    (Horas):</label>
+                                <input type="number" id="jornadaMensal"
+                                    class="mt-1 block w-full rounded-md border-gray-300 p-2 focus:ring-[#00678F] focus:border-[#00678F]"
+                                    value="220">
+                            </div>
+                        </div>
+                        <div class="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4 mt-4">
+                            <div class="flex-1">
+                                <label for="horasExtras" class="block text-sm text-gray-700">Quantidade de Horas
+                                    Extras:</label>
+                                <input type="number" id="horasExtras"
+                                    class="mt-1 block w-full rounded-md border-gray-300 p-2 focus:ring-[#00678F] focus:border-[#00678F]">
+                            </div>
+                            <div class="flex-1">
+                                <label for="adicionalExtra" class="block text-sm text-gray-700">Adicional (%):</label>
+                                <input type="number" id="adicionalExtra"
+                                    class="mt-1 block w-full rounded-md border-gray-300 p-2 focus:ring-[#00678F] focus:border-[#00678F]"
+                                    value="50">
+                            </div>
+                        </div>
+                        <button id="calculateBtn"
+                            class="mt-4 w-full px-4 py-2 bg-[#00678F] text-white rounded-md hover:bg-[#004562] transition duration-300 shadow-md">Calcular
+                            Horas Extras</button>
+                        <div class="mt-4">
+                            <div class="flex items-center copy-container">
+                                <p id="result" class="text-sm text-gray-700"></p>
+                                <button id="copyCalcResult" class="copy-btn hidden" aria-label="Copiar valor"
+                                    title="Copiar valor">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                        <path
+                                            d="M16 1H4C2.9 1 2 1.9 2 3v14h2V3h12V1zm3 4H8C6.9 5 6 5.9 6 7v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z" />
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        <div id="pje-calc-drawer" class="drawer-container">
+                <div id="pje-calc-header" class="drawer-header">
+                    <h4 class="text-xl font-semibold text-[#00678F]">Lançamento no PJe-Calc </h4>
+                    <svg class="arrow-icon w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                    </svg>
+                </div>
+                <div id="pje-calc-content" class="drawer-content">
+                    <p class="text-gray-700 leading-relaxed text-justify mt-4">A seguir, confira o passo a passo para o
+                        lançamento da verba no PJe-Calc, utilizando a opção "Expresso":</p>
+
+                    <ol class="list-decimal list-inside text-gray-700 leading-relaxed mt-4 ml-4 space-y-3">
+                        <li>
+                            <strong class="text-gray-800">Acessar Verbas e Escolher Lançamento:</strong> No menu de
+                            navegação à esquerda, clique na opção <u>Verbas</u> para iniciar o lançamento. Após o
+                            comando,
+                            será exibida a tela para escolha do Lançamento da Verba. Escolha a opção <u>Expresso</u>.
+                            <img src="imagens/verbas.png"
+                                alt="Tela do PJe-Calc - Passo 1: Acessar a opção Verbas no menu lateral e clicar em Expresso na seção Lançamento."
+                                class="w-full h-auto my-4 rounded-lg shadow-md">
+                        </li>
+                        <li>
+                            <strong class="text-gray-800">Seleção da Verba:</strong> O sistema abrirá as opções de
+                            verbas, escolha a verba <u>Horas Extras %</u> e clique no botão <u>Salvar</u>
+                            <img src="imagens/horasextras50.1.png"
+                                alt="Tela do PJe-Calc - Verbas Principais: Selecionar Saldo de Salário"
+                                class="w-full h-auto my-4 rounded-lg shadow-md">
+                        </li>
+                        <li>
+                            <strong class="text-gray-800">Quadro de Verbas e Ações:</strong> O sistema exibirá um quadro
+                            com os campos:
+                            <ul class="list-disc list-inside text-gray-700 leading-relaxed mt-2 ml-4">
+                                <li class="ml-8 flex items-center">
+                                <li>Ações - contendo as opções de configurações da verba selecionada (parâmetros,
+                                    ocorrências e
+                                    exclusão)
+                                    <img src="imagens/telaacoes.png"
+                                        alt="Ícones de Ações: Parâmetros (folha com seta), Ocorrências (folha com checks), Excluir (X vermelho)"
+                                        class="icon-small" style="width: 72px; height: auto;">
+                                </li>
+                                <li class="ml-8 flex items-center">
+                                    - Parâmetros da Verba <img src="imagens/telaparametros.png"
+                                        alt="Ícone de Parâmetros" class="icon-small">
+                                </li>
+                                <li class="ml-8 flex items-center">
+                                    - Ocorrências da Verba <img src="imagens/telaocorrencias.png"
+                                        alt="Ícone de Ocorrências" class="icon-small">
+                                </li>
+                                <li class="ml-8 flex items-center">
+                                    - Excluir <img src="imagens/telaexcluir.png" alt="Ícone de Excluir"
+                                        class="icon-small">
+                                </li>
+                                <li>Verba Principal - verba selecionada para lançamento.</li>
+                                <li>Verba Reflexa - em que ao clicar no botão <u>Exibir</u> serão listadas todas as
+                                    verbas
+                                    reflexas ligadas a Verba Principal.</li>
+                            </ul>
+                            <img src="imagens/horasextras50.2.png"
+                                alt="Tela do PJe-Calc - Verba Saldo de Salário selecionada com as opções de Ações e Verba Reflexa."
+                                class="w-full h-auto my-4 rounded-lg shadow-md">
+                        </li>
+                        <li>
+                            <strong class="text-gray-800">Parametrização da Verba:</strong> Ao clicar no botão
+                            <u>Parâmetros da Verba</u> serão exibidas todas as configurações necessárias para a
+                            parametrização
+                            da Verba Principal.
+                            <img src="imagens/horasextras50.3.png"
+                                alt="Tela do PJe-Calc - Detalhes da Verba Saldo de Salário: Parâmetros, Base de Cálculo, Divisor e Multiplicador."
+                                class="w-full h-auto my-4 rounded-lg shadow-md">
+                        </li>
+                        <li>
+                            <strong class="text-gray-800">Registro de Ocorrências:</strong> Ao clicar no botão
+                            <u>Ocorrências da Verba</u> serão exibidas todas as configurações necessárias para registro
+                            das
+                            ocorrências da Verba Principal.
+                            <img src="imagens/horasextras50.4.png"
+                                alt="Tela do PJe-Calc - Dados de Ocorrências: Detalhamento da data inicial, data final e valor calculado da verba."
+                                class="w-full h-auto my-4 rounded-lg shadow-md">
+                        </li>
+                    </ol>
+
+                </div>
+
+        </section>
+    </div>
+
+    <script>
+        // Função para copiar o texto de um elemento com feedback visual
+        function copyTextFromElement(elementId, buttonElement) {
+            const element = document.getElementById(elementId);
+            if (!element) return;
+            let textToCopy = element.textContent.replace('...', ''); // Remove '...' se houver
+
+            // Se for o resultado da calculadora, copia apenas o valor monetário.
+            if (elementId === 'result') {
+                const match = element.textContent.match(/R\$\s*([\d\.,]+)/);
+                if (match) {
+                    textToCopy = match[0].trim();
+                } else {
+                    textToCopy = element.textContent.trim();
+                }
+            }
+
+            const tempInput = document.createElement('input');
+            tempInput.value = textToCopy;
+            document.body.appendChild(tempInput);
+            tempInput.select();
+
+            try {
+                document.execCommand('copy');
+                // Criar e exibir a mensagem de sucesso
+                const message = document.createElement('span');
+                message.textContent = 'Copiado!';
+                message.className = 'copy-message';
+
+                // Anexar a mensagem ao contêiner pai do botão de cópia
+                const parent = buttonElement.parentElement;
+
+                // Anexar a mensagem ao contêiner pai do botão de cópia
+                message.style.position = 'absolute';
+                message.style.left = 'calc(100% + 10px)';
+                message.style.top = '50%';
+
+                parent.appendChild(message);
+
+                // Animar e remover a mensagem após 1 segundo
+                setTimeout(() => {
+                    message.style.opacity = '1';
+                }, 10);
+                setTimeout(() => {
+                    message.style.opacity = '0';
+                    setTimeout(() => message.remove(), 300);
+                }, 1000);
+
+            } catch (err) {
+                console.error('Falha ao copiar o texto:', err);
+            } finally {
+                document.body.removeChild(tempInput);
+            }
+        }
+
+
+        // Função para formatar o valor do salário conforme o usuário digita
+        function formatSalarioInput() {
+            const salarioBaseInput = document.getElementById('salarioBase');
+            if (!salarioBaseInput) return;
+            salarioBaseInput.addEventListener('input', (e) => {
+                let value = e.target.value;
+                value = value.replace(/\D/g, ''); // Remove todos os não-dígitos
+
+                // Insere a vírgula para os centavos e os pontos para os milhares
+                if (value.length > 2) {
+                    value = value.replace(/(\d+)(\d{2})$/, '$1,$2');
+                }
+                if (value.length > 6) {
+                    value = value.replace(/(\d)(?=(\d{3})+,)/g, '$1.');
+                }
+                e.target.value = value;
+            });
+        }
+
+        formatSalarioInput();
+
+        // Função para calcular as horas extras
+        function calculateHours() {
+            const salarioBaseInput = document.getElementById('salarioBase');
+            const jornadaMensalInput = document.getElementById('jornadaMensal');
+            const horasExtrasInput = document.getElementById('horasExtras');
+            const adicionalExtraInput = document.getElementById('adicionalExtra');
+            const resultDiv = document.getElementById('result');
+            const copyBtn = document.getElementById('copyCalcResult');
+
+            const rawSalarioBase = salarioBaseInput.value.replace(/\./g, '').replace(',', '.');
+            const salarioBase = parseFloat(rawSalarioBase);
+            const jornadaMensal = parseFloat(jornadaMensalInput.value);
+            const horasExtras = parseFloat(horasExtrasInput.value);
+            const adicionalExtra = parseFloat(adicionalExtraInput.value) / 100;
+
+            if (isNaN(salarioBase) || salarioBase <= 0 || isNaN(jornadaMensal) || jornadaMensal <= 0 || isNaN(horasExtras) || horasExtras < 0 || isNaN(adicionalExtra)) {
+                resultDiv.textContent = 'Por favor, insira valores válidos para todos os campos.';
+                copyBtn.classList.add('hidden');
+                return;
+            }
+
+            // 1. Calcular o valor da hora normal
+            const valorHoraNormal = salarioBase / jornadaMensal;
+
+            // 2. Calcular o valor da hora extra (valor da hora normal + adicional)
+            const valorHoraExtra = valorHoraNormal * (1 + adicionalExtra);
+
+            // 3. Calcular o valor total das horas extras
+            const valorTotalHorasExtras = valorHoraExtra * horasExtras;
+
+            resultDiv.textContent = `Valor Bruto das Horas Extras: ${valorTotalHorasExtras.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}`;
+            copyBtn.classList.remove('hidden');
+        }
+
+        // Adiciona os event listeners aos botões
+        document.getElementById('calculateBtn').addEventListener('click', calculateHours);
+        // Atualizado para usar copyTextFromElement
+        document.getElementById('copyCalcResult').addEventListener('click', (e) => copyTextFromElement('result', e.currentTarget));
+
+
+        // Lógica para as gavetas expansíveis
+        function setupDrawer(drawerId) {
+            const header = document.getElementById(`${drawerId}-header`);
+            const content = document.getElementById(`${drawerId}-content`);
+
+            if (!header || !content) return;
+
+            header.addEventListener('click', () => {
+                const isExpanded = header.classList.toggle('active');
+                if (isExpanded) {
+                    // Define a altura máxima para o scrollHeight + margem de segurança
+                    content.style.maxHeight = content.scrollHeight + 30 + "px";
+                } else {
+                    content.style.maxHeight = '0';
+                }
+            });
+        }
+
+        setupDrawer('base-legal');
+        setupDrawer('base-calculo');
+        setupDrawer('verbas-reflexas');
+        setupDrawer('calculadora-simulacao');
+        setupDrawer('pje-calc');
+    </script>
+</body>
+
+</html>

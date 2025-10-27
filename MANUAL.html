@@ -1,0 +1,1181 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manual Interativo de Cálculos Trabalhistas</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f1f5f9;
+            /* Cor de fundo mais suave */
+        }
+
+        .aside-bg {
+            background-color: #005a62;
+            /* Azul-turquesa mais escuro */
+        }
+
+        .nav-link {
+            color: #d1d5db;
+            /* Texto dos links em cinza claro para contraste */
+            transition: background-color 0.2s ease-in-out;
+        }
+
+        .nav-link:hover {
+            background-color: #007380;
+            /* Azul um pouco mais claro no hover */
+        }
+
+        .active-link {
+            background-color: #0284c7;
+            /* Azul ciano para link ativo */
+            color: #ffffff;
+            /* Texto branco para link ativo */
+            font-weight: 600;
+        }
+
+        .copy-btn {
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
+            padding: 0;
+            margin-left: 8px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .copy-btn svg {
+            width: 16px;
+            height: 16px;
+            fill: #6b7280;
+            transition: fill 0.2s ease-in-out;
+        }
+
+        .copy-btn:hover svg {
+            fill: #3b82f6;
+        }
+
+        .text-justify {
+            text-align: justify;
+        }
+
+        @media (max-width: 767px) {
+            .mobile-hidden {
+                display: none;
+            }
+        }
+
+        .content-section {
+            padding-bottom: 2rem;
+        }
+
+        .quiz-option {
+            background-color: #f0f4f8;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            margin-bottom: 0.75rem;
+            cursor: pointer;
+            transition: background-color 0.2s ease-in-out, transform 0.1s ease-in-out;
+        }
+
+        .quiz-option:hover {
+            background-color: #cbd5e1;
+            transform: scale(1.02);
+        }
+
+        .correct {
+            background-color: #d1fae5;
+            border: 2px solid #34d399;
+        }
+
+        .wrong {
+            background-color: #fee2e2;
+            border: 2px solid #ef4444;
+        }
+
+        .faq-answer {
+            background-color: #f0f4f8;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            margin-top: 0.5rem;
+            display: none;
+        }
+
+        .faq-question-btn {
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+            text-align: left;
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: #007380;
+            padding: 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .faq-question-btn svg {
+            transition: transform 0.2s ease-in-out;
+        }
+
+        .faq-question-btn[aria-expanded="true"] svg {
+            transform: rotate(180deg);
+        }
+
+        /* O ESTILO group-highlight FOI REMOVIDO DAQUI */
+    </style>
+</head>
+
+<body>
+    <div class="flex flex-col md:flex-row h-full p-4 md:p-8">
+
+        <aside class="w-full md:w-64 aside-bg rounded-xl shadow-xl p-4 mb-6 md:mb-0 md:mr-6 border border-gray-200">
+            <nav class="sticky top-4">
+                <ul class="flex flex-col space-y-2">
+                    <li>
+                        <a href="#" data-section="proposito" id="nav-proposito"
+                            class="nav-link block p-3 rounded-lg text-sm md:text-base active-link">1. Propósito do
+                            Manual</a>
+                    </li>
+                    <li>
+                        <a href="#" data-section="dominio" class="nav-link block p-3 rounded-lg text-sm md:text-base">2.
+                            O que é necessário para dominar Cálculos?</a>
+                    </li>
+                    <li>
+                        <a href="#" data-section="estrutura"
+                            class="nav-link block p-3 rounded-lg text-sm md:text-base">3. Estrutura dos Cálculos</a>
+                    </li>
+                    <li>
+                        <a href="#" data-section="matematica"
+                            class="nav-link block p-3 rounded-lg text-sm md:text-base">4. Critérios Matemáticos</a>
+                    </li>
+                    <li>
+                        <a href="#" data-section="pje-calc"
+                            class="nav-link block p-3 rounded-lg text-sm md:text-base">5. PJeCalc</a>
+                    </li>
+                    <li>
+                        <a href="#" data-section="remuneracao-rescisao"
+                            class="nav-link block p-3 rounded-lg text-sm md:text-base">6. Verbas,
+                            Rendimentos, Remuneração e
+                            Rescisão</a>
+                    </li>
+                    <li>
+                        <a href="#" data-section="direitos"
+                            class="nav-link block p-3 rounded-lg text-sm md:text-base">7. Direitos Trabalhistas</a>
+                    </li>
+                    <li>
+                        <a href="#" data-section="liquidacao"
+                            class="nav-link block p-3 rounded-lg text-sm md:text-base">8. Liquidação de Sentença</a>
+                    </li>
+                    <li>
+                        <a href="arquivos/liquidacao_verbas_trabalhistas.html" data-section=""
+                            class="nav-link flex items-center p-3 rounded-lg text-sm md:text-base">
+                            <span class="text-[#0284c7] mr-2 text-lg">→</span>8.1. Liquidação das Verbas Trabalhistas
+                        </a>
+                    </li>
+                    <li>
+                        <a href="arquivos/faq.html" data-section=""
+                            class="nav-link block p-3 rounded-lg text-sm md:text-base">9.
+                            Perguntas e Respostas Frequentes</a>
+                    </li>
+                    <li>
+                        <a href="arquivos/teste_conhecimento.html" data-section=""
+                            class="nav-link block p-3 rounded-lg text-sm md:text-base">10. Teste seu Conhecimento</a>
+                    </li>
+                </ul>
+            </nav>
+        </aside>
+
+        <main class="flex-1">
+            <div class="max-w-4xl mx-auto bg-white rounded-xl shadow-xl p-6 md:p-10 border border-gray-200">
+                <div class="flex justify-center mb-6">
+                    <a href="https://www.trt19.jus.br/" target="_blank" rel="noopener noreferrer">
+                        <img src="https://site.trt19.jus.br/sites/default/files/logo-trt19.png"
+                            alt="Logotipo da Justiça do Trabalho, Tribunal Regional do Trabalho da 19ª Região"
+                            class="w-40 md:w-56 h-auto">
+                    </a>
+                </div>
+
+                <h1 class="text-3xl md:text-4xl text-center mb-6 text-[#007380]">Manual Interativo de Cálculos
+                    Trabalhistas</h1>
+                <p class="text-center text-gray-600 mb-8">Um guia completo e interativo para entender os cálculos na
+                    esfera judicial trabalhista.</p>
+
+                <section id="proposito" class="content-section">
+                    <h2 class="text-2xl text-[#007380] mb-4">1. PROPÓSITO DO MANUAL</h2>
+                    <p class="text-gray-700 leading-relaxed text-justify">O <strong>Tribunal Regional do Trabalho da 19ª
+                            Região</strong> desenvolveu esse guia para ser uma fonte de estudo essencial para
+                        compreender os cálculos trabalhistas na esfera judicial. O objetivo é simplificar o entendimento
+                        e a aplicação das metodologias de cálculo disponíveis no PJeCalc, bem como compreender as regras
+                        de direito trabalhistas aplicáveis.</p>
+                    <p class="mt-4 text-gray-700 leading-relaxed text-justify">Este manual, elaborado para auxiliar o
+                        público interno e externo do Tribunal, serve como uma ferramenta de apoio para a atividade de
+                        cálculo, seguindo todas as regras e princípios aqui estabelecidos.</p>
+                </section>
+
+                <section id="dominio" class="content-section hidden">
+                    <h2 class="text-2xl text-[#007380] mb-4">2. O QUE É NECESSÁRIO PARA DOMINAR CÁLCULOS?</h2>
+                    <p class="text-gray-700 leading-relaxed text-justify">É preciso um profundo conhecimento legal e uma
+                        interpretação cuidadosa das decisões judiciais, pois os cálculos de liquidação devem seguir
+                        estritamente as determinações judiciais.</p>
+                    <p class="mt-4 text-gray-700 text-justify"><strong>Deve-se dominar as seguintes áreas:</strong></p>
+                    <ul class="list-disc list-inside mt-2 space-y-2 text-gray-700">
+                        <li class="text-justify">Legislação: Conhecer a fundo a Constituição Federal e a CLT.</li>
+                        <li class="text-justify">Jurisprudência: Estar atualizado sobre as Súmulas e Orientações
+                            Jurisprudenciais do Tribunal Superior do Trabalho (TST) e dos Tribunais Regionais do
+                            Trabalho (TRTs), além das decisões relevantes do Supremo Tribunal Federal (STF).</li>
+                        <li class="text-justify">Documentação Processual: Ler e interpretar corretamente todos os
+                            comandos de uma decisão judicial, acordo ou acórdão para garantir que o cálculo reflita
+                            exatamente o que foi determinado.</li>
+                    </ul>
+                    <p class="mt-4 text-gray-700 leading-relaxed text-justify"><strong>Além disso, é fundamental ter a
+                            técnica para realizar os cálculos, que inclui:</strong></p>
+                    <ul class="list-disc list-inside mt-2 space-y-2 text-gray-700">
+                        <li>Determinar a composição da remuneração mensal do reclamante.</li>
+                        <li>Calcular corretamente cada uma das verbas deferidas.</li>
+                        <li>Aplicar a atualização monetária e os juros de mora.</li>
+                        <li>Apurar os descontos legais, como contribuições previdenciárias e imposto de renda.</li>
+                    </ul>
+                </section>
+
+                <section id="estrutura" class="content-section hidden">
+                    <h2 class="text-2xl text-[#007380] mb-4 text-justify">3. COMO SE ESTRUTURAM OS CÁLCULOS DE
+                        LIQUIDAÇÃO TRABALHISTAS</h2>
+                    <h3 class="text-lg mb-2 text-[#007380]">Componentes do Cálculo</h3>
+                    <p class="text-gray-700 leading-relaxed text-justify">Um cálculo de liquidação deve conter, no
+                        mínimo, os seguintes elementos:</p>
+                    <ol class="list-decimal list-inside mt-2 space-y-2 text-gray-700">
+                        <li class="text-justify">Principal: O valor das verbas trabalhistas deferidas na sentença.</li>
+                        <li class="text-justify">Juros de Mora e Correção Monetária: A correção recompõe o poder de
+                            compra do valor, enquanto os juros funcionam como uma remuneração do capital. Ambos são
+                            obrigatórios, mesmo que a sentença não os mencione, conforme a Súmula 211 do TST.</li>
+                        <li class="text-justify">Contribuições Previdenciárias: Incluindo as cotas do empregado
+                            (reclamante) e do empregador (reclamada). A cota de INSS é de apuração obrigatória e deve
+                            ser calculada e incluída na liquidação, conforme o art. 879, §§ 1º-A e 1º-B da CLT.</li>
+                        <li class="text-justify">Imposto de Renda (IR): O valor devido sobre o crédito do reclamante.
+                        </li>
+                        <li class="text-justify">FGTS: O valor atualizado do Fundo de Garantia por Tempo de Serviço a
+                            ser depositado na conta vinculada do trabalhador.</li>
+                        <li class="text-justify">Despesas Processuais: Itens como custas, honorários periciais e
+                            advocatícios, e despesas com a publicação de editais.</li>
+                    </ol>
+                    <h3 class="text-lg mt-4 mb-2 text-[#007380]">Estrutura Formal do Cálculo</h3>
+                    <p class="text-gray-700 leading-relaxed text-justify">Um cálculo trabalhista é formalmente composto
+                        por dois documentos principais: a memória de cálculo e o resumo geral.</p>
+                    <ul class="list-disc list-inside mt-2 space-y-2 text-gray-700">
+                        <li class="text-justify">Memória de Cálculo: É a parte mais detalhada, que demonstra o passo a
+                            passo de como cada verba foi apurada. Ela deve conter informações como a base de cálculo do
+                            Imposto de Renda e os totais de juros, multa e principal apurados sobre a contribuição
+                            previdenciária.</li>
+                        <li class="text-justify">Resumo Geral: É o fechamento do cálculo. Ele apresenta de forma clara e
+                            resumida todos os valores, facilitando a consulta.</li>
+                    </ul>
+                    <p class="mt-2 text-gray-700 leading-relaxed text-justify">Softwares como o PJe-Calc geram
+                        automaticamente esses relatórios, garantindo que a estrutura e os valores estejam corretos e
+                        padronizados.</p>
+                </section>
+
+                <section id="matematica" class="content-section hidden">
+                    <h2 class="text-2xl text-[#007380] mb-4 text-justify">4. CRITÉRIOS MATEMÁTICOS APLICADOS AOS
+                        CÁLCULOS TRABALHISTAS</h2>
+                    <p class="text-gray-700 leading-relaxed text-justify">Para realizar cálculos trabalhistas de forma
+                        precisa, é fundamental dominar algumas operações matemáticas e suas aplicações específicas.
+                        Erros comuns surgem da má utilização de percentuais, índices e conversões de tempo.</p>
+
+                    <h3 class="text-lg mt-4 mb-2 text-[#007380]">Conversão entre Percentual e Número Índice</h3>
+                    <p class="text-gray-700 leading-relaxed text-justify">Essa conversão é essencial para acumular ou
+                        subtrair índices de correção monetária ou reajustes salariais. Para converter um percentual em
+                        número índice, divida o percentual por 100 e some 1. Para converter um número índice de volta
+                        para percentual, subtraia 1 e multiplique o resultado por 100.</p>
+                    <ul class="list-disc list-inside mt-2 space-y-2 text-gray-700">
+                        <li class="text-justify">
+                            <span>Exemplo de Percentual para Índice:</span> 20% = (20 / 100) + 1 = 1,20.
+                        </li>
+                        <li class="text-justify">
+                            <span>Exemplo de Índice para Percentual:</span> 1,20 = (1,20 - 1) x 100 = 20%.
+                        </li>
+                    </ul>
+                    <p class="mt-4 text-gray-700 leading-relaxed text-justify">Use a calculadora abaixo para converter
+                        um percentual para número índice e vice-versa.</p>
+                    <div
+                        class="p-4 bg-[#f0f4f8] rounded-lg shadow-inner mt-4 flex flex-col md:flex-row md:space-x-4 items-center">
+                        <div class="flex-1 w-full md:w-auto mb-4 md:mb-0">
+                            <label for="percentInput" class="block text-sm text-gray-700">Converter Percentual para
+                                Índice:</label>
+                            <div class="mt-1 relative rounded-md shadow-sm">
+                                <input type="number" id="percentInput"
+                                    class="block w-full rounded-md border-gray-300 p-2 focus:ring-[#007380] focus:border-[#007380]">
+                                <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
+                                    <span class="text-gray-500">%</span>
+                                </div>
+                            </div>
+                            <button id="convertPercentBtn"
+                                class="mt-2 w-full md:w-auto px-4 py-2 bg-[#007380] text-white rounded-md hover:bg-[#005e66] transition duration-300 shadow-md">Calcular</button>
+                            <div class="flex items-center mt-2">
+                                <p id="percentResult" class="text-sm text-gray-700"></p>
+                                <button id="copyPercent" class="copy-btn hidden" aria-label="Copiar resultado">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                        <path
+                                            d="M16 1H4C2.9 1 2 1.9 2 3v14h2V3h12V1zm3 4H8C6.9 5 6 5.9 6 7v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z" />
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="flex-1 w-full md:w-auto">
+                            <label for="indexInput" class="block text-sm text-gray-700">Converter Índice para
+                                Percentual:</label>
+                            <div class="mt-1">
+                                <input type="number" id="indexInput"
+                                    class="block w-full rounded-md border-gray-300 p-2 focus:ring-[#007380] focus:border-[#007380]">
+                            </div>
+                            <button id="convertIndexBtn"
+                                class="mt-2 w-full md:w-auto px-4 py-2 bg-[#007380] text-white rounded-md hover:bg-[#005e66] transition duration-300 shadow-md">Calcular</button>
+                            <div class="flex items-center mt-2">
+                                <p id="indexResult" class="text-sm text-gray-700"></p>
+                                <button id="copyIndex" class="copy-btn hidden" aria-label="Copiar resultado">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                        <path
+                                            d="M16 1H4C2.9 1 2 1.9 2 3v14h2V3h12V1zm3 4H8C6.9 5 6 5.9 6 7v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z" />
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <h3 class="text-lg mt-6 mb-2 text-[#007380]">Acumulação de Índices Positivos (Multiplicação de
+                        Fatores)</h3>
+                    <p class="text-gray-700 leading-relaxed text-justify">Quando os índices de correção são positivos, a
+                        acumulação é feita pela multiplicação dos fatores.</p>
+                    <ul class="list-disc list-inside mt-2 space-y-2 text-gray-700">
+                        <li class="text-justify">
+                            <span>Exemplo:</span> Para acumular 10% e 5%, converta para fatores (1,10 e 1,05),
+                            multiplique-os (1,10 x 1,05 = 1,155) e converta o resultado de volta para percentual
+                            (15,5%).
+                        </li>
+                    </ul>
+                    <p class="mt-4 text-gray-700 leading-relaxed text-justify">Use a calculadora abaixo para acumular
+                        dois percentuais de correção monetária.</p>
+                    <div
+                        class="p-4 bg-[#f0f4f8] rounded-lg shadow-inner mt-4 flex flex-col md:flex-row md:space-x-4 items-center">
+                        <div class="flex-1 w-full md:w-auto mb-4 md:mb-0">
+                            <label for="percent1AccumulateInput" class="block text-sm text-gray-700">Primeiro Percentual
+                                de Correção (%):</label>
+                            <input type="number" id="percent1AccumulateInput"
+                                class="mt-1 block w-full rounded-md border-gray-300 p-2 focus:ring-[#007380] focus:border-[#007380]">
+                        </div>
+                        <div class="flex-1 w-full md:w-auto mb-4 md:mb-0">
+                            <label for="percent2AccumulateInput" class="block text-sm text-gray-700">Segundo Percentual
+                                de Correção (%):</label>
+                            <input type="number" id="percent2AccumulateInput"
+                                class="mt-1 block w-full rounded-md border-gray-300 p-2 focus:ring-[#007380] focus:border-[#007380]">
+                        </div>
+                        <button id="accumulateBtn"
+                            class="mt-2 w-full md:w-auto px-4 py-2 bg-[#007380] text-white rounded-md hover:bg-[#005e66] transition duration-300 shadow-md">Acumular</button>
+                    </div>
+                    <div class="flex items-center mt-2 p-4 bg-[#f0f4f8] rounded-lg shadow-inner">
+                        <p id="accumulationResult" class="text-sm text-gray-700"></p>
+                        <button id="copyAccumulation" class="copy-btn hidden" aria-label="Copiar resultado">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                <path
+                                    d="M16 1H4C2.9 1 2 1.9 2 3v14h2V3h12V1zm3 4H8C6.9 5 6 5.9 6 7v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z" />
+                            </svg>
+                        </button>
+                    </div>
+
+                    <h3 class="text-lg mt-6 mb-2 text-[#007380]">Subtração de Percentuais (Índices Negativos)</h3>
+                    <p class="text-gray-700 leading-relaxed text-justify">A subtração de percentuais ocorre quando um
+                        índice de correção é negativo. Por exemplo, se um valor sofreu uma correção de 15% e depois uma
+                        desvalorização de 5%, você não pode subtrair diretamente. É preciso converter os percentuais em
+                        fatores (1,15 e 0,95) e depois dividi-los. O resultado deve ser convertido de volta para
+                        percentual para obter o valor final.</p>
+                    <ul class="list-disc list-inside mt-2 space-y-2 text-gray-700">
+                        <li class="text-justify">
+                            <span>Exemplo:</span> 15% - 5% = (1,15 / 1,05 - 1) * 100 = 9,52%.
+                        </li>
+                    </ul>
+                    <p class="mt-4 text-gray-700 leading-relaxed text-justify">Use a calculadora abaixo para subtrair um
+                        percentual de outro.</p>
+                    <div
+                        class="p-4 bg-[#f0f4f8] rounded-lg shadow-inner mt-4 flex flex-col md:flex-row md:space-x-4 items-center">
+                        <div class="flex-1 w-full md:w-auto mb-4 md:mb-0">
+                            <label for="percent1SubtractInput" class="block text-sm text-gray-700">Percentual
+                                Inicial:</label>
+                            <input type="number" id="percent1SubtractInput"
+                                class="mt-1 block w-full rounded-md border-gray-300 p-2 focus:ring-[#007380] focus:border-[#007380]">
+                        </div>
+                        <div class="flex-1 w-full md:w-auto mb-4 md:mb-0">
+                            <label for="percent2SubtractInput" class="block text-sm text-gray-700">Percentual a ser
+                                Subtraído:</label>
+                            <input type="number" id="percent2SubtractInput"
+                                class="mt-1 block w-full rounded-md border-gray-300 p-2 focus:ring-[#007380] focus:border-[#007380]">
+                        </div>
+                        <button id="subtractBtn"
+                            class="mt-2 w-full md:w-auto px-4 py-2 bg-[#007380] text-white rounded-md hover:bg-[#005e66] transition duration-300 shadow-md">Subtrair</button>
+                    </div>
+                    <div class="flex items-center mt-2 p-4 bg-[#f0f4f8] rounded-lg shadow-inner">
+                        <p id="subtractionResult" class="text-sm text-gray-700"></p>
+                        <button id="copySubtraction" class="copy-btn hidden" aria-label="Copiar resultado">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                <path
+                                    d="M16 1H4C2.9 1 2 1.9 2 3v14h2V3h12V1zm3 4H8C6.9 5 6 5.9 6 7v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z" />
+                            </svg>
+                        </button>
+                    </div>
+
+                    <h3 class="text-lg mt-6 mb-2 text-[#007380] text-justify">Somatório do Juros de Mora</h3>
+                    <p class="text-gray-700 leading-relaxed text-justify">Diferentemente dos índices de correção, as
+                        taxas de juros de mora são, em geral, somadas. Por exemplo, a taxa SELIC, aplicada para
+                        atualizar débitos fiscais e previdenciários, é acumulada por meio da soma de seus percentuais
+                        mensais. A multiplicação dos percentuais configuraria anatocismo (juros sobre juros), o que é
+                        vedado pela Súmula 121 do STF. O mesmo princípio se aplica aos juros sobre débitos trabalhistas.
+                    </p>
+                    <ul class="list-disc list-inside mt-2 space-y-2 text-gray-700">
+                        <li class="text-justify">
+                            <span>Exemplo:</span> Juros de 1% + 2% = 3%.
+                        </li>
+                    </ul>
+                    <p class="mt-4 text-gray-700 leading-relaxed text-justify">Use a calculadora abaixo para somar dois
+                        percentuais de juros de mora.</p>
+                    <div
+                        class="p-4 bg-[#f0f4f8] rounded-lg shadow-inner mt-4 flex flex-col md:flex-row md:space-x-4 items-center">
+                        <div class="flex-1 w-full md:w-auto mb-4 md:mb-0">
+                            <label for="percent1JurosInput" class="block text-sm text-gray-700">Primeiro Percentual de
+                                Juros (%):</label>
+                            <input type="number" id="percent1JurosInput"
+                                class="mt-1 block w-full rounded-md border-gray-300 p-2 focus:ring-[#007380] focus:border-[#007380]">
+                        </div>
+                        <div class="flex-1 w-full md:w-auto mb-4 md:mb-0">
+                            <label for="percent2JurosInput" class="block text-sm text-gray-700">Segundo Percentual de
+                                Juros (%):</label>
+                            <input type="number" id="percent2JurosInput"
+                                class="mt-1 block w-full rounded-md border-gray-300 p-2 focus:ring-[#007380] focus:border-[#007380]">
+                        </div>
+                        <button id="calculateJurosBtn"
+                            class="mt-2 w-full md:w-auto px-4 py-2 bg-[#007380] text-white rounded-md hover:bg-[#005e66] transition duration-300 shadow-md">Somar</button>
+                    </div>
+                    <div class="flex items-center mt-2 p-4 bg-[#f0f4f8] rounded-lg shadow-inner">
+                        <p id="jurosResult" class="text-sm text-gray-700"></p>
+                        <button id="copyJuros" class="copy-btn hidden" aria-label="Copiar resultado">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                <path
+                                    d="M16 1H4C2.9 1 2 1.9 2 3v14h2V3h12V1zm3 4H8C6.9 5 6 5.9 6 7v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z" />
+                            </svg>
+                        </button>
+                    </div>
+                </section>
+
+                <section id="pje-calc" class="content-section hidden">
+                    <h2 class="text-2xl text-[#007380] mb-4 text-justify">5. PJeCALC – FERRAMENTA PARA CALCULAR AS
+                        VERBAS TRABALHISTAS?</h2>
+                    <p class="text-gray-700 leading-relaxed text-justify">O PJe-Calc (Sistema de Cálculo Trabalhista) é
+                        a principal ferramenta gratuita para a padronização e automatização dos cálculos trabalhistas no
+                        Brasil. Criado para ser o padrão oficial da Justiça do Trabalho, ele garante que os valores
+                        devidos em processos judiciais sejam apurados de forma uniforme e precisa, eliminando
+                        discrepâncias e agilizando a fase de execução da sentença.</p>
+                    <p class="mt-4 text-gray-700 leading-relaxed text-justify">Utilizado por juízes, servidores,
+                        advogados, peritos e pelas próprias partes, sua adoção obrigatória em diversos tribunais
+                        substituiu a necessidade de planilhas e métodos manuais, que frequentemente levavam a erros e
+                        atrasos. Em essência, o PJe-Calc se tornou a ferramenta oficial que proporciona maior segurança
+                        jurídica, celeridade e transparência à liquidação de sentenças na Justiça do Trabalho.</p>
+                    <p class="mt-4 text-gray-700 leading-relaxed text-justify">Para a instalação do PJe-Calc Cidadão,
+                        você pode seguir o <a
+                            href="https://www.trt8.jus.br/pjecalc-cidadao/instalando-o-pje-calc-cidadao" target="_blank"
+                            rel="noopener noreferrer" class="text-[#0284c7] hover:underline">guia de instalação do TRT
+                            da 8ª Região</a>, que detalha o processo passo a passo.</p>
+                    <p class="mt-4 text-gray-700 leading-relaxed text-justify">Para saber o passo a passo de utilização
+                        do sistema PJe consulte o <a href="https://pje.csjt.jus.br/manual/index.php/PJe-Calc"
+                            target="_blank" rel="noopener noreferrer" class="text-[#0284c7] hover:underline">manual
+                            oficial do PJe-Calc</a>.</p>
+                    <p class="mt-4 text-gray-700 leading-relaxed text-justify">Para exemplos práticos e um tutorial de
+                        uso, você pode consultar o <a href="https://pje.csjt.jus.br/manual/index.php/PJe-Calc-Tutorial"
+                            target="_blank" rel="noopener noreferrer" class="text-[#0284c7] hover:underline">Tutorial de
+                            Uso do PJe-Calc</a>.</p>
+                </section>
+
+                <section id="remuneracao-rescisao" class="content-section hidden">
+                    <h2 class="text-2xl text-[#007380] mb-4">6. VERBAS, RENDIMENTOS, REMUNERAÇÃO E RESCISÃO
+                    </h2>
+                    <p class="text-gray-700 leading-relaxed text-justify">Apresentamos 5 mapas mentais para resumir
+                        visualmente os conceitos e nuances normativas, com foco na compreensão da Base de Cálculo,
+                        Deduções e Reflexos das verbas Trabalhistas e Rescisão
+                        Contratual do Trabalho, que são essenciais para a liquidação de sentença.</p>
+
+                    <div class="image-zoom-container flex justify-center mt-6 p-4 border border-gray-200 rounded-lg cursor-pointer hover:shadow-lg transition duration-300"
+                        onclick="openModal('mapamentalverbas.png')">
+                        <img src="imagens/mapamentalverbas.png"
+                            alt="Mapa Mental sobre Verbas Trabalhistas e seus conceitos e nuances normativas."
+                            class="max-w-full h-auto shadow-lg">
+                    </div>
+                    <p class="text-sm text-gray-500 text-center mt-2">Mapa Mental 1: Verbas Trabalhistas e suas
+                        Classificações. <span class="text-[#0284c7] font-bold"> (Clique para
+                            Ampliar)</span></p>
+
+                    <div class="image-zoom-container flex justify-center mt-6 p-4 border border-gray-200 rounded-lg cursor-pointer hover:shadow-lg transition duration-300"
+                        onclick="openModal('mapamentalrendimentos.png')">
+                        <img src="imagens/mapamentalrendimentos.png"
+                            alt="Mapa Mental sobre Rendimentos e seus conceitos e nuances normativas."
+                            class="max-w-full h-auto shadow-lg">
+                    </div>
+                    <p class="text-sm text-gray-500 text-center mt-2">Mapa Mental 2: Rendimentos oriundos do Trabalho.
+                        <span class="text-[#0284c7] font-bold"> (Clique para
+                            Ampliar)</span>
+                    </p>
+                    <div class="image-zoom-container flex justify-center mt-6 p-4 border border-gray-200 rounded-lg cursor-pointer hover:shadow-lg transition duration-300"
+                        onclick="openModal('mapamentalremuneracao.png')">
+                        <img src="imagens/mapamentalremuneracao.png"
+                            alt="Mapa Mental sobre Remuneração e seus conceitos e nuances normativas."
+                            class="max-w-full h-auto shadow-lg">
+                    </div>
+                    <p class="text-sm text-gray-500 text-center mt-2">Mapa Mental 3: Remuneração e seus conceitos e
+                        nuances normativas. <span class="text-[#0284c7] font-bold"> (Clique para Ampliar)</span></p>
+
+                    </p>
+                    <div class="image-zoom-container flex justify-center mt-6 p-4 border border-gray-200 rounded-lg cursor-pointer hover:shadow-lg transition duration-300"
+                        onclick="openModal('mapamentalgratificacaopremioabono.png')">
+                        <img src="imagens/mapamentalgratificacaopremioabono.png"
+                            alt="Mapa Mental sobre Remuneração e seus conceitos e nuances normativas."
+                            class="max-w-full h-auto shadow-lg">
+                    </div>
+                    <p class="text-sm text-gray-500 text-center mt-2">Mapa Mental 4: Diferenciação entre Gratificações,
+                        Pêmios e Abonos.
+                        <span class="text-[#0284c7] font-bold"> (Clique para Ampliar)</span>
+                    </p>
+
+                    <div class="image-zoom-container flex justify-center mt-6 p-4 border border-gray-200 rounded-lg cursor-pointer hover:shadow-lg transition duration-300"
+                        onclick="openModal('mapamentalrescisao.png')">
+                        <img src="imagens/mapamentalrescisao.png"
+                            alt="Mapa Mental sobre Rescisão contratual de Trabalho e seus conceitos e nuances normativas."
+                            class="max-w-full h-auto shadow-lg">
+                    </div>
+                    <p class="text-sm text-gray-500 text-center mt-2">Mapa Mental 5: Rescisão contratual de Trabalho e
+                        seus conceitos e nuances normativas. <span class="text-[#0284c7] font-bold"> (Clique para
+                            Ampliar)</span></p>
+
+                    <h3 class="text-lg mt-6 mb-2 text-[#007380]">Destaques dos Mapas Mentais:</h3>
+                    <ul class="list-disc list-inside mt-2 space-y-2 text-gray-700">
+                        <li class="text-justify"><strong>Mapa 1 (Verbas Trabalhistas):</strong> Aborda o conceito de
+                            Verba Principal e Reflexa e o impacto da classificação na formação da Base de Cáculo das
+                            Verbas Trabalhistas.</li>
+                        <li class="text-justify"><strong>Mapa 2 (Rendimentos):</strong> Demonstra que os Rendimentos
+                            oriundo das relações de trabalho possuem 2 naturezas básicas: Salária e Indenizatória.</li>
+                        <li class="text-justify"><strong>Mapa 3 (Remuneração):</strong> Aborda o conceito legal de
+                            remuneração, as diferenças entre salário e remuneração, e as parcelas que compõem o salário
+                            para fins de cálculo de reflexos.</li>
+                        <li class="text-justify"><strong>Mapa 4 (Rescisão):</strong> Demonstra a diferença conceitual,
+                            legal e doutrinária das Gratificações, Prêmios e Abonos.</li>
+                        para fins de cálculo de reflexos.</li>
+                        <li class="text-justify"><strong>Mapa 5 (Rescisão):</strong> Detalha as modalidades de rescisão,
+                            as principais verbas rescisórias devidas em cada caso.</li>
+                    </ul>
+                </section>
+
+                <section id="direitos" class="content-section hidden">
+                    <h2 class="text-2xl text-[#007380] mb-4">7. DIREITOS TRABALHISTAS E SUAS NATUREZAS</h2>
+                    <p class="text-gray-700 leading-relaxed text-justify">A natureza jurídica de uma verba (salarial,
+                        indenizatória ou previdenciária) é crucial, pois define a incidência ou não de contribuições
+                        previdenciárias e fiscais. A seguir, detalhamos as principais verbas trabalhistas agrupadas por
+                        natureza. Em cada tópico, ao clicar na verba (→), você será direcionado para uma página com o
+                        conceito, a base legal e jurisprudencial, a base de cálculo e deduções, bem como o passo a passo
+                        para lançamento delas no PJe-Calc.</p>
+
+                    <p class="text-xl mt-6 mb-2 text-[#007380] font-bold p-3 rounded-md border-l-4 border-[#007380]">
+                        1. Verbas de Natureza Salarial</p>
+                    <p class="text-gray-700 leading-relaxed text-justify">Verbas de natureza salarial são aquelas que
+                        remuneram o trabalho prestado, habitualmente, e refletem em outros cálculos (férias, 13º, FGTS).
+                        <br />Clique em cada verba abaixo (→) para acessar a página de detalhe contendo o conceito, a
+                        base legal e jurisprudencial, a base de cálculo e deduções, e o passo a passo para lançamento no
+                        PJe-Calc.
+                    </p>
+
+                    <h3 class="text-lg mt-4 mb-2 text-[#007380] font-bold">
+                        Salariais Básicas e Diretas</h3>
+                    <ul class="mt-2 space-y-2 text-gray-700">
+                        <li class="text-justify">
+                            <a href="arquivos/saldo_salario.html" data-section="saldo-salario"
+                                class="flex items-center text-[#007380] font-semibold hover:underline transition duration-150">
+                                <span class="text-[#0284c7] mr-2 text-lg">→</span>Saldo de Salário
+                            </a>
+                        </li>
+                        <li class="text-justify">
+                            <a href="arquivos/diferencas_salarias.html" data-section="diferenca-salarial"
+                                class="flex items-center text-[#007380] font-semibold hover:underline transition duration-150">
+                                <span class="text-[#0284c7] mr-2 text-lg">→</span>Diferença Salarial
+                            </a>
+                        </li>
+                        <li class="text-justify">
+                            <a href="arquivos/comissoes.html" data-section="comissoes-gratificacoes-premios"
+                                class="flex items-center text-[#007380] font-semibold hover:underline transition duration-150">
+                                <span class="text-[#0284c7] mr-2 text-lg">→</span>Comissões
+                            </a>
+                        </li>
+                        <li class="text-justify">
+                            <a href="arquivos/gorjetas.html" data-section="gorjetas"
+                                class="flex items-center text-[#007380] font-semibold hover:underline transition duration-150">
+                                <span class="text-[#0284c7] mr-2 text-lg">→</span>Gorjetas
+                            </a>
+                    </ul>
+
+                    <h3 class="text-lg mt-4 mb-2 text-[#007380] font-bold">
+                        Gratificações Legais e Convencionais</h3>
+                    <ul class="mt-2 space-y-2 text-gray-700">
+                        </li>
+                        <li class="text-justify">
+                            <a href="arquivos/gratificacao_natalina.html" data-section="decimo-terceiro"
+                                class="flex items-center text-[#007380] font-semibold hover:underline transition duration-150">
+                                <span class="text-[#0284c7] mr-2 text-lg">→</span>Gratificação Natalina (13ª
+                                Proporcional)
+                            </a>
+
+                        <li class="text-justify">
+                            <a href="arquivos/gratificacao_tempo_servico.html" data-section="gratificacao-tempo-servico"
+                                class="flex items-center text-[#007380] font-semibold hover:underline transition duration-150">
+                                <span class="text-[#0284c7] mr-2 text-lg">→</span>Gratificação por Tempo de Serviço
+                            </a>
+                        </li>
+                        <li class="text-justify">
+                            <a href="arquivos/gratificacao_funcao.html" data-section="gratificacao-funcao"
+                                class="flex items-center text-[#007380] font-semibold hover:underline transition duration-150">
+                                <span class="text-[#0284c7] mr-2 text-lg">→</span>Gratificação por Função
+                            </a>
+
+                        </li>
+                        <li class="text-justify">
+                            <a href="arquivos/gratificacao_quebra_caixa.html" data-section="gratificacao-quebra-caixa"
+                                class="flex items-center text-[#007380] font-semibold hover:underline transition duration-150">
+                                <span class="text-[#0284c7] mr-2 text-lg">→</span>Gratificação de Caixa (Quebra de
+                                Caixa)
+                            </a>
+                        </li>
+                        <li class="text-justify">
+                            <a href="arquivos/gratificacao_assiduidade.html" data-section="gratificacao-assiduidade"
+                                class="flex items-center text-[#007380] font-semibold hover:underline transition duration-150">
+                                <span class="text-[#0284c7] mr-2 text-lg">→</span>Gratificação por Assiduidade
+                                (salarial/indenizatória) - MISTA
+                            </a>
+                        </li>
+                        <li class="text-justify">
+                            <a href="arquivos/gratificacao_produtividade.html" data-section="gratificacao-produtividade"
+                                class="flex items-center text-[#007380] font-semibold hover:underline transition duration-150">
+                                <span class="text-[#0284c7] mr-2 text-lg">→</span>Gratificação por Produtividade
+                                (salarial/indenizatória) - MISTA
+                            </a>
+                        </li>
+                    </ul>
+
+                    <h3 class="text-lg mt-4 mb-2 text-[#007380] font-bold">
+                        Adicionais</h3>
+                    <ul class="mt-2 space-y-2 text-gray-700">
+                        <li class="text-justify">
+                            <a href="arquivos/adicional_insalubridade.html" data-section="adicional-insalubridade"
+                                class="flex items-center text-[#007380] font-semibold hover:underline transition duration-150">
+                                <span class="text-[#0284c7] mr-2 text-lg">→</span>Adicional de Insalubridade
+                            </a>
+                        </li>
+                        <li class="text-justify">
+                            <a href="arquivos/adicional_periculosidade.html" data-section="adicional-periculosidade"
+                                class="flex items-center text-[#007380] font-semibold hover:underline transition duration-150">
+                                <span class="text-[#0284c7] mr-2 text-lg">→</span>Adicional de Periculosidade
+                            </a>
+                        </li>
+                        <li class="text-justify">
+                            <a href="arquivos/adicional_transferencia.html" data-section="adicional-transferencia"
+                                class="flex items-center text-[#007380] font-semibold hover:underline transition duration-150">
+                                <span class="text-[#0284c7] mr-2 text-lg">→</span>Adicional de Transferência
+                            </a>
+                        </li>
+                    </ul>
+
+                    <h3 class="text-lg mt-4 mb-2 text-[#007380] font-bold">
+                        Tempo à Disposição e Descanso</h3>
+                    <ul class="mt-2 space-y-2 text-gray-700">
+                        <li class="text-justify">
+                            <a href="arquivos/adicional_noturno.html" data-section="adicional-noturno"
+                                class="flex items-center text-[#007380] font-semibold hover:underline transition duration-150">
+                                <span class="text-[#0284c7] mr-2 text-lg">→</span>Adicional Noturno
+                            </a>
+                        </li>
+                        <li class="text-justify">
+                            <a href="arquivos/horas_extras.html" data-section="horas-extras"
+                                class="flex items-center text-[#007380] font-semibold hover:underline transition duration-150">
+                                <span class="text-[#0284c7] mr-2 text-lg">→</span>Horas Extras
+                            </a>
+                        </li>
+                        <li class="text-justify">
+                            <a href="arquivos/intervalos.html" data-section="intervalos"
+                                class="flex items-center text-[#007380] font-semibold hover:underline transition duration-150">
+                                <span class="text-[#0284c7] mr-2 text-lg">→</span>Intervalos Intrajornada e Interjornada
+                            </a>
+                        </li>
+                        <li class="text-justify">
+                            <a href="arquivos/feriados.html" data-section="feriados"
+                                class="flex items-center text-[#007380] font-semibold hover:underline transition duration-150">
+                                <span class="text-[#0284c7] mr-2 text-lg">→</span>Feriados
+                            </a>
+                        </li>
+                        <li class="text-justify">
+                            <a href="arquivos/horas_intinere.html" data-section="horas-itinere"
+                                class="flex items-center text-[#007380] font-semibold hover:underline transition duration-150">
+                                <span class="text-[#0284c7] mr-2 text-lg">→</span>Horas In Itinere
+                            </a>
+                        </li>
+                        <li class="text-justify">
+                            <a href="arquivos/sobreaviso_prontidao.html" data-section="sobreaviso-prontidao"
+                                class="flex items-center text-[#007380] font-semibold hover:underline transition duration-150">
+                                <span class="text-[#0284c7] mr-2 text-lg">→</span>Sobreaviso e Prontidão
+                            </a>
+                        </li>
+                        <li class="text-justify">
+                            <a href="arquivos/ferias_vencidas_proporcionais.html" data-section="ferias-mais-um-terco"
+                                class="flex items-center text-[#007380] font-semibold hover:underline transition duration-150">
+                                <span class="text-[#0284c7] mr-2 text-lg">→</span>Férias Vencidas e Proporcionais + 1/3
+                            </a>
+                        </li>
+                        <li class="text-justify">
+                            <a href="arquivos/dsr.html" data-section="dsr"
+                                class="flex items-center text-[#007380] font-semibold hover:underline transition duration-150">
+                                <span class="text-[#0284c7] mr-2 text-lg">→</span>Descanso Semanal Remunerado
+                            </a>
+                        </li>
+                    </ul>
+
+                    <p class="text-xl mt-6 mb-2 text-[#007380] font-bold p-3 rounded-md border-l-4 border-[#007380]">
+                        2. Verbas de Natureza Indenizatória</p>
+                    <p class="text-gray-700 leading-relaxed text-justify">Verbas de natureza indenizatória são
+                        pagamentos
+                        que visam reparar um prejuízo ou dano, e não se destinam a remunerar o trabalho. Geralmente, não
+                        incidem sobre elas contribuições previdenciárias e fiscais.
+                        <br />Clique em cada verba abaixo (→) para acessar a página de detalhe contendo o conceito, a
+                        base legal e jurisprudencial, a base de cálculo e deduções, e o passo a passo para lançamento no
+                        PJe-Calc.
+                    </p>
+
+                    <h3 class="text-lg mt-4 mb-2 text-[#007380] font-bold">
+                        Ressarcimento de Despesas / Benefícios</h3>
+                    <ul class="mt-2 space-y-2 text-gray-700">
+                        <li class="text-justify">
+                            <a href="arquivos/auxilio_alimentacao.html" data-section="auxilio-alimentacao"
+                                class="flex items-center text-[#007380] font-semibold hover:underline transition duration-150">
+                                <span class="text-[#0284c7] mr-2 text-lg">→</span>Auxílio Alimentação
+                                (indenizatória/salarial) - MISTA
+                            </a>
+                        </li>
+                        <li class="text-justify">
+                            <a href="arquivos/vale_transporte.html" data-section="vale-transporte"
+                                class="flex items-center text-[#007380] font-semibold hover:underline transition duration-150">
+                                <span class="text-[#0284c7] mr-2 text-lg">→</span>Vale Transporte
+                                (indenizatória/salarial) - MISTA
+                            </a>
+                        </li>
+                        <li class="text-justify">
+                            <a href="arquivos/ajuda_custo.html" data-section="ajuda-custo"
+                                class="flex items-center text-[#007380] font-semibold hover:underline transition duration-150">
+                                <span class="text-[#0284c7] mr-2 text-lg">→</span>Ajuda de Custo
+                                (indenizatória/salarial) - MISTA
+                            </a>
+                        </li>
+                        <li class="text-justify">
+                            <a href="arquivos/diarias.html" data-section="diarias"
+                                class="flex items-center text-[#007380] font-semibold hover:underline transition duration-150">
+                                <span class="text-[#0284c7] mr-2 text-lg">→</span>Diária (indenizatória/salarial) -
+                                MISTA
+                            </a>
+                        </li>
+                    </ul>
+
+                    <h3 class="text-lg mt-4 mb-2 text-[#007380] font-bold">
+                        Prêmios</h3>
+                    <ul class="mt-2 space-y-2 text-gray-700">
+                        <li class="text-justify">
+                            <a href="arquivos/plr.html" data-section="plr"
+                                class="flex items-center text-[#007380] font-semibold hover:underline transition duration-150">
+                                <span class="text-[#0284c7] mr-2 text-lg">→</span>Prêmio de Participação nos Lucros
+                                (PLR) (indenizatória)
+                            </a>
+                        </li>
+                    </ul>
+
+                    <h3 class="text-lg mt-4 mb-2 text-[#007380] font-bold">
+                        Indenizatórias da Rescisão Contratual / Descumprimentos</h3>
+                    <ul class="mt-2 space-y-2 text-gray-700">
+                        <li class="text-justify">
+                            <a href="arquivos/aviso_previo.html" data-section="aviso-previo-indenizado"
+                                class="flex items-center text-[#007380] font-semibold hover:underline transition duration-150">
+                                <span class="text-[#0284c7] mr-2 text-lg">→</span>Aviso Prévio Indenizado
+                            </a>
+                        </li>
+                        <li class="text-justify">
+                            <a href="arquivos/fgts_multa.html" data-section="fgts-indenizatorias"
+                                class="flex items-center text-[#007380] font-semibold hover:underline transition duration-150">
+                                <span class="text-[#0284c7] mr-2 text-lg">→</span>Saque e Multa de 40% do FGTS
+                            </a>
+                        </li>
+                        <li class="text-justify">
+                            <a href="arquivos/multa477.html" data-section="multa-477"
+                                class="flex items-center text-[#007380] font-semibold hover:underline transition duration-150">
+                                <span class="text-[#0284c7] mr-2 text-lg">→</span>Multa do art. 477 da CLT
+                            </a>
+                        </li>
+                    </ul>
+
+                    <h3 class="text-lg mt-4 mb-2 text-[#007380] font-bold">
+                        Indenizações Especificadas e Compensatórias</h3>
+                    <ul class="mt-2 space-y-2 text-gray-700">
+                        <li class="text-justify">
+                            <a href="arquivos/indenizacao_data_base.html" data-section="indenizacao-data-base"
+                                class="flex items-center text-[#007380] font-semibold hover:underline transition duration-150">
+                                <span class="text-[#0284c7] mr-2 text-lg">→</span>Indenização da Véspera da Data-Base
+                            </a>
+                        </li>
+                        <li class="text-justify">
+                            <a href="arquivos/indenizacao_estabilidade.html" data-section="indenizacao-estabilidade"
+                                class="flex items-center text-[#007380] font-semibold hover:underline transition duration-150">
+                                <span class="text-[#0284c7] mr-2 text-lg">→</span>Indenização por Quebra de Estabilidade
+                            </a>
+                        </li>
+                        <li class="text-justify">
+                            <a href="arquivos/dano_moral_patrimonial.html" data-section="danos-morais-patriomoniais"
+                                class="flex items-center text-[#007380] font-semibold hover:underline transition duration-150">
+                                <span class="text-[#0284c7] mr-2 text-lg">→</span>Indenização por Danos Morais e
+                                Patrimoniais
+                            </a>
+                        </li>
+                        <li class="text-justify">
+                            <a href="arquivos/indenizacao_abono_pecuniario.html" data-section="abono-pecuniario"
+                                class="flex items-center text-[#007380] font-semibold hover:underline transition duration-150">
+                                <span class="text-[#0284c7] mr-2 text-lg">→</span>Indenização por Venda de 1/3 de Férias
+                                (Abono Pecuniário)
+                            </a>
+                        </li>
+                        <li class="text-justify">
+                            <a href="arquivos/Indenizacao_ferias_dobro.html" data-section="ferias-dobro"
+                                class="flex items-center text-[#007380] font-semibold hover:underline transition duration-150">
+                                <span class="text-[#0284c7] mr-2 text-lg">→</span>Indenização pelo Atraso do
+                                Pagamento das Férias (Férias em Dobro)
+                            </a>
+                        </li>
+                    </ul>
+
+                    <p class="text-xl mt-6 mb-2 text-[#007380] font-bold p-3 rounded-md border-l-4 border-[#007380]">
+                        3. Verbas de Natureza Previdenciária</p>
+                    <p class="text-gray-700 leading-relaxed text-justify">Verbas de natureza previdenciária são aquelas
+                        que constituem a base de cálculo para a contribuição ao INSS, mas que não se enquadram
+                        diretamente como salariais ou indenizatórias. Em geral, referem-se a benefícios pagos pelo
+                        empregador por delegação do INSS.
+                        <br />Clique em cada verba abaixo (→) para acessar a página de detalhe.
+                    </p>
+                    <h3 class="text-lg mt-4 mb-2 text-[#007380] font-bold">
+                        Contribuições e Benefícios</h3>
+                    <ul class="mt-2 space-y-2 text-gray-700">
+                        <li class="text-justify">
+                            <a href="arquivos/salario_familia.html" data-section="salario-familia"
+                                class="flex items-center text-[#007380] font-semibold hover:underline transition duration-150">
+                                <span class="text-[#0284c7] mr-2 text-lg">→</span>Salário Família
+                            </a>
+                        </li>
+                        <li class="text-justify">
+                            <a href="arquivos/salario_maternidade.html" data-section="salario-maternidade"
+                                class="flex items-center text-[#007380] font-semibold hover:underline transition duration-150">
+                                <span class="text-[#0284c7] mr-2 text-lg">→</span>Salário Maternidade
+                            </a>
+                        </li>
+                    </ul>
+                </section>
+
+
+                <section id="liquidacao" class="content-section hidden">
+                    <h2 class="text-2xl text-[#007380] mb-4">8. LIQUIDAÇÃO DE SENTENÇA</h2>
+                    <p class="text-gray-700 leading-relaxed text-justify">A fase de liquidação de sentença é o momento
+                        em que se transformam os direitos reconhecidos em valores monetários líquidos e certos. É um
+                        processo complexo que exige a aplicação rigorosa do que foi determinado na decisão judicial
+                        (sentença ou acórdão), observando as premissas de cálculo e os parâmetros legais.</p>
+                    <p class="mt-4 text-gray-700 leading-relaxed text-justify">O principal objetivo desta fase é
+                        calcular o valor total devido ao reclamante (crédito principal, juros de mora e correção
+                        monetária) e apurar os valores devidos a terceiros (contribuições previdenciárias, fiscais e
+                        honorários), garantindo que a execução seja justa e alinhada ao título executivo.</p>
+                    <h3 class="text-lg mt-6 mb-2 text-[#007380]">Elementos Essenciais da Liquidação:</h3>
+                    <ul class="list-disc list-inside mt-2 space-y-2 text-gray-700">
+                        <li class="text-justify"><strong>Título Executivo Judicial:</strong> A sentença transitada em
+                            julgado é a fonte primária de todas as regras de cálculo. Nada pode ser incluído ou excluído
+                            em desacordo com ela.</li>
+                        <li class="text-justify"><strong>Apuração do Principal:</strong> Cálculo detalhado de cada verba
+                            deferida (ex.: horas extras, adicional noturno, aviso prévio, etc.), com a correta
+                            observância da base de cálculo, período de apuração e divisor aplicável.</li>
+                        <li class="text-justify"><strong>Atualização Monetária e Juros:</strong> Aplicação do índice de
+                            correção monetária e da taxa de juros de mora definidos pela decisão ou pela legislação
+                            (atualmente, a taxa SELIC, conforme ADCs 58 e 59 do STF).</li>
+                        <li class="text-justify"><strong>Descontos Legais:</strong> Cálculo das retenções fiscais
+                            (Imposto de Renda) e das contribuições previdenciárias (INSS) sobre as parcelas de natureza
+                            salarial.</li>
+                    </ul>
+                    <p class="mt-4 text-gray-700 leading-relaxed text-justify">Para detalhes sobre como liquidar cada
+                        verba, consulte a próxima seção.</p>
+                </section>
+
+                <section id="quiz" class="content-section hidden"> </section>
+
+            </div>
+        </main>
+
+        <div id="imageModal" class="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50 hidden"
+            onclick="closeModal()">
+            <div class="relative max-w-7xl max-h-full p-4" onclick="event.stopPropagation()">
+                <img id="modalImage" class="max-w-full max-h-full rounded-lg shadow-2xl" src="" alt="">
+                <button
+                    class="absolute top-2 right-2 text-white bg-black bg-opacity-50 p-2 rounded-full hover:bg-opacity-75 transition"
+                    onclick="closeModal()">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const sections = document.querySelectorAll('.content-section');
+            const navLinks = document.querySelectorAll('.nav-link');
+            const mainContentDiv = document.querySelector('.max-w-4xl');
+
+            function showSection(sectionId) {
+                sections.forEach(section => {
+                    if (section.id === sectionId) {
+                        section.classList.remove('hidden');
+                    } else {
+                        section.classList.add('hidden');
+                    }
+                });
+                navLinks.forEach(link => {
+                    if (link.getAttribute('data-section') === sectionId) {
+                        link.classList.add('active-link');
+                    } else {
+                        link.classList.remove('active-link');
+                    }
+                });
+            }
+
+            navLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    const sectionId = link.getAttribute('data-section');
+                    if (sectionId) {
+                        e.preventDefault();
+                        showSection(sectionId);
+                    }
+                });
+            });
+
+            // Mostra a seção inicial (Propósito do Manual)
+            showSection('proposito');
+
+
+            // --- Modal de Imagem (Zoom) ---
+            const modal = document.getElementById('imageModal');
+            const modalImage = document.getElementById('modalImage');
+            window.openModal = function (imageSrc) {
+                modalImage.src = 'imagens/' + imageSrc;
+                modal.classList.remove('hidden');
+            }
+
+            window.closeModal = function () {
+                modal.classList.add('hidden');
+            }
+
+
+            // --- Calculadoras ---
+
+            // Conversão Percentual/Índice
+            document.getElementById('convertPercentBtn').addEventListener('click', () => {
+                const percent = parseFloat(document.getElementById('percentInput').value);
+                const resultElement = document.getElementById('percentResult');
+                const copyBtn = document.getElementById('copyPercent');
+                if (!isNaN(percent)) {
+                    const index = (percent / 100 + 1).toFixed(4);
+                    resultElement.textContent = `Número Índice: ${index}`;
+                    resultElement.setAttribute('data-copy-value', index);
+                    copyBtn.classList.remove('hidden');
+                } else {
+                    resultElement.textContent = 'Entrada inválida.';
+                    copyBtn.classList.add('hidden');
+                }
+            });
+
+            document.getElementById('convertIndexBtn').addEventListener('click', () => {
+                const index = parseFloat(document.getElementById('indexInput').value);
+                const resultElement = document.getElementById('indexResult');
+                const copyBtn = document.getElementById('copyIndex');
+                if (!isNaN(index)) {
+                    const percent = ((index - 1) * 100).toFixed(2);
+                    resultElement.textContent = `Percentual: ${percent}%`;
+                    resultElement.setAttribute('data-copy-value', `${percent}%`);
+                    copyBtn.classList.remove('hidden');
+                } else {
+                    resultElement.textContent = 'Entrada inválida.';
+                    copyBtn.classList.add('hidden');
+                }
+            });
+
+            // Acumulação de Índices
+            document.getElementById('accumulateBtn').addEventListener('click', () => {
+                const p1 = parseFloat(document.getElementById('percent1AccumulateInput').value);
+                const p2 = parseFloat(document.getElementById('percent2AccumulateInput').value);
+                const resultElement = document.getElementById('accumulationResult');
+                const copyBtn = document.getElementById('copyAccumulation');
+
+                if (!isNaN(p1) && !isNaN(p2)) {
+                    const factor1 = p1 / 100 + 1;
+                    const factor2 = p2 / 100 + 1;
+                    const accumulatedFactor = factor1 * factor2;
+                    const accumulatedPercent = ((accumulatedFactor - 1) * 100).toFixed(2);
+                    resultElement.textContent = `Acumulado: ${accumulatedPercent}% (Fator: ${accumulatedFactor.toFixed(4)})`;
+                    resultElement.setAttribute('data-copy-value', `${accumulatedPercent}%`);
+                    copyBtn.classList.remove('hidden');
+                } else {
+                    resultElement.textContent = 'Entrada inválida.';
+                    copyBtn.classList.add('hidden');
+                }
+            });
+
+            // Subtração de Percentuais
+            document.getElementById('subtractBtn').addEventListener('click', () => {
+                const p1 = parseFloat(document.getElementById('percent1SubtractInput').value);
+                const p2 = parseFloat(document.getElementById('percent2SubtractInput').value);
+                const resultElement = document.getElementById('subtractionResult');
+                const copyBtn = document.getElementById('copySubtraction');
+
+                if (!isNaN(p1) && !isNaN(p2)) {
+                    const factor1 = p1 / 100 + 1;
+                    const factor2 = p2 / 100 + 1;
+
+                    if (factor2 === 0) {
+                        resultElement.textContent = 'Divisão por zero não é permitida.';
+                        copyBtn.classList.add('hidden');
+                        return;
+                    }
+
+                    const subtractedFactor = factor1 / factor2;
+                    const subtractedPercent = ((subtractedFactor - 1) * 100).toFixed(2);
+                    resultElement.textContent = `Subtração: ${subtractedPercent}% (Fator: ${subtractedFactor.toFixed(4)})`;
+                    resultElement.setAttribute('data-copy-value', `${subtractedPercent}%`);
+                    copyBtn.classList.remove('hidden');
+                } else {
+                    resultElement.textContent = 'Entrada inválida.';
+                    copyBtn.classList.add('hidden');
+                }
+            });
+
+            // Somatório de Juros
+            document.getElementById('calculateJurosBtn').addEventListener('click', () => {
+                const p1 = parseFloat(document.getElementById('percent1JurosInput').value);
+                const p2 = parseFloat(document.getElementById('percent2JurosInput').value);
+                const resultElement = document.getElementById('jurosResult');
+                const copyBtn = document.getElementById('copyJuros');
+
+                if (!isNaN(p1) && !isNaN(p2)) {
+                    const sum = (p1 + p2).toFixed(2);
+                    resultElement.textContent = `Soma dos Juros: ${sum}%`;
+                    resultElement.setAttribute('data-copy-value', `${sum}%`);
+                    copyBtn.classList.remove('hidden');
+                } else {
+                    resultElement.textContent = 'Entrada inválida.';
+                    copyBtn.classList.add('hidden');
+                }
+            });
+
+            // Funcionalidade de Copiar
+            document.querySelectorAll('.copy-btn').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    const resultElement = btn.previousElementSibling;
+                    const textToCopy = resultElement.getAttribute('data-copy-value');
+
+                    if (textToCopy) {
+                        navigator.clipboard.writeText(textToCopy).then(() => {
+                            const originalSvg = btn.innerHTML;
+                            btn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-green-500" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg>';
+                            setTimeout(() => {
+                                btn.innerHTML = originalSvg;
+                            }, 1500);
+                        }).catch(err => {
+                            console.error('Falha ao copiar: ', err);
+                        });
+                    }
+                });
+            });
+
+
+            // --- QUIZ ---
+            const quizForm = document.getElementById('quiz-form');
+            const quizResult = document.getElementById('quiz-result');
+            const checkAnswersBtn = document.getElementById('check-answers');
+
+            if (checkAnswersBtn) {
+                checkAnswersBtn.addEventListener('click', () => {
+                    let correctAnswers = 0;
+                    let allAnswered = true;
+                    const questions = document.querySelectorAll('.quiz-question');
+
+                    questions.forEach((question, index) => {
+                        const options = question.querySelectorAll('.quiz-option');
+                        const selectedOption = question.querySelector('input[name="q' + index + '"]:checked');
+                        const correctAnswerValue = question.getAttribute('data-correct-answer');
+
+                        options.forEach(option => {
+                            option.classList.remove('correct', 'wrong');
+                        });
+
+                        if (!selectedOption) {
+                            allAnswered = false;
+                        } else {
+                            if (selectedOption.value === correctAnswerValue) {
+                                correctAnswers++;
+                                selectedOption.closest('.quiz-option').classList.add('correct');
+                            } else {
+                                selectedOption.closest('.quiz-option').classList.add('wrong');
+                                // Highlight correct option
+                                const correctOption = question.querySelector(`input[value="${correctAnswerValue}"]`).closest('.quiz-option');
+                                correctOption.classList.add('correct');
+                            }
+                        }
+                    });
+
+                    quizResult.classList.remove('hidden');
+                    if (allAnswered) {
+                        quizResult.innerHTML = `Você acertou <span class="font-bold">${correctAnswers}</span> de <span class="font-bold">${questions.length}</span> perguntas.`;
+                    } else {
+                        quizResult.textContent = 'Por favor, responda a todas as perguntas antes de verificar.';
+                    }
+                });
+            }
+
+            // --- FAQ ---\
+            const faqButtons = document.querySelectorAll('.faq-question-btn');
+            faqButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const targetId = button.getAttribute('data-target');
+                    const targetAnswer = document.getElementById(targetId);
+                    const isExpanded = button.getAttribute('aria-expanded') === 'true';
+
+                    if (isExpanded) {
+                        targetAnswer.style.display = 'none';
+                        button.setAttribute('aria-expanded', 'false');
+                    } else {
+                        targetAnswer.style.display = 'block';
+                        button.setAttribute('aria-expanded', 'true');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>

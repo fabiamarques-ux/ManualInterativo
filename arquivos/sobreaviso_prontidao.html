@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sobreaviso e Prontidão</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f4f8;
+            color: #1a202c;
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 2rem;
+            background-color: #ffffff;
+            border-radius: 1rem;
+            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.05);
+        }
+        .copy-btn {
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
+            padding: 0;
+            margin-left: 1rem;
+        }
+        .copy-btn svg {
+            width: 1.5rem;
+            height: 1.5rem;
+            fill: #00678F;
+            transition: fill 0.3s ease;
+        }
+        .copy-btn:hover svg {
+            fill: #004562;
+        }
+        .loading-spinner {
+            border: 4px solid rgba(0, 103, 143, 0.1);
+            border-top: 4px solid #00678F;
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            animation: spin 1s linear infinite;
+            margin-right: 0.5rem;
+            display: none;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        .drawer-container {
+            padding: 1rem;
+            background-color: #f0f4f8;
+            border-radius: 0.75rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+            margin-top: 1.5rem;
+        }
+        .drawer-header {
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .drawer-content {
+            overflow: hidden;
+            transition: all 0.5s ease-in-out;
+            max-height: 0;
+        }
+        .drawer-header .arrow-icon {
+            transition: transform 0.5s ease-in-out;
+        }
+        .drawer-header.active .arrow-icon {
+            transform: rotate(180deg);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container my-8 relative">
+        <img src="https://site.trt19.jus.br/sites/default/files/logo-trt19.png" alt="Logo do TRT19" class="absolute top-4 right-4 w-36 h-auto">
+        
+        <section id="regimes-disponibilidade" class="content-section">
+            <h2 class="text-3xl font-bold text-[#00678F] mb-4">Sobreaviso e Prontidão</h2>
+            <p class="text-gray-700 leading-relaxed text-justify">Ambos os regimes representam períodos em que o empregado permanece à disposição do empregador, além de sua jornada normal, aguardando ser chamado. A principal distinção reside no <strong>local de espera</strong> e, consequentemente, na <strong>remuneração</strong> devida, conforme detalhado na Consolidação das Leis do Trabalho (CLT).</p>
+
+            <div class="mt-6 mb-8 p-4 border border-[#00678F] bg-[#e6f4ff] rounded-lg shadow-lg">
+                <h3 class="text-xl font-bold text-[#00678F] mb-3 text-center">Diferença Central entre os Regimes</h3>
+                <div class="overflow-x-auto">
+                    <table class="min-w-full divide-y divide-gray-300">
+                        <thead class="bg-[#00678F]">
+                            <tr>
+                                <th class="px-3 py-2 text-left text-xs font-medium text-white uppercase tracking-wider rounded-tl-lg">Critério</th>
+                                <th class="px-3 py-2 text-left text-xs font-medium text-white uppercase tracking-wider">Sobreaviso (CLT Art. 244, § 2º)</th>
+                                <th class="px-3 py-2 text-left text-xs font-medium text-white uppercase tracking-wider rounded-tr-lg">Prontidão (CLT Art. 244, § 3º)</th>
+                            </tr>
+                        </thead>
+                        <tbody class="bg-white divide-y divide-gray-200">
+                            <tr>
+                                <td class="px-3 py-3 whitespace-nowrap font-semibold text-gray-800 bg-gray-50">Remuneração (Fração)</td>
+                                <td class="px-3 py-3 whitespace-nowrap text-sm text-gray-700"><strong>1/3</strong> (33,33%) do valor da hora normal.</td>
+                                <td class="px-3 py-3 whitespace-nowrap text-sm text-gray-700"><strong>2/3</strong> (66,66%) do valor da hora normal.</td>
+                            </tr>
+                            <tr>
+                                <td class="px-3 py-3 whitespace-nowrap font-semibold text-gray-800 bg-gray-50">Local de Espera</td>
+                                <td class="px-3 py-3 text-sm text-gray-700">Residência ou local de escolha do empregado, restrito pelo dispositivo de chamada.</td>
+                                <td class="px-3 py-3 text-sm text-gray-700">Dependências da empresa ou local determinado que permita a intervenção imediata.</td>
+                            </tr>
+                            <tr>
+                                <td class="px-3 py-3 whitespace-nowrap font-semibold text-gray-800 bg-gray-50">Limite de Duração</td>
+                                <td class="px-3 py-3 whitespace-nowrap text-sm text-gray-700">Máximo de <strong>24 horas</strong>.</td>
+                                <td class="px-3 py-3 whitespace-nowrap text-sm text-gray-700">Máximo de <strong>12 horas</strong>.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div id="comparativo-legal-drawer" class="drawer-container">
+                <div id="comparativo-legal-header" class="drawer-header">
+                    <h4 class="text-xl font-semibold text-[#00678F]">Base Legal e Jurisprudência</h4>
+                    <svg class="arrow-icon w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                    </svg>
+                </div>
+                <div id="comparativo-legal-content" class="drawer-content">
+                    <p class="text-gray-700 leading-relaxed text-justify mt-4">Os regimes de Sobreaviso e Prontidão são disciplinados pelos dispositivos legais e entendimentos jurisprudenciais a seguir:</p>
+                    
+                    <h5 class="text-lg font-semibold text-gray-800 mt-4">Fontes Normativas (CLT)</h5>
+                    <hr class="my-4 border-gray-300">
+                    
+                    <h5 class="text-base font-semibold text-gray-800">1. Horas de Sobreaviso (1/3)</h5>
+                    <ul class="list-disc list-inside text-gray-700 leading-relaxed mt-2 ml-4">
+                        <li>
+                            <strong>CLT, Art. 244, § 2º:</strong>
+                            <p class="text-sm italic mt-1 ml-4 border-l-2 border-gray-400 pl-3">"Considera-se de 'sobreaviso' o empregado que permanecer em sua casa, aguardando a qualquer momento o chamado para o serviço. Cada escala de 'sobreaviso' não poderá ser superior a <b>vinte e quatro horas</b>. As horas de 'sobreaviso', para todos os efeitos, serão contadas à razão de <b>1/3</b> (um terço) do salário normal."</p>
+                        </li>
+                        <li>
+                            <strong class="text-gray-900">Local:</strong> Residência ou local de escolha do empregado, restrito pelo dispositivo de chamada.
+                        </li>
+                    </ul>
+
+                    <hr class="my-4 border-gray-300">
+                    
+                    <h5 class="text-base font-semibold text-gray-800">2. Horas de Prontidão (2/3)</h5>
+                    <ul class="list-disc list-inside text-gray-700 leading-relaxed mt-2 ml-4">
+                        <li>
+                            <strong>CLT, Art. 244, § 3º:</strong>
+                            <p class="text-sm italic mt-1 ml-4 border-l-2 border-gray-400 pl-3">"Considera-se de 'prontidão' o empregado que permanecer nas dependências da estrada, aguardando ordens. A escala de 'prontidão' não poderá exceder a <b>doze horas</b>. As horas de 'prontidão' serão contadas à razão de <b>2/3</b> (dois terços) do salário-hora normal."</p>
+                        </li>
+                        <li>
+                            <strong class="text-gray-900">Local:</strong> Nas dependências da empresa ou local determinado que possibilite o atendimento imediato.
+                        </li>
+                    </ul>
+
+                    <hr class="my-6 border-gray-300">
+
+                    <h5 class="text-lg font-semibold text-gray-800">Jurisprudência (TST)</h5>
+                    <h6 class="text-base font-semibold text-gray-800 mt-4">Súmula nº 428 do TST (Sobreaviso)</h6>
+                    <div class="p-4 bg-gray-100 rounded-md mt-2 border border-gray-300">
+                        <p class="font-bold text-sm">Entendimento Consolidado do TST:</p>
+                        <ul class="list-disc list-inside text-gray-700 leading-relaxed mt-2 ml-4 space-y-2 text-sm">
+                            <li>
+                                <p class="text-sm italic"><strong>I -</strong> A utilização de instrumentos telemáticos ou informatizados, por si só, não caracteriza o regime de sobreaviso.</p>
+                            </li>
+                            <li>
+                                <p class="text-sm italic"><strong>II -</strong> Considera-se em sobreaviso o empregado que, à distância e submetido ao controle patronal por instrumentos telemáticos ou informatizados, permanecer em regime de plantão ou equivalente, aguardando a qualquer momento o chamado para o serviço durante o período de descanso. (Exige comprovação da **restrição de mobilidade**).</p>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div id="remuneracao-reflexos-drawer" class="drawer-container">
+                <div id="remuneracao-reflexos-header" class="drawer-header">
+                    <h4 class="text-xl font-semibold text-[#00678F]">Base de Cálculo e Deduções</h4>
+                    <svg class="arrow-icon w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                    </svg>
+                </div>
+                <div id="remuneracao-reflexos-content" class="drawer-content">
+                    <h5 class="text-xl font-semibold text-[#00678F] mb-2">Remuneração Principal (Fração)</h5>
+                    <p class="text-gray-700 leading-relaxed text-justify">A remuneração da hora de sobreaviso é de <strong>1/3</strong> (trinta e três vírgula trinta e três por cento) do valor da hora normal, enquanto a hora de prontidão é de <strong>2/3</strong> (sessenta e seis vírgula sessenta e seis por cento) do valor da hora normal. O cálculo se baseia no salário-base dividido pela jornada mensal padrão (geralmente 220 horas).</p>
+
+                    <div class="mt-4 p-3 bg-white rounded-lg border border-indigo-200">
+                        <h5 class="text-md font-bold text-gray-800 mb-2">Exemplo Prático (Sobreaviso - 1/3)</h5>
+                        <ul class="list-disc list-inside text-gray-700 ml-4 text-sm">
+                            <li>Salário Bruto: R$ 3.000,00</li>
+                            <li>Jornada Padrão: 220 horas/mês</li>
+                            <li>Horas de Sobreaviso no mês: 40 horas</li>
+                        </ul>
+                        <p class="text-sm font-semibold mt-2">Cálculo:</p>
+                        <p class="text-sm text-gray-700">1. Valor da Hora Normal: R$ 3.000,00 / 220 = <strong>R$ 13,64</strong></p>
+                        <p class="text-sm text-gray-700">2. Valor da Hora de Sobreaviso (1/3): R$ 13,64 / 3 = <strong>R$ 4,55</strong></p>
+                        <p class="text-sm text-gray-700">3. Valor Total de Sobreaviso: 40 horas x R$ 4,55 = <strong>R$ 182,00</strong></p>
+                    </div>
+
+                    <h5 class="text-xl font-semibold text-[#00678F] mt-8 mb-2 border-t pt-4">Deduções da Base de Cálculo</h5>
+                    <p class="text-gray-700 leading-relaxed text-justify">Tanto sobre o valor do Sobreaviso quanto da Prontidão, somados ao salário base, incidem as contribuições obrigatórias para o <strong>INSS</strong> (Instituto Nacional do Seguro Social) e o <strong>Imposto de Renda (IRPF)</strong>, conforme as tabelas progressivas vigentes.</p>
+
+                    <div class="mt-4 p-3 bg-white rounded-lg border border-indigo-200">
+                        <h5 class="text-md font-bold text-gray-800 mb-2">Exemplo de Base de Cálculo (INSS/IRPF)</h5>
+                        <ul class="list-disc list-inside text-gray-700 ml-4 text-sm">
+                            <li>Salário Base: R$ 3.000,00</li>
+                            <li>Horas de Sobreaviso (Valor Principal): R$ 182,00 (Conforme exemplo anterior)</li>
+                        </ul>
+                        <p class="text-sm font-semibold mt-2">Base de Cálculo Total para Deduções:</p>
+                        <p class="text-sm text-gray-700">R$ 3.000,00 (Salário) + R$ 182,00 (Sobreaviso) = <strong>R$ 3.182,00</strong></p>
+                        <p class="text-xs text-red-600 mt-2">Nota: O valor final do IRPF é calculado após todas as deduções permitidas por lei, incluindo dependentes e a própria dedução do INSS.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div id="reflexos-drawer" class="drawer-container">
+                <div id="reflexos-header" class="drawer-header">
+                    <h4 class="text-xl font-semibold text-[#00678F]">Reflexos em Outras Verbas</h4>
+                    <svg class="arrow-icon w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                    </svg>
+                </div>
+                <div id="reflexos-content" class="drawer-content">
+                    <p class="text-gray-700 leading-relaxed text-justify mt-4">Por possuírem <strong>natureza salarial</strong>, tanto as horas de Sobreaviso quanto as de Prontidão devem integrar a base de cálculo de outras parcelas trabalhistas devidas ao empregado, gerando os seguintes reflexos:</p>
+                    <ul class="list-disc list-inside text-gray-700 ml-4 mt-2">
+                        <li><strong>Descanso Semanal Remunerado (DSR):</strong> Incidência obrigatória sobre o valor pago.</li>
+                        <li><strong>13º Salário:</strong> O valor médio das horas deve compor o cálculo.</li>
+                        <li><strong>Férias + 1/3 Constitucional:</strong> O valor médio deve integrar a remuneração das férias.</li>
+                        <li><strong>FGTS:</strong> Incide sobre o valor principal e também sobre os reflexos gerados.</li>
+                        <li><strong>Aviso Prévio (quando indenizado):</strong> Deve integrar a base de cálculo.</li>
+                    </ul>
+
+                     <div class="mt-4 p-3 bg-white rounded-lg border border-indigo-200">
+                        <h5 class="text-md font-bold text-gray-800 mb-2">Exemplo de Reflexo (DSR)</h5>
+                        <ul class="list-disc list-inside text-gray-700 ml-4 text-sm">
+                            <li>Valor Total de Sobreaviso no mês: R$ 182,00</li>
+                            <li>Cálculo DSR: Soma das Horas Extras/Sobreaviso dividido pelos dias úteis e multiplicado pelos DSR/feriados do mês.</li>
+                        </ul>
+                        <p class="text-sm font-semibold mt-2">Aplicação Prática (Mês com 25 dias úteis e 5 DSR/Feriados):</p>
+                        <p class="text-sm text-gray-700">R$ 182,00 / 25 dias úteis x 5 DSR = <strong>R$ 36,40</strong> (Reflexo de DSR)</p>
+                        <p class="text-xs text-red-600 mt-2">Nota: Esse reflexo (R$ 36,40) será somado ao valor de Sobreaviso (R$ 182,00) para compor a Base de Cálculo do 13º, Férias e Aviso Prévio futuramente.</p>
+                    </div>
+                </div>
+            </div>
+            <div id="calculadora-integrada-drawer" class="drawer-container">
+                <div id="calculadora-integrada-header" class="drawer-header">
+                    <h4 class="text-xl font-semibold text-[#00678F]">Calculadora (Simulação)</h4>
+                    <svg class="arrow-icon w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                    </svg>
+                </div>
+                <div id="calculadora-integrada-content" class="drawer-content">
+                    <p class="text-gray-700 leading-relaxed text-justify mt-4">Selecione o regime e insira os dados para calcular o valor total devido. (Jornada de trabalho mensal padrão: 220 horas)</p>
+                    
+                    <div class="p-4 bg-white rounded-lg shadow-inner mt-4">
+                        <h5 class="text-md font-semibold text-gray-800">Cálculo: Salário / 220 * (Fração do Regime) * Horas</h5>
+                        
+                        <div class="flex flex-col space-y-4 mt-4">
+                            <div>
+                                <label for="salarioBrutoInput" class="block text-sm text-gray-700">Salário Bruto Mensal (R$):</label>
+                                <input type="text" id="salarioBrutoInput" class="mt-1 block w-full rounded-md border-gray-300 p-2 focus:ring-[#00678F] focus:border-[#00678F]" placeholder="Ex: 3.500,00">
+                            </div>
+                            <div>
+                                <label for="horasDisponibilidadeInput" class="block text-sm text-gray-700">Horas de Disponibilidade (horas):</label>
+                                <input type="number" id="horasDisponibilidadeInput" class="mt-1 block w-full rounded-md border-gray-300 p-2 focus:ring-[#00678F] focus:border-[#00678F]" placeholder="Ex: 80">
+                            </div>
+                            <div>
+                                <label for="regimeType" class="block text-sm text-gray-700">Regime de Disponibilidade:</label>
+                                <select id="regimeType" class="mt-1 block w-full rounded-md border-gray-300 p-2 focus:ring-[#00678F] focus:border-[#00678F]">
+                                    <option value="sobreaviso">Sobreaviso (Fração: 1/3)</option>
+                                    <option value="prontidao">Prontidão (Fração: 2/3)</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <button id="calculateRegimeBtn" class="mt-4 w-full px-4 py-2 bg-[#00678F] text-white rounded-md hover:bg-[#004562] transition duration-300 shadow-md">Calculular Valor Total</button>
+                        
+                        <div class="mt-4">
+                            <div class="flex items-center">
+                                <p id="regimeResult" class="text-sm font-bold text-gray-700">Valor total calculado: R$ 0,00</p>
+                                <button id="copyRegime" class="copy-btn hidden" aria-label="Copiar valor">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M16 1H4C2.9 1 2 1.9 2 3v14h2V3h12V1zm3 4H8C6.9 5 6 5.9 6 7v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="pje-calc-drawer" class="drawer-container">
+                <div id="pje-calc-header" class="drawer-header">
+                    <h4 class="text-xl font-semibold text-[#00678F]">Lançamento no PJe-Calc </h4>
+                    <svg class="arrow-icon w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                    </svg>
+                </div>
+                <div id="pje-calc-content" class="drawer-content">
+                    <p class="text-gray-700 leading-relaxed text-justify mt-4">A seguir, confira o passo a passo para o
+                        lançamento da verba no PJe-Calc, utilizando a opção "Expresso":</p>
+
+                    <ol class="list-decimal list-inside text-gray-700 leading-relaxed mt-4 ml-4 space-y-3">
+                        <li>
+                            <strong class="text-gray-800">Acessar Verbas e Escolher Lançamento:</strong> No menu de
+                            navegação à esquerda, clique na opção <u>Verbas</u> para iniciar o lançamento. Após o
+                            comando,
+                            será exibida a tela para escolha do Lançamento da Verba. Escolha a opção <u>Expresso</u>.
+                            <img src="imagens/verbas.png"
+                                alt="Tela do PJe-Calc - Passo 1: Acessar a opção Verbas no menu lateral e clicar em Expresso na seção Lançamento."
+                                class="w-full h-auto my-4 rounded-lg shadow-md">
+                        </li>
+                        <li>
+                            <strong class="text-gray-800">Seleção da Verba:</strong> O sistema abrirá as opções de
+                            verbas, escolha a verba <u>Adicional de Sobreaviso</u> e clique no botão <u>Salvar</u>
+                            <img src="imagens/sobreaviso1.png"
+                                alt="Tela do PJe-Calc - Verbas Principais: Selecionar Saldo de Salário"
+                                class="w-full h-auto my-4 rounded-lg shadow-md">
+                        </li>
+                        <li>
+                            <strong class="text-gray-800">Quadro de Verbas e Ações:</strong> O sistema exibirá um quadro
+                            com os campos:
+                            <ul class="list-disc list-inside text-gray-700 leading-relaxed mt-2 ml-4">
+                                <li class="ml-8 flex items-center">
+                                <li>Ações - contendo as opções de configurações da verba selecionada (parâmetros,
+                                    ocorrências e
+                                    exclusão)
+                                    <img src="imagens/telaacoes.png"
+                                        alt="Ícones de Ações: Parâmetros (folha com seta), Ocorrências (folha com checks), Excluir (X vermelho)"
+                                        class="icon-small" style="width: 72px; height: auto;">
+                                </li>
+                                <li class="ml-8 flex items-center">
+                                    - Parâmetros da Verba <img src="imagens/telaparametros.png"
+                                        alt="Ícone de Parâmetros" class="icon-small">
+                                </li>
+                                <li class="ml-8 flex items-center">
+                                    - Ocorrências da Verba <img src="imagens/telaocorrencias.png"
+                                        alt="Ícone de Ocorrências" class="icon-small">
+                                </li>
+                                <li class="ml-8 flex items-center">
+                                    - Excluir <img src="imagens/telaexcluir.png" alt="Ícone de Excluir"
+                                        class="icon-small">
+                                </li>
+                                <li>Verba Principal - verba selecionada para lançamento.</li>
+                                <li>Verba Reflexa - em que ao clicar no botão <u>Exibir</u> serão listadas todas as
+                                    verbas
+                                    reflexas ligadas a Verba Principal.</li>
+                            </ul>
+                            <img src="imagens/sobreaviso2.png"
+                                alt="Tela do PJe-Calc - Verba Saldo de Salário selecionada com as opções de Ações e Verba Reflexa."
+                                class="w-full h-auto my-4 rounded-lg shadow-md">
+                        </li>
+                        <li>
+                            <strong class="text-gray-800">Parametrização da Verba:</strong> Ao clicar no botão
+                            <u>Parâmetros da Verba</u> serão exibidas todas as configurações necessárias para a
+                            parametrização
+                            da Verba Principal.
+                            <img src="imagens/sobreaviso3.png"
+                                alt="Tela do PJe-Calc - Detalhes da Verba Saldo de Salário: Parâmetros, Base de Cálculo, Divisor e Multiplicador."
+                                class="w-full h-auto my-4 rounded-lg shadow-md">
+                        </li>
+                        <li>
+                            <strong class="text-gray-800">Registro de Ocorrências:</strong> Ao clicar no botão
+                            <u>Ocorrências da Verba</u> serão exibidas todas as configurações necessárias para registro
+                            das
+                            ocorrências da Verba Principal.
+                            <img src="imagens/sobreaviso4.png"
+                                alt="Tela do PJe-Calc - Dados de Ocorrências: Detalhamento da data inicial, data final e valor calculado da verba."
+                                class="w-full h-auto my-4 rounded-lg shadow-md">
+                        </li>
+                    </ol>
+
+                </div>
+
+        </section>
+    </div>
+
+    <script>
+        // Função para formatar o valor do salário conforme o usuário digita
+        function formatSalarioInput() {
+            const salarioBrutoInput = document.getElementById('salarioBrutoInput');
+            salarioBrutoInput.addEventListener('input', (e) => {
+                let value = e.target.value;
+                // Remove todos os caracteres que não sejam dígitos
+                value = value.replace(/\D/g, '');
+                
+                // Formata com vírgula para centavos e pontos para milhares
+                if (value.length > 2) {
+                    value = value.replace(/(\d+)(\d{2})$/, '$1,$2');
+                }
+                if (value.length > 6) {
+                    value = value.replace(/(\d)(?=(\d{3})+,)/g, '$1.');
+                }
+                e.target.value = value;
+            });
+        }
+        
+        // Chamada da função de formatação
+        formatSalarioInput();
+
+        // Função para calcular as horas de Sobreaviso ou Prontidão (INTEGRADA)
+        function calculateRegime() {
+            const salarioInput = document.getElementById('salarioBrutoInput');
+            const horasDisponibilidadeInput = document.getElementById('horasDisponibilidadeInput');
+            const regimeType = document.getElementById('regimeType').value;
+            const resultDiv = document.getElementById('regimeResult');
+            const copyBtn = document.getElementById('copyRegime');
+
+            const rawSalario = salarioInput.value.replace(/\./g, '').replace(',', '.');
+            const salario = parseFloat(rawSalario);
+            const horas = parseInt(horasDisponibilidadeInput.value);
+
+            if (isNaN(salario) || salario <= 0 || isNaN(horas) || horas < 0) {
+                resultDiv.textContent = 'Por favor, insira valores válidos para Salário e Horas de Disponibilidade.';
+                copyBtn.classList.add('hidden');
+                return;
+            }
+
+            const jornadaMensal = 220; // Padrão CLT
+            const valorHoraNormal = salario / jornadaMensal;
+
+            let fracao;
+            let regimeName;
+
+            if (regimeType === 'sobreaviso') {
+                fracao = 1 / 3;
+                regimeName = 'Sobreaviso (1/3)';
+            } else if (regimeType === 'prontidao') {
+                fracao = 2 / 3;
+                regimeName = 'Prontidão (2/3)';
+            } else {
+                resultDiv.textContent = 'Regime de cálculo inválido.';
+                copyBtn.classList.add('hidden');
+                return;
+            }
+
+            const valorHoraRegime = valorHoraNormal * fracao;
+            const valorTotal = valorHoraRegime * horas;
+            
+            resultDiv.textContent = `Valor total das Horas de ${regimeName}: ${valorTotal.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}`;
+            copyBtn.classList.remove('hidden');
+        }
+
+        // Função para copiar o texto
+        function copyText(elementId) {
+            const element = document.getElementById(elementId);
+            if (!element) return;
+            const textToCopy = element.textContent.split(': ')[1] || element.textContent; // Copia apenas o valor se for o resultado da calculadora
+
+            const tempInput = document.createElement('input');
+            tempInput.value = textToCopy.trim();
+            document.body.appendChild(tempInput);
+            tempInput.select();
+            try {
+                document.execCommand('copy');
+                console.log('Texto copiado com sucesso!');
+            } catch (err) {
+                console.error('Falha ao copiar o texto:', err);
+            } finally {
+                document.body.removeChild(tempInput);
+            }
+        }
+
+        // Adiciona os event listeners ao botão de cálculo
+        document.getElementById('calculateRegimeBtn').addEventListener('click', calculateRegime);
+        document.getElementById('copyRegime').addEventListener('click', () => copyText('regimeResult'));
+        
+        // Lógica para as gavetas expansíveis
+        function setupDrawer(drawerId) {
+            const header = document.getElementById(`${drawerId}-header`);
+            const content = document.getElementById(`${drawerId}-content`);
+
+            header.addEventListener('click', () => {
+                const isExpanded = header.classList.toggle('active');
+                if (isExpanded) {
+                    // Calcula o scrollHeight total, incluindo o padding da gaveta
+                    const contentHeight = content.scrollHeight + 16; // 16px de padding superior e inferior
+                    content.style.maxHeight = contentHeight + "px";
+                } else {
+                    content.style.maxHeight = '0';
+                }
+            });
+        }
+
+        // Setup para as gavetas integradas (deducoes-drawer removida)
+        setupDrawer('comparativo-legal');
+        setupDrawer('remuneracao-reflexos'); // Base de Cálculo e Deduções (agora juntas)
+        setupDrawer('reflexos'); // Reflexos em Outras Verbas
+        setupDrawer('calculadora-integrada'); // Calculadora (Simulação)
+        setupDrawer('pje-calc');
+    </script>
+</body>
+</html>

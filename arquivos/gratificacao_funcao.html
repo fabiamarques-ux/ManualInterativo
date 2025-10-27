@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gratificação de Função</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f4f8;
+            color: #1a202c;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 2rem;
+            background-color: #ffffff;
+            border-radius: 1rem;
+            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.05);
+        }
+
+        .copy-container {
+            display: flex;
+            align-items: center;
+            position: relative;
+        }
+
+        .copy-btn {
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
+            padding: 0;
+            margin-left: 0.5rem;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .copy-btn svg {
+            width: 1.5rem;
+            height: 1.5rem;
+            fill: #00678F;
+            transition: fill 0.3s ease;
+        }
+
+        .copy-btn:hover svg {
+            fill: #004562;
+        }
+
+        .copy-message {
+            position: absolute;
+            left: 100%;
+            top: 50%;
+            transform: translate(10px, -50%);
+            background-color: #00678F;
+            color: white;
+            padding: 0.25rem 0.5rem;
+            border-radius: 0.5rem;
+            font-size: 0.75rem;
+            white-space: nowrap;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        /* Aplicação de fundo e sombra aos contêineres expansíveis */
+        .drawer-container {
+            padding: 1rem;
+            background-color: #f0f4f8;
+            border-radius: 0.75rem;
+            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+            margin-top: 1.5rem;
+        }
+
+        .drawer-header {
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .drawer-content {
+            overflow: hidden;
+            transition: all 0.5s ease-in-out;
+            max-height: 0;
+        }
+
+        .drawer-header .arrow-icon {
+            transition: transform 0.5s ease-in-out;
+        }
+
+        .drawer-header.active .arrow-icon {
+            transform: rotate(180deg);
+        }
+
+        .table-responsive {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th,
+        td {
+            padding: 0.75rem;
+            text-align: left;
+            border-bottom: 1px solid #d1d5db;
+        }
+
+        th {
+            background-color: #00678F;
+            color: white;
+        }
+
+        tr:nth-child(odd) {
+            background-color: #f0f4f8;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container my-8 relative">
+        <img src="https://site.trt19.jus.br/sites/default/files/logo-trt19.png" alt="Logo do TRT19"
+            class="absolute top-4 right-4 w-36 h-auto">
+
+        <section id="gratificacao-funcao" class="content-section">
+            <h2 class="text-3xl font-bold text-[#00678F] mb-4">Gratificação de Função</h2>
+            <p class="text-gray-700 leading-relaxed text-justify">A Gratificação de Função é um acréscimo salarial
+                pago ao empregado que exerce um cargo de confiança (Ex: gerente, coordenador), em adição ao seu salário
+                base. Ela visa remunerar a maior responsabilidade e fidúcia exigidas pelo cargo.</p>
+
+            <p class="text-gray-700 leading-relaxed text-justify mt-4">Por ser uma parcela paga em decorrência do
+                contrato de trabalho e de forma habitual, a Gratificação de Função possui natureza salarial e, portanto,
+                deve integrar a base de cálculo de outras verbas trabalhistas.</p>
+
+            <p class="text-gray-700 leading-relaxed text-justify mt-4">A regra de incorporação da gratificação de função
+                sofreu uma importante alteração com a Reforma Trabalhista (Lei n.º 13.467/2017). Atualmente, a lei não
+                assegura a incorporação, independentemente do tempo de exercício. Contudo, o Tribunal Superior do
+                Trabalho (TST) garante o direito adquirido para quem completou 10 anos antes da mudança na lei.</p>
+
+            <h3 class="text-xl font-bold text-[#00678F] mt-6 mb-3">Regra de Incorporação da Gratificação de Função</h3>
+            <div class="table-responsive">
+                <table
+                    class="w-full text-sm text-gray-700 border-collapse border border-gray-300 rounded-md overflow-hidden">
+                    <thead>
+                        <tr class="bg-[#00678F] text-white">
+                            <th class="py-2 px-4 text-left border-b border-gray-300 w-1/4">Situação</th>
+                            <th class="py-2 px-4 text-left border-b border-gray-300 w-1/4">Tempo na Função</th>
+                            <th class="py-2 px-4 text-left border-b border-gray-300 w-1/2">Resultado da Reversão
+                                (Supressão)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="border-b border-gray-300">
+                            <td class="py-2 px-4 font-medium">Direito Adquirido (Pré-Reforma)</td>
+                            <td class="py-2 px-4">10 anos ou mais completados antes de 11/11/2017.</td>
+                            <td class="py-2 px-4">O empregado mantém a gratificação (incorporada ao salário) se a
+                                reversão for sem justo motivo (Súmula 372, I, TST).</td>
+                        </tr>
+                        <tr class="border-b border-gray-300">
+                            <td class="py-2 px-4 font-medium">Regra Atual (Pós-Reforma)</td>
+                            <td class="py-2 px-4">Qualquer tempo, incluindo 10 anos ou mais, completados após
+                                11/11/2017.</td>
+                            <td class="py-2 px-4">O empregador pode suprimir a gratificação, com ou sem justo motivo, e
+                                ela não será incorporada (Art. 468, § 2º, da CLT).</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div id="base-legal-drawer" class="drawer-container">
+                <div id="base-legal-header" class="drawer-header">
+                    <h4 class="text-xl font-semibold text-[#00678F]">Base Legal e Jurisprudência</h4>
+                    <svg class="arrow-icon w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                    </svg>
+                </div>
+                <div id="base-legal-content" class="drawer-content">
+                    <p class="text-gray-700 leading-relaxed text-justify mt-4">
+                        A natureza salarial e a reversão ao cargo efetivo da Gratificação de Função são regulamentadas
+                        pela legislação e jurisprudência a seguir:
+                    </p>
+
+                    <h5 class="text-lg font-semibold text-gray-800 mt-4">Fontes Normativas</h5>
+
+                    <hr class="my-4 border-gray-300">
+                    <h5 class="text-base font-semibold text-gray-800">Consolidação das Leis do Trabalho (CLT):</h5>
+                    <ul class="list-disc list-inside text-gray-700 leading-relaxed mt-2 ml-4 space-y-3">
+                        <li>
+                            <strong>Artigo 457, § 1º (Natureza Salarial):</strong>
+                            <p class="text-sm italic mt-1 ml-4 border-l-2 border-gray-400 pl-3">"Integram o salário a
+                                importância fixa estipulada, as gratificações legais e as comissões pagas pelo
+                                empregador."</p>
+                        </li>
+                        <li>
+                            <strong>Artigo 468, Parágrafo único (Impossibilidade de Reversão ao Cargo Efetivo - Pós
+                                Reforma):</strong>
+                            <p class="text-sm italic mt-1 ml-4 border-l-2 border-gray-400 pl-3">"Nos contratos
+                                individuais de trabalho só é lícita a alteração das respectivas condições por mútuo
+                                consentimento, e ainda assim desde que não resultem, direta ou indiretamente, prejuízos
+                                ao empregado, sob pena de nulidade da cláusula infringente desta garantia."</p>
+                            <p class="text-sm italic mt-1 ml-4 border-l-2 border-gray-400 pl-3">"§ 1o Não se considera
+                                alteração unilateral a determinação do empregador para que o respectivo empregado
+                                reverta ao cargo efetivo, anteriormente ocupado, deixando o exercício de função de
+                                confiança."</p>
+                            <p class="text-sm italic mt-1 ml-4 border-l-2 border-gray-400 pl-3">"§ 2o A alteração de que
+                                trata o § 1o deste artigo, com ou sem justo motivo, não assegura ao empregado o direito
+                                à manutenção do pagamento da gratificação correspondente, que não será incorporada,
+                                independentemente do tempo de exercício da respectiva função."</p>
+                        </li>
+                    </ul>
+
+                    <hr class="my-6 border-gray-300">
+
+                    <h5 class="text-lg font-semibold text-gray-800">Jurisprudência</h5>
+
+                    <h6 class="text-base font-semibold text-gray-800 mt-4">Incorporação da Gratificação</h6>
+                    <div class="p-4 bg-gray-100 rounded-md mt-2 border border-gray-300">
+                        <p class="font-bold text-sm">Súmula 372 do TST (Estabilidade Financeira - Anterior a Reforma):
+                        </p>
+                        <p class="text-sm mt-1 italic">"Percebida a gratificação de função por dez ou mais anos pelo
+                            empregado, se o empregador, sem justo motivo, revertê-lo a seu cargo efetivo, não poderá
+                            retirar-lhe a gratificação, tendo em vista o princípio da estabilidade financeira."</p>
+                        <br>
+                        <p class="font-bold text-sm">(Entendimento do TST - Pos-Reforma)</p>
+                        <p>
+                        <p class="font-bold text-sm">RECURSO DE EMBARGOS EM RECURSO DE REVISTA. ACÓRDÃO PUBLICADO NA
+                            VIGÊNCIA DA LEI Nº 13.467/2017. INCORPORAÇÃO DA GRATIFICAÇÃO DE FUNÇÃO RECEBIDA POR MAIS DE
+                            DEZ ANOS. DIREITO ADQUIRIDO. IRRETROATIVIDADE DA LEI Nº 13.467/2017.</p>
+                        <p class="text-sm mt-1 italic">(...) Nos termos do entendimento desta Subseção, as alterações
+                            promovidas no art. 468, § 2º, da CLT pela Lei nº 13.467/2017 (Reforma Trabalhista), que
+                            afastaram o direito à incorporação da gratificação de função recebida por dez ou mais anos,
+                            não podem atingir o empregado que já havia implementado o direito à incorporação antes da
+                            entrada em vigor do novo regramento, sob pena de ofensa ao direito adquirido, previsto no
+                            art. 5º, XXXVI, da Constituição Federal."</p>
+                    </div>
+
+                </div>
+            </div>
+
+            <div id="base-calculo-drawer" class="drawer-container">
+                <div id="base-calculo-header" class="drawer-header">
+                    <h4 class="text-xl font-semibold text-[#00678F]">Base de Cálculo e Deduções</h4>
+                    <svg class="arrow-icon w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                    </svg>
+                </div>
+                <div id="base-calculo-content" class="drawer-content">
+
+                    <div class="p-3 mt-4 mb-4 bg-yellow-50 border-l-4 border-yellow-500 rounded-r-md">
+                        <p class="text-gray-900 leading-relaxed text-justify font-medium">
+                            IMPORTANTE: A Gratificação por Função deve integrar o valor da Remuneração Total (Salário-Base + Adicionais + H. Extras + Gratificações ) para fins de cálculo das deduções obrigatórias fiscais e para formação da base de cálculo das Verbas Reflexas.
+                        </p>
+                    </div>
+
+                    <hr class="mb-6 mt-0 border-[#00678F]">
+                    <h4 class="text-xl font-semibold text-[#00678F]">Definição e Critérios da Base de Cálculo</h4>
+                    <p class="text-gray-700 leading-relaxed text-justify mt-2">A Gratificação de Função (GF) é um valor
+                        nominal pago mensalmente. A forma de apuração é estabelecida no contrato de trabalho ou norma
+                        coletiva, podendo ser definida como:
+                    <p> 1 - Um percentual fixo aplicado sobre o salário-base, ou;<p>
+                    <p> 2 - Um valor nominal fixo preestabelecido.<p>
+                    <p>Caso a gratificação seja vinculada ao desempenho ou metas, seus valores podem ser variáveis,
+                        devendo ser calculada a média para a apuração dos reflexos."</p>
+
+                    <p class="text-gray-700 leading-relaxed text-justify mt-2">Base de Cálculo da Gratificação de Função, considerando um % sobre o Salário Base:
+                    </p>
+
+                    <ul class="list-disc list-inside text-gray-700 leading-relaxed mt-2 pl-4 space-y-2">
+                        <li><strong>Valor Principal:</strong> <span class="underline font-bold">Salário Base</span>.
+                        </li>
+                        <li><strong>Fórmula de Cálculo:</strong> Salário Base * % da Gratificação por Função.</li>
+                    </ul>
+
+                    <div class="p-3 mt-4 bg-gray-100 border-l-4 border-[#00678F]/50 rounded-r-md">
+                        <p class="text-sm text-gray-700 leading-relaxed text-justify">
+                            <strong class="text-gray-900">Observação:</strong> A GF é uma parcela de natureza
+                            salarial e deve integrar o salário base para compor a Remuneração Total do empregado.
+                        </p>
+                    </div>
+
+                    <hr class="my-4 border-gray-300">
+                    <h5 class="text-lg font-semibold text-gray-800">Exemplo Prático (Valor Bruto)
+                    </h5>
+                    <p class="text-gray-700 leading-relaxed text-justify mt-2">
+                        Composição da Remuneração Total para fins de cálculo de deduções e reflexos:
+                    </p>
+
+                    <table
+                        class="w-full mt-4 text-sm text-gray-700 border-collapse border border-gray-300 rounded-md overflow-hidden">
+                        <thead>
+                            <tr class="bg-gray-200">
+                                <th class="py-2 px-4 text-left border-b border-gray-300">Item</th>
+                                <th class="py-2 px-4 text-left border-b border-gray-300">Valor / Detalhe</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="border-b border-gray-300">
+                                <td class="py-2 px-4">Salário-Base</td>
+                                <td class="py-2 px-4">R$ 3.500,00</td>
+                            </tr>
+                            <tr class="border-b border-gray-300">
+                                <td class="py-2 px-4">Gratificação de Função (GF) - 3.500 x 20%</td>
+                                <td class="py-2 px-4">R$ 700,00</td>
+
+                            </tr>
+                            <tr>
+                                <td class="py-2 px-4 font-bold bg-gray-100">Remuneração Total (Base de Cálculo Bruta)
+                                </td>
+                                <td class="py-2 px-4 font-bold bg-gray-100">R$ 4.200,00</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <hr class="my-6 border-[#00678F]">
+
+                    <h4 class="text-xl font-semibold text-[#00678F]">Deduções da Base de Cálculo</h4>
+
+                    <h6 class="text-lg font-bold text-[#00678F] mt-4">Deduções Fiscais e Previdenciárias:</h6>
+                    <p class="text-gray-700 leading-relaxed text-justify mt-2">A Gratificação de Função, somada ao
+                        salário base e outras verbas salariais, forma a Remuneração Total sobre a qual incidem as deduções
+                        obrigatórias.</p>
+
+                    <ul class="list-disc list-inside text-gray-700 leading-relaxed mt-2 pl-4 space-y-2">
+                        <li><strong>INSS (Contribuição Social):</strong> Incide sobre o valor da gratificação, somado
+                            aos demais
+                            itens da Remuneração Total.</li>
+                        <li><strong>IRPF (Imposto de Renda):</strong> O valor da gratificação compõe a base de cálculo
+                            do Imposto
+                            de Renda (Remuneração Total - Deduções Legais).</li>
+                    </ul>
+
+                    <hr class="my-4 border-gray-300">
+                    <h5 class="text-lg font-semibold text-gray-800">Exemplo Prático ((Valor Bruto - Deduções = Valor Líquido))</h5>
+                    <p class="text-gray-700 leading-relaxed text-justify mt-2">Simulação de como a GF afeta a base de
+                        cálculo do IRPF (seguindo o exemplo anterior, Remuneração Total: R$ 4.200,00):</p>
+
+                    <table
+                        class="w-full mt-4 text-sm text-gray-700 border-collapse border border-gray-300 rounded-md overflow-hidden">
+                        <thead>
+                            <tr class="bg-gray-200">
+                                <th class="py-2 px-4 text-left border-b border-gray-300">Item</th>
+                                <th class="py-2 px-4 text-left border-b border-gray-300">Valor / Detalhe</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="border-b border-gray-300">
+                                <td class="py-2 px-4 font-bold bg-gray-50">Remuneração Total (Salário Base + GF)</td>
+                                <td class="py-2 px-4 font-bold bg-gray-50">R$ 4.200,00</td>
+                            </tr>
+                            <tr class="border-b border-gray-300">
+                                <td class="py-2 px-4 text-red-600">(-) Dedução INSS (Simulado)</td>
+                                <td class="py-2 px-4 text-red-600">R$ 200,00 </td>
+                            </tr>
+                            <tr class="border-b border-gray-300">
+                                <td class="py-2 px-4 text-red-600">(-) Dedução IRPF (Simulado)</td>
+                                <td class="py-2 px-4 text-red-600">R$ 500,00 </td>
+                            <tr>
+                                <td class="py-2 px-4 font-bold bg-gray-100">Total Deduções (Fiscais/Previdenciárias)
+                                </td>
+                                <td class="py-2 px-4 font-bold bg-gray-100">R$ 700,00</td>
+                            </tr>
+                            <tr>
+                                <td class="py-2 px-4 font-bold bg-[#00678F]/10 text-[#00678F]">Remuneração Líquida
+                                    (Parcial)</td>
+                                <td class="py-2 px-4 font-bold bg-[#00678F]/10 text-[#00678F]">R$ 3.500,00</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <p class="text-gray-700 leading-relaxed text-justify mt-4">As alíquotas e as faixas de dedução do
+                        INSS e do IRPF mudam periodicamente. O exemplo acima é apenas uma simulação e não contempla
+                        todas as
+                        possíveis deduções.</p>
+
+                </div>
+            </div>
+            <div id="verbas-reflexas-drawer" class="drawer-container">
+                <div id="verbas-reflexas-header" class="drawer-header">
+                    <h4 class="text-xl font-semibold text-[#00678F]">Verbas Reflexas</h4>
+                    <svg class="arrow-icon w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                    </svg>
+                </div>
+                <div id="verbas-reflexas-content" class="drawer-content">
+                    <p class="text-gray-700 leading-relaxed text-justify">A Gratificação de Função (GF) deve ser integrada à remuneração para fins de
+                        cálculo de outras verbas trabalhistas e rescisórias.</p>
+                    <p class="text-gray-700 leading-relaxed text-justify mt-2">A integração da Gratificação de Função
+                        (GF) na remuneração é essencial para garantir que o cálculo de verbas contratuais e rescisórias
+                        reflita a correta base remuneratória do empregado. Confira as principais verbas que recebem o
+                        reflexo da GF:</p>
+
+                    <table
+                        class="w-full mt-4 text-sm text-gray-700 border-collapse border border-gray-300 rounded-md overflow-hidden">
+                        <thead>
+                            <tr class="bg-gray-200">
+                                <th class="py-2 px-4 text-left border-b border-gray-300 w-1/3">Verba Trabalhista</th>
+                                <th class="py-2 px-4 text-left border-b border-gray-300 w-2/3">Reflexo da Gratificação
+                                    de Função</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="border-b border-gray-300">
+                                <td class="py-2 px-4 font-medium">13º Salário</td>
+                                <td class="py-2 px-4">Integra o cálculo do 13º Salário (integral e proporcional).</td>
+                            </tr>
+                            <tr class="border-b border-gray-300">
+                                <td class="py-2 px-4 font-medium">Férias + 1/3</td>
+                                <td class="py-2 px-4">Integra o cálculo das Férias (vencidas e proporcionais) e o
+                                    adicional de 1/3.</td>
+                            </tr>
+                            <tr class="border-b border-gray-300">
+                                <td class="py-2 px-4 font-medium">Aviso Prévio</td>
+                                <td class="py-2 px-4">Integra a base de remuneração para cálculo do Aviso Prévio
+                                    (trabalhado ou indenizado).</td>
+                            </tr>
+                            <tr class="border-b border-gray-300">
+                                <td class="py-2 px-4 font-medium">FGTS (Depósito Mensal e Multa)</td>
+                                <td class="py-2 px-4">Incide sobre a gratificação, compondo a base de cálculo para o
+                                    depósito mensal de 8% e para a Multa de 40%.</td>
+                            </tr>
+                            <tr>
+                                <td class="py-2 px-4 font-medium">Horas Extras</td>
+                                <td class="py-2 px-4">Compõe o salário-hora para o cálculo, se devidas.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <hr class="my-4 border-gray-300">
+                    <p class="text-gray-700 leading-relaxed text-justify mt-2"><strong>Atenção:</strong> A Gratificação
+                        de Função, por ter natureza salarial (Art. 457, § 1º, da CLT), integra o cálculo de todas as
+                        verbas que são calculadas sobre a remuneração.</p>
+                </div>
+            </div>
+            <div id="calculadora-gf-drawer" class="drawer-container">
+                <div id="calculadora-gf-header" class="drawer-header">
+                    <h4 class="text-xl font-semibold text-[#00678F]">Calculadora (Simulação)</h4>
+                    <svg class="arrow-icon w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                    </svg>
+                </div>
+                <div id="calculadora-gf-content" class="drawer-content">
+                    <p class="text-gray-700 leading-relaxed text-justify mt-4">Utilize esta ferramenta para calcular o
+                        valor bruto mensal da Gratificação de Função com base no percentual estabelecido pela empresa
+                        sobre o seu salário-base.</p>
+
+                    <div class="p-4 bg-white rounded-lg shadow-inner mt-4">
+                        <h5 class="text-md font-semibold text-gray-800">Cálculo Simples (Valor Bruto da Gratificação de
+                            Função)</h5>
+                        <p class="text-gray-600 text-sm mb-4">Gratificação = Salário-Base $\times$ Percentual da Função
+                        </p>
+
+                        <div class="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4">
+                            <div class="flex-1">
+                                <label for="salarioBaseGFInput" class="block text-sm text-gray-700">Salário-Base
+                                    (R$):</label>
+                                <input type="text" id="salarioBaseGFInput"
+                                    class="mt-1 block w-full rounded-md border-gray-300 p-2 focus:ring-[#00678F] focus:border-[#00678F]"
+                                    placeholder="Ex: 5.000,00">
+                            </div>
+                            <div class="flex-1">
+                                <label for="percentualFuncaoInput" class="block text-sm text-gray-700">Percentual da
+                                    Função
+                                    (%):</label>
+                                <input type="number" id="percentualFuncaoInput"
+                                    class="mt-1 block w-full rounded-md border-gray-300 p-2 focus:ring-[#00678F] focus:border-[#00678F]"
+                                    placeholder="Ex: 40 (para 40%)">
+                            </div>
+                        </div>
+                        <button id="calculateGFBtn"
+                            class="mt-4 w-full px-4 py-2 bg-[#00678F] text-white rounded-md hover:bg-[#004562] transition duration-300 shadow-md flex items-center justify-center">
+                            <span>Calcular Gratificação de Função Bruta</span>
+                        </button>
+                        <div class="mt-4">
+                            <div class="flex items-center copy-container">
+                                <p id="gfResult" class="text-base font-bold text-gray-800"></p>
+                                <button id="copyGFResult" class="copy-btn hidden" aria-label="Copiar valor">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                        <path
+                                            d="M16 1H4C2.9 1 2 1.9 2 3v14h2V3h12V1zm3 4H8C6.9 5 6 5.9 6 7v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z" />
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="pje-calc-drawer" class="drawer-container">
+                <div id="pje-calc-header" class="drawer-header">
+                    <h4 class="text-xl font-semibold text-[#00678F]">Lançamento no PJe-Calc </h4>
+                    <svg class="arrow-icon w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                    </svg>
+                </div>
+                <div id="pje-calc-content" class="drawer-content">
+                    <p class="text-gray-700 leading-relaxed text-justify mt-4">A seguir, confira o passo a passo para o
+                        lançamento da verba no PJe-Calc, utilizando a opção "Expresso":</p>
+
+                    <ol class="list-decimal list-inside text-gray-700 leading-relaxed mt-4 ml-4 space-y-3">
+                        <li>
+                            <strong class="text-gray-800">Acessar Verbas e Escolher Lançamento:</strong> No menu de
+                            navegação à esquerda, clique na opção <u>Verbas</u> para iniciar o lançamento. Após o
+                            comando,
+                            será exibida a tela para escolha do Lançamento da Verba. Escolha a opção <u>Expresso</u>.
+                            <img src="imagens/verbas.png"
+                                alt="Tela do PJe-Calc - Passo 1: Acessar a opção Verbas no menu lateral e clicar em Expresso na seção Lançamento."
+                                class="w-full h-auto my-4 rounded-lg shadow-md">
+                        </li>
+                        <li>
+                            <strong class="text-gray-800">Seleção da Verba:</strong> O sistema abrirá as opções de
+                            verbas, escolha a verba <u>Gratificação de Função</u> e clique no botão <u>Salvar</u>
+                            <img src="imagens/gratificacaofuncao1.png"
+                                alt="Tela do PJe-Calc - Verbas Principais: Selecionar Saldo de Salário"
+                                class="w-full h-auto my-4 rounded-lg shadow-md">
+                        </li>
+                        <li>
+                            <strong class="text-gray-800">Quadro de Verbas e Ações:</strong> O sistema exibirá um quadro
+                            com os campos:
+                            <ul class="list-disc list-inside text-gray-700 leading-relaxed mt-2 ml-4">
+                                <li class="ml-8 flex items-center">
+                                <li>Ações - contendo as opções de configurações da verba selecionada (parâmetros,
+                                    ocorrências e
+                                    exclusão)
+                                    <img src="imagens/telaacoes.png"
+                                        alt="Ícones de Ações: Parâmetros (folha com seta), Ocorrências (folha com checks), Excluir (X vermelho)"
+                                        class="icon-small" style="width: 72px; height: auto;">
+                                </li>
+                                <li class="ml-8 flex items-center">
+                                    - Parâmetros da Verba <img src="imagens/telaparametros.png"
+                                        alt="Ícone de Parâmetros" class="icon-small">
+                                </li>
+                                <li class="ml-8 flex items-center">
+                                    - Ocorrências da Verba <img src="imagens/telaocorrencias.png"
+                                        alt="Ícone de Ocorrências" class="icon-small">
+                                </li>
+                                <li class="ml-8 flex items-center">
+                                    - Excluir <img src="imagens/telaexcluir.png" alt="Ícone de Excluir"
+                                        class="icon-small">
+                                </li>
+                                <li>Verba Principal - verba selecionada para lançamento.</li>
+                                <li>Verba Reflexa - em que ao clicar no botão <u>Exibir</u> serão listadas todas as
+                                    verbas
+                                    reflexas ligadas a Verba Principal.</li>
+                            </ul>
+                            <img src="imagens/gratificacaofuncao2.png"
+                                alt="Tela do PJe-Calc - Verba Saldo de Salário selecionada com as opções de Ações e Verba Reflexa."
+                                class="w-full h-auto my-4 rounded-lg shadow-md">
+                        </li>
+                        <li>
+                            <strong class="text-gray-800">Parametrização da Verba:</strong> Ao clicar no botão
+                            <u>Parâmetros da Verba</u> serão exibidas todas as configurações necessárias para a
+                            parametrização
+                            da Verba Principal.
+                            <img src="imagens/gratificacaofuncao3.png"
+                                alt="Tela do PJe-Calc - Detalhes da Verba Saldo de Salário: Parâmetros, Base de Cálculo, Divisor e Multiplicador."
+                                class="w-full h-auto my-4 rounded-lg shadow-md">
+                        </li>
+                        <li>
+                            <strong class="text-gray-800">Registro de Ocorrências:</strong> Ao clicar no botão
+                            <u>Ocorrências da Verba</u> serão exibidas todas as configurações necessárias para registro
+                            das
+                            ocorrências da Verba Principal.
+                            <img src="imagens/gratificacaofuncao4.png"
+                                alt="Tela do PJe-Calc - Dados de Ocorrências: Detalhamento da data inicial, data final e valor calculado da verba."
+                                class="w-full h-auto my-4 rounded-lg shadow-md">
+                        </li>
+                    </ol>
+
+                </div>
+
+        </section>
+    </div>
+
+    </section>
+    </div>
+
+    <script>
+        // Função para copiar o texto de um elemento com feedback visual
+        function copyTextFromElement(elementId, buttonElement) {
+            const element = document.getElementById(elementId);
+            if (!element) return;
+            const textToCopy = element.textContent.replace('...', ''); // Remove '...' para copiar o link completo
+
+            const tempInput = document.createElement('input');
+            tempInput.value = textToCopy;
+            document.body.appendChild(tempInput);
+            tempInput.select();
+
+            try {
+                document.execCommand('copy');
+                // Criar e exibir a mensagem de sucesso
+                const message = document.createElement('span');
+                message.textContent = 'Copiado!';
+                message.className = 'copy-message';
+                // Posicionamento ajustado
+                message.style.position = 'absolute';
+                message.style.left = 'calc(100% + 10px)';
+                message.style.top = '50%';
+
+                buttonElement.parentElement.appendChild(message);
+
+                // Animar e remover a mensagem após 1 segundo
+                setTimeout(() => {
+                    message.style.opacity = '1';
+                }, 10);
+                setTimeout(() => {
+                    message.style.opacity = '0';
+                    setTimeout(() => message.remove(), 300);
+                }, 1000);
+
+            } catch (err) {
+                console.error('Falha ao copiar o texto:', err);
+            } finally {
+                document.body.removeChild(tempInput);
+            }
+        }
+
+        // Função para formatação de moeda em inputs tipo text
+        function formatInput() {
+            const inputElements = document.querySelectorAll('input[type="text"]');
+            inputElements.forEach(input => {
+                input.addEventListener('input', (e) => {
+                    let value = e.target.value;
+                    // Remove todos os caracteres que não sejam dígitos
+                    value = value.replace(/\D/g, '');
+
+                    // Formata com vírgula para centavos e pontos para milhares
+                    if (value.length > 2) {
+                        value = value.replace(/(\d+)(\d{2})$/, '$1,$2');
+                    }
+                    if (value.length > 6) {
+                        value = value.replace(/(\d)(?=(\d{3})+,)/g, '$1.');
+                    }
+                    e.target.value = value;
+                });
+            });
+        }
+
+        formatInput();
+
+        // Lógica para a calculadora de Gratificação de Função (GF)
+        function calculateGF() {
+            // Helper function to convert formatted R$ string back to number
+            const parseCurrency = (value) => {
+                if (!value) return 0;
+                // Remove points for thousands, replace comma for decimal
+                return parseFloat(value.replace(/\./g, '').replace(',', '.'));
+            };
+
+            const salarioBaseInput = document.getElementById('salarioBaseGFInput');
+            const percentualFuncaoInput = document.getElementById('percentualFuncaoInput');
+            const gfResultElement = document.getElementById('gfResult');
+            const copyGFResultButton = document.getElementById('copyGFResult');
+
+            const salarioBase = parseCurrency(salarioBaseInput.value);
+            const percentualFuncao = parseFloat(percentualFuncaoInput.value);
+
+            if (salarioBase > 0 && percentualFuncao >= 0) {
+                const percentualDecimal = percentualFuncao / 100;
+                const gratificacaoBruta = salarioBase * percentualDecimal;
+
+                // Format result to Brazilian currency (R$ X.XXX,XX)
+                const formattedResult = 'R$ ' + gratificacaoBruta.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+
+                gfResultElement.textContent = `Gratificação de Função Bruta Mensal: ${formattedResult}`;
+
+                // Make copy button visible
+                copyGFResultButton.classList.remove('hidden');
+
+                // Update the copy button's behavior to copy the calculated value
+                copyGFResultButton.onclick = () => copyTextFromElement('gfResult', copyGFResultButton);
+
+            } else {
+                gfResultElement.textContent = 'Por favor, insira valores válidos.';
+                copyGFResultButton.classList.add('hidden');
+            }
+        }
+
+        // Adiciona o event listener para o botão da calculadora
+        document.getElementById('calculateGFBtn').addEventListener('click', calculateGF);
+
+
+        // Lógica para as gavetas expansíveis
+        function setupDrawer(drawerId) {
+            const header = document.getElementById(`${drawerId}-header`);
+            const content = document.getElementById(`${drawerId}-content`);
+            if (header && content) {
+                header.addEventListener('click', () => {
+                    const isExpanded = header.classList.toggle('active');
+                    if (isExpanded) {
+                        // Calcula a altura do conteúdo com margem de segurança
+                        content.style.maxHeight = content.scrollHeight + 30 + "px";
+                    } else {
+                        content.style.maxHeight = '0';
+                    }
+                });
+            }
+        }
+
+        // Configura as gavetas
+        setupDrawer('base-legal');
+        setupDrawer('base-calculo');
+        setupDrawer('verbas-reflexas'); /* ID ATUALIZADO */
+        setupDrawer('calculadora-gf');
+        setupDrawer('pje-calc');
+    </script>
+</body>
+
+</html>

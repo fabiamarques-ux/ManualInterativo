@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Salário Família</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Estilos base para garantir a fonte e fundo */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f4f8;
+            color: #1a202c;
+            line-height: 1.6;
+        }
+        /* Container principal com estética de cartão */
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 2rem;
+            background-color: #ffffff;
+            border-radius: 1rem;
+            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.05);
+        }
+        /* Estilo para o botão de copiar */
+        .copy-btn {
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
+            padding: 0;
+            margin-left: 1rem;
+            transition: opacity 0.3s ease;
+        }
+        .copy-btn svg {
+            width: 1.5rem;
+            height: 1.5rem;
+            fill: #00678F; /* Cor principal do tema */
+            transition: fill 0.3s ease;
+        }
+        .copy-btn:hover svg {
+            fill: #004562;
+        }
+        /* Estilo do spinner de carregamento */
+        .loading-spinner {
+            border: 4px solid rgba(0, 103, 143, 0.1);
+            border-top: 4px solid #00678F;
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            animation: spin 1s linear infinite;
+            margin-right: 0.5rem;
+            display: none; /* Inicia oculto */
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        /* Estilos para os componentes de gaveta (Drawer/Accordion) */
+        .drawer-container {
+            padding: 1rem;
+            background-color: #f0f4f8; /* Fundo azul claro para destaque */
+            border-radius: 0.75rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+            margin-top: 1.5rem;
+        }
+        .drawer-header {
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.5rem 0; /* Espaçamento para clique */
+        }
+        .drawer-content {
+            overflow: hidden;
+            transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            max-height: 0; /* Inicia fechado */
+            padding: 0;
+        }
+        .drawer-header .arrow-icon {
+            transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .drawer-header.active .arrow-icon {
+            transform: rotate(180deg);
+        }
+        /* Conteúdo dentro da gaveta com padding superior para separação visual */
+        .drawer-content > * {
+            padding-top: 0.5rem;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container my-8 relative">
+        <img src="https://site.trt19.jus.br/sites/default/files/logo-trt19.png" alt="Logo do TRT19" class="absolute top-4 right-4 w-24 sm:w-32 md:w-36 h-auto">
+        
+        <section id="salario-familia" class="content-section pt-16 sm:pt-4">
+            <h1 class="text-3xl font-bold text-[#00678F] mb-6">Salário Família</h1>
+            <p class="text-gray-700 leading-relaxed text-justify mb-4">O Salário Família é um benefício previdenciário devido aos trabalhadores de baixa renda, empregados ou avulsos, que possuem filhos ou equiparados. É um valor pago em cotas (por filho elegível), cujo direito depende estritamente do limite máximo da remuneração mensal bruta do segurado, atualizado anualmente pelo Governo Federal.</p>
+            
+            <h4 class="text-2xl font-bold text-[#00678F] mt-8 mb-2 border-t pt-4 border-gray-300">Obrigações e Manutenção do Benefício</h4>
+            <p class="text-gray-700 leading-relaxed text-justify mt-1">Para continuar recebendo o Salário Família, o segurado deve comprovar regularmente a situação dos dependentes perante o empregador.</p>
+            <h5 class="text-lg font-semibold text-gray-800 mt-4">Comprovações Anuais:</h5>
+            <ul class="list-disc list-inside text-gray-700 leading-relaxed mt-2 pl-4">
+                <li>Vacinação (até 6 anos): A caderneta de vacinação deve ser apresentada anualmente.</li>
+                <li>Frequência Escolar (7 a 14 anos): Comprovante de frequência escolar apresentado a cada seis meses (maio e novembro).</li>
+                <li>A falta de comprovação leva à suspensão do benefício até a regularização.</li>
+            </ul>
+
+            <div id="base-legal-drawer" class="drawer-container">
+                <div id="base-legal-header" class="drawer-header">
+                    <h4 class="text-xl font-semibold text-[#00678F]">Base Legal e Jurisprudência</h4>
+                    <svg class="arrow-icon w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                    </svg>
+                </div>
+                <div id="base-legal-content" class="drawer-content">
+                    <div class="py-2">
+                        <p class="text-gray-700 leading-relaxed text-justify mt-1">O Salário Família é um benefício previdenciário, condicional à renda, regido pela legislação previdenciária e trabalhista, sendo um direito fundamental do trabalhador de baixa renda.</p>
+                        
+                        <h5 class="text-lg font-semibold text-gray-800 mt-4">Fontes Normativas e Elegibilidade</h5>
+                        <hr class="my-4 border-gray-300">
+
+                        <h5 class="text-base font-semibold text-gray-800">Lei nº 8.213/91 (Plano de Benefícios da Previdência Social):</h5>
+                        <ul class="list-disc list-inside text-gray-700 leading-relaxed mt-2 ml-4 space-y-3">
+                            <li><strong>Artigos 65 a 70:</strong>
+                                <p class="text-sm italic mt-1 ml-4 border-l-2 border-gray-400 pl-3">Estabelecem as regras gerais, a natureza previdenciária, os requisitos de renda e as condições de dependência do benefício.</p>
+                            </li>
+                            <li><strong>Dependentes:</strong>
+                                <p class="text-sm italic mt-1 ml-4 border-l-2 border-gray-400 pl-3">Filhos ou equiparados (enteados, tutelados) de até **14 anos incompletos**. Se o dependente for inválido ou deficiente, não há limite de idade.</p>
+                            </li>
+                        </ul>
+
+                        <hr class="my-4 border-gray-300">
+                        <h5 class="text-base font-semibold text-gray-800">Consolidação das Leis do Trabalho (CLT):</h5>
+                        <ul class="list-disc list-inside text-gray-700 leading-relaxed mt-2 ml-4">
+                            <li><strong>Art. 67:</strong>
+                                <p class="text-sm italic mt-1 ml-4 border-l-2 border-gray-400 pl-3">Regulamenta que o valor será pago pelo empregador e por ele deduzido da contribuição previdenciária, confirmando seu papel de mero intermediário.</p>
+                            </li>
+                        </ul>
+                        
+                        <hr class="my-6 border-gray-300">
+
+                        <h5 class="text-lg font-semibold text-gray-800">Jurisprudência</h5>
+                        <p class="text-gray-700 leading-relaxed text-justify mt-2">Os tribunais (STJ/TNU/TST) reforçam a natureza contributiva e condicionada do benefício, destacando:</p>
+
+                        <h6 class="text-base font-semibold text-gray-800 mt-4">Comprovação e Dependência</h6>
+                        <div class="p-4 bg-gray-100 rounded-md mt-2 border border-gray-300">
+                            <p class="font-bold text-sm">Súmula nº 7 da TNU (Turma Nacional de Uniformização):</p>
+                            <p class="text-sm mt-1 italic">"A apresentação da documentação exigida (certidão de nascimento, vacinação e frequência escolar) é indispensável para o recebimento do Salário Família. O direito não é automático; depende da prova regular do segurado."</p>
+                        </div>
+
+                        <h6 class="text-base font-semibold text-gray-800 mt-6">Responsabilidade de Pagamento</h6>
+                        <div class="p-4 bg-gray-100 rounded-md mt-2 border border-gray-300">
+                            <p class="font-bold text-sm">Orientação Jurisprudencial (OJ) n° 401 da SDI-1 do TST:</p>
+                            <p class="text-sm mt-1 italic">"O empregador, ao pagar o Salário Família, atua como mero intermediário do INSS. Isto confirma a natureza previdenciária do benefício, e não salarial, sendo o valor posteriormente compensado nas contribuições sociais devidas."</p>
+                        </div>
+                        
+                        <h6 class="text-base font-semibold text-gray-800 mt-6">Direito Adquirido (Natureza Condicional)</h6>
+                        <div class="p-4 bg-gray-100 rounded-md mt-2 border border-gray-300">
+                            <p class="font-bold text-sm">Entendimento Consolidado:</p>
+                            <p class="text-sm mt-1 italic">O direito ao benefício é condicional e só é devido se cumpridos todos os requisitos (limite de renda e idade/condição do dependente) no momento do requerimento ou da concessão, não se mantendo em caso de perda da qualidade de segurado ou cessação da condição.</p>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div id="base-deducoes-drawer" class="drawer-container">
+                <div id="base-deducoes-header" class="drawer-header">
+                    <h4 class="text-xl font-semibold text-[#00678F]">Base de Cálculo e Deduções</h4>
+                    <svg class="arrow-icon w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                    </svg>
+                </div>
+                <div id="base-deducoes-content" class="drawer-content">
+                    <div class="py-2">
+                        <h5 class="text-lg font-semibold text-gray-800 mt-2">Base de Cálculo do Salário Família (Elegibilidade)</h5>
+                        <p class="text-gray-700 leading-relaxed text-justify mt-1">A base de cálculo utilizada para determinar o direito ao Salário Família é a remuneração mensal bruta do empregado, de acordo com as regras estabelecidas pelo INSS.</p>
+                        <ul class="list-disc list-inside text-gray-700 leading-relaxed mt-2 pl-4">
+                            <li>Renda Bruta: Inclui o salário-base e quaisquer adicionais (horas extras, adicional noturno, insalubridade, periculosidade, etc.) que façam parte da remuneração, antes de quaisquer descontos legais.</li>
+                            <li>Limite Governamental: A remuneração bruta total do mês deve ser igual ou inferior ao teto definido anualmente pelo Ministério da Previdência Social.</li>
+                        </ul>
+                        
+                        <hr class="my-4 border-gray-300">
+
+                        <h5 class="text-lg font-semibold text-gray-800 mt-2">Deduções da Base de Cálculo</h5>
+                        <p class="text-gray-700 leading-relaxed text-justify mt-1">Para fins de apuração da elegibilidade, a base de cálculo (renda bruta) não sofre deduções de valores como Imposto de Renda Retido na Fonte (IRRF) ou contribuição ao INSS.</p>
+                        <ul class="list-disc list-inside text-gray-700 leading-relaxed mt-2 pl-4">
+                            <li>Remuneração Pura: O INSS considera a remuneração no sentido mais amplo, sem descontos obrigatórios.</li>
+                            <li>O Benefício em Si: O valor da cota do Salário Família pago ao trabalhador não sofre descontos de INSS ou Imposto de Renda, pois possui natureza indenizatória e previdenciária.</li>
+                        </ul>
+
+                        <hr class="my-4 border-gray-300">
+                        
+                        <h5 class="text-lg font-semibold text-gray-800 mt-2">Valores de Quota e Limite de Renda (Exemplo Prático 2024)</h5>
+                        <p class="text-gray-700 leading-relaxed text-justify mt-1">O benefício é um valor fixo (quota) por dependente elegível, condicionado ao teto da renda mensal bruta do trabalhador.</p>
+                        <h5 class="text-lg font-semibold text-gray-800 mt-4">Fórmula Base (Condicional):</h5>
+                        <p class="text-gray-700 mt-2 font-mono bg-gray-100 p-2 rounded-md inline-block">Salário Família = Número de Dependentes x Valor da Cota (SE Renda Bruta $\le$ Limite)</p>
+                        <hr class="my-4 border-gray-300">
+                        <p class="text-gray-700 leading-relaxed text-justify mt-2 font-semibold">Exemplo (Valores 2024 - Apenas para referência):</p>
+                        <p class="text-gray-700 leading-relaxed text-justify mt-1">Se o limite de renda for R$ 1.819,26 e o valor da cota R$ 62,04, um trabalhador com 2 filhos elegíveis e que receba R$ 1.500,00 tem direito a: 2 * R$ 62,04 = R$ 124,08.</p>
+                        <table class="w-full mt-4 text-sm text-gray-700 border-collapse border border-gray-300 rounded-lg overflow-hidden">
+                            <thead>
+                                <tr class="bg-gray-200">
+                                    <th class="py-2 px-4 text-left border-b border-gray-300">Item</th>
+                                    <th class="py-2 px-4 text-left border-b border-gray-300">Valor (R$)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="bg-white">
+                                    <td class="py-2 px-4 border-b border-gray-300">Limite Máx. Renda (2024)</td>
+                                    <td class="py-2 px-4 border-b border-gray-300 font-semibold">1.819,26</td>
+                                </tr>
+                                <tr class="bg-gray-50">
+                                    <td class="py-2 px-4 border-b border-gray-300">Valor da Cota (2024)</td>
+                                    <td class="py-2 px-4 border-b border-gray-300 font-semibold">62,04</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <div id="reflexos-drawer" class="drawer-container">
+                <div id="reflexos-header" class="drawer-header">
+                    <h4 class="text-xl font-semibold text-[#00678F]">Verbas Reflexas</h4>
+                    <svg class="arrow-icon w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                    </svg>
+                </div>
+                <div id="reflexos-content" class="drawer-content">
+                    <div class="py-2">
+                        <p class="text-gray-700 leading-relaxed text-justify mt-1">Por ter natureza **previdenciária e indenizatória** (e não salarial), o Salário Família, em regra, **não** gera reflexos em outras verbas trabalhistas.</p>
+                        <h5 class="text-lg font-semibold text-gray-800 mt-4">Verbas Não Afetadas:</h5>
+                        <ul class="list-disc list-inside text-gray-700 leading-relaxed mt-2 pl-4">
+                            <li>Férias e Adicional de 1/3.</li>
+                            <li>13º Salário.</li>
+                            <li>Aviso Prévio (indenizado ou trabalhado).</li>
+                            <li>Fundo de Garantia por Tempo de Serviço (FGTS).</li>
+                            <li>Descanso Semanal Remunerado (DSR).</li>
+                        </ul>
+                        <p class="text-gray-700 leading-relaxed text-justify mt-3 font-semibold">O Salário Família é um pagamento de transferência social, condicional à renda, e deve ser tratado de forma separada na folha de pagamento, sendo isento de contribuição previdenciária e imposto de renda.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div id="calculadora-salario-drawer" class="drawer-container">
+                <div id="calculadora-salario-header" class="drawer-header">
+                    <h4 class="text-xl font-semibold text-[#00678F]">Calculadora (Simulação)</h4>
+                    <svg class="arrow-icon w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                    </svg>
+                </div>
+                <div id="calculadora-salario-content" class="drawer-content">
+                    <div class="py-2">
+                        <p class="text-gray-700 leading-relaxed text-justify mt-1">Esta calculadora usa a tabela de referência de 2024 (Limite: R$ 1.819,26; Cota: R$ 62,04) apenas para simulação.</p>
+                        <div class="p-4 bg-white rounded-lg shadow-inner mt-4 border border-gray-200">
+                            <h5 class="text-md font-semibold text-gray-800 mb-3">Insira os dados abaixo:</h5>
+                            <div class="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4">
+                                <div class="flex-1">
+                                    <label for="salarioBrutoInput" class="block text-sm font-medium text-gray-700">Renda Bruta Mensal (R$):</label>
+                                    <input type="text" id="salarioBrutoInput" placeholder="Ex: 1.500,00" class="mt-1 block w-full rounded-md border-gray-300 p-2 focus:ring-[#00678F] focus:border-[#00678F] border">
+                                </div>
+                                <div class="flex-1">
+                                    <label for="dependentesInput" class="block text-sm font-medium text-gray-700">Nº de Dependentes Elegíveis:</label>
+                                    <input type="number" id="dependentesInput" placeholder="Ex: 2" min="0" class="mt-1 block w-full rounded-md border-gray-300 p-2 focus:ring-[#00678F] focus:border-[#00678F] border">
+                                </div>
+                            </div>
+                            <button id="calculateBtn" class="mt-6 w-full py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-[#00678F] hover:bg-[#005170] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#00678F] transition duration-150 ease-in-out flex items-center justify-center">
+                                <div id="loading-spinner" class="loading-spinner"></div>
+                                Calcular Salário Família
+                            </button>
+                            
+                            <div class="mt-6 p-4 bg-[#e6f2ff] rounded-lg border border-[#00678F]">
+                                <h6 class="text-md font-semibold text-gray-800 mb-2">Resultado da Simulação:</h6>
+                                <p id="result" class="text-xl font-bold text-gray-900 flex items-center justify-between">
+                                    Aguardando dados...
+                                    <button id="copyResult" class="copy-btn hidden" title="Copiar valor">
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M16 1H4C2.9 1 2 1.9 2 3V17H4V3H16V1ZM15 5H8C6.9 5 6 5.9 6 7V21C6 22.1 6.9 23 8 23H15C16.1 23 17 22.1 17 21V7C17 5.9 16.1 5 15 5ZM15 21H8V7H15V21Z"/></svg>
+                                    </button>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="pje-calc-drawer" class="drawer-container">
+                <div id="pje-calc-header" class="drawer-header">
+                    <h4 class="text-xl font-semibold text-[#00678F]">Lançamento no PJe-Calc</h4>
+                    <svg class="arrow-icon w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                    </svg>
+                </div>
+                <div id="pje-calc-content" class="drawer-content">
+                    <div class="py-2">
+                        <p class="text-gray-700 leading-relaxed text-justify mt-1">O Salário Família não possui natureza salarial, sendo um benefício previdenciário pago por intermédio do empregador. Por isso, seu lançamento correto no PJe-Calc é crucial para a apuração da Compensação Previdenciária e para evitar que o valor integre as bases de cálculo indevidamente.</p>
+                        
+                        <h5 class="text-lg font-semibold text-gray-800 mt-4">Passos e Considerações no PJe-Calc:</h5>
+                        <ul class="list-disc list-inside text-gray-700 leading-relaxed mt-2 pl-4">
+                            <li>O valor não deve ser lançado como uma rubrica salarial nas Fichas Financeiras ou Cartões de Ponto.</li>
+                            <li>O valor deve ser informado na seção **'Cálculo' > 'Benefícios'** ou em campos específicos de dedução/compensação previdenciária.</li>
+                            <li>Em geral, o PJe-Calc permite que o valor do Salário Família pago pelo empregador (como intermediário) seja **compensado** na GPS (Guia da Previdência Social) ou na apuração das contribuições sociais devidas à Previdência.</li>
+                            <li>Certifique-se de que a rubrica **não integre** a base de cálculo para férias, 13º salário, aviso prévio ou FGTS, conforme a lei.</li>
+                        </ul>
+
+                        <h5 class="text-lg font-semibold text-gray-800 mt-4 border-t pt-4 border-gray-300">Representação Visual no Sistema:</h5>
+
+                        <div class="mt-4 flex flex-col items-center">
+                            <img src="imagens/familia1.png" alt="Tela do PJe-Calc mostrando a inserção de Salário Família no menu Benefícios/Deduções." class="max-w-full h-auto rounded-lg shadow-lg mb-6 border border-gray-200">
+                            <img src="imagens/familia2.png" alt="Segunda tela do PJe-Calc detalhando o cálculo ou a compensação do Salário Família." class="max-w-full h-auto rounded-lg shadow-lg mb-6 border border-gray-200">
+                        </div>
+
+                        <p class="text-gray-700 leading-relaxed text-justify mt-3 font-semibold">O sistema deve ser instruído a reconhecer a verba como de natureza indenizatória, garantindo que seja subtraída do total das contribuições sociais a pagar.</p>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+    </div>
+    
+    <script>
+        // Constantes da Tabela Salário Família 2024 (APENAS PARA SIMULAÇÃO)
+        const LIMITE_RENDA_2024 = 1819.26;
+        const VALOR_COTA_2024 = 62.04;
+
+        // Utilidade para formatar valores monetários no formato brasileiro
+        const formatCurrency = (value) => {
+            return value.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+        };
+
+        // --- LÓGICA DO INPUT DE SALÁRIO/RENDA ---
+        function formatSalarioInput() {
+            const salarioBrutoInput = document.getElementById('salarioBrutoInput');
+            salarioBrutoInput.addEventListener('input', (e) => {
+                let value = e.target.value.replace(/\D/g, ''); // Remove tudo que não for dígito
+                if (value.length > 2) {
+                    value = value.replace(/(\d+)(\d{2})$/, '$1,$2'); // Adiciona a vírgula
+                }
+                if (value.length > 6) {
+                    value = value.replace(/(\d)(?=(\d{3})+,)/g, '$1.'); // Adiciona os pontos de milhar
+                }
+                e.target.value = value;
+            });
+        }
+
+        // --- LÓGICA DA CALCULADORA DE SALÁRIO FAMÍLIA ---
+        function calculateSalaryBalance() {
+            const salarioBrutoInput = document.getElementById('salarioBrutoInput');
+            const dependentesInput = document.getElementById('dependentesInput');
+            const resultDiv = document.getElementById('result');
+            const copyBtn = document.getElementById('copyResult');
+            const loadingSpinner = document.getElementById('loading-spinner');
+
+            // Mostrar spinner enquanto calcula (embora seja rápido)
+            loadingSpinner.style.display = 'inline-block';
+            copyBtn.classList.add('hidden');
+            resultDiv.textContent = 'Calculando...';
+
+            setTimeout(() => {
+                loadingSpinner.style.display = 'none';
+
+                let salarioText = salarioBrutoInput.value.replace(/\./g, '').replace(',', '.');
+                let salarioBruto = parseFloat(salarioText) || 0;
+                let numDependentes = parseInt(dependentesInput.value) || 0;
+
+                let resultText = '';
+
+                if (numDependentes > 0 && salarioBruto <= LIMITE_RENDA_2024) {
+                    const valorSalarioFamilia = numDependentes * VALOR_COTA_2024;
+                    resultText = `${formatCurrency(valorSalarioFamilia)} (${numDependentes} cotas)`;
+                    copyBtn.classList.remove('hidden');
+                } else if (salarioBruto > LIMITE_RENDA_2024) {
+                    resultText = `Renda Bruta (${formatCurrency(salarioBruto).replace('R$', '').trim()}) EXCEDEU o limite (${formatCurrency(LIMITE_RENDA_2024).replace('R$', '').trim()}). Sem direito ao benefício.`;
+                    copyBtn.classList.add('hidden');
+                } else {
+                    // numDependentes é 0
+                    resultText = 'Insira o número de dependentes elegíveis para calcular o benefício.';
+                    copyBtn.classList.add('hidden');
+                }
+                resultDiv.textContent = resultText;
+            }, 500); // Pequeno atraso para simular processamento/melhorar UX
+        }
+
+        // --- LÓGICA DE CÓPIA PARA O CLIPBOARD ---
+        function copyText(elementId) {
+            const element = document.getElementById(elementId);
+            if (!element) return;
+            
+            // Extrai apenas o valor monetário para cópia
+            const fullText = element.textContent;
+            const match = fullText.match(/R\$\s*[\d\.,]+/);
+            const textToCopy = match ? match[0] : fullText;
+
+            const tempInput = document.createElement('input');
+            tempInput.value = textToCopy;
+            document.body.appendChild(tempInput);
+            tempInput.select();
+            document.execCommand('copy');
+            document.body.removeChild(tempInput);
+
+            // Feedback visual simples
+            const originalText = element.textContent;
+            element.textContent = 'Copiado!';
+            setTimeout(() => {
+                element.textContent = originalText;
+                // Re-habilita o botão de cópia após restaurar o texto
+                const copyBtn = document.getElementById('copyResult');
+                if (copyBtn && copyBtn.classList.contains('hidden')) {
+                    copyBtn.classList.remove('hidden');
+                }
+            }, 1500);
+        }
+
+        // --- LÓGICA DAS GAVETAS (DRAWERS) ---
+        function setupDrawer(drawerId) {
+            const header = document.getElementById(`${drawerId}-header`);
+            const content = document.getElementById(`${drawerId}-content`);
+
+            if (!header || !content) return;
+
+            // Define o max-height inicial se for para estar aberto por padrão (Calculadora/Simulação)
+            if (header.classList.contains('active')) {
+                // Define o max-height para o scrollHeight real do conteúdo
+                content.style.maxHeight = content.scrollHeight + "px";
+            }
+
+            header.addEventListener('click', () => {
+                const isExpanded = header.classList.toggle('active');
+                if (isExpanded) {
+                    // Define o max-height para o scrollHeight real do conteúdo
+                    content.style.maxHeight = content.scrollHeight + "px";
+                } else {
+                    // Fecha a gaveta
+                    content.style.maxHeight = '0';
+                }
+            });
+        }
+
+        // Inicialização de todas as funcionalidades
+        document.addEventListener('DOMContentLoaded', () => {
+            // Inicializa a formatação do input de salário/re
+            formatSalarioInput();
+
+            // Adiciona listeners para os botões e calculadora
+            document.getElementById('calculateBtn').addEventListener('click', calculateSalaryBalance);
+            document.getElementById('copyResult').addEventListener('click', () => copyText('result'));
+            
+            // Configura as gavetas (Drawers) na ordem correta
+            setupDrawer('base-legal');
+            setupDrawer('base-deducoes'); // Base de Cálculo e Exemplo Prático
+            setupDrawer('reflexos'); // Reflexos sobre Outras Verbas
+            setupDrawer('calculadora-salario'); // Calculadora (Simulação)
+            setupDrawer('pje-calc'); // Lançamento no PJe-Calc (NOVO)
+        });
+    </script>
+</body>
+</html>

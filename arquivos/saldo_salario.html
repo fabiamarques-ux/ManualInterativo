@@ -1,0 +1,951 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Saldo de Salário</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f4f8;
+            color: #1a202c;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 2rem;
+            background-color: #ffffff;
+            border-radius: 1rem;
+            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.05);
+        }
+
+        .copy-btn {
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
+            padding: 0;
+            margin-left: 1rem;
+        }
+
+        .copy-btn svg {
+            width: 1.5rem;
+            height: 1.5rem;
+            fill: #00678F;
+            transition: fill 0.3s ease;
+        }
+
+        .copy-btn:hover svg {
+            fill: #004562;
+        }
+
+        .loading-spinner {
+            border: 4px solid rgba(0, 103, 143, 0.1);
+            border-top: 4px solid #00678F;
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            animation: spin 1s linear infinite;
+            margin-right: 0.5rem;
+            display: none;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* Corrigido: Removido padding vertical (1rem) do container principal */
+        .drawer-container {
+            background-color: #f0f4f8;
+            border-radius: 0.75rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+            margin-top: 1.5rem;
+            overflow: hidden;
+            /* Garante que o padding lateral não vaze durante a transição */
+        }
+
+        /* Estilo para gavetas aninhadas (Tabelas, Cálculos) */
+        .drawer-nested {
+            background-color: #ffffff;
+            border: 1px solid #d1d5db;
+            border-radius: 0.5rem;
+            margin-top: 1rem;
+            overflow: hidden;
+        }
+
+        .drawer-header {
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+            /* Adicionado padding para o cabeçalho */
+        }
+
+        /* Define padding lateral e zero padding vertical quando fechado */
+        .drawer-content {
+            overflow: hidden;
+            transition: all 0.5s ease-in-out;
+            max-height: 0;
+            padding: 0 1rem;
+            /* Padding lateral mantido */
+        }
+
+        /* Corrigido: Adiciona padding vertical APENAS quando o header está ativo (gaveta aberta) */
+        .drawer-header.active+.drawer-content {
+            padding-top: 1rem;
+            padding-bottom: 1rem;
+        }
+
+        /* Regra de segurança CSS: Remove qualquer margin-top residual do primeiro elemento de texto para evitar espaçamento duplo */
+        .drawer-header.active+.drawer-content>*:first-child {
+            margin-top: 0 !important;
+        }
+
+        .drawer-nested .drawer-header.active+.drawer-content>*:first-child {
+            margin-top: 0 !important;
+        }
+
+        .drawer-header.active .arrow-icon {
+            transform: rotate(180deg);
+        }
+
+        .icon-small {
+            width: 24px;
+            height: 24px;
+            display: inline-block;
+            vertical-align: middle;
+            margin-left: 8px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container my-8 relative">
+        <img src="https://site.trt19.jus.br/sites/default/files/logo-trt19.png" alt="Logo do TRT19"
+            class="absolute top-4 right-4 w-36 h-auto">
+
+        <section id="salario-saldo" class="content-section">
+            <h2 class="text-3xl font-bold text-[#00678F] mb-4">Saldo de Salário</h2>
+            <p class="text-gray-700 leading-relaxed text-justify">O Saldo de Salário é o valor correspondente aos dias
+                trabalhados pelo empregado no mês em que ocorre a rescisão do contrato de trabalho. É uma das verbas
+                rescisórias devidas ao empregado, independentemente do motivo do desligamento (pedido de demissão,
+                demissão sem justa causa, ou outras).</p>
+
+            <div class="p-5 bg-gray-50 border border-gray-200 rounded-lg mt-6">
+
+                <p class="text-gray-700 leading-relaxed text-justify mt-2">Trata-se do Salário Base
+                    Proporcional, também conhecido como Salário Fixo ou Salário Contratual, sendo o valor estipulado em
+                    contrato de trabalho (e anotado na Carteira de Trabalho) que o empregado recebe pela prestação de
+                    seus serviços, antes da aplicação de quaisquer adicionais, bônus, gratificações ou comissões. Em
+                    essência, ele é a quantia fixa e invariável que serve como ponto de partida (a "base") para todos os
+                    cálculos da remuneração e das obrigações trabalhistas.</p>
+
+                <h4 class="text-lg font-semibold text-gray-800 mt-4">O que Compõe o Salário Base</h4>
+                <p class="text-gray-700 leading-relaxed text-justify mt-2">O Salário Base é composto primariamente por
+                    um valor monetário fixo, determinado por:</p>
+                <ul class="list-disc list-inside text-gray-700 leading-relaxed mt-2 pl-4">
+                    <li><strong>Negociação Contratual:</strong> É o valor acordado entre o empregado e o empregador no
+                        momento da contratação.</li>
+                    <li><strong>Piso Salarial:</strong> O valor negociado não pode ser inferior ao:
+                        <ul class="list-circle list-inside text-gray-700 leading-relaxed mt-1 pl-4">
+                            <li>Salário Mínimo Nacional ou</li>
+                            <li>Piso Salarial Estadual ou</li>
+                            <li>Piso Salarial da Categoria estabelecido em Convenção ou Acordo Coletivo de Trabalho.
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+                <div class="mt-4 p-3 bg-gray-100 border-l-4 border-[#00678F]/50 rounded-r-md">
+                    <p class="font-semibold text-sm text-gray-800">O ÚNICO COMPONENTE DO SALÁRIO BASE:</p>
+                    <p class="text-sm text-gray-700 mt-1">O Salário Base é o valor fixo estipulado no contrato de
+                        trabalho (e anotado na carteira de trabalho) como contrapartida direta pela prestação do
+                        serviço. É o valor nominal, constante e invariável que o empregado tem direito a receber
+                        mensalmente.</p>
+                </div>
+
+
+                <h4 class="text-lg font-semibold text-gray-800 mt-6">O que NÃO Compõe o Salário Base (Mas compõe a
+                    Remuneração Total)</h4>
+                <p class="text-gray-700 leading-relaxed text-justify mt-2">É crucial distinguir o Salário Base da
+                    Remuneração (Salário Bruto). A Remuneração é o Salário Base mais todas as outras parcelas devidas ao
+                    empregado. Portanto, o Salário Base não inclui as seguintes verbas, que são calculadas à parte:</p>
+                <table
+                    class="w-full mt-4 text-sm text-gray-700 border-collapse border border-gray-300 rounded-md overflow-hidden">
+                    <thead>
+                        <tr class="bg-gray-200">
+                            <th class="py-2 px-4 text-left border-b border-gray-300 w-1/3">Parcelas de Natureza Salarial
+                            </th>
+                            <th class="py-2 px-4 text-left border-b border-gray-300 w-2/3">Descrição</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="border-b border-gray-300">
+                            <td class="py-2 px-4 font-medium">Horas Extras</td>
+                            <td class="py-2 px-4">Adicional pelo tempo trabalhado além da jornada normal.</td>
+                        </tr>
+                        <tr class="border-b border-gray-300">
+                            <td class="py-2 px-4 font-medium">Adicionais de Insalubridade e Periculosidade</td>
+                            <td class="py-2 px-4">Valores devidos por trabalho em condições nocivas ou perigosas.</td>
+                        </tr>
+                        <tr class="border-b border-gray-300">
+                            <td class="py-2 px-4 font-medium">Adicional Noturno</td>
+                            <td class="py-2 px-4">Valor pago pelo trabalho realizado em horário noturno.</td>
+                        </tr>
+                        <tr class="border-b border-gray-300">
+                            <td class="py-2 px-4 font-medium">Comissões e Gorjetas</td>
+                            <td class="py-2 px-4">Valores variáveis ligados a vendas, desempenho ou serviço.</td>
+                        </tr>
+                        <tr>
+                            <td class="py-2 px-4 font-medium">DSR e Feriados sobre Variáveis</td>
+                            <td class="py-2 px-4">O reflexo (cálculo) do DSR e dos feriados sobre as verbas variáveis
+                                (horas extras, comissões).</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h4 class="text-lg font-semibold text-gray-800 mt-6">DSR e Feriados: Distinção entre Mensalistas e
+                    Horistas</h4>
+                <p class="text-gray-700 leading-relaxed text-justify mt-2">O DSR (Descanso Semanal Remunerado) e os
+                    Feriados não são adicionais ao Salário Base para quem é mensalista. Eles são um direito que está
+                    embutido/incluído no cálculo do Salário Base para os trabalhadores que recebem por mês.</p>
+
+                <ul class="list-disc list-inside text-gray-700 leading-relaxed mt-2 pl-4 space-y-2">
+                    <li><strong>Mensalistas (Salário Fixo):</strong> O valor do Salário Base já remunera os 30 dias do
+                        mês, incluindo os dias trabalhados, os DSRs e os feriados. Para o mensalista, geralmente não há
+                        uma rubrica de "DSR" ou "Feriado" separada na folha de pagamento sobre o Salário Base.</li>
+                    <li><strong>Horistas e Comissionistas:</strong> Nesses casos, o DSR e os Feriados são calculados
+                        separadamente, de forma proporcional ao valor que eles produziram (horas ou vendas) e são
+                        adicionados ao pagamento, compondo a Remuneração Bruta.</li>
+                    <li><strong>Reflexo de Verbas Variáveis:</strong> O DSR e Feriados aparecem como cálculo adicional,
+                        mesmo para mensalistas, quando incidem sobre verbas variáveis (Horas Extras, Adicional Noturno,
+                        Comissões). Esse "Reflexo do DSR e Feriados" integra a Remuneração Bruta, mas não o Salário
+                        Base.</li>
+                </ul>
+
+                <h4 class="text-lg font-semibold text-gray-800 mt-6">Importância do Salário Base</h4>
+                <p class="text-gray-700 leading-relaxed text-justify mt-2">O Salário Base é o principal referencial
+                    para:</p>
+                <ul class="list-disc list-inside text-gray-700 leading-relaxed mt-2 pl-4">
+                    <li><strong>Cálculo de Verbas:</strong> É usado como base para calcular o valor da hora de trabalho,
+                        férias, 13º salário, aviso prévio e, em muitos casos, o valor das horas extras e outros
+                        adicionais.</li>
+                    <li><strong>Segurança e Estabilidade:</strong> Oferece ao empregado uma renda mínima previsível e
+                        estável.</li>
+                </ul>
+            </div>
+            <div id="base-legal-drawer" class="drawer-container">
+                <div id="base-legal-header" class="drawer-header">
+                    <h4 class="text-xl font-semibold text-[#00678F]">Base Legal e Jurisprudência</h4>
+                    <svg class="arrow-icon w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                    </svg>
+                </div>
+                <div id="base-legal-content" class="drawer-content">
+                    <p class="text-gray-700 leading-relaxed text-justify">O direito ao recebimento ao Saldo de Salário
+                        tem por base a legislação a seguir:</p>
+
+                    <h5 class="text-lg font-semibold text-gray-800 mt-4">Fontes Normativas</h5>
+
+                    <hr class="my-4 border-gray-300">
+                    <h5 class="text-base font-semibold text-gray-800">Consolidação das Leis do Trabalho (CLT):</h5>
+                    <ul class="list-disc list-inside text-gray-700 leading-relaxed mt-2 ml-4 space-y-3">
+                        <li><strong>Art. 64:</strong>
+                            <p class="text-sm italic mt-1 ml-4 border-l-2 border-gray-400 pl-3">O salário-hora normal,
+                                no caso de empregado mensalista, será obtido dividindo-se o salário mensal
+                                correspondente à duração do trabalho, a que se refere o art. 58, por 30 (trinta) vezes o
+                                número de horas dessa duração.</p>
+                        </li>
+                        <li><strong>Parágrafo único do Art. 64:</strong>
+                            <p class="text-sm italic mt-1 ml-4 border-l-2 border-gray-400 pl-3">Sendo o número de dias
+                                inferior a 30 (trinta), adotar-se-á para o cálculo, em lugar desse número, o de dias de
+                                trabalho por mês.</p>
+                        </li>
+                        <li><strong>Art. 65:</strong>
+                            <p class="text-sm italic mt-1 ml-4 border-l-2 border-gray-400 pl-3">No caso do empregado
+                                diarista, o salário-hora normal será obtido dividindo-se o salário diário correspondente
+                                à duração do trabalho, estabelecido no art. 58, pelo número de horas de efetivo
+                                trabalho.</p>
+                        </li>
+                    </ul>
+
+                    <hr class="my-6 border-gray-300">
+
+                    <h5 class="text-lg font-semibold text-gray-800">Jurisprudência</h5>
+                    <div class="p-4 bg-gray-100 rounded-md mt-2 border border-gray-300">
+                        <p class="font-bold text-sm">Súmula 264, TST:</p>
+                        <p class="text-sm mt-1 italic">Na rescisão contratual, o empregado tem direito ao salário dos
+                            dias
+                            trabalhados no mês da dispensa, calculado à base do número de dias efetivamente trabalhados.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div id="base-calculo-drawer" class="drawer-container">
+                <div id="base-calculo-header" class="drawer-header">
+                    <h4 class="text-xl font-semibold text-[#00678F]">Base de Cálculo e Deduções</h4>
+                    <svg class="arrow-icon w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                    </svg>
+                </div>
+                <div id="base-calculo-content" class="drawer-content">
+
+
+                    <div class="p-3 mt-2 mb-4 bg-yellow-50 border-l-4 border-yellow-500 rounded-r-md">
+                        <p class="text-gray-900 leading-relaxed text-justify font-medium">
+                            IMPORTANTE: O Saldo de Salário deve integrar o valor da Remuneração Total (Salário-Base + Adicionais + H. Extras + Gratificações ) para fins de cálculo das deduções obrigatórias fiscais e para formação da base de cálculo das Verbas Reflexas
+                        </p>
+                    </div>
+
+                    <hr class="mb-6 mt-0 border-[#00678F]">
+                    <h4 class="text-xl font-semibold text-[#00678F]">Definição da Base de Cálculo</h4>
+                    <p class="text-gray-700 leading-relaxed text-justify mt-2">A base de cálculo é o montante sobre o
+                        qual incidirão os cálculos para apurar o valor devido.</p>
+
+                    <p class="text-gray-700 leading-relaxed text-justify mt-2">Para calcular o Saldo de Salário,
+                        considera-se o salário mensal e a quantidade de dias efetivamente trabalhados no último mês. A
+                        base de cálculo é sempre a remuneração integral do empregado.</p>
+
+                    <h6 class="text-lg font-bold text-[#00678F] mt-4">Composição da Base de Cálculo:</h6>
+
+                    <p class="text-gray-700 leading-relaxed text-justify mt-2">A Base de Cálculo do Saldo de Salário é
+                        formada pelo somatório das bases:</p>
+
+                    <ul class="list-disc list-inside text-gray-700 leading-relaxed mt-2 pl-4 space-y-2">
+                        <li><strong>Base Principal:</strong> <span class="underline font-bold">Salário Base
+                                Proporcional</span>.</li>
+                        <li><strong>Bases Adicionais:</strong> <span class="underline font-bold">Não há</span>.</li>
+                    </ul>
+
+                    <div class="p-3 mt-4 bg-gray-100 border-l-4 border-[#00678F]/50 rounded-r-md">
+                        <p class="text-sm text-gray-700 leading-relaxed text-justify">
+                            <strong class="text-gray-900">Observação:</strong> Destaque-se que Feriados e Descanso
+                            Semanal Remunerado (parcelas fixas) já estão incluídos no Salário Base. No entanto, no caso
+                            de incidência de verbas variáveis (horas extras, adicional noturno, comissões) há reflexos
+                            sobre o DSR e Feriados, que devem ser somados à base principal.
+                        </p>
+                    </div>
+
+
+                    <p class="text-gray-700 leading-relaxed text-justify mt-4"><strong>Importante:</strong> Saldo de
+                        Salário é uma verba separada de outras verbas rescisórias como férias proporcionais, 13º salário
+                        proporcional e aviso prévio indenizado.</p>
+
+                    <hr class="my-4 border-gray-300">
+
+                    <div id="calculo-salario-hora-drawer" class="drawer-nested">
+                        <div id="calculo-salario-hora-header"
+                            class="drawer-header bg-gray-100 hover:bg-gray-200 transition duration-150">
+                            <h4 class="text-lg font-semibold text-gray-800">Cálculo do Salário-Hora (Mensalista)</h4>
+                            <svg class="arrow-icon w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </div>
+                        <div id="calculo-salario-hora-content" class="drawer-content bg-white">
+                            <p class="text-gray-700 leading-relaxed text-justify">O Artigo 64 da CLT é usado para
+                                determinar o divisor mensal de horas. Embora mencione "30 vezes o número de horas dessa
+                                duração", o entendimento consolidado considera a jornada semanal do empregado, sendo o
+                                divisor
+                                padrão de 220 horas para a jornada de 44 horas semanais.</p>
+                            <ul class="list-disc list-inside text-gray-700 leading-relaxed mt-2 pl-4">
+                                <li><strong>Jornada de 44h semanais:</strong> O divisor padrão é 220 horas (resultado de
+                                    30 dias
+                                    * 7,33 horas/dia, ou 44 horas/semana * 5 semanas/mês, aproximadamente).</li>
+                                <li><strong>Jornada de 40h semanais:</strong> O divisor é 200 horas.</li>
+                                <li><strong>Jornada de 36h semanais:</strong> O divisor é 180 horas.</li>
+                            </ul>
+
+                            <div class="p-3 bg-gray-50 rounded-md border border-gray-300 mt-2">
+                                <p class="font-semibold text-sm text-center">Salário-Hora Normal = Salário Mensal /
+                                    Divisor
+                                    Horário
+                                    Padrão</p>
+                                <p class="text-xs text-gray-600 mt-1 text-center">O Divisor Horário Padrão é 220, 200,
+                                    180,
+                                    etc., conforme a jornada de trabalho semanal do empregado.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="calculo-salario-hora-diarista-drawer" class="drawer-nested">
+                        <div id="calculo-salario-hora-diarista-header"
+                            class="drawer-header bg-gray-100 hover:bg-gray-200 transition duration-150">
+                            <h4 class="text-lg font-semibold text-gray-800">Cálculo do Salário-Hora (Diarista)</h4>
+                            <svg class="arrow-icon w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </div>
+                        <div id="calculo-salario-hora-diarista-content" class="drawer-content bg-white">
+                            <p class="text-gray-700 leading-relaxed text-justify">O artigo 65 da CLT define como
+                                calcular a
+                                hora de trabalho para o empregado que recebe por dia (diarista). Para o diarista, o
+                                salário já é
+                                fixado por dia. Para encontrar o valor da hora, basta dividir o salário diário pela
+                                duração da
+                                jornada diária normal (geralmente 8 horas).</p>
+
+                            <div class="p-3 bg-gray-50 rounded-md border border-gray-300 mt-2">
+                                <p class="font-semibold text-sm text-center">Salário-Hora Normal = Salário Diário /
+                                    Duração
+                                    Normal
+                                    do Trabalho Diário</p>
+                                <p class="text-xs text-gray-600 mt-1 text-center">A Duração Normal do Trabalho Diário é,
+                                    geralmente, de 8 horas (conforme Art. 58 da CLT).</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="calculo-salario-dia-drawer" class="drawer-nested">
+                        <div id="calculo-salario-dia-header"
+                            class="drawer-header bg-gray-100 hover:bg-gray-200 transition duration-150">
+                            <h4 class="text-lg font-semibold text-gray-800">Cálculo do Salário-Dia (Proporcional)</h4>
+                            <svg class="arrow-icon w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </div>
+                        <div id="calculo-salario-dia-content" class="drawer-content bg-white">
+                            <p class="text-gray-700 leading-relaxed text-justify">O parágrafo único do artigo 64 da CLT
+                                é
+                                crucial e gera debates, mas a interpretação atual se volta para a ideia de dias reais do
+                                mês em
+                                caso de rescisão. A interpretação é de que, se o mês tem menos de 30 dias (como
+                                fevereiro), o
+                                cálculo deve usar o número de dias real do mês. Por extensão e conforme a Súmula 264 do
+                                TST, o
+                                cálculo do valor do dia de trabalho para o saldo de salário deve ser:</p>
+
+                            <div class="p-3 bg-gray-50 rounded-md border border-gray-300 mt-2">
+                                <p class="font-semibold text-sm text-center mb-1">Valor do Dia de Trabalho = Salário
+                                    Mensal
+                                    / Número
+                                    de Dias do Mês da Rescisão</p>
+                                <p class="font-semibold text-sm text-center">Saldo de Salário = Valor do Dia de Trabalho
+                                    x
+                                    Dias
+                                    Trabalhados no Mês</p>
+                            </div>
+                        </div>
+                    </div>
+                    <h5 class="text-lg font-semibold text-gray-800 mt-4">Exemplo Prático (Valor Bruto)</h5>
+                    <p class="text-gray-700 leading-relaxed text-justify mt-2">O cálculo do saldo de salário é simples e
+                        direto, seguindo uma fórmula proporcional aos dias trabalhados no mês da rescisão, utilizando o
+                        número de dias reais do mês conforme a interpretação do Art. 64, Parágrafo Único e Súmula
+                        264 do TST.</p>
+                    <hr class="my-4 border-gray-300">
+                    <p class="text-gray-700 leading-relaxed text-justify mt-2">Um empregado com salário mensal de R$
+                        3.100,00 foi demitido no dia 15 de janeiro (mês com 31 dias). O cálculo do saldo de salário é:
+                    </p>
+                    <p class="text-gray-700 mt-2 font-semibold">Saldo de Salário = (R$ 3.100,00 / 31 dias) * 15 dias =
+                        R$
+                        1.500,00</p>
+                    <p class="text-gray-700 leading-relaxed text-justify mt-2">Dessa forma, o valor do saldo de salário
+                        devido a este empregado é de R$ 1.500,00.</p>
+                    <hr class="my-4 border-gray-300">
+                    <table
+                        class="w-full mt-4 text-sm text-gray-700 border-collapse border border-gray-300 rounded-md overflow-hidden">
+                        <thead>
+                            <tr class="bg-gray-200">
+                                <th class="py-2 px-4 text-left border-b border-gray-300">Item</th>
+                                <th class="py-2 px-4 text-left border-b border-gray-300">Valor</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="border-b border-gray-300">
+                                <td class="py-2 px-4">Salário Mensal</td>
+                                <td class="py-2 px-4">R$ 3.100,00</td>
+                            </tr>
+                            <tr class="border-b border-gray-300">
+                                <td class="py-2 px-4">Dias no Mês</td>
+                                <td class="py-2 px-4">31 dias (Janeiro)</td>
+                            </tr>
+                            <tr class="border-b border-gray-300">
+                                <td class="py-2 px-4">Dias Trabalhados</td>
+                                <td class="py-2 px-4">15 dias</td>
+                            </tr>
+                            <tr>
+                                <td class="py-2 px-4 font-bold bg-gray-100">Saldo de Salário Bruto</td>
+                                <td class="py-2 px-4 font-bold bg-gray-100">R$ 1.500,00</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <hr class="my-6 border-[#00678F]">
+
+                    <h4 class="text-xl font-semibold text-[#00678F]">Deduções da Base de Cálculo</h4>
+
+                    <h6 class="text-lg font-bold text-[#00678F] mt-4">Deduções Fiscais e Previdenciárias:</h6>
+                    <p class="text-gray-700 leading-relaxed text-justify mt-2">O desconto da contribuição para o
+                        Instituto Nacional do Seguro Social (INSS) e do Imposto de Renda Retido na Fonte (IRRF) é
+                        obrigatório, pois o saldo de salário possui natureza salarial.</p>
+                    <h6 class="text-lg font-bold text-[#00678F] mt-4">Deduções de Valores Pagos (Compensação -
+                        Adiantamento):</h6>
+                    <ul class="list-disc list-inside text-gray-700 leading-relaxed mt-2 pl-4 space-y-2">
+                        <li><strong>Adiantamentos Salariais:</strong> Valores antecipados ao empregado no mês da
+                            rescisão ou em meses anteriores.</li>
+                    </ul>
+
+                    <h6 class="text-lg font-bold text-[#00678F] mt-4">Descontos Autorizados por Lei, Contrato ou Acordo
+                        Coletivo:</h6>
+                    <ul class="list-disc list-inside text-gray-700 leading-relaxed mt-2 pl-4 space-y-2">
+                        <li><strong>Vale-Transporte:</strong> Desconto de até 6% do salário básico, caso o empregado
+                            tenha optado por receber o benefício e ele tenha sido antecipado.</li>
+                        <li><strong>Faltas e Atrasos Injustificados:</strong> O valor correspondente aos dias ou horas
+                            de ausência não justificada no mês da rescisão.</li>
+                    </ul>
+
+                    <hr class="my-4 border-gray-300">
+                    <h5 class="text-lg font-semibold text-gray-800">Exemplo Prático (Valor Bruto - Deduções = Valor
+                        Líquido)</h5>
+                    <p class="text-gray-700 leading-relaxed text-justify mt-2">Considerando o valor do saldo de salário
+                        bruto de R$ 1.500,00, e a inclusão dos descontos de adiantamento (R$ 300,00) e Vale-Transporte
+                        (R$ 50,00), o cálculo do valor líquido é:</p>
+                    <table
+                        class="w-full mt-4 text-sm text-gray-700 border-collapse border border-gray-300 rounded-md overflow-hidden">
+                        <thead>
+                            <tr class="bg-gray-200">
+                                <th class="py-2 px-4 text-left border-b border-gray-300">Item</th>
+                                <th class="py-2 px-4 text-left border-b border-gray-300">Valor</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="border-b border-gray-300">
+                                <td class="py-2 px-4 font-bold bg-gray-50">Saldo de Salário Bruto</td>
+                                <td class="py-2 px-4 font-bold bg-gray-50">R$ 1.500,00</td>
+                            </tr>
+                            <tr class="border-b border-gray-300">
+                                <td class="py-2 px-4 text-red-600">(-) Dedução INSS (R$ 1.500,00 * 7,5%)</td>
+                                <td class="py-2 px-4 text-red-600">R$ 112,50</td>
+                            </tr>
+                            <tr class="border-b border-gray-300">
+                                <td class="py-2 px-4 text-gray-700">Base de Cálculo IRPF (1500,00 - 112,50)</td>
+                                <td class="py-2 px-4 text-gray-700">R$ 1.387,50</td>
+                            </tr>
+                            <tr class="border-b border-gray-300">
+                                <td class="py-2 px-4 text-red-600">(-) Dedução IRPF (R$ 1.387,50 * 7,5%)</td>
+                                <td class="py-2 px-4 text-red-600">R$ 104,06</td>
+                            </tr>
+                            <tr class="border-b border-gray-300">
+                                <td class="py-2 px-4 text-red-600">(-) Desconto Adiantamento Salarial</td>
+                                <td class="py-2 px-4 text-red-600">R$ 300,00</td>
+                            </tr>
+                            <tr class="border-b border-gray-300">
+                                <td class="py-2 px-4 text-red-600">(-) Desconto Vale-Transporte (6% do Salário Base)
+                                </td>
+                                <td class="py-2 px-4 text-red-600">R$ 90,00</td>
+                            </tr>
+                            <tr>
+                                <td class="py-2 px-4 font-bold bg-gray-100">Total Deduções (INSS + IRPF + Adiant. + VT)
+                                </td>
+                                <td class="py-2 px-4 font-bold bg-gray-100">R$ 606,65</td>
+                            </tr>
+                            <tr>
+                                <td class="py-2 px-4 font-bold bg-[#00678F]/10 text-[#00678F]">Saldo de Salário Líquido
+                                </td>
+                                <td class="py-2 px-4 font-bold bg-[#00678F]/10 text-[#00678F]">R$ 893,44</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div id="verbas-reflexas-drawer" class="drawer-container">
+                <div id="verbas-reflexas-header" class="drawer-header">
+                    <h4 class="text-xl font-semibold text-[#00678F]">Verbas Reflexas</h4>
+                    <svg class="arrow-icon w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                    </svg>
+                </div>
+                <div id="verbas-reflexas-content" class="drawer-content">
+                    <p class="text-gray-700 leading-relaxed text-justify">O Saldo de Salário, por representar a
+                        remuneração devida pelos dias trabalhados, serve como base de cálculo (ou um indicador da
+                        proporcionalidade) para outras verbas rescisórias.</p>
+                    <p class="text-gray-700 leading-relaxed text-justify mt-2">Embora o Saldo de Salário seja a
+                        remuneração direta dos dias efetivamente trabalhados, a contagem desses dias é essencial para
+                        determinar a proporção de direitos, e seu valor entra no cálculo de verbas como:</p>
+
+                    <table
+                        class="w-full mt-4 text-sm text-gray-700 border-collapse border border-gray-300 rounded-md overflow-hidden">
+                        <thead>
+                            <tr class="bg-gray-200">
+                                <th class="py-2 px-4 text-left border-b border-gray-300 w-1/3">Verbas Reflexas</th>
+                                <th class="py-2 px-4 text-left border-b border-gray-300 w-2/3">Relação com o Saldo de
+                                    Salário</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="border-b border-gray-300">
+                                <td class="py-2 px-4 font-medium">13º Salário Proporcional</td>
+                                <td class="py-2 px-4">O Saldo de Salário determina se o mês da rescisão conta como 1/12
+                                    avos (se trabalhado 15 dias ou mais).</td>
+                            </tr>
+                            <tr class="border-b border-gray-300">
+                                <td class="py-2 px-4 font-medium">Férias Proporcionais</td>
+                                <td class="py-2 px-4">A contagem dos dias trabalhados no mês (do Saldo de Salário) é
+                                    usada para apuração do período aquisitivo.</td>
+                            </tr>
+                            <tr class="border-b border-gray-300">
+                                <td class="py-2 px-4 font-medium">Aviso Prévio Indenizado</td>
+                                <td class="py-2 px-4">O valor do Saldo de Salário (e médias) serve como base de
+                                    remuneração para o cálculo do aviso.</td>
+                            </tr>
+                            <tr class="border-b border-gray-300">
+                                <td class="py-2 px-4 font-medium">Depósito FGTS (8%)</td>
+                                <td class="py-2 px-4">O valor bruto do Saldo de Salário (incluindo variáveis) é a base
+                                    de cálculo para o depósito obrigatório de 8%.</td>
+                            </tr>
+                            <tr>
+                                <td class="py-2 px-4 font-medium">Multa de 40% do FGTS</td>
+                                <td class="py-2 px-4">O Saldo de Salário (junto com outras verbas salariais) integra a
+                                    base para o cálculo da multa rescisória.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <ul class="list-disc list-inside text-gray-700 leading-relaxed mt-2 pl-4 space-y-2">
+
+                        <hr class="my-4 border-gray-300">
+                        <p class="text-gray-700 leading-relaxed text-justify mt-2"><strong>Atenção:</strong> O Saldo de
+                            Salário é uma verba principal. Os reflexos mencionados acima são cálculos que dependem da
+                            existência do Saldo de Salário e dos dias trabalhados no mês da rescisão, bem como do seu
+                            valor.
+                        </p>
+                </div>
+            </div>
+
+            <div id="calculadora-salario-drawer" class="drawer-container">
+                <div id="calculadora-salario-header" class="drawer-header">
+                    <h4 class="text-xl font-semibold text-[#00678F]">Calculadora (Simulação)</h4>
+                    <svg class="arrow-icon w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path>
+                    </svg>
+                </div>
+                <div id="calculadora-salario-content" class="drawer-content">
+                    <p class="text-gray-700 leading-relaxed text-justify">Utilize esta ferramenta para calcular o
+                        seu saldo de salário de forma rápida e simples, considerando o número real de dias do mês de
+                        rescisão.</p>
+
+                    <div class="p-4 bg-white rounded-lg shadow-inner mt-4">
+                        <h5 class="text-md font-semibold text-gray-800">Cálculo Simples (Bruto)</h5>
+                        <div class="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4">
+                            <div class="flex-1">
+                                <label for="salarioBrutoInput" class="block text-sm text-gray-700">Salário Bruto Mensal
+                                    (R$):</label>
+                                <input type="text" id="salarioBrutoInput" placeholder="Ex: 3100,00"
+                                    class="mt-1 block w-full rounded-md border-gray-300 p-2 focus:ring-[#00678F] focus:border-[#00678F]">
+                            </div>
+                            <div class="flex-1">
+                                <label for="diasNoMesInput" class="block text-sm text-gray-700">Dias no Mês de
+                                    Rescisão:</label>
+                                <input type="number" id="diasNoMesInput" placeholder="Ex: 31" min="28" max="31"
+                                    class="mt-1 block w-full rounded-md border-gray-300 p-2 focus:ring-[#00678F] focus:border-[#00678F]">
+                            </div>
+                            <div class="flex-1">
+                                <label for="diasTrabalhadosInput" class="block text-sm text-gray-700">Dias Trabalhados
+                                    no mês:</label>
+                                <input type="number" id="diasTrabalhadosInput" placeholder="Ex: 15"
+                                    class="mt-1 block w-full rounded-md border-gray-300 p-2 focus:ring-[#00678F] focus:border-[#00678F]">
+                            </div>
+                        </div>
+                        <button id="calculateBtn"
+                            class="mt-4 w-full px-4 py-2 bg-[#00678F] text-white rounded-md hover:bg-[#004562] transition duration-300 shadow-md flex items-center justify-center">
+                            <span id="buttonText">Calcular Saldo</span>
+                            <div id="loadingSpinner" class="loading-spinner"></div>
+                        </button>
+                        <div class="mt-4">
+                            <div class="flex items-center justify-between">
+                                <div id="result" class="text-sm text-gray-700 w-full"></div>
+                                <button id="copyResult" class="copy-btn hidden" aria-label="Copiar valor">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                        <path
+                                            d="M16 1H4C2.9 1 2 1.9 2 3v14h2V3h12V1zm3 4H8C6.9 5 6 5.9 6 7v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z" />
+                                    </svg>
+                                </button>
+                            </div>
+                            <span id="copyTargetValue" class="hidden"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div id="pje-calc-drawer" class="drawer-container">
+                <div id="pje-calc-header" class="drawer-header">
+                    <h4 class="text-xl font-semibold text-[#00678F]">Lançamento no PJe-Calc </h4>
+                    <svg class="arrow-icon w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                    </svg>
+                </div>
+                <div id="pje-calc-content" class="drawer-content">
+                    <p class="text-gray-700 leading-relaxed text-justify">A seguir, confira o passo a passo para o
+                        lançamento da verba no PJe-Calc, utilizando a opção "Expresso":</p>
+
+                    <ol class="list-decimal list-inside text-gray-700 leading-relaxed mt-4 ml-4 space-y-3">
+                        <li>
+                            <strong class="text-gray-800">Acessar Verbas e Escolher Lançamento:</strong> No menu de
+                            navegação à esquerda, clique na opção <u>Verbas</u> para iniciar o lançamento. Após o
+                            comando,
+                            será exibida a tela para escolha do Lançamento da Verba. Escolha a opção <u>Expresso</u>.
+                            <img src="imagens/verbas.png"
+                                alt="Tela do PJe-Calc - Passo 1: Acessar a opção Verbas no menu lateral e clicar em Expresso na seção Lançamento."
+                                class="w-full h-auto my-4 rounded-lg shadow-md">
+                        </li>
+                        <li>
+                            <strong class="text-gray-800">Seleção da Verba:</strong> O sistema abrirá as opções de
+                            verbas, escolha a verba <u>Saldo de Salário</u> e clique no botão <u>Salvar</u>
+                            <img src="imagens//saldosalario1.png"
+                                alt="Tela do PJe-Calc - Verbas Principais: Selecionar Saldo de Salário"
+                                class="w-full h-auto my-4 rounded-lg shadow-md">
+                        </li>
+                        <li>
+                            <strong class="text-gray-800">Quadro de Verbas e Ações:</strong> O sistema exibirá um quadro
+                            com os campos:
+                            <ul class="list-disc list-inside text-gray-700 leading-relaxed mt-2 ml-4">
+                                <li class="ml-8 flex items-center">
+                                <li>Ações - contendo as opções de configurações da verba selecionada (parâmetros,
+                                    ocorrências e
+                                    exclusão)
+                                    <img src="imagens/telaacoes.png"
+                                        alt="Ícones de Ações: Parâmetros (folha com seta), Ocorrências (folha com checks), Excluir (X vermelho)"
+                                        class="icon-small" style="width: 72px; height: auto;">
+                                </li>
+                                <li class="ml-8 flex items-center">
+                                    - Parâmetros da Verba <img src="imagens/telaparametros.png"
+                                        alt="Ícone de Parâmetros" class="icon-small">
+                                </li>
+                                <li class="ml-8 flex items-center">
+                                    - Ocorrências da Verba <img src="imagens/telaocorrencias.png"
+                                        alt="Ícone de Ocorrências" class="icon-small">
+                                </li>
+                                <li class="ml-8 flex items-center">
+                                    - Excluir <img src="imagens/telaexcluir.png" alt="Ícone de Excluir"
+                                        class="icon-small">
+                                </li>
+                                <li>Verba Principal - verba selecionada para lançamento.</li>
+                                <li>Verba Reflexa - em que ao clicar no botão <u>Exibir</u> serão listadas todas as
+                                    verbas
+                                    reflexas ligadas a Verba Principal.</li>
+                            </ul>
+                            <img src="imagens/saldosalario2.png"
+                                alt="Tela do PJe-Calc - Verba Saldo de Salário selecionada com as opções de Ações e Verba Reflexa."
+                                class="w-full h-auto my-4 rounded-lg shadow-md">
+                        </li>
+                        <li>
+                            <strong class="text-gray-800">Parametrização da Verba:</strong> Ao clicar no botão
+                            <u>Parâmetros da Verba</u> serão exibidas todas as configurações necessárias para a
+                            parametrização
+                            da Verba Principal.
+                            <img src="imagens/saldosalario3.png"
+                                alt="Tela do PJe-Calc - Detalhes da Verba Saldo de Salário: Parâmetros, Base de Cálculo, Divisor e Multiplicador."
+                                class="w-full h-auto my-4 rounded-lg shadow-md">
+                        </li>
+                        <li>
+                            <strong class="text-gray-800">Registro de Ocorrências:</strong> Ao clicar no botão
+                            <u>Ocorrências da Verba</u> serão exibidas todas as configurações necessárias para registro
+                            das
+                            ocorrências da Verba Principal.
+                            <img src="imagens/saldosalario4.png"
+                                alt="Tela do PJe-Calc - Dados de Ocorrências: Detalhamento da data inicial, data final e valor calculado da verba."
+                                class="w-full h-auto my-4 rounded-lg shadow-md">
+                        </li>
+                    </ol>
+
+                </div>
+
+        </section>
+    </div>
+
+    <script>
+        // Function to format the salary value as the user types
+        function formatSalarioInput() {
+            const salarioBrutoInput = document.getElementById('salarioBrutoInput');
+            salarioBrutoInput.addEventListener('input', (e) => {
+                let value = e.target.value;
+                // Remove all characters that are not digits
+                value = value.replace(/\D/g, '');
+
+                // Format with a comma for cents and dots for thousands
+                if (value.length > 2) {
+                    value = value.replace(/(\d+)(\d{2})$/, '$1,$2');
+                }
+                if (value.length > 6) {
+                    value = value.replace(/(\d)(?=(\d{3})+,)/g, '$1.');
+                }
+                e.target.value = value.trim();
+            });
+        }
+
+        // Call the formatting function
+        formatSalarioInput();
+
+        // Function to calculate the salary balance
+        function calculateSalaryBalance() {
+            const salarioInput = document.getElementById('salarioBrutoInput');
+            const diasNoMesInput = document.getElementById('diasNoMesInput');
+            const diasTrabalhadosInput = document.getElementById('diasTrabalhadosInput');
+            const resultDiv = document.getElementById('result');
+            const copyBtn = document.getElementById('copyResult');
+            const loadingSpinner = document.getElementById('loadingSpinner');
+            const buttonText = document.getElementById('buttonText');
+
+            // Mostrar spinner e desativar botão
+            buttonText.textContent = '';
+            loadingSpinner.style.display = 'inline-block';
+            document.getElementById('calculateBtn').disabled = true;
+
+            const rawSalario = salarioInput.value.replace(/\./g, '').replace(',', '.');
+            const salario = parseFloat(rawSalario);
+            const diasTrabalhados = parseFloat(diasTrabalhadosInput.value);
+            const diasNoMes = parseFloat(diasNoMesInput.value);
+            const copyTarget = document.getElementById('copyTargetValue');
+
+
+            // Validar entradas
+            if (isNaN(salario) || salario <= 0) {
+                resultDiv.innerHTML = '<p class="text-red-600">Por favor, insira um valor de Salário Bruto mensal válido.</p>';
+                copyBtn.classList.add('hidden');
+                copyTarget.textContent = '';
+            } else if (isNaN(diasNoMes) || diasNoMes < 28 || diasNoMes > 31) {
+                resultDiv.innerHTML = '<p class="text-red-600">Por favor, insira um número válido de Dias no Mês de Rescisão (28 a 31).</p>';
+                copyBtn.classList.add('hidden');
+                copyTarget.textContent = '';
+            } else if (isNaN(diasTrabalhados) || diasTrabalhados < 0 || diasTrabalhados > diasNoMes) {
+                resultDiv.innerHTML = `<p class="text-red-600">Por favor, insira um número válido de Dias Trabalhados no mês (0 a ${diasNoMes}).</p>`;
+                copyBtn.classList.add('hidden');
+                copyTarget.textContent = '';
+            } else {
+                // Cálculo Corrigido (usando diasNoMes como divisor)
+                const valorDiario = salario / diasNoMes;
+                const valorTotal = valorDiario * diasTrabalhados;
+
+                // Formatação para exibição
+                const salarioFormatado = salario.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+                const valorDiarioFormatado = valorDiario.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+                const valorTotalFormatado = valorTotal.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+
+
+                const resultText = `
+                    <p class="font-bold text-lg text-[#00678F]">Saldo de Salário Bruto Calculado:</p>
+                    <div class="mt-2 p-3 border-l-4 border-yellow-500 bg-gray-50 rounded-r-md">
+                        <p class="text-xs text-gray-600">Fórmula: (R$ ${salarioFormatado} / ${diasNoMes} dias do mês) * ${diasTrabalhados} dias trabalhados</p>
+                        <p class="text-sm mt-1">Valor Diário: ${valorDiarioFormatado}</p>
+                    </div>
+                    <p class="text-xl font-bold mt-3">Total Bruto: ${valorTotalFormatado}</p>
+                `;
+
+                resultDiv.innerHTML = resultText;
+                // Armazena o valor numérico puro no elemento escondido para cópia
+                copyTarget.textContent = valorTotal.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+                copyBtn.classList.remove('hidden');
+            }
+
+            // Esconder spinner e reativar botão após um breve delay (simulação de processamento)
+            setTimeout(() => {
+                loadingSpinner.style.display = 'none';
+                buttonText.textContent = 'Calcular Saldo';
+                document.getElementById('calculateBtn').disabled = false;
+            }, 300);
+        }
+
+        // Function to copy text
+        function copyText(elementId) {
+            const element = document.getElementById(elementId);
+            if (!element) return;
+            // Pega o valor formatado para cópia (R$ x.xxx,xx)
+            const textToCopy = element.textContent.trim();
+
+            const tempInput = document.createElement('textarea');
+            tempInput.value = textToCopy;
+            document.body.appendChild(tempInput);
+            tempInput.select();
+            tempInput.setSelectionRange(0, 99999);
+
+            try {
+                document.execCommand('copy');
+                // Alerta visual de cópia (feedback)
+                const resultDiv = document.getElementById('result');
+                const feedbackText = document.createElement('p');
+                feedbackText.id = 'copyFeedback';
+                feedbackText.className = 'text-sm text-green-600 font-semibold mt-2';
+                feedbackText.textContent = `Copiado para a área de transferência: ${textToCopy}`;
+
+                // Evita duplicar a mensagem de feedback se o usuário clicar rápido
+                let feedback = document.getElementById('copyFeedback');
+                if (feedback) {
+                    feedback.textContent = `Copiado para a área de transferência: ${textToCopy}`;
+                } else {
+                    resultDiv.appendChild(feedbackText);
+                }
+
+                setTimeout(() => {
+                    feedback = document.getElementById('copyFeedback');
+                    if (feedback) {
+                        feedback.remove();
+                    }
+                }, 1000);
+            } catch (err) {
+                alert('Erro ao copiar o valor. Tente novamente.');
+            } finally {
+                document.body.removeChild(tempInput);
+            }
+        }
+
+        // Add event listeners to the buttons
+        document.getElementById('calculateBtn').addEventListener('click', calculateSalaryBalance);
+        // O botão de cópia agora é ligado ao ID que contém o valor numérico formatado para facilitar a cópia
+        document.getElementById('copyResult').addEventListener('click', () => copyText('copyTargetValue'));
+
+        // Logic for expandable drawers (CORRIGIDO com maxHeight fixo)
+        function setupDrawer(drawerId) {
+            const header = document.getElementById(`${drawerId}-header`);
+            const content = document.getElementById(`${drawerId}-content`);
+
+            if (header && content) {
+                header.addEventListener('click', () => {
+                    const isExpanded = header.classList.toggle('active');
+                    if (isExpanded) {
+                        // CORREÇÃO ROBUSTA: Usa um valor grande e fixo para max-height para garantir que todo o conteúdo caiba,
+                        // contornando problemas de cálculo de scrollHeight após a aplicação de padding e estilos.
+                        content.style.maxHeight = '9999px';
+                    } else {
+                        content.style.maxHeight = '0';
+                    }
+                });
+            }
+        }
+
+        // Configuração de todas as gavetas
+        setupDrawer('base-legal');
+        setupDrawer('base-calculo');
+        setupDrawer('verbas-reflexas');
+        setupDrawer('calculadora-salario');
+        setupDrawer('pje-calc');
+        // Gavetas aninhadas (Mantendo o setupDrawer para elas também)
+        setupDrawer('calculo-salario-hora');
+        setupDrawer('calculo-salario-hora-diarista');
+        setupDrawer('calculo-salario-dia');
+    </script>
+</body>
+
+</html>

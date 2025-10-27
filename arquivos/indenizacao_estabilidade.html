@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Indenização por Quebra de Estabilidade Provisória</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f4f8;
+            color: #1a202c;
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 2rem;
+            background-color: #ffffff;
+            border-radius: 1rem;
+            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.05);
+        }
+        /* Estilos para os Drawers (Acordeão) */
+        .drawer-container {
+            padding: 1rem;
+            background-color: #f0f4f8;
+            border-radius: 0.75rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+            margin-top: 1.5rem;
+        }
+        .drawer-header {
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .drawer-content {
+            overflow: hidden;
+            transition: all 0.5s ease-in-out;
+            max-height: 0;
+        }
+        .drawer-header.active .arrow-icon {
+            transition: transform 0.5s ease-in-out;
+        }
+        .drawer-header.active .arrow-icon {
+            transform: rotate(180deg);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container my-8 relative">
+        <img src="https://site.trt19.jus.br/sites/default/files/logo-trt19.png" alt="Logo do TRT19" class="absolute top-4 right-4 w-36 h-auto">
+        
+        <section id="secao-indenizacao-estabilidade" class="content-section">
+            <h2 class="text-3xl font-bold text-[#00678F] mb-4">Indenização por Quebra de Estabilidade Provisória</h2>
+            <p class="text-gray-700 leading-relaxed text-justify">A estabilidade provisória é uma garantia de emprego que protege o trabalhador contra dispensa arbitrária ou sem justa causa em períodos específicos. A quebra dessa garantia gera o direito à indenização substitutiva.</p>
+            
+            <div class="mt-8 mb-6 p-4 border-l-4 border-[#00678F] bg-[#f0f4f8] rounded-r-md shadow-sm">
+                <h3 class="text-xl font-bold text-[#00678F] mb-2">Características da Indenização</h3>
+                <ul class="list-none ml-2 space-y-1 text-sm text-gray-700">
+                    <li class="ml-4 text-sm"><strong class="font-medium text-gray-900">O que é:</strong> Indenização referente aos <strong>salários e direitos do período restante da garantia de emprego</strong>.</li>
+                    
+                    <li class="font-medium text-gray-900 mt-2">Principais Tipos de Estabilidade:</li>
+                    <ul class="list-disc list-inside ml-4 text-xs space-y-1 mt-1">
+                        <li><strong class="text-gray-900">Gestante:</strong> Da confirmação da gravidez até cinco meses após o parto.</li>
+                        <li><strong class="text-gray-900">Acidente/Doença:</strong> 12 meses após a cessação do auxílio-doença acidentário (Art. 118, Lei 8.213/91).</li>
+                        <li><strong class="text-gray-900">Cipeiro (CIPA):</strong> Desde o registro da candidatura até um ano após o final do mandato.</li>
+                        <li><strong class="text-gray-900">Dirigente Sindical:</strong> Desde o registro da candidatura até 1 ano após o final do mandato.</li>
+                    </ul>
+                </ul>
+            </div>
+            
+            <div id="base-legal-drawer" class="drawer-container">
+                <div id="base-legal-header" class="drawer-header active">
+                    <h4 class="text-xl font-semibold text-[#00678F]">Base Legal e Jurisprudência (Gestante)</h4>
+                    <svg class="arrow-icon w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                    </svg>
+                </div>
+                <div id="base-legal-content" class="drawer-content">
+                    
+                    <p class="text-gray-700 leading-relaxed text-justify mt-4">O direito à indenização por quebra de estabilidade provisória tem como base a legislação e jurisprudência a seguir:</p>
+
+                    <h5 class="text-lg font-semibold text-gray-800 mt-4">Fontes Normativas</h5>
+                    <hr class="my-4 border-gray-300">
+                    <h5 class="text-base font-semibold text-gray-800">Constituição Federal (CF/88) - ADCT:</h5>
+                    <ul class="list-disc list-inside text-gray-700 leading-relaxed mt-2 ml-4 space-y-3">
+                        <li><strong class="text-[#00678F]">Art. 10, II, "b" do ADCT:</strong>
+                            <p class="text-sm italic mt-1 ml-4 border-l-2 border-gray-400 pl-3">"É vedada a dispensa arbitrária ou sem justa causa da empregada gestante, desde a confirmação da gravidez até cinco meses após o parto. A indenização, neste caso, é o pagamento de todos os salários e demais direitos correspondentes ao período total da estabilidade não cumprida."</p>
+                        </li>
+                    </ul>
+
+                    <hr class="my-6 border-gray-300">
+
+                    <h5 class="text-lg font-semibold text-gray-800">Jurisprudência</h5>
+                    <h6 class="text-base font-semibold text-gray-800 mt-4">Estabilidade da Gestante (Garantia do TST)</h6>
+                    <div class="p-4 bg-gray-100 rounded-md mt-2 border border-gray-300">
+                        <p class="font-bold text-sm">Súmula nº 244, I, do TST:</p>
+                        <p class="text-sm mt-1 italic">"O desconhecimento do estado gravídico pelo empregador não afasta o direito à estabilidade. (Base para a indenização substitutiva)."</p>
+                    </div>
+
+                </div>
+            </div>
+
+            <div id="base-deducoes-drawer" class="drawer-container">
+                <div id="base-deducoes-header" class="drawer-header">
+                    <h4 class="text-xl font-semibold text-[#00678F]">Base de Cálculo e Deduções</h4>
+                    <svg class="arrow-icon w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                    </svg>
+                </div>
+                <div id="base-deducoes-content" class="drawer-content">
+                    <p class="text-gray-700 leading-relaxed text-justify mt-4">A natureza jurídica **salarial** da indenização define a base de cálculo e a incidência de encargos sociais e fiscais (INSS, IRRF e FGTS).</p>
+                    
+                    <h5 class="text-lg font-semibold text-gray-800 mt-4">Indenização por Quebra de Estabilidade</h5>
+                    <div class="p-3 bg-teal-50 rounded-md mt-2 border border-teal-300">
+                        <p class="font-bold text-sm text-teal-800">Base de Cálculo:</p>
+                        <p class="text-sm mt-1 text-teal-800">Corresponde à projeção dos <strong>salários e demais direitos</strong> que seriam pagos durante o período restante da estabilidade. Isso inclui Salário-Base, Média de Horas Extras, Comissões e Projeções de 13º salário e Férias + 1/3.</p>
+                        <p class="font-bold text-sm text-teal-800 mt-2">Deduções / Encargos:</p>
+                        <p class="text-sm mt-1 text-teal-800">Por substituir os salários que seriam recebidos (possuindo <strong>natureza salarial</strong>), há <strong>INCIDÊNCIA</strong> de Imposto de Renda (IRRF) e contribuição previdenciária (INSS). Também deve haver depósito de FGTS sobre esta indenização.</p>
+                    </div>
+
+                    <h5 class="text-lg font-semibold text-gray-800 mt-6 border-t pt-4">Detalhamento do Cálculo</h5>
+                    <p class="text-gray-700 leading-relaxed text-justify mt-2">A indenização por estabilidade é calculada com base no período faltante para o término da garantia. Cada mês de estabilidade restante equivale a um salário mensal (além das projeções de 13º e férias).</p>
+                    <div class="p-4 bg-yellow-50 rounded-md mt-4 border border-yellow-300">
+                        <p class="font-bold text-sm text-yellow-800">Fórmula Básica de Indenização por Estabilidade (Valor Básico):</p>
+                        <p class="text-sm mt-1 text-yellow-800">$$ \text{Valor Indenização} = \text{Salário Base} \times \text{Meses de Estabilidade Restante} $$</p>
+                        <p class="text-xs mt-2 text-yellow-700 italic">Observação: O cálculo final no PJe-Calc incluirá 13º e Férias + 1/3 proporcionais.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div id="verbas-reflexas-drawer" class="drawer-container">
+                <div id="verbas-reflexas-header" class="drawer-header">
+                    <h4 class="text-xl font-semibold text-[#00678F]">Verbas Reflexas e de Projeções</h4>
+                    <svg class="arrow-icon w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                    </svg>
+                </div>
+                <div id="verbas-reflexas-content" class="drawer-content">
+                    <p class="text-gray-700 leading-relaxed text-justify mt-4">Devido à natureza salarial da indenização substitutiva, ela deve refletir em outras verbas contratuais calculadas sobre o salário, projetadas para o período de estabilidade não usufruído.</p>
+                    
+                    <ul class="list-disc list-inside text-gray-700 leading-relaxed mt-4 ml-4 space-y-2">
+                        <li>
+                            <strong class="text-gray-900">Décimo Terceiro Salário (13º):</strong> A indenização deve refletir no pagamento de 13º salário proporcional ao período de estabilidade.
+                        </li>
+                        <li>
+                            <strong class="text-gray-900">Férias + 1/3:</strong> O período indenizado gera direito a Férias Proporcionais acrescidas de 1/3 Constitucional.
+                        </li>
+                        <li>
+                            <strong class="text-gray-900">FGTS:</strong> O depósito de 8% é devido sobre o valor total da indenização (salários e 13º/férias), por sua natureza remuneratória.
+                        </li>
+                        <li>
+                            <strong class="text-gray-900">Acréscimos Legais:</strong> Outras parcelas salariais médias (horas extras, comissões, adicionais noturnos, etc.) devem ser integradas ao cálculo do valor base da indenização.
+                        </li>
+                    </ul>
+
+                    <div class="p-3 bg-yellow-50 rounded-md mt-4 border border-yellow-300">
+                        <p class="font-bold text-sm text-yellow-800">Nota:</p>
+                        <p class="text-sm mt-1 text-yellow-800">O PJe-Calc geralmente calcula as projeções de 13º e Férias automaticamente ao lançar os salários do período de estabilidade. As verbas reflexas seguem a mesma incidência de INSS e IRRF da indenização principal.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div id="calculadora-drawer" class="drawer-container">
+                <div id="calculadora-header" class="drawer-header">
+                    <h4 class="text-xl font-semibold text-[#00678F]">Calculadora (Simulação)</h4>
+                    <svg class="arrow-icon w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                    </svg>
+                </div>
+                <div id="calculadora-content" class="drawer-content">
+                    <p class="text-gray-700 leading-relaxed text-justify mt-4">Simule o valor base da indenização por quebra de estabilidade (não inclui 13º e Férias).</p>
+                    <div class="p-6 bg-white rounded-xl shadow-lg border border-gray-200 mt-4">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <label for="salarioBase" class="block text-sm font-medium text-gray-700">Salário Base Mensal (R$)</label>
+                                <input type="number" id="salarioBase" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-3 border focus:ring-[#00678F] focus:border-[#00678F]" placeholder="Ex: 3500.00" min="0">
+                            </div>
+                            <div>
+                                <label for="mesesEstabilidade" class="block text-sm font-medium text-gray-700">Meses de Estabilidade Restante</label>
+                                <input type="number" id="mesesEstabilidade" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-3 border focus:ring-[#00678F] focus:border-[#00678F]" value="0" min="0">
+                            </div>
+                        </div>
+                        
+                        <button id="calcularSimulacaoBtn" class="mt-6 w-full px-4 py-3 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 transition duration-300 shadow-lg font-bold">
+                            Calcular Indenização
+                        </button>
+
+                        <div class="mt-6 pt-4 border-t border-gray-200 space-y-3">
+                            <h5 class="text-lg font-semibold text-gray-800">Resultado do Cálculo (Valor Base):</h5>
+                            
+                            <div class="p-3 bg-green-50 rounded-md border-l-4 border-green-500">
+                                <p class="text-sm font-medium text-green-800">Indenização por Estabilidade (Salários-Base):</p>
+                                <p id="resultadoEstabilidade" class="text-xl font-bold text-green-900 mt-1">R$ 0,00</p>
+                            </div>
+                            
+                            <p class="text-xs text-gray-500 mt-4 italic">Este valor é apenas a projeção dos salários-base. O cálculo final no PJe-Calc incluirá adicionais, 13º e Férias proporcionais, e terá incidência de encargos.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="pjecalc-drawer" class="drawer-container">
+                <div id="pjecalc-header" class="drawer-header">
+                    <h4 class="text-xl font-semibold text-[#00678F]">Lançamento no PJe-Calc</h4>
+                    <svg class="arrow-icon w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                    </svg>
+                </div>
+                <div id="pjecalc-content" class="drawer-content">
+                    <h5 class="text-lg font-semibold text-gray-800 mt-4">2. Indenização por Quebra de Estabilidade</h5>
+                    <div class="p-3 bg-white rounded-md mt-2 border border-gray-300">
+                        <p class="font-bold text-sm text-[#00678F]">Natureza: Salarial (Substitutiva)</p>
+                        <p class="text-sm mt-1 text-gray-700">Esta verba deve ser lançada como **Salários** projetados para o período de estabilidade.</p>
+                        <ul class="list-disc list-inside ml-4 text-xs space-y-1 mt-1">
+                            <li>Lance os **Salários** (mês a mês) do período de estabilidade restante.</li>
+                            <li>O PJe-Calc calculará automaticamente a incidência de **INSS, IRRF e FGTS** (sobre salários e demais parcelas salariais, como 13º e férias indenizadas).</li>
+                            <li><strong class="text-red-600">Atenção:</strong> Não confunda com a rubrica "Indenização (art. 477/CLT)", que não é a correta.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            </section>
+    </div>
+
+    <script>
+        // Função para formatar números como moeda BRL
+        const formatter = new Intl.NumberFormat('pt-BR', {
+            style: 'currency',
+            currency: 'BRL',
+            minimumFractionDigits: 2,
+        });
+
+        // Função principal de cálculo da simulação
+        function calculateSimulation() {
+            const salarioBaseInput = document.getElementById('salarioBase');
+            const mesesEstabilidadeInput = document.getElementById('mesesEstabilidade');
+            
+            const resultadoEstabilidade = document.getElementById('resultadoEstabilidade');
+
+            // Resetar resultados
+            resultadoEstabilidade.textContent = 'R$ 0,00';
+
+            // 1. Coleta e validação dos inputs
+            const salarioBase = parseFloat(salarioBaseInput.value) || 0;
+            const mesesEstabilidade = parseInt(mesesEstabilidadeInput.value) || 0;
+            
+            if (salarioBase <= 0) {
+                alert('Erro: Informe um salário base válido.');
+                return;
+            }
+            if (mesesEstabilidade <= 0) {
+                alert('Erro: Informe o número de meses restantes de estabilidade.');
+                return;
+            }
+
+            // 2. Cálculo da Indenização por Estabilidade (Valor Base)
+            let valorEstabilidade = salarioBase * mesesEstabilidade;
+            
+            resultadoEstabilidade.textContent = formatter.format(valorEstabilidade);
+        }
+
+        // Configuração dos Event Listeners para a Calculadora
+        document.getElementById('calcularSimulacaoBtn').addEventListener('click', calculateSimulation);
+        
+        // Lógica para os drawers expansíveis
+        function setupDrawer(drawerId, startOpen = false) {
+            const header = document.getElementById(`${drawerId}-header`);
+            const content = document.getElementById(`${drawerId}-content`);
+
+            if (!header || !content) return;
+
+            // Inicialização para drawers abertos
+            if (startOpen) {
+                header.classList.add('active');
+                setTimeout(() => {
+                    if (content.scrollHeight > 0) {
+                        content.style.maxHeight = content.scrollHeight + "px";
+                    } else {
+                        content.style.maxHeight = 'fit-content';
+                    }
+                }, 10);
+            }
+            
+            header.addEventListener('click', () => {
+                const isExpanded = header.classList.toggle('active');
+                if (isExpanded) {
+                    content.style.maxHeight = content.scrollHeight + "px";
+                } else {
+                    content.style.maxHeight = '0';
+                }
+                
+                // Ajusta a altura de todos os drawers abertos após a expansão/retração de um
+                document.querySelectorAll('.drawer-content').forEach(dc => {
+                    if (dc.id !== content.id) {
+                        const dh = document.getElementById(dc.id.replace('-content', '-header'));
+                        if (dh && dh.classList.contains('active')) {
+                            dc.style.maxHeight = dc.scrollHeight + "px";
+                        }
+                    }
+                });
+            });
+            
+            // Adiciona listener para reajustar altura em caso de redimensionamento de conteúdo interno
+            new ResizeObserver(() => {
+                if (header.classList.contains('active')) {
+                    content.style.maxHeight = content.scrollHeight + "px";
+                }
+            }).observe(content);
+        }
+
+        // Inicializa os drawers, mantendo um deles aberto por padrão e seguindo a nova ordem
+        setupDrawer('base-legal', true); 
+        setupDrawer('base-deducoes', false); 
+        setupDrawer('verbas-reflexas', false); // Novo tópico
+        setupDrawer('calculadora', false); 
+        setupDrawer('pjecalc', false); // Movido para o final
+    </script>
+</body>
+</html>
