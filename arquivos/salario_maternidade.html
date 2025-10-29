@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -16,6 +17,7 @@
             color: #1a202c;
             line-height: 1.6;
         }
+
         /* Container principal com estética de cartão */
         .container {
             max-width: 900px;
@@ -25,6 +27,7 @@
             border-radius: 1rem;
             box-shadow: 0 4px 14px rgba(0, 0, 0, 0.05);
         }
+
         /* Estilo para o botão de copiar */
         .copy-btn {
             background-color: transparent;
@@ -34,15 +37,19 @@
             margin-left: 1rem;
             transition: opacity 0.3s ease;
         }
+
         .copy-btn svg {
             width: 1.5rem;
             height: 1.5rem;
-            fill: #00678F; /* Cor principal do tema */
+            fill: #00678F;
+            /* Cor principal do tema */
             transition: fill 0.3s ease;
         }
+
         .copy-btn:hover svg {
             fill: #004562;
         }
+
         /* Estilo do spinner de carregamento */
         .loading-spinner {
             border: 4px solid rgba(0, 103, 143, 0.1);
@@ -52,47 +59,65 @@
             height: 24px;
             animation: spin 1s linear infinite;
             margin-right: 0.5rem;
-            display: none; /* Inicia oculto */
+            display: none;
+            /* Inicia oculto */
         }
+
         @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
         }
+
         /* Estilos para os componentes de gaveta (Drawer/Accordion) */
         .drawer-container {
             padding: 1rem;
-            background-color: #f0f4f8; /* Fundo azul claro para destaque */
+            background-color: #f0f4f8;
+            /* Fundo azul claro para destaque */
             border-radius: 0.75rem;
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
             margin-top: 1.5rem;
         }
+
         .drawer-header {
             cursor: pointer;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 0.5rem 0; /* Espaçamento para clique */
+            padding: 0.5rem 0;
+            /* Espaçamento para clique */
         }
+
         .drawer-content {
             overflow: hidden;
             transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-            max-height: 0; /* Inicia fechado */
+            max-height: 0;
+            /* Inicia fechado */
             padding: 0;
         }
+
         .drawer-header .arrow-icon {
             transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
         }
+
         .drawer-header.active .arrow-icon {
             transform: rotate(180deg);
         }
+
         /* Conteúdo dentro da gaveta com padding superior para separação visual */
-        .drawer-content > * {
+        .drawer-content>* {
             padding-top: 0.5rem;
         }
+
         /* Estilos específicos para a calculadora */
         .input-group {
             margin-bottom: 1rem;
         }
+
         .result-box {
             background-color: #e0f2fe;
             border-left: 5px solid #00678F;
@@ -103,6 +128,7 @@
             justify-content: space-between;
             align-items: center;
         }
+
         .result-value {
             font-size: 1.5rem;
             font-weight: 700;
@@ -110,50 +136,64 @@
         }
     </style>
 </head>
+
 <body>
 
     <div class="container my-8 relative">
-        <img src="https://site.trt19.jus.br/sites/default/files/logo-trt19.png" alt="Logo do TRT19" class="absolute top-4 right-4 w-24 sm:w-32 md:w-36 h-auto">
-        
+        <img src="https://site.trt19.jus.br/sites/default/files/logo-trt19.png" alt="Logo do TRT19"
+            class="absolute top-4 right-4 w-24 sm:w-32 md:w-36 h-auto">
+
         <section id="salario-maternidade" class="content-section pt-16 sm:pt-4">
             <h1 class="text-3xl font-bold text-[#00678F] mb-6">Salário Maternidade</h1>
-            <p class="text-gray-700 leading-relaxed text-justify mb-4">O Salário Maternidade é um benefício previdenciário devido à segurada (ou segurado, em casos específicos) do Regime Geral de Previdência Social (RGPS) que se afasta do trabalho por motivo de nascimento de filho, adoção, guarda judicial para fins de adoção ou aborto não criminoso.</p>
-            
-            <h4 class="text-2xl font-bold text-[#00678F] mt-8 mb-2 border-t pt-4 border-gray-300">Requisitos e Duração do Benefício</h4>
-            <p class="text-gray-700 leading-relaxed text-justify mt-1">O direito ao benefício depende da qualidade de segurado e, em alguns casos, do cumprimento de carência.</p>
+            <p class="text-gray-700 leading-relaxed text-justify mb-4">O Salário Maternidade é um benefício
+                previdenciário devido à segurada (ou segurado, em casos específicos) do Regime Geral de Previdência
+                Social (RGPS) que se afasta do trabalho por motivo de nascimento de filho, adoção, guarda judicial para
+                fins de adoção ou aborto não criminoso.</p>
+
+            <h4 class="text-2xl font-bold text-[#00678F] mt-8 mb-2 border-t pt-4 border-gray-300">Requisitos e Duração
+                do Benefício</h4>
+            <p class="text-gray-700 leading-relaxed text-justify mt-1">O direito ao benefício depende da qualidade de
+                segurado e, em alguns casos, do cumprimento de carência.</p>
             <h5 class="text-lg font-semibold text-gray-800 mt-4">Duração Padrão:</h5>
             <ul class="list-disc list-inside text-gray-700 leading-relaxed mt-2 pl-4">
-                <li>**120 dias** (4 meses), nos casos de parto, adoção ou guarda judicial para fins de adoção.</li>
-                <li>**14 dias**, no caso de aborto não criminoso ou em caso de natimorto.</li>
+                <li>120 dias (4 meses), nos casos de parto, adoção ou guarda judicial para fins de adoção.</li>
+                <li>14 dias, no caso de aborto não criminoso ou em caso de natimorto.</li>
             </ul>
-            <h5 class="text-lg font-semibold text-gray-800 mt-4">Carência:</h5>
+            <h5 class="text-lg font-semibold text-gray-800 mt-4">Pagamento:</h5>
             <ul class="list-disc list-inside text-gray-700 leading-relaxed mt-2 pl-4">
-                <li>**Empregada e Trabalhadora Avulsa:** Não há exigência de carência.</li>
-                <li>**Contribuinte Individual, Facultativa e Segurada Especial:** Exigência de 10 meses de contribuição.</li>
+                <li>O empregador (a empresa) realiza o pagamento, mas é reembolsado posteriormente pelo INSS (Instituto
+                    Nacional do Seguro Social) através da compensação nas contribuições.</li>
+
             </ul>
 
 
             <div id="base-legal-drawer" class="drawer-container">
                 <div id="base-legal-header" class="drawer-header">
                     <h4 class="text-xl font-semibold text-[#00678F]">Base Legal e Jurisprudência</h4>
-                    <svg class="arrow-icon w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <svg class="arrow-icon w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
                     </svg>
                 </div>
                 <div id="base-legal-content" class="drawer-content">
                     <div class="py-2">
-                        <p class="text-gray-700 leading-relaxed text-justify mt-4">O Salário Maternidade possui natureza previdenciária, substituindo a renda da segurada durante o período de licença. Por isso, **não** se integra ao salário de contribuição para fins de INSS ou FGTS (exceto para o recolhimento do FGTS, que é devido pelo empregador).</p>
-                        
+                        <p class="text-gray-700 leading-relaxed text-justify mt-4">O Salário Maternidade possui natureza
+                            previdenciária, substituindo a renda da segurada during o período de licença. Por isso, não
+                            se integra ao salário de contribuição para fins de INSS ou FGTS (exceto para o recolhimento
+                            do FGTS, que é devido pelo empregador).</p>
+
                         <hr class="my-4 border-gray-300">
 
                         <h5 class="text-lg font-semibold text-gray-800 mt-4">Fontes Normativas</h5>
-                        
+
                         <hr class="my-4 border-gray-300">
-                        <h5 class="text-base font-semibold text-gray-800">Lei nº 8.213/91 (Plano de Benefícios da Previdência Social):</h5>
+                        <h5 class="text-base font-semibold text-gray-800">Lei nº 8.213/91 (Plano de Benefícios da
+                            Previdência Social):</h5>
                         <ul class="list-disc list-inside text-gray-700 leading-relaxed mt-2 ml-4 space-y-3">
                             <li>
                                 <strong>Artigos 71 a 73-A:</strong>
-                                <p class="text-sm italic mt-1 ml-4 border-l-2 border-gray-400 pl-3">Tratam especificamente da concessão e duração do Salário Maternidade no RGPS.</p>
+                                <p class="text-sm italic mt-1 ml-4 border-l-2 border-gray-400 pl-3">Tratam
+                                    especificamente da concessão e duração do Salário Maternidade no RGPS.</p>
                             </li>
                         </ul>
 
@@ -162,95 +202,152 @@
                         <ul class="list-disc list-inside text-gray-700 leading-relaxed mt-2 ml-4 space-y-3">
                             <li>
                                 <strong>Art. 392 e seguintes:</strong>
-                                <p class="text-sm italic mt-1 ml-4 border-l-2 border-gray-400 pl-3">Definem a licença-maternidade (afastamento do trabalho) e as garantias da empregada gestante.</p>
+                                <p class="text-sm italic mt-1 ml-4 border-l-2 border-gray-400 pl-3">Definem a
+                                    licença-maternidade (afastamento do trabalho) e as garantias da empregada gestante.
+                                </p>
                             </li>
                         </ul>
 
                         <hr class="my-6 border-gray-300">
 
                         <h5 class="text-lg font-semibold text-gray-800">Jurisprudência</h5>
-                        
+
                         <h6 class="text-base font-semibold text-gray-800 mt-4">Natureza da Verba</h6>
                         <div class="p-4 bg-gray-100 rounded-md mt-2 border border-gray-300">
                             <p class="font-bold text-sm">Responsabilidade pelo Pagamento e Natureza Previdenciária:</p>
                             <p class="text-sm mt-1 italic">
-                                **STF (ADI 2110):** Tratou da constitucionalidade da responsabilidade do INSS pelo pagamento do Salário Maternidade (mesmo quando adiantado pela empresa) e sua natureza de benefício previdenciário.
+                                STF (ADI 2110): Tratou da constitucionalidade da responsabilidade do INSS pelo pagamento
+                                do Salário Maternidade (mesmo quando adiantado pela empresa) e sua natureza de benefício
+                                previdenciário.
                             </p>
                             <p class="text-sm mt-1 italic">
-                                **Súmula do TST:** Reforça a natureza previdenciária, e não salarial, da verba, influenciando sua não incidência de contribuições (exceto FGTS).
+                                Súmula do TST: Reforça a natureza previdenciária, e não salarial, da verba,
+                                influenciando sua não incidência de contribuições (exceto FGTS).
                             </p>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div id="base-deducoes-drawer" class="drawer-container">
-                <div id="base-deducoes-header" class="drawer-header">
+            <div id="base-calculo-drawer" class="drawer-container">
+                <div id="base-calculo-header" class="drawer-header">
                     <h4 class="text-xl font-semibold text-[#00678F]">Base de Cálculo e Deduções</h4>
-                    <svg class="arrow-icon w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <svg class="arrow-icon w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
                     </svg>
                 </div>
-                <div id="base-deducoes-content" class="drawer-content">
+                <div id="base-calculo-content" class="drawer-content">
                     <div class="py-2">
-                        <h5 class="text-lg font-semibold text-gray-800 mt-2">Base de Cálculo para Empregada:</h5>
-                        <p class="text-gray-700 leading-relaxed text-justify mt-1">O valor é a **remuneração integral** do mês, que pode ser salário fixo ou a média das 6 (seis) últimas remunerações, se o salário for variável.</p>
-                        
+                        <hr class="mb-6 mt-0 border-[#00678F]">
+                        <h4 class="text-xl font-semibold text-[#00678F]">Definição da Base de Cálculo</h4>
+                        <p class="text-gray-700 leading-relaxed text-justify mt-1">O valor é a remuneração integral do
+                            mês do afastamento, que pode ser salário fixo ou a média das 6 (seis) últimas remunerações,
+                            se o salário for variável.</p>
+
                         <hr class="my-4 border-gray-300">
 
-                        <h5 class="text-lg font-semibold text-gray-800 mt-2">Deduções/Compensação:</h5>
-                        <p class="text-gray-700 leading-relaxed text-justify mt-1">O valor do Salário Maternidade pago pelo empregador é **deduzido (compensado)** do montante a pagar ao INSS (Contribuições Previdenciárias) na GPS. Tecnicamente, não se trata de "dedução" no sentido de IRRF, mas sim de compensação de valor devido.</p>
-                        <p class="text-gray-700 leading-relaxed text-justify mt-2 font-semibold">O benefício não sofre incidência de INSS (cota parte do empregado ou patronal) ou IRRF na fonte, salvo exceções legais.</p>
+                        <h4 class="text-xl font-semibold text-[#00678F]">Deduções da Base de Cálculo</h4>
+                        <h5 class="text-lg font-bold text-[#00678F] mt-4">Deduções Fiscais e Previdenciárias:</h5>
+                 <p class="text-gray-700 leading-relaxed text-justify mt-2">O desconto da contribuição para o
+                        Instituto Nacional do Seguro Social (INSS) e do Imposto de Renda Retido na Fonte (IRRF) é
+                        obrigatório, pois o salário maternidade por ser considerado um rendimento, está sujeito às retenções tributárias.</p>
+
+                    <h6 class="text-lg font-bold text-[#00678F] mt-4">Deduções/Compensações Possíveis:</h6>
+                    <ul class="list-disc list-inside text-gray-700 leading-relaxed mt-2 pl-4 space-y-2">
+                        Descontos referentes a convênios, empréstimos consignados ou pensão alimentícia podem ser mantidos, conforme a legislação e o contrato.
+                    </ul>
+
                     </div>
                 </div>
             </div>
-
+            
             <div id="reflexos-drawer" class="drawer-container">
                 <div id="reflexos-header" class="drawer-header">
                     <h4 class="text-xl font-semibold text-[#00678F]">Verbas Reflexas</h4>
-                    <svg class="arrow-icon w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <svg class="arrow-icon w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
                     </svg>
                 </div>
                 <div id="reflexos-content" class="drawer-content">
                     <div class="py-2">
-                        <p class="text-gray-700 leading-relaxed text-justify mt-1">O período de afastamento do Salário Maternidade é considerado tempo de serviço para diversos fins trabalhistas.</p>
-                        <h5 class="text-lg font-semibold text-gray-800 mt-4">Verbas Afetadas (Gera Direito):</h5>
-                        <ul class="list-disc list-inside text-gray-700 leading-relaxed mt-2 pl-4">
-                            <li>**Férias e Adicional de 1/3:** O período é considerado tempo de serviço.</li>
-                            <li>**13º Salário:** A empregada tem direito ao 13º integral.</li>
-                        </ul>
-                        <h5 class="text-lg font-semibold text-gray-800 mt-4">FGTS:</h5>
-                        <p class="text-gray-700 leading-relaxed text-justify mt-2 font-semibold">O empregador tem a obrigação legal de recolher o FGTS (8%) sobre o valor correspondente ao Salário Maternidade.</p>
+                        <p class="text-gray-700 leading-relaxed text-justify mt-1">O período de afastamento do Salário
+                            Maternidade é considerado tempo de serviço para diversos fins trabalhistas, servindo como base
+                            de cálculo para as verbas a seguir.</p>
+
+                        <table
+                            class="w-full mt-4 text-sm text-gray-700 border-collapse border border-gray-300 rounded-md overflow-hidden">
+                            <thead>
+                                <tr class="bg-gray-200">
+                                    <th class="py-2 px-4 text-left border-b border-gray-300 w-1/3">Verba Reflexa</th>
+                                    <th class="py-2 px-4 text-left border-b border-gray-300 w-2/3">Relação com o Salário
+                                        Maternidade</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="border-b border-gray-300">
+                                    <td class="py-2 px-4 font-medium">Férias + 1/3</td>
+                                    <td class="py-2 px-4">O período de licença é considerado tempo de serviço e conta
+                                        normalmente para o período aquisitivo.</td>
+                                </tr>
+                                <tr class="border-b border-gray-300">
+                                    <td class="py-2 px-4 font-medium">13º Salário</td>
+                                    <td class="py-2 px-4">A empregada tem direito ao 13º salário integral, contando o
+                                        período
+                                        de licença como tempo de trabalho.</td>
+                                </tr>
+                                <tr>
+                                    <td class="py-2 px-4 font-medium">FGTS (8%)</td>
+                                    <td class="py-2 px-4">O empregador deve continuar recolhendo o FGTS sobre o valor do
+                                        benefício durante todo o afastamento.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <hr class="my-4 border-gray-300">
+                        <p class="text-gray-700 leading-relaxed text-justify mt-2"><strong>Atenção:</strong> O Salário
+                            Maternidade é um benefício previdenciário que substitui a remuneração. Embora não seja
+                            "salário" em sentido estrito, a lei garante que ele gere os reflexos mencionados acima
+                            para proteger a trabalhadora.
+                        </p>
                     </div>
                 </div>
             </div>
-
             <div id="calculadora-salario-drawer" class="drawer-container">
                 <div id="calculadora-salario-header" class="drawer-header">
                     <h4 class="text-xl font-semibold text-[#00678F]">Calculadora (Simulação)</h4>
-                    <svg class="arrow-icon w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <svg class="arrow-icon w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
                     </svg>
                 </div>
                 <div id="calculadora-salario-content" class="drawer-content">
                     <div class="py-2">
-                        <p class="text-gray-700 leading-relaxed text-justify mb-4">Esta simulação estima o valor total do Salário Maternidade (120 dias) e o valor mensal. Use o salário de contribuição ou a média das últimas 6 remunerações (se variável).</p>
+                        <p class="text-gray-700 leading-relaxed text-justify mb-4">Esta simulação estima o valor total
+                            do Salário Maternidade (120 dias) e o valor mensal. Use o salário de contribuição ou a média
+                            das últimas 6 remunerações (se variável).</p>
 
                         <div class="input-group">
-                            <label for="baseSalario" class="block text-sm font-medium text-gray-700">Salário Base ou Média Remuneratória (R$):</label>
-                            <input type="text" id="baseSalario" value="" placeholder="Ex: 2500,00" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-2 border focus:border-indigo-500 focus:ring-indigo-500" onkeyup="formatSalarioInput(this)">
+                            <label for="baseSalario" class="block text-sm font-medium text-gray-700">Salário Base ou
+                                Média Remuneratória (R$):</label>
+                            <input type="text" id="baseSalario" value="" placeholder="Ex: 2500,00"
+                                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-2 border focus:border-indigo-500 focus:ring-indigo-500"
+                                onkeyup="formatSalarioInput(this)">
                         </div>
-                        
+
                         <div class="input-group">
-                            <label for="tipoAfastamento" class="block text-sm font-medium text-gray-700">Tipo de Afastamento:</label>
-                            <select id="tipoAfastamento" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-2 border focus:border-indigo-500 focus:ring-indigo-500">
+                            <label for="tipoAfastamento" class="block text-sm font-medium text-gray-700">Tipo de
+                                Afastamento:</label>
+                            <select id="tipoAfastamento"
+                                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-2 border focus:border-indigo-500 focus:ring-indigo-500">
                                 <option value="120">Parto, Adoção ou Natimorto (120 dias)</option>
                                 <option value="14">Aborto não criminoso (14 dias)</option>
                             </select>
                         </div>
 
-                        <button id="calculateBtn" class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-[#00678F] hover:bg-[#004562] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#00678F]">
+                        <button id="calculateBtn"
+                            class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-[#00678F] hover:bg-[#004562] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#00678F]">
                             <div class="loading-spinner"></div>
                             Calcular Salário Maternidade
                         </button>
@@ -261,10 +358,13 @@
                                 <p id="result-total" class="result-value text-red-700"></p>
                             </div>
                             <button id="copyResult" class="copy-btn" title="Copiar Resultado">
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M16 1H4C2.9 1 2 1.9 2 3v14h2V3h12V1zm3 4H8C6.9 5 6 5.9 6 7v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                    <path
+                                        d="M16 1H4C2.9 1 2 1.9 2 3v14h2V3h12V1zm3 4H8C6.9 5 6 5.9 6 7v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z" />
+                                </svg>
                             </button>
                         </div>
-                        
+
                         <div id="result-monthly" class="result-box hidden mt-3">
                             <div>
                                 <p class="text-sm font-medium text-gray-600">Valor Mensal (R$):</p>
@@ -272,7 +372,10 @@
                             </div>
                         </div>
 
-                        <p class="text-xs text-gray-500 mt-4 italic text-justify">Atenção: Esta é uma simulação simplificada baseada na remuneração integral, aplicável a empregadas. O valor real pode variar dependendo da categoria do segurado (Ex: Contribuinte Individual) e da média de salários de contribuição dos últimos 12 meses.</p>
+                        <p class="text-xs text-gray-500 mt-4 italic text-justify">Atenção: Esta é uma simulação
+                            simplificada baseada na remuneração integral, aplicável a empregadas. O valor real pode
+                            variar dependendo da categoria do segurado (Ex: Contribuinte Individual) e da média de
+                            salários de contribuição dos últimos 12 meses.</p>
                     </div>
                 </div>
             </div>
@@ -364,7 +467,7 @@
         </section>
     </div>
 
-    
+
     <script>
         // Função para formatar o input de salário (moeda)
         function formatSalarioInput(input) {
@@ -378,7 +481,7 @@
                 input.value = value;
             }
         }
-        
+
         // Função para obter o valor numérico (em float)
         function getNumericValue(id) {
             const input = document.getElementById(id);
@@ -391,7 +494,7 @@
         function calculateSalaryBalance() {
             const calculateBtn = document.getElementById('calculateBtn');
             const spinner = calculateBtn.querySelector('.loading-spinner');
-            
+
             // Ativa o loading
             spinner.style.display = 'inline-block';
             calculateBtn.disabled = true;
@@ -414,17 +517,17 @@
                     calculateBtn.disabled = false;
                     return;
                 }
-                
+
                 // Cálculo: (Salário Base / 30 dias) * dias de afastamento
                 const valorDia = baseSalario / 30;
                 const valorTotal = valorDia * tipoAfastamento;
-                
+
                 // Valor mensal é o Salário Base (para 120 dias) ou o valor total (para 14 dias)
                 let valorMensalDisplay = 'N/A';
                 if (tipoAfastamento === 120) {
                     valorMensalDisplay = baseSalario.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
                 } else {
-                     valorMensalDisplay = valorTotal.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+                    valorMensalDisplay = valorTotal.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
                 }
 
 
@@ -445,7 +548,7 @@
         function copyText(elementId) {
             const resultElement = document.getElementById(elementId);
             const textToCopy = resultElement.textContent.replace('R$', '').trim();
-            
+
             // Tenta usar a API Clipboard
             if (navigator.clipboard) {
                 navigator.clipboard.writeText(textToCopy).then(() => {
@@ -485,7 +588,7 @@
             if (!header || !content) return;
 
             // Define a altura inicial
-            content.style.maxHeight = '0'; 
+            content.style.maxHeight = '0';
 
             header.addEventListener('click', () => {
                 const isExpanded = header.classList.toggle('active');
@@ -508,15 +611,17 @@
             // Adiciona listeners para os botões e calculadora
             document.getElementById('calculateBtn').addEventListener('click', calculateSalaryBalance);
             // Copia o resultado total
-            document.getElementById('copyResult').addEventListener('click', () => copyText('result-total')); 
-            
+            document.getElementById('copyResult').addEventListener('click', () => copyText('result-total'));
+
             // Configura as gavetas (Drawers)
             setupDrawer('base-legal');
-            setupDrawer('base-deducoes'); 
+            // ATUALIZADO: Usando o novo ID 'base-calculo'
+            setupDrawer('base-calculo');
             setupDrawer('reflexos');
-            setupDrawer('calculadora-salario'); 
+            setupDrawer('calculadora-salario');
             setupDrawer('pje-calc');
         });
     </script>
 </body>
+
 </html>
