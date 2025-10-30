@@ -182,6 +182,12 @@
                         </a>
                     </li>
                     <li>
+                        <a href="arquivos/atualizacao_liquidacao.html" data-section=""
+                            class="nav-link flex items-center p-3 rounded-lg text-sm md:text-base">
+                            <span class="text-[#0284c7] mr-2 text-lg">→</span>8.2. Atualização da Liquidação
+                        </a>
+                    </li>
+                    <li>
                         <a href="arquivos/faq.html" data-section=""
                             class="nav-link block p-3 rounded-lg text-sm md:text-base">9.
                             Perguntas e Respostas Frequentes</a>
@@ -918,7 +924,7 @@
                     <p class="mt-4 text-gray-700 leading-relaxed text-justify">Para detalhes sobre como liquidar cada
                         verba, consulte a próxima seção.</p>
                 </section>
-
+                
                 <section id="quiz" class="content-section hidden"> </section>
 
             </div>
@@ -968,9 +974,14 @@
             navLinks.forEach(link => {
                 link.addEventListener('click', (e) => {
                     const sectionId = link.getAttribute('data-section');
-                    if (sectionId) {
+                    // Verifica se é uma seção interna (data-section não vazio)
+                    if (sectionId && link.getAttribute('href') === '#') {
                         e.preventDefault();
                         showSection(sectionId);
+                    } else if (link.getAttribute('href').startsWith('arquivos/')) {
+                        // Não impede a navegação para links externos/arquivos separados
+                        navLinks.forEach(l => l.classList.remove('active-link'));
+                        link.classList.add('active-link');
                     }
                 });
             });

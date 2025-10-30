@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>8.2. Atualização da Liquidação - Manual Interativo de Cálculos Trabalhistas</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f1f5f9;
+        }
+
+        .text-justify {
+            text-align: justify;
+        }
+
+        /* Estilos do conteúdo */
+        .content-section {
+            padding-bottom: 2rem;
+        }
+
+        .aside-bg {
+            background-color: #005a62;
+        }
+
+        /* Estilo para a Logo */
+        .logo-trt {
+            max-height: 60px;
+            /* Definindo uma altura máxima menor para a logo */
+            width: auto;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-100 p-6 md:p-10">
+    <div class="max-w-4xl mx-auto bg-white rounded-xl shadow-xl p-6 md:p-10 border border-gray-200">
+
+        <div class="flex justify-center mb-6">
+            <img src="https://site.trt19.jus.br/portalTRT19/sites/default/files/logo-trt19.png"
+                alt="Logo do TRT19" class="logo-trt w-auto object-contain">
+        </div>
+        <h1 class="text-3xl md:text-4xl text-center mb-6 text-[#007380]">Manual Interativo de Cálculos Trabalhistas
+        </h1>
+        <p class="text-center text-gray-600 mb-8">Um guia completo e interativo para entender os cálculos na esfera
+            judicial trabalhista.</p>
+        <a href="../index.html" class="text-[#0284c7] hover:underline mb-6 block text-lg font-semibold">
+            ← Voltar para o Manual
+        </a>
+
+        <section id="atualizacao-liquidacao" class="content-section">
+            <h2 class="text-2xl text-[#007380] mb-4">8.2. ATUALIZAÇÃO DA LIQUIDAÇÃO</h2>
+            <p class="text-gray-700 leading-relaxed text-justify">A atualização de um cálculo de liquidação se
+                faz necessária quando há decurso de tempo entre a data do cálculo original e a data do efetivo
+                pagamento (ou a data de um novo marco processual, como a garantia da execução). Este processo
+                visa manter o valor real do crédito, aplicando os índices de correção e juros determinados pelo
+                título executivo e pela legislação vigente.</p>
+
+            <h3 class="text-lg mt-6 mb-2 text-[#007380]">Taxa de Atualização Monetária (SELIC)</h3>
+            <p class="text-gray-700 leading-relaxed text-justify">Conforme a decisão proferida pelo Supremo
+                Tribunal Federal (STF) nas Ações Declaratórias de Constitucionalidade (ADCs) 58 e 59, e nas
+                Ações Diretas de Inconstitucionalidade (ADIs) 5867 e 6021, a atualização dos créditos
+                decorrentes de condenação judicial na Justiça do Trabalho deve seguir a **Taxa SELIC**.</p>
+            <ul class="list-disc list-inside mt-2 space-y-2 text-gray-700">
+                <li class="text-justify">A SELIC (Sistema Especial de Liquidação e de Custódia) incide a partir
+                    do ajuizamento da ação (observada a data de exigibilidade do crédito) e engloba tanto a
+                    Correção Monetária quanto os Juros de Mora.</li>
+                <li class="text-justify"><strong>Não se deve aplicar mais a TR (Taxa Referencial)</strong>
+                    como índice de correção monetária, nem juros de 1% ao mês (art. 39 da Lei 8.177/91) em
+                    conjunto com outro índice de correção, para os períodos posteriores ao ajuizamento.</li>
+            </ul>
+
+            <h3 class="text-lg mt-6 mb-2 text-[#007380]">Metodologia de Atualização (PJe-Calc)</h3>
+            <p class="text-gray-700 leading-relaxed text-justify">No sistema PJe-Calc, a atualização é feita de
+                forma simples, bastando informar a **Data-Base do Cálculo** (data até a qual o cálculo foi
+                realizado) e a **Data de Atualização** desejada (data do novo marco).</p>
+            <table class="min-w-full divide-y divide-gray-200 mt-4">
+                <thead class="bg-gray-50">
+                    <tr>
+                        <th
+                            class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            Período</th>
+                        <th
+                            class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            Índice / Taxa de Juros</th>
+                    </tr>
+                </thead>
+                <tbody class="bg-white divide-y divide-gray-200">
+                    <tr>
+                        <td
+                            class="px-6 py-4 text-sm font-medium text-gray-900">Créditos de
+                            natureza não tributária, anteriores ao ajuizamento da ação</td>
+                        <td class="px-6 py-4 text-sm text-gray-500">IPCA-E na fase
+                            pré-judicial + Juros de mora de 1% ao mês (simples)</td>
+                    </tr>
+                    <tr>
+                        <td
+                            class="px-6 py-4 text-sm font-medium text-gray-900">Créditos de
+                            natureza não tributária, a partir do ajuizamento da ação</td>
+                        <td class="px-6 py-4 text-sm text-gray-500">Taxa SELIC (englobando
+                            correção e juros)</td>
+                    </tr>
+                    <tr>
+                        <td
+                            class="px-6 py-4 text-sm font-medium text-gray-900">Créditos de
+                            natureza tributária (Contribuições Previdenciárias e IR)</td>
+                        <td class="px-6 py-4 text-sm text-gray-500">Taxa SELIC (englobando
+                            multa e juros)</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3 class="text-lg mt-6 mb-2 text-[#007380]">Observações Importantes:</h3>
+            <ul class="list-disc list-inside mt-2 space-y-2 text-gray-700">
+                <li class="text-justify"><strong>Termo Inicial dos Juros:</strong> Mesmo com a aplicação da
+                    SELIC, o cômputo dos juros é devido a partir da data de exigibilidade do crédito, ou seja,
+                    a partir do momento em que a verba deveria ter sido paga ao trabalhador (Súmula 439 do
+                    TST).</li>
+                <li class="text-justify"><strong>Cálculos Anteriores:</strong> Cálculos que tenham utilizado a
+                    TR ou outro índice devem ser refeitos, se houver determinação judicial, para adequação à
+                    SELIC a partir do ajuizamento.</li>
+            </ul>
+        </section>
+
+    </div>
+</body>
+
+</html>
