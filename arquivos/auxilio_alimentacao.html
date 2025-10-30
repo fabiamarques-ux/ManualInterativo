@@ -120,7 +120,7 @@
             <div class="p-4 bg-yellow-50 rounded-md mt-2 border border-yellow-300">
                 <p class="font-medium text-gray-800 mb-1">A principal distinção no cálculo é se o Auxílio Alimentação possui natureza salarial ou indenizatória.</p>
                 <ul class="list-disc list-inside text-sm text-gray-700 ml-4">
-                    <li><b>Indenizatório:</b> Não há reflexos em nenhuma verba acessória.</li>
+                    <li><b>Indenizatório:</b> Não há reflexos em nenhuma verba acessória e nem incidência de INSS e IRRF.</li>
                     <li><b>Salarial (por descaracterização):</b> O valor integra a remuneração para todos os fins.</li>
                 </ul>
             </div>
@@ -187,7 +187,7 @@
                     </svg>
                 </div>
                 <div id="calculo-base-content" class="drawer-content">
-                    <p class="text-gray-700 leading-relaxed text-justify mt-4">O Auxílio Alimentação, se mantida sua natureza indenizatória, <b>não integra a base de cálculo</b> de nenhuma verba (salário, férias, 13º, FGTS, INSS e IRRF).</p>
+                    <p class="text-gray-700 leading-relaxed text-justify mt-4">O Auxílio Alimentação, se mantida sua natureza indenizatória, <b>não integra a base de cálculo</b> de nenhuma verba (salário, férias, 13º, FGTS). Bem como não tem incidência de INSS e IRRF. </p>
                     
                     <hr class="my-4 border-gray-300">
 
@@ -195,7 +195,7 @@
                     <p class="text-gray-700 leading-relaxed text-justify mt-2">Apenas se houver decisão judicial transitada em julgado reconhecendo sua natureza salarial (geralmente por aplicação de lei anterior ou descaracterização), o valor do Auxílio Alimentação integrará o cálculo:</p>
 
                     <ul class="list-disc list-inside text-gray-700 leading-relaxed mt-2 pl-4">
-                        <li>O valor mensal apurado entra como base de cálculo para os reflexos (13º, férias, etc.).</li>
+                        <li>Da Remuneração Mensal.</li>
                         <li>Passa a incidir INSS e IRRF sobre a parcela, devendo ser calculados os recolhimentos correspondentes.</li>
                     </ul>
 
@@ -213,7 +213,8 @@
                     </svg>
                 </div>
                 <div id="reflexos-verbas-content" class="drawer-content">
-                    <p class="text-gray-700 leading-relaxed text-justify mt-4">A condenação de Auxílio Alimentação como verba salarial (situação excepcional) gera reflexos sobre as verbas acessórias devidas ao empregado, retroativamente, pelo princípio da habitualidade.</p>
+                    <p class="text-gray-700 leading-relaxed text-justify mt-4"> O Auxílio Alimentação por possuir de regra natureza indenizatória não integra a base de cálculo de nenhuma outra verba. <p></p> 
+                    A condenação de Auxílio Alimentação como verba salarial (situação excepcional) gera reflexos sobre as verbas acessórias devidas ao empregado, retroativamente, pelo princípio da habitualidade.</p>
                     
                     <hr class="my-4 border-gray-300">
                     
@@ -356,53 +357,50 @@
              calcularBtn.addEventListener('click', calculateSimulation);
         }
        
-        // Lógica para os drawers expansíveis
+        // Lógica para os drawers expansíveis otimizada
         function setupDrawer(drawerId, startOpen = false) {
             const header = document.getElementById(`${drawerId}-header`);
             const content = document.getElementById(`${drawerId}-content`);
 
             if (startOpen) {
                 header.classList.add('active');
-                // Temporarily set height to auto to get the full scrollHeight
-                content.style.maxHeight = 'fit-content'; 
-                // Then set it back using scrollHeight for smooth transition
-                setTimeout(() => {
-                    content.style.maxHeight = content.scrollHeight + "px";
-                }, 10); 
+                content.style.maxHeight = content.scrollHeight + "px";
             }
-            
+
             header.addEventListener('click', () => {
                 const isExpanded = header.classList.toggle('active');
                 if (isExpanded) {
-                    content.style.maxHeight = content.scrollHeight + "px";
+                    // Aguarda imagens carregarem antes de calcular altura
+                    const images = content.querySelectorAll('img');
+                    const imagePromises = Array.from(images).map(img => {
+                        if (!img.complete) {
+                            return new Promise(resolve => img.onload = resolve);
+                        }
+                        return Promise.resolve();
+                    });
+
+                    Promise.all(imagePromises).then(() => {
+                        content.style.maxHeight = content.scrollHeight + "px";
+                    });
                 } else {
                     content.style.maxHeight = '0';
                 }
-                // Ajusta a altura de todos os drawers abertos após a expansão de um
-                document.querySelectorAll('.drawer-content').forEach(dc => {
-                    if (dc.id !== content.id) {
-                        const dh = document.getElementById(dc.id.replace('-content', '-header'));
-                        if (dh && dh.classList.contains('active')) {
-                            // Reajusta apenas se estiver ativo
-                            dc.style.maxHeight = dc.scrollHeight + "px";
-                        }
-                    }
-                });
             });
-            // Adiciona listener para reajustar altura em caso de redimensionamento de conteúdo interno
-            new ResizeObserver(() => {
+
+            // Adiciona listener para redimensionamento da janela
+            window.addEventListener('resize', () => {
                 if (header.classList.contains('active')) {
                     content.style.maxHeight = content.scrollHeight + "px";
                 }
-            }).observe(content);
+            });
         }
 
-        // Inicializa os 5 drawers com os títulos originais
+        // Inicializa os drawers
         setupDrawer('base-legal');
         setupDrawer('calculo-base');
-        setupDrawer('reflexos-verbas'); 
-        setupDrawer('calculadora-simulacao'); 
-        setupDrawer('pje-calc'); 
+        setupDrawer('reflexos-verbas');
+        setupDrawer('calculadora-simulacao');
+        setupDrawer('pje-calc');
     </script>
 </body>
 </html>
