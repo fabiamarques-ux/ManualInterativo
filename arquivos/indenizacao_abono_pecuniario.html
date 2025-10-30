@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -15,6 +16,7 @@
             color: #1a202c;
             line-height: 1.6;
         }
+
         .container {
             max-width: 900px;
             margin: 0 auto;
@@ -23,6 +25,7 @@
             border-radius: 1rem;
             box-shadow: 0 4px 14px rgba(0, 0, 0, 0.05);
         }
+
         .copy-btn {
             background-color: transparent;
             border: none;
@@ -30,15 +33,18 @@
             padding: 0;
             margin-left: 1rem;
         }
+
         .copy-btn svg {
             width: 1.5rem;
             height: 1.5rem;
             fill: #00678F;
             transition: fill 0.3s ease;
         }
+
         .copy-btn:hover svg {
             fill: #004562;
         }
+
         .loading-spinner {
             border: 4px solid rgba(0, 103, 143, 0.1);
             border-top: 4px solid #00678F;
@@ -49,10 +55,17 @@
             margin-right: 0.5rem;
             display: none;
         }
+
         @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
         }
+
         .drawer-container {
             padding: 1rem;
             background-color: #f0f4f8;
@@ -60,41 +73,51 @@
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
             margin-top: 1.5rem;
         }
+
         .drawer-header {
             cursor: pointer;
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
+
         .drawer-content {
             overflow: hidden;
             transition: all 0.5s ease-in-out;
             max-height: 0;
         }
+
         .drawer-header .arrow-icon {
             transition: transform 0.5s ease-in-out;
         }
+
         .drawer-header.active .arrow-icon {
             transform: rotate(180deg);
         }
+
         .table-container {
             overflow-x: auto;
             -webkit-overflow-scrolling: touch;
         }
+
         .custom-table {
             width: 100%;
             border-collapse: collapse;
             font-size: 0.875rem;
         }
-        .custom-table th, .custom-table td {
+
+        .custom-table th,
+        .custom-table td {
             border: 1px solid #d1d5db;
             padding: 0.75rem;
             text-align: center;
         }
+
         .custom-table th {
             background-color: #f0f4f8;
             font-weight: 600;
         }
+
         .image-container {
             margin: 1.5rem 0;
             border: 1px solid #d1d5db;
@@ -104,98 +127,114 @@
         }
     </style>
 </head>
+
 <body>
 
     <div class="container my-8 relative">
-        <img src="https://site.trt19.jus.br/sites/default/files/logo-trt19.png" alt="[Imagem do logo TRT19]" class="absolute top-4 right-4 w-36 h-auto">
-        
+        <img src="https://site.trt19.jus.br/sites/default/files/logo-trt19.png" alt="[Imagem do logo TRT19]"
+            class="absolute top-4 right-4 w-36 h-auto">
+
         <section id="abono-pecuniario" class="content-section">
             <h2 class="text-3xl font-bold text-[#00678F] mb-4">Abono Pecuniário de Férias (Venda de 1/3)</h2>
             <p class="text-gray-700 leading-relaxed text-justify mb-4">
-                O Abono Pecuniário é a faculdade concedida ao empregado de converter 1/3 (10 dias) do seu período de férias em dinheiro, conforme previsto no Art. 143 da CLT. Este valor é tratado como verba indenizatória e é isento de encargos sociais e fiscais.
+                O Abono Pecuniário é a faculdade concedida ao empregado de converter 1/3 (10 dias) do seu período de
+                férias em dinheiro, conforme previsto no Art. 143 da CLT. Este valor é tratado como verba indenizatória
+                e é isento de encargos sociais e fiscais.
             </p>
-            
-            <h5 class="text-lg font-semibold text-gray-900 mt-4">Cálculo e Natureza Jurídica do Abono Pecuniário</h5>
-            <p class="text-gray-700 leading-relaxed text-justify mt-2 mb-4">
-                O abono pecuniário (venda de 1/3 das férias) é calculado sobre o valor da remuneração das férias (salário base mais médias) **sem** a incidência do adicional de 1/3 constitucional (Súmula nº 328 do TST).
-                <br>
-                <strong class="font-mono block text-center mt-2">Abono Pecuniário Bruto = Valor das Férias Base (Sem 1/3) / 3</strong>
-            </p>
+
+            <!-- Removido o texto para transferir ao tópico Base de Cálculo e Deduções -->
 
             <h5 class="text-lg font-semibold text-gray-900 mt-4">Prazo de Pagamento</h5>
             <p class="text-gray-700 leading-relaxed text-justify mt-2 pl-4">
-                O pagamento do abono pecuniário deve ser feito até **dois dias antes do início do gozo das férias** (Art. 145 da CLT).
+                O pagamento do abono pecuniário deve ser feito até **dois dias antes do início do gozo das férias**
+                (Art. 145 da CLT).
             </p>
 
             <div id="base-legal-drawer" class="drawer-container">
                 <div id="base-legal-header" class="drawer-header">
                     <h4 class="text-xl font-semibold text-[#00678F]">Base Legal e Jurisprudência</h4>
-                    <svg class="arrow-icon w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <svg class="arrow-icon w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
                     </svg>
                 </div>
                 <div id="base-legal-content" class="drawer-content">
-                    <p class="text-gray-700 leading-relaxed text-justify mt-4">A legislação e a jurisprudência definem o direito de conversão de 1/3 das férias em dinheiro.</p>
+                    <p class="text-gray-700 leading-relaxed text-justify mt-4">A legislação e a jurisprudência definem o
+                        direito de conversão de 1/3 das férias em dinheiro.</p>
                     <h5 class="text-lg font-semibold text-gray-800 mt-4">Fontes Normativas</h5>
-                    
+
                     <hr class="my-4 border-gray-300">
                     <h5 class="text-base font-semibold text-gray-800">Consolidação das Leis do Trabalho (CLT):</h5>
                     <ul class="list-disc list-inside text-gray-700 leading-relaxed mt-2 ml-4 space-y-3">
                         <li><strong>Art. 143 da CLT:</strong>
-                            <p class="text-sm italic mt-1 ml-4 border-l-2 border-gray-400 pl-3">Permite ao empregado converter 1/3 do período de férias em abono pecuniário, mediante requerimento até 15 dias antes do término do período aquisitivo.</p>
+                            <p class="text-sm italic mt-1 ml-4 border-l-2 border-gray-400 pl-3">Permite ao empregado
+                                converter 1/3 do período de férias em abono pecuniário, mediante requerimento até 15
+                                dias antes do término do período aquisitivo.</p>
                         </li>
                         <li><strong>Art. 145 da CLT:</strong>
-                            <p class="text-sm italic mt-1 ml-4 border-l-2 border-gray-400 pl-3">Estabelece que o pagamento do abono pecuniário deve ser feito até 2 dias antes do início do gozo.</p>
+                            <p class="text-sm italic mt-1 ml-4 border-l-2 border-gray-400 pl-3">Estabelece que o
+                                pagamento do abono pecuniário deve ser feito até 2 dias antes do início do gozo.</p>
                         </li>
                     </ul>
 
                     <hr class="my-6 border-gray-300">
 
                     <h5 class="text-lg font-semibold text-gray-800">Jurisprudência</h5>
-                    
+
                     <h6 class="text-base font-semibold text-gray-800 mt-4">Abono Pecuniário de Férias</h6>
                     <div class="p-4 bg-gray-100 rounded-md mt-2 border border-gray-300">
                         <p class="font-bold text-sm">Súmula nº 328 do TST:</p>
-                        <p class="text-sm mt-1 italic">O abono de férias deve ser calculado sobre a remuneração das férias, sem a incidência do adicional de 1/3 constitucional.</p>
+                        <p class="text-sm mt-1 italic">O abono de férias deve ser calculado sobre a remuneração das
+                            férias, sem a incidência do adicional de 1/3 constitucional.</p>
                     </div>
                 </div>
             </div>
 
-            <div id="base-calculo-deducoes-drawer" class="drawer-container">
+            <div id="base-calculo-deducoes" class="drawer-container">
                 <div id="base-calculo-deducoes-header" class="drawer-header">
                     <h4 class="text-xl font-semibold text-[#00678F]">Base de Cálculo e Deduções</h4>
-                    <svg class="arrow-icon w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <svg class="arrow-icon w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
                     </svg>
                 </div>
                 <div id="base-calculo-deducoes-content" class="drawer-content">
-                    <p class="text-gray-700 leading-relaxed text-justify mt-4">
-                        O abono pecuniário tem natureza indenizatória, o que garante a isenção de encargos.
+
+                    <div class="p-3 mt-2 mb-4 bg-yellow-50 border-l-4 border-yellow-500 rounded-r-md">
+                        <p class="text-gray-900 leading-relaxed text-justify font-medium">
+                            IMPORTANTE: O Abono de Férias possue natureza indenizatória.
+                            Portanto, não há incidência de Imposto de Renda Retido na Fonte (IRRF) ou contribuição
+                            para o Instituto Nacional do Seguro Social (INSS).
+                        </p>
+                    </div>
+
+                    <h5 class="text-lg font-semibold text-gray-900 mt-4">Cálculo e Natureza Jurídica do Abono Pecuniário
+                    </h5>
+                    <p class="text-gray-700 leading-relaxed text-justify mt-2 mb-4">
+                        O abono pecuniário (venda de 1/3 das férias) é calculado sobre o valor da remuneração das férias
+                        (salário base mais médias) <strong>sem</strong> a incidência do adicional de 1/3 constitucional
+                        (Súmula nº 328 do TST).
+                        <br>
+                        <strong class="font-mono block text-center mt-2">Abono Pecuniário Bruto = Valor das Férias Base
+                            (Sem 1/3) / 3</strong>
                     </p>
-                    
-                    <h5 class="text-lg font-semibold text-[#00678F] mt-4">Deduções</h5>
-                    <ul class="list-disc list-inside text-gray-700 leading-relaxed mt-2 pl-4">
-                        <li>
-                            **Imposto de Renda Retido na Fonte (IRRF):** O valor do abono pecuniário é **isento** de Imposto de Renda.
-                        </li>
-                        <li>
-                            **Contribuição ao INSS:** O valor do abono pecuniário é **isento** de Contribuição ao INSS.
-                        </li>
+
                     </ul>
                 </div>
             </div>
 
             <div id="reflexos-outras-verbas-drawer" class="drawer-container">
                 <div id="reflexos-outras-verbas-header" class="drawer-header">
-                    <h4 class="text-xl font-semibold text-[#00678F]">Reflexos sobre Outras Verbas</h4>
-                    <svg class="arrow-icon w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <h4 class="text-xl font-semibold text-[#00678F]">Verbas Reflexas</h4>
+                    <svg class="arrow-icon w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
                     </svg>
                 </div>
                 <div id="reflexos-outras-verbas-content" class="drawer-content">
-                    <h5 class="text-lg font-semibold text-[#00678F] mt-4">FGTS</h5>
+
                     <p class="text-gray-700 leading-relaxed text-justify mt-2">
-                        Por ter natureza indenizatória, **não há incidência de FGTS** sobre o valor do Abono Pecuniário de Férias.
+                        Por ter natureza indenizatória, o Abono Pecunário não causa reflexos sobre outras verbas.
                     </p>
                 </div>
             </div>
@@ -203,27 +242,36 @@
             <div id="calculadora-ferias-drawer" class="drawer-container">
                 <div id="calculadora-ferias-header" class="drawer-header">
                     <h4 class="text-xl font-semibold text-[#00678F]">Calculadora (Simulação)</h4>
-                    <svg class="arrow-icon w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <svg class="arrow-icon w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
                     </svg>
                 </div>
                 <div id="calculadora-ferias-content" class="drawer-content">
-                    <p class="text-gray-700 leading-relaxed text-justify mt-4">Use a calculadora abaixo para estimar o valor bruto do Abono Pecuniário (venda de 1/3).</p>
-                    
+                    <p class="text-gray-700 leading-relaxed text-justify mt-4">Use a calculadora abaixo para estimar o
+                        valor bruto do Abono Pecuniário (venda de 1/3).</p>
+
                     <div class="p-4 bg-white rounded-lg shadow-inner mt-4">
                         <h5 class="text-md font-semibold text-gray-800">Cálculo Simples (Bruto do Abono)</h5>
-                        <p class="text-gray-600 text-sm mb-2">Este cálculo estima o valor bruto do Abono Pecuniário, com base no salário e sem a incidência do 1/3 constitucional.</p>
+                        <p class="text-gray-600 text-sm mb-2">Este cálculo estima o valor bruto do Abono Pecuniário, com
+                            base no salário e sem a incidência do 1/3 constitucional.</p>
                         <div class="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4">
                             <div class="flex-1">
-                                <label for="salarioBrutoInput" class="block text-sm text-gray-700">Salário Base (R$):</label>
-                                <input type="text" id="salarioBrutoInput" class="mt-1 block w-full rounded-md border-gray-300 p-2 focus:ring-[#00678F] focus:border-[#00678F]">
+                                <label for="salarioBrutoInput" class="block text-sm text-gray-700">Salário Base
+                                    (R$):</label>
+                                <input type="text" id="salarioBrutoInput"
+                                    class="mt-1 block w-full rounded-md border-gray-300 p-2 focus:ring-[#00678F] focus:border-[#00678F]">
                             </div>
                             <div class="flex-1">
-                                <label for="diasAboneInput" class="block text-sm text-gray-700">Dias Vendidos (1/3 = 10 dias):</label>
-                                <input type="number" id="diasAboneInput" class="mt-1 block w-full rounded-md border-gray-300 p-2 focus:ring-[#00678F] focus:border-[#00678F]" value="10" min="10" max="10" readonly>
+                                <label for="diasAboneInput" class="block text-sm text-gray-700">Dias Vendidos (1/3 = 10
+                                    dias):</label>
+                                <input type="number" id="diasAboneInput"
+                                    class="mt-1 block w-full rounded-md border-gray-300 p-2 focus:ring-[#00678F] focus:border-[#00678F]"
+                                    value="10" min="10" max="10" readonly>
                             </div>
                         </div>
-                        <button id="calculateFeriasBtn" class="mt-4 w-full px-4 py-2 bg-[#00678F] text-white rounded-md hover:bg-[#004562] transition duration-300 shadow-md flex items-center justify-center">
+                        <button id="calculateFeriasBtn"
+                            class="mt-4 w-full px-4 py-2 bg-[#00678F] text-white rounded-md hover:bg-[#004562] transition duration-300 shadow-md flex items-center justify-center">
                             <span id="buttonText">Calcular Abono Pecuniário (1/3)</span>
                             <div id="loadingSpinner" class="loading-spinner"></div>
                         </button>
@@ -231,7 +279,10 @@
                             <div class="flex items-center">
                                 <p id="feriasResult" class="text-sm text-gray-700"></p>
                                 <button id="copyFerias" class="copy-btn hidden" aria-label="Copiar valor">
-                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M16 1H4C2.9 1 2 1.9 2 3v14h2V3h12V1zm3 4H8C6.9 5 6 5.9 6 7v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                        <path
+                                            d="M16 1H4C2.9 1 2 1.9 2 3v14h2V3h12V1zm3 4H8C6.9 5 6 5.9 6 7v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z" />
+                                    </svg>
                                 </button>
                             </div>
                         </div>
@@ -239,7 +290,7 @@
                 </div>
             </div>
 
-                        <div id="pje-calc-drawer" class="drawer-container">
+            <div id="pje-calc-drawer" class="drawer-container">
                 <div id="pje-calc-header" class="drawer-header">
                     <h4 class="text-xl font-semibold text-[#00678F]">Lançamento no PJe-Calc </h4>
                     <svg class="arrow-icon w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
@@ -335,7 +386,7 @@
                 let value = e.target.value;
                 // Remove todos os caracteres que não sejam dígitos
                 value = value.replace(/\D/g, '');
-                
+
                 // Formata com vírgula para centavos e pontos para milhares
                 if (value.length > 2) {
                     value = value.replace(/(\d+)(\d{2})$/, '$1,$2');
@@ -346,7 +397,7 @@
                 e.target.value = value;
             });
         }
-        
+
         // Chamada da função de formatação
         formatSalarioInput();
 
@@ -369,7 +420,7 @@
 
             // Cálculo do Abono: (Salário Bruto / 30) * 10 dias = Salário Bruto / 3
             const valorAbono = (salario / 30) * dias;
-            
+
             resultDiv.textContent = `Valor Bruto do Abono Pecuniário (1/3): ${valorAbono.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}`;
             copyBtn.classList.remove('hidden');
         }
@@ -397,7 +448,7 @@
         // Adiciona os event listeners aos botões
         document.getElementById('calculateFeriasBtn').addEventListener('click', calculateFerias);
         document.getElementById('copyFerias').addEventListener('click', () => copyText('feriasResult'));
-        
+
         // Lógica para as gavetas expansíveis
         function setupDrawer(drawerId) {
             const header = document.getElementById(`${drawerId}-header`);
@@ -414,10 +465,11 @@
         }
         // Configuração das gavetas
         setupDrawer('base-legal');
-        setupDrawer('base-calculo-deducoes'); 
-        setupDrawer('reflexos-outras-verbas'); 
+        setupDrawer('base-calculo-deducoes');
+        setupDrawer('reflexos-outras-verbas');
         setupDrawer('calculadora-ferias');
         setupDrawer('pje-calc');
     </script>
 </body>
+
 </html>
