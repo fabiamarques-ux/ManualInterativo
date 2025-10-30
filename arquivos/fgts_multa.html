@@ -120,7 +120,7 @@
                 </div>
             </div>
             <div id="base-legal-drawer" class="drawer-container">
-                <div id="base-legal-header" class="drawer-header active">
+                <div id="base-legal-header" class="drawer-header">
                     <h4 class="text-xl font-semibold text-[#00678F]">Base Legal e Jurisprudência</h4>
                     <svg class="arrow-icon w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
@@ -181,7 +181,7 @@
             </div>
             <div id="reflexo-verbas-drawer" class="drawer-container">
                 <div id="reflexo-verbas-header" class="drawer-header">
-                    <h4 class="text-xl font-semibold text-[#00678F]">Reflexo sobre Outras Verbas</h4>
+                    <h4 class="text-xl font-semibold text-[#00678F]">Verbas Reflexas</h4>
                     <svg class="arrow-icon w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
                     </svg>
@@ -341,40 +341,21 @@
 
             if (startOpen) {
                 header.classList.add('active');
-                // Temporarily set height to auto to get the full scrollHeight
-                content.style.maxHeight = 'fit-content'; 
-                // Then set it back using scrollHeight for smooth transition
-                setTimeout(() => {
-                    content.style.maxHeight = content.scrollHeight + "px";
-                }, 10); 
+                content.style.maxHeight = content.scrollHeight + "px";
+            } else {
+                header.classList.remove('active');
+                content.style.maxHeight = "0";
             }
-            
+
             header.addEventListener('click', () => {
                 const isExpanded = header.classList.toggle('active');
-                if (isExpanded) {
-                    content.style.maxHeight = content.scrollHeight + "px";
-                } else {
-                    content.style.maxHeight = '0';
-                }
-                // Ajusta a altura de todos os drawers abertos após a expansão de um
-                document.querySelectorAll('.drawer-content').forEach(dc => {
-                    if (dc.id !== content.id) {
-                        const dh = document.getElementById(dc.id.replace('-content', '-header'));
-                        if (dh && dh.classList.contains('active')) {
-                            // Reajusta apenas se estiver ativo
-                            dc.style.maxHeight = dc.scrollHeight + "px";
-                        }
-                    }
-                });
+                content.style.maxHeight = isExpanded ? content.scrollHeight + "px" : "0";
             });
         }
 
         // Inicializa os drawers
-        setupDrawer('base-legal', true);
-        setupDrawer('base-calculo', false);
-        setupDrawer('reflexo-verbas', false); /* NOVO DRAWER */
-        setupDrawer('calculadora', false); 
-        setupDrawer('pje-calc', true); // Mantendo o último aberto para destacar a seção
+        setupDrawer('base-legal', false); // Mantém fechado ao carregar
+        setupDrawer('base-calculo');
     </script>
 </body>
 </html>
