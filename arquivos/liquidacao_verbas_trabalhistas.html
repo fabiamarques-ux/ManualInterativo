@@ -29,7 +29,7 @@
             width: auto;
         }
 
-        /* Estilos e Transições para o Acordeão */
+        /* Estilos e Transições para o Acordeão PRINCIPAL */
         .accordion-content {
             max-height: 0;
             overflow: hidden;
@@ -63,6 +63,24 @@
         .accordion-icon.rotate {
             transform: rotate(45deg);
         }
+
+        /* Estilos e Transições para o SUB-ACORDEÃO (Modalidades) */
+        .sub-acordeon-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out, padding 0.3s ease-out;
+            padding-top: 0;
+            padding-bottom: 0;
+        }
+
+        .sub-acordeon-content.active {
+            max-height: 20000px;
+            /* Valor grande o suficiente para a expansão */
+            padding-top: 1rem;
+            /* p-4 */
+            padding-bottom: 1rem;
+            /* p-4 */
+        }
     </style>
 </head>
 
@@ -70,8 +88,8 @@
     <div class="p-4 md:p-8">
         <div class="max-w-4xl mx-auto bg-white rounded-xl shadow-xl p-6 md:p-10 border border-gray-200">
             <div class="flex justify-center mb-6">
-                <img src="https://site.trt19.jus.br/portalTRT19/sites/default/files/logo-trt19.png"
-                    alt="Logo do TRT19" class="logo-trt w-auto object-contain">
+                <img src="https://site.trt19.jus.br/portalTRT19/sites/default/files/logo-trt19.png" alt="Logo do TRT19"
+                    class="logo-trt w-auto object-contain">
             </div>
             <h1 class="text-3xl md:text-4xl text-center mb-6 text-[#007380]">Manual Interativo de Cálculos Trabalhistas
             </h1>
@@ -80,382 +98,598 @@
 
             <section id="liquidacao-verbas-content" class="content-section">
                 <h2 class="text-2xl text-[#007380] mb-4">8.1. Liquidação das Verbas Trabalhistas</h2>
-                <div class="space-y-6">
-                    <p class="text-gray-700 leading-relaxed text-justify">
-                        Após o lançamento e cálculo de todas as verbas trabalhistas e seus
-                        reflexos, o sistema PJe-Calc permite a liquidação e a impressão detalhada da
-                        planilha de cálculo, fundamental para a juntada ao processo judicial.</p>
+                <div class="space-y-4">
 
-                    <div class="space-y-4">
-
-                        <div class="accordion-item border border-gray-200 rounded-lg">
-                            <button
-                                class="accordion-header w-full flex justify-between items-center p-4 text-[#007380] text-left font-bold rounded-lg focus:outline-none">
-                                <span class="text-xl text-[#007380]">8.1.1. Tela de Inclusão/Busca/Importação de
-                                    Calculo</span>
-                                <span class="accordion-icon transition-transform transform text-[#007380]">+</span>
-                            </button>
-                            <div class="accordion-content p-4 rounded-b-lg">
-                                <p class="text-gray-700 text-justify">A tela inicial do PJe-Calc Cidadão oferece as
-                                    opções de Criar Novo Cálculo, Buscar Cálculo existente ou Importar Cálculo. O menu
-                                    lateral exibe todas as etapas do processo de liquidação, como Dados do Cálculo,
-                                    Faltas, Histórico Salarial e Verbas.</p>
-                                <img src="imagens/tela_inicialpjecalc.png" alt="Tela inicial do PJe-Calc Cidadão"
-                                    class="w-full h-auto mt-2 border border-gray-300 rounded-md shadow-lg">
-                            </div>
+                    <div class="accordion-item border border-gray-200 rounded-lg">
+                        <button
+                            class="accordion-header w-full flex justify-between items-center p-4 text-[#007380] text-left font-bold rounded-lg focus:outline-none">
+                            <span class="text-xl text-[#007380]">8.1.1. Tela de Inclusão/Busca/Importação de
+                                Calculo</span>
+                            <span class="accordion-icon transition-transform transform text-[#007380]">+</span>
+                        </button>
+                        <div class="accordion-content p-4 rounded-b-lg">
+                            <p class="text-gray-700 text-justify">A tela inicial do PJe-Calc Cidadão oferece as
+                                opções de Criar Novo Cálculo, Buscar Cálculo existente ou Importar Cálculo. O menu
+                                lateral exibe todas as etapas do processo de liquidação, como Dados do Cálculo,
+                                Faltas, Histórico Salarial e Verbas.</p>
+                            <img src="imagens/tela_inicialpjecalc.png" alt="Tela inicial do PJe-Calc Cidadão"
+                                class="w-full h-auto mt-2 border border-gray-300 rounded-md shadow-lg">
                         </div>
-
-                        <div class="accordion-item border border-gray-200 rounded-lg">
-                            <button
-                                class="accordion-header w-full flex justify-between items-center p-4 text-[#007380] text-left font-bold rounded-lg focus:outline-none">
-                                <span class="text-xl text-[#007380]">8.1.2. Inclusão e Parametrização dos Dados do
-                                    Cálculo</span>
-                                <span class="accordion-icon transition-transform transform text-[#007380]">+</span>
-                            </button>
-                            <div class="accordion-content p-4 rounded-b-lg">
-                                <p class="text-gray-700 text-justify">A configuração inicial do cálculo é feita na tela
-                                    "Dados do Cálculo", que é dividida em "Dados do Processo" e "Parâmetros do Cálculo".
-                                    É nesta etapa que se define o reclamante, reclamado, o período contratual
-                                    (admissão/demissão) e os critérios de apuração, como prescrição e aviso prévio.
-                                    (Cálculo Nº 33).</p>
-                                <h4 class="text-lg text-[#007380] font-semibold mt-4">Dados do Processo</h4>
-                                <img src="imagens/dadosdocalculo.png"
-                                    alt="Tela de Dados do Cálculo - Dados do Processo (Reclamante, Reclamado e Advogados)"
-                                    class="w-full h-auto mt-2 border border-gray-300 rounded-md">
-                                <h4 class="text-lg text-[#007380] font-semibold mt-4">Parâmetros do Cálculo</h4>
-                                <img src="imagens/dadoscalculoparametro.png"
-                                    alt="Tela de Dados do Cálculo - Parâmetros do Cálculo (Datas, Limites, Regime, Sábado, Feriados)"
-                                    class="w-full h-auto mt-2 border border-gray-300 rounded-md">
-                            </div>
-                        </div>
-
-                        <div class="accordion-item border border-gray-200 rounded-lg">
-                            <button
-                                class="accordion-header w-full flex justify-between items-center p-4 text-[#007380] text-left font-bold rounded-lg focus:outline-none">
-                                <span class="text-xl text-[#007380]">8.1.3. Lançamento das Faltas</span>
-                                <span class="accordion-icon transition-transform transform text-[#007380]">+</span>
-                            </button>
-                            <div class="accordion-content p-4 rounded-b-lg">
-                                <p class="text-gray-700 text-justify">A tela "Faltas" permite o registro manual de
-                                    ausências ou a importação de um arquivo CSV externo. É possível indicar a data
-                                    inicial e final da falta, se ela foi justificada e se deve reiniciar o Período
-                                    Aquisitivo de Férias.</p>
-                                <div class="flex flex-wrap gap-4 mt-2">
-                                    <img src="imagens/faltas1.png"
-                                        alt="Tela de Faltas (Menu lateral e Dados do Cálculo - Tela Cheia)"
-                                        class="max-w-full h-auto border border-gray-300 rounded-md">
-                                    <img src="imagens/faltas2.png"
-                                        alt="Tela de Faltas (Registro Manual e Importação - Detalhe)"
-                                        class="max-w-full h-auto border border-gray-300 rounded-md">
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="accordion-item border border-gray-200 rounded-lg">
-                            <button
-                                class="accordion-header w-full flex justify-between items-center p-4 text-[#007380] text-left font-bold rounded-lg focus:outline-none">
-                                <span class="text-xl text-[#007380]">8.1.4. Lançamento do Cartão de Ponto</span>
-                                <span class="accordion-icon transition-transform transform text-[#007380]">+</span>
-                            </button>
-                            <div class="accordion-content p-4 rounded-b-lg">
-                                <p class="text-gray-700 text-justify">A tela de Cartão de Ponto permite o lançamento ou a
-                                    importação da jornada de trabalho para fins de apuração de horas extras, horas
-                                    noturnas e intervalos.</p>
-
-                                <h4 class="text-lg text-[#007380] font-semibold mt-4"></h4>
-                                <p class="text-gray-700 text-justify">As imagens abaixo demonstram o lançamento ou a
-                                    importação da jornada de trabalho.</p>
-
-                                <div class="flex flex-wrap gap-4 mt-4">
-                                    <div class="border border-gray-300 rounded-md p-2">
-                                        <h5 class="font-medium text-gray-800">Geração do Cartão de Ponto</h5>
-                                        <img src="imagens/cartaoponto1.png"
-                                            alt="Tela principal do Cartão de Ponto para iniciar o lançamento."
-                                            class="max-w-full h-auto mt-2">
-                                    </div>
-                                    <div class="border border-gray-300 rounded-md p-2">
-                                        <h5 class="font-medium text-gray-800">Parametrizações do Cartão de Ponto</h5>
-                                        <img src="imagens/cartaoponto2.png"
-                                            alt="Detalhamento do formulário para lançamento de marcações de entrada e saída."
-                                            class="max-w-full h-auto mt-2">
-                                    </div>
-                                    <div class="border border-gray-300 rounded-md p-2">
-                                        <h5 class="font-medium text-gray-800"></h5>
-                                        <img src="imagens/cartaoponto3.png"
-                                            alt="Configuração de horários de trabalho e tipos de jornada (fixa, variável, etc.)."
-                                            class="max-w-full h-auto mt-2">
-                                    </div>
-                                    <div class="border border-gray-300 rounded-md p-2">
-                                        <h5 class="font-medium text-gray-800">Visualização/Alteração e Exclusão do Cartão
-                                            de Ponto</h5>
-                                        <img src="imagens/cartaoponto4.png"
-                                            alt="Grade de visualização das marcações lançadas mês a mês."
-                                            class="max-w-full h-auto mt-2">
-                                    </div>
-                                    <div class="border border-gray-300 rounded-md p-2">
-                                        <h5 class="font-medium text-gray-800">Lançamento de Ocorrências</h5>
-                                        <img src="imagens/cartaoponto5.png"
-                                            alt="Grade detalhada para lançamento manual de ocorrências, faltas e abonos."
-                                            class="max-w-full h-auto mt-2">
-                                    </div>
-                                    <div class="border border-gray-300 rounded-md p-2">
-                                        <h5 class="font-medium text-gray-800">6. Formulário de Jornada Padrão</h5>
-                                        <img src="imagens/cartaoponto6.png"
-                                            alt="Opções para incluir uma jornada padrão ou fixa em múltiplos dias."
-                                            class="max-w-full h-auto mt-2">
-                                    </div>
-                                    <div class="border border-gray-300 rounded-md p-2">
-                                        <h5 class="font-medium text-gray-800">7. Importação de Arquivo de Ponto (CSV)</h5>
-                                        <img src="imagens/cartaoponto7.png"
-                                            alt="Tela para fazer o upload e processar um arquivo CSV com o registro de ponto."
-                                            class="max-w-full h-auto mt-2">
-                                    </div>
-                                    <div class="border border-gray-300 rounded-md p-2">
-                                        <h5 class="font-medium text-gray-800">8. Apuração de Horas e Detalhes do Dia</h5>
-                                        <img src="imagens/cartaoponto8.png"
-                                            alt="Visualização do cálculo de horas (Extras, Noturnas) e o resultado da apuração diária."
-                                            class="max-w-full h-auto mt-2">
-                                    </div>
-                                    <div class="border border-gray-300 rounded-md p-2">
-                                        <h5 class="font-medium text-gray-800">9. Resumo do Cálculo e Totais</h5>
-                                        <img src="imagens/cartaoponto9.png"
-                                            alt="Tela de resumo mostrando os totais de horas apuradas para o período."
-                                            class="max-w-full h-auto mt-2">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="accordion-item border border-gray-200 rounded-lg">
-                            <button
-                                class="accordion-header w-full flex justify-between items-center p-4 text-[#007380] text-left font-bold rounded-lg focus:outline-none">
-                                <span class="text-xl text-[#007380]">8.1.5. Lançamento do Histórico Salarial</span>
-                                <span class="accordion-icon transition-transform transform text-[#007380]">+</span>
-                            </button>
-                            <div class="accordion-content p-4 rounded-b-lg">
-                                <p class="text-gray-700 text-justify">O Histórico Salarial é onde todas as parcelas
-                                    salariais pagas, devidas ou calculadas são cadastradas. Esta etapa é crucial para a
-                                    base de cálculo de verbas e deduções.</p>
-
-                                <h4 class="text-lg text-[#007380] font-semibold mt-4">Galeria de Imagens do Histórico
-                                    Salarial (Ordem Sequencial)</h4>
-                                <p class="text-gray-700 text-justify">Abaixo estão as telas do Histórico Salarial na
-                                    ordem de **1 a 7**, cobrindo a busca de parcelas, formas de lançamento, exemplos,
-                                    detalhes de incidência e importação de dados.</p>
-
-                                <div class="space-y-6 mt-4">
-                                    <div class="border border-gray-300 rounded-md p-2">
-                                        <h5 class="font-medium text-gray-800">1. Tela de Busca e Criação de Parcela</h5>
-                                        <img src="imagens/historicosalarial1.png"
-                                            alt="Tela de Histórico Salarial (Dados do Cálculo e botões Novo/Grade de Ocorrências)"
-                                            class="w-full h-auto mt-2">
-                                    </div>
-
-                                    <div class="border border-gray-300 rounded-md p-2">
-                                        <h5 class="font-medium text-gray-800">2. Importação e Cadastro de Nova Parcela
-                                            (Valor Informado)</h5>
-                                        <img src="imagens/historicosalarial2.png"
-                                            alt="Tela de Importação do Histórico Salarial com o formulário de cadastro de nova parcela (Valor Informado)"
-                                            class="w-full h-auto mt-2">
-                                    </div>
-
-                                    <div class="border border-gray-300 rounded-md p-2">
-                                        <h5 class="font-medium text-gray-800">3. Seleção de Nome da Parcela (Adicionais,
-                                            Comissões, etc.)</h5>
-                                        <img src="imagens/historicosalarial3.png"
-                                            alt="Seleção de Nome da Parcela (Exemplos: Adicionais, Comissões)"
-                                            class="w-full h-auto mt-2">
-                                    </div>
-
-                                    <div class="border border-gray-300 rounded-md p-2">
-                                        <h5 class="font-medium text-gray-800">4. Lançamento Detalhado e Incidências</h5>
-                                        <img src="imagens/historicosalarial4.png"
-                                            alt="Grade de Lançamento Detalhada do Histórico Salarial"
-                                            class="w-full h-auto mt-2">
-                                    </div>
-
-                                    <div class="border border-gray-300 rounded-md p-2">
-                                        <h5 class="font-medium text-gray-800">5. Grade de Lançamento (Base Calculada em
-                                            Salário Mínimo)</h5>
-                                        <img src="imagens/historicosalarial5.png"
-                                            alt="Grade de Lançamento (Base Calculada em Salário Mínimo)"
-                                            class="w-full h-auto mt-2">
-                                    </div>
-
-                                    <div class="border border-gray-300 rounded-md p-2">
-                                        <h5 class="font-medium text-gray-800">6. Tela de Cadastro de Parcela (Tipo Valor
-                                            Informado)</h5>
-                                        <img src="imagens/historicosalarial6.png"
-                                            alt="Tela de Cadastro de Parcela (Valor Informado)"
-                                            class="w-full h-auto mt-2">
-                                    </div>
-
-                                    <div class="border border-gray-300 rounded-md p-2">
-                                        <h5 class="font-medium text-gray-800">7. Tela de Cadastro de Parcela (Tipo Valor
-                                            Calculado)</h5>
-                                        <img src="imagens/historicosalarial7.png"
-                                            alt="Tela de Cadastro de Parcela (Valor Calculado)"
-                                            class="w-full h-auto mt-2">
-                                    </div>
-
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="accordion-item border border-gray-200 rounded-lg">
-                            <button
-                                class="accordion-header w-full flex justify-between items-center p-4 text-[#007380] text-left font-bold rounded-lg focus:outline-none">
-                                <span class="text-xl text-[#007380]">8.1.6. Lançamento de Verbas</span>
-                                <span class="accordion-icon transition-transform transform text-[#007380]">+</span>
-                            </button>
-                            <div class="accordion-content p-4 rounded-b-lg">
-                                <p class="text-gray-700 text-justify">A tela de Verbas é onde se inicia o lançamento dos
-                                    pedidos deferidos (Verbas Principais). O lançamento pode ser feito de forma Manual
-                                    ou Expressa.</p>
-                                <h4 class="text-lg text-[#007380] font-semibold mt-4">Opções de Lançamento e Regeração
-                                </h4>
-                                <img src="imagens/verbas.png"
-                                    alt="Tela de Verbas - Listar (Opções Manual, Expresso e Regerar Ocorrências)"
-                                    class="w-full h-auto mt-2 border border-gray-300 rounded-md">
-                                <h4 class="text-lg text-[#007380] font-semibold mt-4">Lançamento Expresso</h4>
-                                <p class="text-gray-700 text-justify">O Lançamento Expresso permite a rápida seleção das
-                                    Verbas Principais, como 13º Salário, Aviso Prévio, Férias + 1/3, Multa do Artigo 477
-                                    da CLT e Saldo de Salário.</p>
-                                <img src="imagens/verbas2.png"
-                                    alt="Tela de Verbas - Lançamento Expresso (Seleção de Verbas Principais)"
-                                    class="w-full h-auto mt-2 border border-gray-300 rounded-md">
-
-                                <h4 class="text-lg text-[#007380] font-semibold mt-4">Resumo das Verbas Lançadas</h4>
-                                <p class="text-gray-700 text-justify">A tela de verbas mostra o resumo das verbas
-                                    principais (13º Salário, Aviso Prévio, Férias + 1/3, Multa do Artigo 477 da CLT,
-                                    Saldo de Salário) que foram lançadas para o cálculo (Nº 33).</p>
-                                <img src="imagens/verbas3.png" alt="Tela de Verbas do PJe-Calc"
-                                    class="w-full h-auto mt-2 border border-gray-300 rounded-md">
-                            </div>
-                        </div>
-
-                        <div class="accordion-item border border-gray-200 rounded-lg">
-                            <button
-                                class="accordion-header w-full flex justify-between items-center p-4 text-[#007380] text-left font-bold rounded-lg focus:outline-none">
-                                <span class="text-xl text-[#007380]">8.1.7. Lançamento das Custas Judiciais, Correção,
-                                    Juros e Multa</span>
-                                <span class="accordion-icon transition-transform transform text-[#007380]">+</span>
-                            </button>
-                            <div class="accordion-content p-4 rounded-b-lg">
-                                <h3 class="text-lg text-[#007380] font-semibold mt-4">8.1.7.1. Custas Judiciais</h3>
-                                <p class="text-gray-700 text-justify">As telas de Custas Judiciais (Custas Devidas e
-                                    Custas Recolhidas)
-                                    permitem o registro dos valores de custas devidas (2% sobre a liquidação, atos
-                                    processuais, recursos, etc.) e os valores já recolhidos, para apuração de eventual
-                                    diferença a ser paga/restituída.</p>
-                                <div class="flex flex-wrap gap-4 mt-2">
-                                    <img src="imagens/custasjudiciais1.png"
-                                        alt="Tela de Custas Judiciais - Custas Devidas"
-                                        class="max-w-xl h-auto border border-gray-300 rounded-md">
-                                    <img src="imagens/custasjudiciais2.png"
-                                        alt="Tela de Custas Judiciais - Custas Recolhidas"
-                                        class="max-w-xl h-auto border border-gray-300 rounded-md">
-                                </div>
-
-                                <h3 class="text-lg text-[#007380] font-semibold mt-4">8.1.7.2. Correção, Juros e Multa
-                                </h3>
-                                <p class="text-gray-700 text-justify">As telas de Correção, Juros e Multa (Dados Gerais
-                                    e Dados Específicos)
-                                    permitem a configuração detalhada dos índices de correção monetária e juros de mora
-                                    aplicáveis aos créditos trabalhistas, previdenciários e ao FGTS.</p>
-                                <div class="flex flex-wrap gap-4 mt-2">
-                                    <img src="imagens/correcaojurosmulta1.png"
-                                        alt="Tela de Correção, Juros e Multa - Dados Específicos"
-                                        class="max-w-xl h-auto border border-gray-300 rounded-md">
-                                    <img src="imagens/correcaojurosmulta2.png"
-                                        alt="Tela de Correção, Juros e Multa - Dados Gerais"
-                                        class="max-w-xl h-auto border border-gray-300 rounded-md">
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="accordion-item border border-gray-200 rounded-lg">
-                            <button
-                                class="accordion-header w-full flex justify-between items-center p-4 text-[#007380] text-left font-bold rounded-lg focus:outline-none">
-                                <span class="text-xl text-[#007380]">8.1.8. Liquidação</span>
-                                <span class="accordion-icon transition-transform transform text-[#007380]">+</span>
-                            </button>
-                            <div class="accordion-content p-4 rounded-b-lg">
-                                <p class="text-gray-700 text-justify">A tela de liquidação permite configurar a data
-                                    (31/10/2025) e o critério de acumulação dos
-                                    índices de correção monetária, iniciando a partir do mês subsequente ao vencimento
-                                    das verbas.</p>
-                                <img src="imagens/liquidação.png" alt="Tela de Liquidação do PJe-Calc"
-                                    class="w-full h-auto mt-2 border border-gray-300 rounded-md">
-                            </div>
-                        </div>
-
-                        <div class="accordion-item border border-gray-200 rounded-lg">
-                            <button
-                                class="accordion-header w-full flex justify-between items-center p-4 text-[#007380] text-left font-bold rounded-lg focus:outline-none">
-                                <span class="text-xl text-[#007380]">8.1.9. Configuração de Impressão</span>
-                                <span class="accordion-icon transition-transform transform text-[#007380]">+</span>
-                            </button>
-                            <div class="accordion-content p-4 rounded-b-lg">
-                                <p class="text-gray-700 text-justify">A impressão é configurada no menu Imprimir, com a
-                                    seleção de todos os relatórios necessários para a juntada ao processo judicial.</p>
-                                <div class="flex flex-wrap gap-4 mt-2">
-                                    <img src="imagens/impressao.png"
-                                        alt="Tela de Impressão (Seleção de Relatórios - Parte 1)"
-                                        class="max-w-xs h-auto border border-gray-300 rounded-md">
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="accordion-item border border-gray-200 rounded-lg">
-                            <button
-                                class="accordion-header w-full flex justify-between items-center p-4 text-[#007380] text-left font-bold rounded-lg focus:outline-none">
-                                <span class="text-xl text-[#007380]">8.1.10. Planilha de Cálculo Impresso</span>
-                                <span class="accordion-icon transition-transform transform text-[#007380]">+</span>
-                            </button>
-                            <div class="accordion-content p-4 rounded-b-lg">
-                                <p class="text-gray-700 text-justify">As páginas impressas detalham o resumo da
-                                    liquidação, o critério legal, os dados do cálculo, o histórico salarial, o
-                                    demonstrativo individual de cada verba, as deduções (INSS, IR) e as custas
-                                    judiciais.</p>
-                                <img src="imagens/planilha1.jpg"
-                                    alt="Planilha de Cálculo (Página 1: Resumo da Liquidação e Critério Legal)"
-                                    class="w-full h-auto mt-2 border border-gray-300 rounded-md">
-                                <img src="imagens/planilha2.jpg"
-                                    alt="Planilha de Cálculo (Página 3: Dados do Cálculo e Histórico Salarial - Parte 1)"
-                                    class="w-full h-auto mt-2 border border-gray-300 rounded-md">
-                                <img src="imagens/planilha3.jpg"
-                                    alt="Planilha de Cálculo (Página 4: Histórico Salarial - Parte 2)"
-                                    class="w-full h-auto mt-2 border border-gray-300 rounded-md">
-                                <img src="imagens/planilha4.jpg"
-                                    alt="Planilha de Cálculo (Página 5: Histórico Salarial - Fim e Demonstrativo de Verbas - 13º Salário)"
-                                    class="w-full h-auto mt-2 border border-gray-300 rounded-md">
-                                <img src="imagens/planilha5.jpg"
-                                    alt="Planilha de Cálculo (Página 6: Demonstrativo de Verbas - Aviso Prévio, Férias, Multa 477, Saldo de Salário)"
-                                    class="w-full h-auto mt-2 border border-gray-300 rounded-md">
-                                <img src="imagens/planilha6.jpg"
-                                    alt="Planilha de Cálculo (Página 7: Demonstrativo de Juros sobre Verbas e FGTS)"
-                                    class="w-full h-auto mt-2 border border-gray-300 rounded-md">
-                                <img src="imagens/planilha7.jpg"
-                                    alt="Planilha de Cálculo (Página 8: Demonstrativo de Contribuição Social Segurado, Empresa e SAT)"
-                                    class="w-full h-auto mt-2 border border-gray-300 rounded-md">
-                                <img src="imagens/planilha8.jpg"
-                                    alt="Planilha de Cálculo (Página 9: Bases de Cálculo da Contribuição Previdenciária e FGTS - Parte 1)"
-                                    class="w-full h-auto mt-2 border border-gray-300 rounded-md">
-                                <img src="imagens/planilha9.jpg"
-                                    alt="Planilha de Cálculo (Página 10: Base de Cálculo da Contribuição Previdenciária e Demonstrativo de Imposto de Renda)"
-                                    class="w-full h-auto mt-2 border border-gray-300 rounded-md">
-                                <img src="imagens/planilha10.jpg"
-                                    alt="Planilha de Cálculo (Página 11: Diferença de Custas do Reclamado)"
-                                    class="w-full h-auto mt-2 border border-gray-300 rounded-md">
-                                <img src="imagens/planilha11.jpg"
-                                    alt="Planilha de Cálculo (Página 12: Diferença de Custas do Reclamado - Final e Demonstrativo de Diferença de Custas - Fim)"
-                                    class="w-full h-auto mt-2 border border-gray-300 rounded-md">
-                            </div>
-                        </div>
-
                     </div>
-                </div>
+
+                    <div class="accordion-item border border-gray-200 rounded-lg">
+                        <button
+                            class="accordion-header w-full flex justify-between items-center p-4 text-[#007380] text-left font-bold rounded-lg focus:outline-none">
+                            <span class="text-xl text-[#007380]">8.1.2. Inclusão e Parametrização dos Dados do
+                                Cálculo</span>
+                            <span class="accordion-icon transition-transform transform text-[#007380]">+</span>
+                        </button>
+                        <div class="accordion-content p-4 rounded-b-lg">
+                            <p class="text-gray-700 text-justify">A configuração inicial do cálculo é feita na tela
+                                "Dados do Cálculo", que é dividida em "Dados do Processo" e "Parâmetros do Cálculo".
+                                É nesta etapa que se define o reclamante, reclamado, o período contratual
+                                (admissão/demissão) e os critérios de apuração, como prescrição e aviso prévio.
+                                (Cálculo Nº 33).</p>
+                            <h4 class="text-lg text-[#007380] font-semibold mt-4">Dados do Processo</h4>
+                            <img src="imagens/dadosdocalculo.png"
+                                alt="Tela de Dados do Cálculo - Dados do Processo (Reclamante, Reclamado e Advogados)"
+                                class="w-full h-auto mt-2 border border-gray-300 rounded-md">
+                            <h4 class="text-lg text-[#007380] font-semibold mt-4">Parâmetros do Cálculo</h4>
+                            <img src="imagens/dadoscalculoparametro.png"
+                                alt="Tela de Dados do Cálculo - Parâmetros do Cálculo (Datas, Limites, Regime, Sábado, Feriados)"
+                                class="w-full h-auto mt-2 border border-gray-300 rounded-md">
+                        </div>
+                    </div>
+
+                    <div class="accordion-item border border-gray-200 rounded-lg">
+                        <button
+                            class="accordion-header w-full flex justify-between items-center p-4 text-[#007380] text-left font-bold rounded-lg focus:outline-none">
+                            <span class="text-xl text-[#007380]">8.1.3. Lançamento das Faltas</span>
+                            <span class="accordion-icon transition-transform transform text-[#007380]">+</span>
+                        </button>
+                        <div class="accordion-content p-4 rounded-b-lg">
+                            <p class="text-gray-700 text-justify">A tela "Faltas" permite o registro manual de
+                                ausências ou a importação de um arquivo CSV externo. É possível indicar a data
+                                inicial e final da falta, se ela foi justificada e se deve reiniciar o Período
+                                Aquisitivo de Férias.</p>
+                            <div class="flex flex-wrap gap-4 mt-2">
+                                <img src="imagens/faltas1.png"
+                                    alt="Tela de Faltas (Menu lateral e Dados do Cálculo - Tela Cheia)"
+                                    class="max-w-full h-auto border border-gray-300 rounded-md">
+                                <img src="imagens/faltas2.png"
+                                    alt="Tela de Faltas (Registro Manual e Importação - Detalhe)"
+                                    class="max-w-full h-auto border border-gray-300 rounded-md">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item border border-gray-200 rounded-lg">
+                        <button
+                            class="accordion-header w-full flex justify-between items-center p-4 text-[#007380] text-left font-bold rounded-lg focus:outline-none">
+                            <span class="text-xl text-[#007380]">8.1.4. Lançamento do Cartão de Ponto</span>
+                            <span class="accordion-icon transition-transform transform text-[#007380]">+</span>
+                        </button>
+                        <div class="accordion-content p-4 rounded-b-lg">
+                            <p class="text-gray-700 text-justify">A tela de Cartão de Ponto permite o lançamento ou a
+                                importação da jornada de trabalho para fins de apuração de horas extras, horas
+                                noturnas e intervalos.</p>
+
+                            <h4 class="text-lg text-[#007380] font-semibold mt-4"></h4>
+                            <p class="text-gray-700 text-justify">As imagens abaixo demonstram o lançamento ou a
+                                importação da jornada de trabalho.</p>
+
+                            <div class="flex flex-wrap gap-4 mt-4">
+                                <div class="border border-gray-300 rounded-md p-2">
+                                    <h5 class="font-medium text-gray-800">Geração do Cartão de Ponto</h5>
+                                    <img src="imagens/cartaoponto1.png"
+                                        alt="Tela principal do Cartão de Ponto para iniciar o lançamento."
+                                        class="max-w-full h-auto mt-2">
+                                </div>
+                                <div class="border border-gray-300 rounded-md p-2">
+                                    <h5 class="font-medium text-gray-800">Parametrizações do Cartão de Ponto</h5>
+                                    <img src="imagens/cartaoponto2.png"
+                                        alt="Detalhamento do formulário para lançamento de marcações de entrada e saída."
+                                        class="max-w-full h-auto mt-2">
+                                </div>
+                                <div class="border border-gray-300 rounded-md p-2">
+                                    <h5 class="font-medium text-gray-800"></h5>
+                                    <img src="imagens/cartaoponto3.png"
+                                        alt="Configuração de horários de trabalho e tipos de jornada (fixa, variável, etc.)."
+                                        class="max-w-full h-auto mt-2">
+                                </div>
+                                <div class="border border-gray-300 rounded-md p-2">
+                                    <h5 class="font-medium text-gray-800">Visualização/Alteração e Exclusão do
+                                        Cartão
+                                        de Ponto</h5>
+                                    <img src="imagens/cartaoponto4.png"
+                                        alt="Grade de visualização das marcações lançadas mês a mês."
+                                        class="max-w-full h-auto mt-2">
+                                </div>
+                                <div class="border border-gray-300 rounded-md p-2">
+                                    <h5 class="font-medium text-gray-800">Lançamento de Ocorrências</h5>
+                                    <img src="imagens/cartaoponto5.png"
+                                        alt="Grade detalhada para lançamento manual de ocorrências, faltas e abonos."
+                                        class="max-w-full h-auto mt-2">
+                                </div>
+                                <div class="border border-gray-300 rounded-md p-2">
+                                    <h5 class="font-medium text-gray-800">6. Formulário de Jornada Padrão</h5>
+                                    <img src="imagens/cartaoponto6.png"
+                                        alt="Opções para incluir uma jornada padrão ou fixa em múltiplos dias."
+                                        class="max-w-full h-auto mt-2">
+                                </div>
+                                <div class="border border-gray-300 rounded-md p-2">
+                                    <h5 class="font-medium text-gray-800">7. Importação de Arquivo de Ponto (CSV)
+                                    </h5>
+                                    <img src="imagens/cartaoponto7.png"
+                                        alt="Tela para fazer o upload e processar um arquivo CSV com o registro de ponto."
+                                        class="max-w-full h-auto mt-2">
+                                </div>
+                                <div class="border border-gray-300 rounded-md p-2">
+                                    <h5 class="font-medium text-gray-800">8. Apuração de Horas e Detalhes do Dia
+                                    </h5>
+                                    <img src="imagens/cartaoponto8.png"
+                                        alt="Visualização do cálculo de horas (Extras, Noturnas) e o resultado da apuração diária."
+                                        class="max-w-full h-auto mt-2">
+                                </div>
+                                <div class="border border-gray-300 rounded-md p-2">
+                                    <h5 class="font-medium text-gray-800">9. Resumo do Cálculo e Totais</h5>
+                                    <img src="imagens/cartaoponto9.png"
+                                        alt="Tela de resumo mostrando os totais de horas apuradas para o período."
+                                        class="w-full h-auto mt-2">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item border border-gray-200 rounded-lg">
+                        <button
+                            class="accordion-header w-full flex justify-between items-center p-4 text-[#007380] text-left font-bold rounded-lg focus:outline-none">
+                            <span class="text-xl text-[#007380]">8.1.5. Lançamento do Histórico Salarial</span>
+                            <span class="accordion-icon transition-transform transform text-[#007380]">+</span>
+                        </button>
+                        <div class="accordion-content p-4 rounded-b-lg">
+                            <p class="text-gray-700 text-justify">O Histórico Salarial é o registro detalhado e
+                                fundamental de toda a evolução remuneratória do empregado. É nesta seção que se
+                                cadastram todas as parcelas salariais — sejam elas pagas, devidas ou que necessitem
+                                de cálculo.
+                                Este registro permite ao usuário incluir tanto os valores que o empregado é credor
+                                (como um adicional noturno) quanto as parcelas em que o trabalhador é devedor
+                                (débitos).
+                                Essa etapa é crucial, pois os dados aqui inseridos formam a base de cálculo para a
+                                criação de futuras verbas e deduções no processo. Por exemplo, um adicional noturno
+                                registrado pode ser usado futuramente para deduzir um valor deferido em sentença.
+                            </p>
+
+                            <h4 class="text-lg text-[#007380] font-semibold mt-4">Passo a Passo no PJe-Calc </h4>
+                            <p class="text-gray-700 text-justify">As telas estão organizadas na sequência lógica de
+                                cadastro e visualização de uma nova parcela no sistema, com a separação das modalidades
+                                Manual e Automática.</p>
+
+                            <div class="space-y-6 mt-4">
+
+                                <div class="border border-gray-300 rounded-md p-2">
+                                    <h5 class="font-medium text-gray-800">1. Tela de Busca e Criação de Novo Histórico
+                                        Salarial</h5>
+                                    <p class="text-gray-700 text-justify text-sm mt-1">A tela inicial exibe a lista de
+                                        históricos já cadastrados e o botão para 'Novo', dando início ao cadastro da
+                                        parcela.</p>
+                                    <img src="imagens/historicosalarial1.0.png"
+                                        alt="Tela de Histórico Salarial (Dados do Cálculo e botões Novo/Grade de Ocorrências)"
+                                        class="w-full h-auto mt-2">
+                                </div>
+
+                                <div class="border border-gray-300 rounded-md p-2">
+                                    <h5 class="font-medium text-gray-800">2. Modalidades de Inserção de Dados e
+                                        Incidências Iniciais</h5>
+                                    <p class="text-gray-700 text-justify text-sm mt-1">O sistema oferece duas
+                                        modalidades principais para a inserção das informações:</p>
+                                    <ul>
+                                        <li>
+                                            <strong>Lançamento Manual:</strong> O usuário insere, mês a mês, o valor de
+                                            cada parcela no histórico salarial.
+                                        </li>
+                                        <li>
+                                            <strong>Importação Automática:</strong> Os dados são inseridos por meio de
+                                            um arquivo formatado na extensão .CSV, compatível com planilhas eletrônicas.
+                                        </li>
+                                    </ul>
+                                    <img src="imagens/historicosalarial1.1.png"
+                                        alt="Tela de Importação Histórico Salarial a partir de Arquivo Externo e Formulário de Cadastro de Nova Parcela"
+                                        class="w-full h-auto mt-2">
+                                </div>
+
+                                <div class="sub-acordeon-item border-2 border-[#007380] rounded-lg mt-4">
+                                    <button
+                                        class="sub-acordeon-header w-full flex justify-between items-center p-4 bg-[#e6f2f2] text-[#007380] text-left font-bold rounded-t-lg focus:outline-none">
+                                        <span class="text-xl">Modalidade 1: Inserção Manual (Passos 3 a 6)</span>
+                                        <span
+                                            class="sub-acordeon-icon transition-transform transform text-[#007380]">+</span>
+                                    </button>
+                                    <div class="sub-acordeon-content p-4 rounded-b-lg space-y-6">
+
+                                        <div class="border border-gray-300 rounded-md p-2">
+                                            <h5 class="font-medium text-gray-800">3. Tela de Cadastro de Nova Parcela
+                                                (Valor Informado)</h5>
+                                            <p class="text-gray-700 text-justify text-sm mt-1">Esta tela exibe o
+                                                formulário inicial para o cadastro manual de uma nova parcela com o Tipo
+                                                do Valor Informado.</p>
+                                            <img src="imagens/historicosalarial3.1.png"
+                                                alt="Tela de Cadastro de Parcela (Valor Informado)"
+                                                class="w-full h-auto mt-2">
+                                        </div>
+
+                                        <div class="border border-gray-300 rounded-md p-2">
+                                            <h5 class="font-medium text-gray-800">4. Seleção de Nome da Parcela</h5>
+                                            <p class="text-gray-700 text-justify text-sm mt-1">O próximo passo é digitar
+                                                o Nome da parcela ou selecionar um item na lista de sugestões,
+                                                definindo a incidência inicial. As verbas abaixo são as já existentes no
+                                                sistema. Caso a verba desejada não esteja na lista, o usuário deve
+                                                incluir o nome da nova verba diretamente no campo e, após salvar, ela
+                                                estará disponível para o cálculo.</p>
+
+                                            <ul class="list-disc list-inside text-gray-700 text-sm mt-2 space-y-0.5">
+                                                <li>Adicional de Horas Extras Pagas</li>
+                                                <li>Adicional de Insalubridade Pago</li>
+                                                <li>Adicional de Periculosidade Pago</li>
+                                                <li>Adicional de Risco Pago</li>
+                                                <li>Adicional de Sobreaviso Pago</li>
+                                                <li>Adicional de Transferência Pago</li>
+                                                <li>Adicional Noturno Pago</li>
+                                                <li>Adicional de Tempo de Serviço Pago</li>
+                                                <li>Anuênio Pago</li>
+                                                <li>Comissões Pagas</li>
+                                                <li>Diárias Pagas</li>
+                                                <li>Gorjetas Pagas</li>
+                                                <li>Gratificação de Função</li>
+                                                <li>Gratificação por Tempo de Serviço Pago</li>
+                                                <li>Horas Extras Pagas</li>
+                                                <li>Intervalo Interjornada Pago</li>
+                                                <li>Intervalo Intrajornada Pago</li>
+                                                <li>Quinquênio Pago</li>
+                                                <li>Salário Base</li>
+                                                <li>Salário Devido</li>
+                                                <li>Salário Pago</li>
+                                                <li>Soldada Base</li>
+                                                <li>Soldo</li>
+                                                <li>Triênio Pago</li>
+                                                <li>Vencimento</li>
+                                            </ul>
+
+                                            <img src="imagens/historicosalarial3.2.png"
+                                                alt="Seleção do nome da Parcela e Incidências"
+                                                class="w-full h-auto mt-2">
+                                        </div>
+
+                                        <div class="border border-gray-300 rounded-md p-2">
+                                            <h5 class="font-medium text-gray-800">5. Parcela com Tipo de Valor Informado
+                                                (Salário Base)</h5>
+                                            <p class="text-gray-700 text-justify text-sm mt-1">Exemplo de cadastro para
+                                                o "SALÁRIO BASE" quando o valor é informado (R$ 4.000,00) fixamente.
+                                                Após preencher o valor e o período, clique em "Gerar Ocorrências".</p>
+                                            <div class="flex flex-wrap gap-4 mt-2">
+                                                <img src="imagens/historicosalarial3.3.png"
+                                                    alt="Tela de Cadastro de Parcela com Tipo Valor Informado (Valor Fixo)"
+                                                    class="max-w-md h-auto border border-gray-300 rounded-md">
+                                                <img src="imagens/historicosalarial3.4.png"
+                                                    alt="Grade gerada para a parcela com Valor Informado"
+                                                    class="max-w-md h-auto border border-gray-300 rounded-md">
+                                            </div>
+                                        </div>
+
+                                        <div class="border border-gray-300 rounded-md p-2">
+                                            <h5 class="font-medium text-gray-800">6. Parcela com Tipo de Valor Calculado
+                                                (Salário Mínimo)</h5>
+                                            <p class="text-gray-700 text-justify text-sm mt-1">Exemplo de cadastro onde
+                                                o valor é Calculado com base em uma referência, como 1 Salário Mínimo. A
+                                                imagem demonstra a configuração da base de cálculo e a grade gerada com
+                                                os valores variáveis do Salário Mínimo.</p>
+                                            <div class="flex flex-wrap gap-4 mt-2">
+                                                <img src="imagens/historicosalarial3.5.png"
+                                                    alt="Tela de Cadastro de Parcela com Tipo Valor Calculado (Base de Referência)"
+                                                    class="max-w-md h-auto border border-gray-300 rounded-md">
+                                                <img src="imagens/historicosalarial3.6.png"
+                                                    alt="Grade gerada para a parcela com Valor Calculado (Salário Mínimo)"
+                                                    class="max-w-md h-auto border border-gray-300 rounded-md">
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                                <div class="sub-acordeon-item border-2 border-[#007380] rounded-lg mt-4">
+                                    <button
+                                        class="sub-acordeon-header w-full flex justify-between items-center p-4 bg-[#e6f2f2] text-[#007380] text-left font-bold rounded-t-lg focus:outline-none">
+                                        <span class="text-xl">Modalidade 2: Inserção Automática / Importação (Passos 7 a
+                                            9)</span>
+                                        <span
+                                            class="sub-acordeon-icon transition-transform transform text-[#007380]">+</span>
+                                    </button>
+                                    <div class="sub-acordeon-content p-4 rounded-b-lg space-y-6">
+
+                                        <div class="border border-gray-300 rounded-md p-2">
+                                            <h5 class="font-medium text-gray-800">7. Grade de Lançamento das Parcelas
+                                            </h5>
+                                            <p class="text-gray-700 text-justify text-sm mt-1">Visão da grade de
+                                                ocorrências das parcelas, que pode ser gerada tanto por lançamento
+                                                manual quanto pela importação de dados.</p>
+                                            <img src="imagens/historicosalarial2.3.png"
+                                                alt="Grade de Lançamento (Base Calculada em Salário Mínimo)"
+                                                class="w-full h-auto mt-1">
+                                        </div>
+
+                                        <div class="border border-gray-300 rounded-md p-2">
+                                            <h5 class="font-medium text-gray-800">8. Procedimento de Importação de
+                                                Arquivo CSV</h5>
+                                            <p class="text-gray-700 text-justify text-sm mt-1">Para lançar grandes
+                                                volumes de dados, utiliza-se a opção de importação. A planilha deve
+                                                estar em formato .CSV e seguir um padrão de colunas específico do
+                                                PJe-Calc.</p>
+
+                                            <div class="space-y-4 mt-4">
+                                                <div class="border border-gray-200 rounded-md p-2">
+                                                    <h6 class="font-medium text-gray-700 text-sm">Estrutura da Planilha
+                                                        de Importação</h6>
+                                                    <p class="text-gray-700 text-justify text-xs mt-1">A planilha deve
+                                                        conter o Mês/Ano e indicar as incidências (S para Sim, como em
+                                                        FGTS e Contribuição Social).</p>
+                                                    <img src="imagens/historicosalarial2.1.png"
+                                                        alt="Exemplo de planilha Excel formatada para importação (Mês/Ano, FGTS, Contribuição Social)"
+                                                        class="w-full h-auto mt-1">
+                                                </div>
+
+                                                <div class="border border-gray-200 rounded-md p-2">
+                                                    <h6 class="font-medium text-gray-700 text-sm">Configuração da Célula
+                                                        de Mês/Ano</h6>
+                                                    <p class="text-gray-700 text-justify text-xs mt-1">É essencial que a
+                                                        coluna de Mês/Ano na planilha Excel esteja formatada como
+                                                        Personalizado no formato "mm/aaaa".</p>
+                                                    <img src="imagens/historicosalarial2.2.png"
+                                                        alt="Caixa de diálogo Formatar Células no Excel com a categoria Personalizado e tipo mm/aaaa selecionado"
+                                                        class="w-full h-auto mt-1">
+                                                </div>
+
+                                                <div class="border border-gray-200 rounded-md p-2">
+                                                    <h6 class="font-medium text-gray-700 text-sm">Confirmação de
+                                                        Importação</h6>
+                                                    <p class="text-gray-700 text-justify text-xs mt-1">Após selecionar o
+                                                        arquivo e clicar em "Confirmar", a importação será realizada, e
+                                                        os dados preencherão a grade do histórico salarial.</p>
+                                                    <img src="imagens/historicosalarial2.3.png"
+                                                        alt="Tela de Importar Histórico Salarial a partir de Arquivo Externo com a confirmação de importação 'Feito'"
+                                                        class="w-full h-auto mt-1">
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="border border-gray-300 rounded-md p-2">
+                                            <h5 class="font-medium text-gray-800">9. Telas de Detalhamento e Ocorrências
+                                                da Parcela (Complementares)</h5>
+                                            <p class="text-gray-700 text-justify text-sm mt-1">Telas que detalham o
+                                                resultado do lançamento (manual ou importado) e a visualização das
+                                                incidências por competência.</p>
+
+                                            <div class="space-y-4 mt-4">
+                                                <div class="border border-gray-200 rounded-md p-2">
+                                                    <h6 class="font-medium text-gray-700 text-sm">Tela de Cadastro de
+                                                        Parcela (Valor Informado - Grade Detalhada)</h6>
+                                                    <img src="imagens/historicosalarial2.4.png"
+                                                        alt="Tela de Cadastro de Parcela com a grade de valores e incidências detalhada"
+                                                        class="w-full h-auto mt-1">
+                                                    <img src="imagens/historicosalarial2.5.png"
+                                                        alt="Grade de valores mês a mês (continuação)"
+                                                        class="w-full h-auto mt-1">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="sub-acordeon-item border-2 border-[#007380] rounded-lg mt-4">
+                                    <button
+                                        class="sub-acordeon-header w-full flex justify-between items-center p-4 bg-[#e6f2f2] text-[#007380] text-left font-bold rounded-t-lg focus:outline-none">
+                                        <span class="text-xl">Última Remuneração - Importação da tela de
+                                            Parâmetros</span>
+                                        <span
+                                            class="sub-acordeon-icon transition-transform transform text-[#007380]">+</span>
+                                    </button>
+                                    <div class="sub-acordeon-content p-4 rounded-b-lg space-y-6">
+                                        <p class="text-gray-700 text-justify text-sm mt-1">A opção "ÚLTIMA
+                                            REMUNERAÇÃO" é preenchida automaticamente pelo sistema ao importar o
+                                            Histórico Salarial a partir dos parâmetros de cálculo (Maiores
+                                            Remunerações/Última Remuneração).</p>
+
+                                        <div class="border border-gray-300 rounded-md p-2">
+                                            <h5 class="font-medium text-gray-800">10. Visualização da "ÚLTIMA
+                                                REMUNERAÇÃO" na Grade Principal</h5>
+                                            <p class="text-gray-700 text-justify text-sm mt-1">Após a importação
+                                                automática, a verba "ÚLTIMA REMUNERAÇÃO" (R$ 5.000,00) aparece na
+                                                grade de Históricos Salariais, conforme definido na tela de Parâmetros
+                                                do Cálculo (Tópico 8.1.2).</p>
+                                            <img src="imagens/historicosalarial5.png"
+                                                alt="Grade de Histórico Salarial mostrando SALÁRIO BASE e ÚLTIMA REMUNERAÇÃO"
+                                                class="w-full h-auto mt-2">
+                                        </div>
+
+                                        <div class="border border-gray-300 rounded-md p-2">
+                                            <h5 class="font-medium text-gray-800">11. Tela de Detalhamento da Parcela
+                                                "ÚLTIMA REMUNERAÇÃO"</h5>
+                                            <p class="text-gray-700 text-justify text-sm mt-1">Ao acessar a verba, o
+                                                sistema exibe os detalhes e a grade de ocorrências com o valor fixo de
+                                                R$ 5.000,00, mantendo as incidências definidas.</p>
+                                            <img src="imagens/historicosalarial6.png"
+                                                alt="Tela de Detalhamento da parcela ÚLTIMA REMUNERAÇÃO com os valores mensais de R$ 5.000,00"
+                                                class="w-full h-auto mt-2">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div> </div> <div class="accordion-item border border-gray-200 rounded-lg">
+                                <button
+                                    class="accordion-header w-full flex justify-between items-center p-4 text-[#007380] text-left font-bold rounded-lg focus:outline-none">
+                                    <span class="text-xl text-[#007380]">8.1.6. Lançamento de Verbas</span>
+                                    <span class="accordion-icon transition-transform transform text-[#007380]">+</span>
+                                </button>
+                                <div class="accordion-content p-4 rounded-b-lg">
+                                    <p class="text-gray-700 text-justify">A tela de Verbas é onde se inicia o lançamento
+                                        dos
+                                        pedidos deferidos (Verbas Principais). O lançamento pode ser feito de forma
+                                        Manual
+                                        ou Expressa.</p>
+                                    <h4 class="text-lg text-[#007380] font-semibold mt-4">Opções de Lançamento e
+                                        Regeração
+                                    </h4>
+                                    <img src="imagens/verbas.png"
+                                        alt="Tela de Verbas - Listar (Opções Manual, Expresso e Regerar Ocorrências)"
+                                        class="w-full h-auto mt-2 border border-gray-300 rounded-md">
+                                    <h4 class="text-lg text-[#007380] font-semibold mt-4">Lançamento Expresso</h4>
+                                    <p class="text-gray-700 text-justify">O Lançamento Expresso permite a rápida seleção
+                                        das
+                                        Verbas Principais, como 13º Salário, Aviso Prévio, Férias + 1/3, Multa do Artigo
+                                        477
+                                        da CLT e Saldo de Salário.</p>
+                                    <img src="imagens/verbas2.png"
+                                        alt="Tela de Verbas - Lançamento Expresso (Seleção de Verbas Principais)"
+                                        class="w-full h-auto mt-2 border border-gray-300 rounded-md">
+
+                                    <h4 class="text-lg text-[#007380] font-semibold mt-4">Resumo das Verbas Lançadas
+                                    </h4>
+                                    <p class="text-gray-700 text-justify">A tela de verbas mostra o resumo das verbas
+                                        principais (13º Salário, Aviso Prévio, Férias + 1/3, Multa do Artigo 477 da CLT,
+                                        Saldo de Salário) que foram lançadas para o cálculo (Nº 33).</p>
+                                    <img src="imagens/verbas3.png" alt="Tela de Verbas do PJe-Calc"
+                                        class="w-full h-auto mt-2 border border-gray-300 rounded-md">
+                                </div>
+                            </div>
+
+                            <div class="accordion-item border border-gray-200 rounded-lg">
+                                <button
+                                    class="accordion-header w-full flex justify-between items-center p-4 text-[#007380] text-left font-bold rounded-lg focus:outline-none">
+                                    <span class="text-xl text-[#007380]">8.1.7. Lançamento das Custas Judiciais,
+                                        Correção,
+                                        Juros e Multa</span>
+                                    <span class="accordion-icon transition-transform transform text-[#007380]">+</span>
+                                </button>
+                                <div class="accordion-content p-4 rounded-b-lg">
+                                    <h3 class="text-lg text-[#007380] font-semibold mt-4">8.1.7.1. Custas Judiciais</h3>
+                                    <p class="text-gray-700 text-justify">As telas de Custas Judiciais (Custas Devidas e
+                                        Custas Recolhidas)
+                                        permitem o registro dos valores de custas devidas (2% sobre a liquidação, atos
+                                        processuais, recursos, etc.) e os valores já recolhidos, para apuração de
+                                        eventual
+                                        diferença a ser paga/restituída.</p>
+                                    <div class="flex flex-wrap gap-4 mt-2">
+                                        <img src="imagens/custasjudiciais1.png"
+                                            alt="Tela de Custas Judiciais - Custas Devidas"
+                                            class="max-w-xl h-auto border border-gray-300 rounded-md">
+                                        <img src="imagens/custasjudiciais2.png"
+                                            alt="Tela de Custas Judiciais - Custas Recolhidas"
+                                            class="max-w-xl h-auto border border-gray-300 rounded-md">
+                                    </div>
+
+                                    <h3 class="text-lg text-[#007380] font-semibold mt-4">8.1.7.2. Correção, Juros e
+                                        Multa
+                                    </h3>
+                                    <p class="text-gray-700 text-justify">As telas de Correção, Juros e Multa (Dados
+                                        Gerais
+                                        e Dados Específicos)
+                                        permitem a configuração detalhada dos índices de correção monetária e juros de
+                                        mora
+                                        aplicáveis aos créditos trabalhistas, previdenciários e ao FGTS.</p>
+                                    <div class="flex flex-wrap gap-4 mt-2">
+                                        <img src="imagens/correcaojurosmulta1.png"
+                                            alt="Tela de Correção, Juros e Multa - Dados Específicos"
+                                            class="max-w-xl h-auto border border-gray-300 rounded-md">
+                                        <img src="imagens/correcaojurosmulta2.png"
+                                            alt="Tela de Correção, Juros e Multa - Dados Gerais"
+                                            class="max-w-xl h-auto border border-gray-300 rounded-md">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="accordion-item border border-gray-200 rounded-lg">
+                                <button
+                                    class="accordion-header w-full flex justify-between items-center p-4 text-[#007380] text-left font-bold rounded-lg focus:outline-none">
+                                    <span class="text-xl text-[#007380]">8.1.8. Liquidação</span>
+                                    <span class="accordion-icon transition-transform transform text-[#007380]">+</span>
+                                </button>
+                                <div class="accordion-content p-4 rounded-b-lg">
+                                    <p class="text-gray-700 text-justify">A tela de liquidação permite configurar a data
+                                        (31/10/2025) e o critério de acumulação dos
+                                        índices de correção monetária, iniciando a partir do mês subsequente ao
+                                        vencimento
+                                        das verbas.</p>
+                                    <img src="imagens/liquidação.png" alt="Tela de Liquidação do PJe-Calc"
+                                        class="w-full h-auto mt-2 border border-gray-300 rounded-md">
+                                </div>
+                            </div>
+
+                            <div class="accordion-item border border-gray-200 rounded-lg">
+                                <button
+                                    class="accordion-header w-full flex justify-between items-center p-4 text-[#007380] text-left font-bold rounded-lg focus:outline-none">
+                                    <span class="text-xl text-[#007380]">8.1.9. Configuração de Impressão</span>
+                                    <span class="accordion-icon transition-transform transform text-[#007380]">+</span>
+                                </button>
+                                <div class="accordion-content p-4 rounded-b-lg">
+                                    <p class="text-gray-700 text-justify">A impressão é configurada no menu Imprimir,
+                                        com a
+                                        seleção de todos os relatórios necessários para a juntada ao processo judicial.
+                                    </p>
+                                    <div class="flex flex-wrap gap-4 mt-2">
+                                        <img src="imagens/impressao.png"
+                                            alt="Tela de Impressão (Seleção de Relatórios - Parte 1)"
+                                            class="max-w-xs h-auto border border-gray-300 rounded-md">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="accordion-item border border-gray-200 rounded-lg">
+                                <button
+                                    class="accordion-header w-full flex justify-between items-center p-4 text-[#007380] text-left font-bold rounded-lg focus:outline-none">
+                                    <span class="text-xl text-[#007380]">8.1.10. Planilha de Cálculo Impresso</span>
+                                    <span class="accordion-icon transition-transform transform text-[#007380]">+</span>
+                                </button>
+                                <div class="accordion-content p-4 rounded-b-lg">
+                                    <p class="text-gray-700 text-justify">As páginas impressas detalham o resumo da
+                                        liquidação, o critério legal, os dados do cálculo, o histórico salarial, o
+                                        demonstrativo individual de cada verba, as deduções (INSS, IR) e as custas
+                                        judiciais.</p>
+                                    <img src="imagens/planilha1.jpg"
+                                        alt="Planilha de Cálculo (Página 1: Resumo da Liquidação e Critério Legal)"
+                                        class="w-full h-auto mt-2 border border-gray-300 rounded-md">
+                                    <img src="imagens/planilha2.jpg"
+                                        alt="Planilha de Cálculo (Página 3: Dados do Cálculo e Histórico Salarial - Parte 1)"
+                                        class="w-full h-auto mt-2 border border-gray-300 rounded-md">
+                                    <img src="imagens/planilha3.jpg"
+                                        alt="Planilha de Cálculo (Página 4: Histórico Salarial - Parte 2)"
+                                        class="w-full h-auto mt-2 border border-gray-300 rounded-md">
+                                    <img src="imagens/planilha4.jpg"
+                                        alt="Planilha de Cálculo (Página 5: Histórico Salarial - Fim e Demonstrativo de Verbas - 13º Salário)"
+                                        class="w-full h-auto mt-2 border border-gray-300 rounded-md">
+                                    <img src="imagens/planilha5.jpg"
+                                        alt="Planilha de Cálculo (Página 6: Demonstrativo de Verbas - Aviso Prévio, Férias, Multa 477, Saldo de Salário)"
+                                        class="w-full h-auto mt-2 border border-gray-300 rounded-md">
+                                    <img src="imagens/planilha6.jpg"
+                                        alt="Planilha de Cálculo (Página 7: Demonstrativo de Juros sobre Verbas e FGTS)"
+                                        class="w-full h-auto mt-2 border border-gray-300 rounded-md">
+                                    <img src="imagens/planilha7.jpg"
+                                        alt="Planilha de Cálculo (Página 8: Demonstrativo de Contribuição Social Segurado, Empresa e SAT)"
+                                        class="w-full h-auto mt-2 border border-gray-300 rounded-md">
+                                    <img src="imagens/planilha8.jpg"
+                                        alt="Planilha de Cálculo (Página 9: Bases de Cálculo da Contribuição Previdenciária e FGTS - Parte 1)"
+                                        class="w-full h-auto mt-2 border border-gray-300 rounded-md">
+                                    <img src="imagens/planilha9.jpg"
+                                        alt="Planilha de Cálculo (Página 10: Base de Cálculo da Contribuição Previdenciária e Demonstrativo de Imposto de Renda)"
+                                        class="w-full h-auto mt-2 border border-gray-300 rounded-md">
+                                    <img src="imagens/planilha10.jpg"
+                                        alt="Planilha de Cálculo (Página 11: Diferença de Custas do Reclamado)"
+                                        class="w-full h-auto mt-2 border border-gray-300 rounded-md">
+                                    <img src="imagens/planilha11.jpg"
+                                        alt="Planilha de Cálculo (Página 12: Diferença de Custas do Reclamado - Final e Demonstrativo de Diferença de Custas - Fim)"
+                                        class="w-full h-auto mt-2 border border-gray-300 rounded-md">
+                                </div>
+                            </div>
+
+                        </div>
             </section>
         </div>
     </div>
@@ -464,14 +698,10 @@
         document.addEventListener('DOMContentLoaded', function () {
             const headers = document.querySelectorAll('.accordion-header');
 
-            // Itera sobre todos os cabeçalhos do acordeão.
+            // Itera sobre todos os cabeçalhos do acordeão PRINCIPAL.
             headers.forEach(header => {
                 const content = header.nextElementSibling;
                 const icon = header.querySelector('.accordion-icon');
-
-                // Garante que todos os cabeçalhos estão com a classe 'rounded-lg' ao iniciar,
-                // removendo 'rounded-t-lg' se estiver presente.
-                // A remoção de 'rounded-lg' e 'rounded-t-lg' no CSS/JS foi feita para um visual mais quadrado.
 
                 // Configura o estado inicial do conteúdo para garantir que está fechado
                 content.classList.remove('active');
@@ -482,7 +712,7 @@
 
 
                 header.addEventListener('click', () => {
-                    // 1. Colapsa todos os outros acordeões
+                    // 1. Colapsa todos os outros acordeões PRINCIPAIS
                     document.querySelectorAll('.accordion-header').forEach(otherHeader => {
                         if (otherHeader !== header) {
                             const otherContent = otherHeader.nextElementSibling;
@@ -491,6 +721,8 @@
                             // Se estiver ativo, colapsa
                             if (otherContent.classList.contains('active')) {
                                 otherContent.style.maxHeight = '0';
+                                otherContent.style.paddingTop = '0';
+                                otherContent.style.paddingBottom = '0';
                                 otherIcon.innerHTML = '+';
                                 otherIcon.classList.remove('rotate');
                                 otherContent.classList.remove('active');
@@ -502,18 +734,54 @@
                     if (content.classList.contains('active')) {
                         // Colapsar
                         content.style.maxHeight = '0'; // A transição é acionada
+                        content.style.paddingTop = '0';
+                        content.style.paddingBottom = '0';
                         icon.innerHTML = '+';
                         icon.classList.remove('rotate');
                         content.classList.remove('active');
                     } else {
                         // Expandir
-                        // A classe 'active' define max-height grande e padding 1rem.
                         content.classList.add('active');
                         // Garante que a transição ocorra de 0 para o max-height alto
                         content.style.maxHeight = '20000px';
+                        content.style.paddingTop = '1rem';
+                        content.style.paddingBottom = '1rem';
 
-                        icon.innerHTML = '-'; // Ícone alterado para hífen para um visual mais limpo
+                        icon.innerHTML = '-'; // Ícone alterado para hífen
                         icon.classList.add('rotate');
+                    }
+                });
+            });
+
+            // Tratamento para os SUB-ACORDEÕES (Modalidades)
+            const subHeaders = document.querySelectorAll('.sub-acordeon-header');
+
+            subHeaders.forEach(header => {
+                const content = header.nextElementSibling;
+                const icon = header.querySelector('.sub-acordeon-icon');
+
+                // CORREÇÃO: Garante que o estado inicial é TOTALMENTE fechado ao carregar
+                content.classList.remove('active');
+                content.style.maxHeight = '0';
+                content.style.paddingTop = '0';
+                content.style.paddingBottom = '0';
+                icon.innerHTML = '+';
+
+                header.addEventListener('click', () => {
+                    if (content.classList.contains('active')) {
+                        // Colapsar
+                        content.style.maxHeight = '0';
+                        content.style.paddingTop = '0';
+                        content.style.paddingBottom = '0';
+                        icon.innerHTML = '+';
+                        content.classList.remove('active');
+                    } else {
+                        // Expandir
+                        content.classList.add('active');
+                        content.style.maxHeight = '20000px';
+                        content.style.paddingTop = '1rem';
+                        content.style.paddingBottom = '1rem';
+                        icon.innerHTML = '-';
                     }
                 });
             });
