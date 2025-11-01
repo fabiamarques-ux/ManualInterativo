@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Funcionalidade de Exportar Cálculo</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f1f5f9;
+        }
+
+        .text-justify {
+            text-align: justify;
+        }
+
+        .aside-bg {
+            background-color: #005a62;
+        }
+
+        /* Estilo para a Logo */
+        .logo-trt {
+            max-height: 60px;
+            width: auto;
+        }
+
+        /* Estilos e Transições para o Acordeão PRINCIPAL */
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out, padding 0.3s ease-out;
+            padding-top: 0;
+            padding-bottom: 0;
+            background-color: #f0f4f8;
+        }
+
+        .accordion-content.active {
+            max-height: 20000px;
+            padding-top: 1rem;
+            padding-bottom: 1rem;
+        }
+
+        .accordion-header {
+            background-color: #f0f4f8;
+        }
+
+        .accordion-icon {
+            transition: transform 0.3s ease;
+            font-size: 1.5rem;
+            line-height: 1;
+        }
+
+        .accordion-icon.rotate {
+            transform: rotate(45deg);
+        }
+
+        /* Estilos e Transições para o SUB-ACORDEÃO (Modalidades) */
+        .sub-acordeon-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out, padding 0.3s ease-out;
+            padding-top: 0;
+            padding-bottom: 0;
+        }
+
+        .sub-acordeon-content.active {
+            max-height: 20000px;
+            padding-top: 1rem;
+            padding-bottom: 1rem;
+        }
+
+        /* Estilo para imagens no conteúdo do acordeão */
+        .content-image {
+            max-width: 100%;
+            height: auto;
+            border: 1px solid #ccc;
+            border-radius: 0.5rem;
+            margin-top: 1rem;
+            margin-bottom: 1rem;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="p-4 md:p-8">
+        <div class="max-w-4xl mx-auto bg-white rounded-xl shadow-xl p-6 md:p-10 border border-gray-200">
+            <div class="flex justify-center mb-6">
+                <img src="https://site.trt19.jus.br/portalTRT19/sites/default/files/logo-trt19.png" alt="Logo do TRT19"
+                    class="logo-trt w-auto object-contain">
+            </div>
+            <h1 class="text-3xl md:text-4xl text-center mb-6 text-[#007380]">Manual Interativo de Cálculos Trabalhistas
+            </h1>
+            <p class="text-center text-gray-600 mb-8">Um guia completo e interativo para entender os cálculos na esfera
+                judicial trabalhista.</p>
+
+            <section id="exportar-content" class="content-section">
+                <h2 class="text-2xl md:text-3xl font-bold mb-4 text-[#007380]">Funcionalidade Exportar Cálculo</h2>
+                <div class="space-y-4">
+                    <p class="text-gray-700 text-justify">
+                        A funcionalidade "Exportar", encontrada no menu "Operações" na lateral esquerda,
+                        permite salvar o cálculo atual em um arquivo, geralmente no formato PJC ou similar,
+                        próprio do PJe-Calc. Este arquivo pode ser compartilhado e posteriormente importado
+                        por outros usuários do sistema (como advogados, peritos ou servidores).
+                    </p>
+
+                    <h4 class="text-lg text-[#007380] font-semibold mt-4">1. Acessando a Exportação</h4>
+                    <p class="text-gray-700 text-justify">
+                        Para iniciar a exportação, clique em "Exportar" no menu Operações. Esta opção é
+                        acessível a partir da tela principal de Verbas, após a conclusão do lançamento de todas
+                        as verbas e a liquidação dos valores.
+                    </p>
+                    <img src="imagens_liquidacao/exportar1.png"
+                        alt="Tela de Verbas do PJe-Calc Cidadão, destacando a opção 'Exportar' no menu Operações na lateral esquerda."
+                        class="content-image max-w-3xl mx-auto">
+
+                    <h4 class="text-lg text-[#007380] font-semibold mt-4">2. Configuração e Nome do Arquivo</h4>
+                    <p class="text-gray-700 text-justify">
+                        Ao clicar em "Exportar", o sistema exibe a tela de dados da exportação.
+                        O sistema sugere um Nome do Arquivo automático que inclui o número do cálculo, a data e a hora
+                        da exportação (ex: CÁLCULO\_33\_DATA\_01112025\_HORA\_1133). É possível alterar este nome para
+                        facilitar a identificação.
+                    </p>
+                    <img src="imagens_liquidacao/exportar2.png"
+                        alt="Tela de Dados da Exportação no PJe-Calc Cidadão, mostrando o Nome do Arquivo sugerido e o botão 'Exportar'."
+                        class="content-image max-w-3xl mx-auto">
+
+                    <h4 class="text-lg text-[#007380] font-semibold mt-4">3. Finalizando a Exportação</h4>
+                    <p class="text-gray-700 text-justify">
+                        Após conferir o nome, clique no botão "Exportar". O arquivo será gerado e um
+                        pop-up do seu navegador permitirá que você escolha a pasta de destino para salvar
+                        o arquivo exportado. Este arquivo contém todos os dados e configurações do cálculo.
+                    </p>
+                </div>
+            </section>
+        </div>
+    </div>
+</body>
+
+</html>

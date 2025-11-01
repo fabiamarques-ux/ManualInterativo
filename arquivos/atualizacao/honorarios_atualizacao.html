@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lançamento dos Honorários</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f1f5f9;
+        }
+
+        .text-justify {
+            text-align: justify;
+        }
+
+        .aside-bg {
+            background-color: #005a62;
+        }
+
+        /* Estilo para a Logo */
+        .logo-trt {
+            max-height: 60px;
+            width: auto;
+        }
+
+        /* Estilos e Transições para o Acordeão PRINCIPAL */
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out, padding 0.3s ease-out;
+            padding-top: 0;
+            padding-bottom: 0;
+            background-color: #f0f4f8;
+        }
+
+        .accordion-content.active {
+            max-height: 20000px;
+            padding-top: 1rem;
+            padding-bottom: 1rem;
+        }
+
+        .accordion-header {
+            background-color: #f0f4f8;
+        }
+
+        .accordion-icon {
+            transition: transform 0.3s ease;
+            font-size: 1.5rem;
+            line-height: 1;
+        }
+
+        .accordion-icon.rotate {
+            transform: rotate(45deg);
+        }
+
+        /* Estilos e Transições para o SUB-ACORDEÃO (Modalidades) */
+        .sub-acordeon-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out, padding 0.3s ease-out;
+            padding-top: 0;
+            padding-bottom: 0;
+        }
+
+        .sub-acordeon-content.active {
+            max-height: 20000px;
+            padding-top: 1rem;
+            padding-bottom: 1rem;
+        }
+
+        /* Estilo para imagens no conteúdo do acordeão */
+        .content-image {
+            max-width: 100%;
+            height: auto;
+            border: 1px solid #ccc;
+            border-radius: 0.5rem;
+            margin-top: 1rem;
+            margin-bottom: 1rem;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="p-4 md:p-8">
+        <div class="max-w-4xl mx-auto bg-white rounded-xl shadow-xl p-6 md:p-10 border border-gray-200">
+            <div class="flex justify-center mb-6">
+                <img src="https://site.trt19.jus.br/portalTRT19/sites/default/files/logo-trt19.png" alt="Logo do TRT19"
+                    class="logo-trt w-auto object-contain">
+            </div>
+            <h1 class="text-3xl md:text-4xl text-center mb-6 text-[#007380]">Manual Interativo de Cálculos Trabalhistas
+            </h1>
+            <p class="text-center text-gray-600 mb-8">Um guia completo e interativo para entender os cálculos na esfera
+                judicial trabalhista.</p>
+
+            <section id="honorarios-content" class="content-section">
+                <h2 class="text-2xl md:text-3xl font-bold mb-4 text-[#007380]">Lançamento e Atualização de Honorários</h2>
+                <div class="space-y-4">
+                    <p class="text-gray-700 text-justify">
+                        O módulo de Honorários (acessado via Atualização) permite o lançamento detalhado
+                        de verbas honorárias (Advocatícios, Periciais, etc.), aplicando o percentual devido sobre
+                        a base de cálculo definida na decisão judicial. É essencial cadastrar esses valores para o
+                        correto cálculo de atualização do passivo.
+                    </p>
+
+                    <h4 class="text-lg text-[#007380] font-semibold mt-4">1. Inclusão de Novo Honorário</h4>
+                    <p class="text-gray-700 text-justify">
+                        A tela inicial de Honorários, após a atualização, mostra o painel e o botão "Novo" para a inclusão de um item.
+                    </p>
+                    <img src="imagens_atualizacao/honorarios_atualizacao1.png" alt="Tela principal do módulo Honorários com o botão Novo"
+                        class="content-image max-w-3xl mx-auto">
+
+                    <h4 class="text-lg text-[#007380] font-semibold mt-4">2. Configuração dos Dados Principais</h4>
+                    <p class="text-gray-700 text-justify">
+                        Ao clicar em "Novo", abre-se a tela de cadastro. O primeiro passo é definir o Tipo de Honorário (Advocatícios, Periciais), o Devedor (Reclamante ou Reclamado) e a Descrição (ex: HONORÁRIOS ADVOCATÍCIOS).
+                    </p>
+                    <img src="imagens_atualizacao/honorarios_atualizacao1.png" alt="Tela de Cadastro de Honorários mostrando Tipo, Devedor, Base de Cálculo e Credor"
+                        class="content-image max-w-3xl mx-auto">
+
+                    <h4 class="text-lg text-[#007380] font-semibold mt-4">3. Tipo de Valor e Base para Apuração</h4>
+                    <p class="text-gray-700 text-justify">
+                        * Tipo do Valor: Marque "Calculado" para que o sistema use a alíquota e a base para apuração.
+                        * Base para Apuração: Selecione a base de cálculo determinada na sentença (ex: Valor da Liquidação, Valor do Bem, etc.).
+                        * Alíquota (%) e Data do Evento: Preencha o percentual e a data a partir da qual o valor deve ser atualizado.
+                        * Credor: Preencha o nome completo e o documento fiscal (CPF ou CNPJ) do credor dos honorários.
+                    </p>
+
+                    <p class="text-gray-700 text-justify mt-4">
+                        Clique em "Salvar" para registrar o honorário e, depois, em "Liquidar Atualização" no menu lateral para incluir os valores atualizados no cálculo final.
+                    </p>
+                </div>
+            </section>
+        </div>
+    </div>
+</body>
+
+</html>

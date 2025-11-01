@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adicional de Transferência</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f4f8;
+            color: #1a202c;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 2rem;
+            background-color: #ffffff;
+            border-radius: 1rem;
+            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.05);
+        }
+
+        /* INÍCIO DO CSS ADICIONAL/ATUALIZADO PARA ESTILO (Copy) */
+        /* REMOVIDO: O CSS para .copy-container e elementos relacionados, pois não há mais links/botões de cópia nesta seção. */
+        .copy-btn {
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
+            padding: 0;
+            margin-left: 0.5rem;
+            /* Ajustado para consistência */
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .copy-btn svg {
+            width: 1.5rem;
+            height: 1.5rem;
+            fill: #00678F;
+            transition: fill 0.3s ease;
+        }
+
+        .copy-btn:hover svg {
+            fill: #004562;
+        }
+
+        .copy-message {
+            position: absolute;
+            left: 100%;
+            top: 50%;
+            transform: translate(10px, -50%);
+            background-color: #00678F;
+            color: white;
+            padding: 0.25rem 0.5rem;
+            border-radius: 0.5rem;
+            font-size: 0.75rem;
+            white-space: nowrap;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        /* FIM DO CSS ADICIONAL/ATUALIZADO PARA ESTILO (Copy) */
+
+        .drawer-container {
+            padding: 1rem;
+            background-color: #f0f4f8;
+            border-radius: 0.75rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+            margin-top: 1.5rem;
+        }
+
+        .drawer-header {
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .drawer-content {
+            overflow: hidden;
+            transition: all 0.5s ease-in-out;
+            max-height: 0;
+        }
+
+        .drawer-header .arrow-icon {
+            transition: transform 0.5s ease-in-out;
+        }
+
+        .drawer-header.active .arrow-icon {
+            transform: rotate(180deg);
+        }
+
+        /* Estilos para as imagens */
+        .pje-calc-image {
+            width: 100%;
+            /* Garante que a imagem ocupe a largura total do container */
+            height: auto;
+            margin-top: 1.5rem;
+            /* Espaço entre a imagem e o conteúdo anterior */
+            border: 1px solid #ccc;
+            /* Borda leve para destacar a imagem */
+            border-radius: 0.5rem;
+        }
+
+        .image-caption {
+            text-align: center;
+            font-size: 0.875rem;
+            color: #4a5568;
+            margin-top: 0.5rem;
+            font-style: italic;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th,
+        td {
+            padding: 0.75rem;
+            text-align: left;
+            border-bottom: 1px solid #d1d5db;
+        }
+
+        th {
+            background-color: #00678F;
+            color: white;
+        }
+
+        tr:nth-child(odd) {
+            background-color: #f0f4f8;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container my-8 relative">
+        <img src="https://site.trt19.jus.br/sites/default/files/logo-trt19.png" alt="Logo do TRT19"
+            class="absolute top-4 right-4 w-36 h-auto">
+
+        <section id="adicional-transferencia" class="content-section">
+            <h2 class="text-3xl font-bold text-[#00678F] mb-4">Adicional de Transferência</h2>
+            <p class="text-gray-700 leading-relaxed text-justify">O Adicional de Transferência é uma verba de natureza
+                salarial paga ao empregado que é transferido provisoriamente de localidade, conforme previsto no Artigo
+                469, § 3º, da Consolidação das Leis do Trabalho (CLT). O objetivo é compensar o trabalhador pelos custos
+                e transtornos decorrentes da mudança temporária.</p>
+            <p class="text-gray-700 leading-relaxed text-justify mt-4">Para ser devido, a transferência deve ser para um
+                local que não estava previsto no contrato inicial de trabalho e precisa ter caráter provisório. A
+                jurisprudência, notadamente o TST, entende que a transferência se torna definitiva após um período
+                prolongado (geralmente mais de dois anos), cessando a obrigação do adicional.</p>
+            <p class="text-gray-700 leading-relaxed text-justify mt-4">O valor do adicional de transferência é de, no
+                mínimo, 25% do salário que o empregado recebia na localidade de origem. Este percentual incide sobre o
+                salário, sem inclusão de gratificações, prêmios ou outros adicionais, exceto se houver previsão
+                contratual ou normativa em sentido contrário. </p>
+
+            <p class="text-gray-700 leading-relaxed text-justify mt-4">Abaixo estão os critérios legais e
+                jurisprudenciais para a concessão do Adicional de Transferência:</p>
+            <div class="overflow-x-auto mt-4 rounded-lg shadow-md">
+                <table class="w-full text-sm text-left text-gray-700">
+                    <thead class="text-xs text-white uppercase bg-[#00678F]">
+                        <tr>
+                            <th scope="col" class="px-6 py-3 rounded-tl-lg">Critério</th>
+                            <th scope="col" class="px-6 py-3 rounded-tr-lg">Detalhe</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="bg-white border-b border-gray-200">
+                            <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">Natureza da Transferência
+                            </td>
+                            <td class="px-6 py-4">Deve ser provisória. Se for definitiva, o adicional não é devido.</td>
+                        </tr>
+                        <tr class="bg-gray-50 border-b border-gray-200">
+                            <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">Localidade</td>
+                            <td class="px-6 py-4">Para localidade diversa daquela que resultou do contrato.</td>
+                        </tr>
+                        <tr class="bg-white border-b border-gray-200">
+                            <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">Percentual Mínimo</td>
+                            <td class="px-6 py-4">Mínimo de 25% sobre o salário do empregado.</td>
+                        </tr>
+                        <tr class="bg-gray-50 border-b border-gray-200">
+                            <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">Inclusão Contratual</td>
+                            <td class="px-6 py-4">A regra de provisoriedade não se aplica a empregados que, por
+                                contrato, exercem cargo de confiança ou tenham a transferência como condição implícita
+                                ou explícita (Art. 469, § 1º).</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div id="base-legal-jurisprudencia-drawer" class="drawer-container">
+                <div id="base-legal-jurisprudencia-header" class="drawer-header">
+                    <h4 class="text-xl font-semibold text-[#00678F]">Base Legal e Jurisprudência</h4>
+                    <svg class="arrow-icon w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                    </svg>
+                </div>
+                <div id="base-legal-jurisprudencia-content" class="drawer-content">
+                    <p class="text-gray-700 leading-relaxed text-justify mt-4">O direito ao recebimento do Adicional de
+                        Transferência tem por base a legislação e os entendimentos a seguir:</p>
+
+                    <h5 class="text-lg font-semibold text-gray-800 mt-4">Fontes Normativas</h5>
+                    <hr class="my-4 border-gray-300">
+
+                    <h5 class="text-base font-semibold text-gray-800">Consolidação das Leis do Trabalho (CLT) - Art. 469,
+                        § 3º:</h5>
+                    <ul class="list-disc list-inside text-gray-700 leading-relaxed mt-2 ml-4 space-y-3">
+                        <li><strong>Direito ao Adicional:</strong>
+                            <p class="text-sm italic mt-1 ml-4 border-l-2 border-gray-400 pl-3">Define o direito ao
+                                adicional de, no mínimo, 25% para transferência provisória.</p>
+                        </li>
+                    </ul>
+                    
+
+                    <hr class="my-6 border-gray-300">
+
+                    <h5 class="text-lg font-semibold text-gray-800">Jurisprudência Consolidada</h5>
+
+                    <h6 class="text-base font-semibold text-gray-800 mt-4">Súmula 29 do TST</h6>
+                    <div class="p-4 bg-gray-100 rounded-md mt-2 border border-gray-300">
+                        <p class="font-bold text-sm">Tese (Caráter Provisório):</p>
+                        <p class="text-sm mt-1 italic">Define que o empregado transferido tem direito ao adicional
+                            enquanto perdurar a situação provisória, cessando o pagamento se a transferência se tornar
+                            definitiva.</p>
+                    </div>
+                    
+
+                    <h6 class="text-base font-semibold text-gray-800 mt-6">OJ 113 da SDI-1 do TST</h6>
+                    <div class="p-4 bg-gray-100 rounded-md mt-2 border border-gray-300">
+                        <p class="font-bold text-sm">Tese (Base de Cálculo):</p>
+                        <p class="text-sm mt-1 italic">O adicional é calculado sobre o salário, excluídas as despesas
+                            resultantes da transferência (como ajuda de custo e ressarcimento de aluguel), que não
+                            possuem natureza salarial.</p>
+                    </div>
+                    
+                </div>
+            </div>
+            <div id="calculo-deducoes-drawer" class="drawer-container">
+                <div id="calculo-deducoes-header" class="drawer-header">
+                    <h4 class="text-xl font-semibold text-[#00678F]">Base de Cálculo e Deduções</h4>
+                    <svg class="arrow-icon w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                    </svg>
+                </div>
+                <div id="calculo-deducoes-content" class="drawer-content">
+
+                    <h5 class="text-lg font-semibold text-[#004562] mt-4">Base de Cálculo</h5>
+                    <p class="text-gray-700 leading-relaxed text-justify mt-2">A base de cálculo do adicional de
+                        transferência é o <strong>salário base do empregado</strong>. Outras verbas, como ajuda de custo
+                        para mudança, reembolso de aluguel, horas extras ou comissões, são excluídas por terem natureza
+                        indenizatória ou não integrarem o conceito de salário para este cálculo, conforme o Art. 469, §
+                        3º da CLT e a OJ 113 do TST.</p>
+                    <p class="text-gray-700 leading-relaxed text-justify mt-4">O percentual mínimo é de 25%, mas pode
+                        ser maior se houver negociação coletiva ou previsão no contrato individual de trabalho.</p>
+                    <p class="text-gray-700 leading-relaxed text-justify mt-4 font-semibold">Exemplo de Cálculo da Base:
+                    </p>
+                    <div class="mt-2 p-4 bg-gray-100 rounded-md">
+                        <p class="font-mono text-sm">Salário Base (Verba Salarial) = R$ 5.000,00</p>
+                        <p class="font-mono text-sm">Ajuda de Custo (Verba Indenizatória, Excluída) = R$ 1.500,00</p>
+                        <p class="font-mono text-sm mt-2"><strong>Base de Cálculo do Adicional</strong> = R$ 5.000,00
+                        </p>
+                        <p class="font-mono text-sm mt-1 text-[#004562]">Cálculo do Adicional (25%): R$ 5.000,00 x 25% =
+                            R$ 1.250,00</p>
+                    </div>
+
+                    <h5 class="text-lg font-semibold text-[#004562] mt-6">Deduções da Base de Cálculo</h5>
+                    <p class="text-gray-700 leading-relaxed text-justify mt-2">Por ser uma verba de <strong>natureza
+                            salarial</strong>, o adicional de transferência integra a remuneração para fins de cálculo
+                        da contribuição para o <strong>INSS</strong> (Instituto Nacional do Seguro Social) e do
+                        <strong>Imposto de Renda Retido na Fonte (IRPF)</strong>. </p>
+                    <p class="text-gray-700 leading-relaxed text-justify mt-4">Isso significa que as alíquotas de INSS e
+                        IRPF incidirão sobre o valor total da remuneração (salário base + adicional de transferência),
+                        de acordo com as tabelas progressivas vigentes.</p>
+                    <p class="text-gray-700 leading-relaxed text-justify mt-4 font-semibold">Exemplo de Base de
+                        Incidência:</p>
+                    <div class="mt-2 p-4 bg-gray-100 rounded-md">
+                        <p class="font-mono text-sm">Salário Base: R$ 5.000,00</p>
+                        <p class="font-mono text-sm">Adicional de Transferência: R$ 1.250,00</p>
+                        <p class="font-mono text-sm mt-2"><strong>Base de Cálculo para INSS/IRPF</strong> = R$ 6.250,00
+                        </p>
+                        <p class="font-mono text-xs text-red-700 mt-1">OBS: A alíquota do INSS e IRPF será aplicada
+                            sobre R$ 6.250,00 (sujeito aos tetos e faixas).</p>
+                    </div>
+                </div>
+            </div>
+
+            <div id="verbas-reflexas-drawer" class="drawer-container">
+                <div id="verbas-reflexas-header" class="drawer-header">
+                    <h4 class="text-xl font-semibold text-[#00678F]">Verbas Reflexas</h4>
+                    <svg class="arrow-icon w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                    </svg>
+                </div>
+                <div id="verbas-reflexas-content" class="drawer-content">
+                    <p class="text-gray-700 leading-relaxed text-justify mt-4">O Adicional de Transferência, por possuir
+                        **natureza salarial** (Art. 469, § 3º da CLT e Súmula 29 do TST), integra a remuneração para
+                        todos os efeitos legais, gerando reflexos nas verbas abaixo. O adicional deve ser pago enquanto
+                        perdurar a situação provisória (Súmula 29 do TST).</p>
+                    <p class="text-gray-700 leading-relaxed text-justify mt-2">O cálculo dos reflexos é feito pela
+                        integração do adicional ao salário-base, resultando na **remuneração completa** que serve como
+                        base de cálculo das verbas. (Ex: Salário-Base + Adicional de Transferência).</p>
+
+                    <table
+                        class="w-full mt-4 text-sm text-gray-700 border-collapse border border-gray-300 rounded-md overflow-hidden">
+                        <thead>
+                            <tr class="bg-gray-200">
+                                <th class="py-2 px-4 text-left border-b border-gray-300 w-1/3">Verba Trabalhista</th>
+                                <th class="py-2 px-4 text-left border-b border-gray-300 w-2/3">Reflexo do Adicional de
+                                    Transferência</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="border-b border-gray-300">
+                                <td class="py-2 px-4 font-medium">13º Salário</td>
+                                <td class="py-2 px-4">Integra a base de cálculo do 13º Salário (integral e proporcional),
+                                    computando-se o adicional pago em cada mês do ano.</td>
+                            </tr>
+                            <tr class="border-b border-gray-300">
+                                <td class="py-2 px-4 font-medium">Férias + 1/3</td>
+                                <td class="py-2 px-4">Integra a base de cálculo das Férias (vencidas e proporcionais) e o
+                                    adicional constitucional de 1/3.</td>
+                            </tr>
+                            <tr class="border-b border-gray-300">
+                                <td class="py-2 px-4 font-medium">Aviso Prévio</td>
+                                <td class="py-2 px-4">Integra a base de remuneração para cálculo do Aviso Prévio
+                                    (trabalhado ou indenizado).</td>
+                            </tr>
+                            <tr>
+                                <td class="py-2 px-4 font-medium">FGTS (Depósito Mensal e Multa)</td>
+                                <td class="py-2 px-4">Incide sobre o valor do adicional, compondo a base de cálculo para
+                                    o depósito mensal de 8% e para a Multa de 40%.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <hr class="my-4 border-gray-300">
+                    <p class="text-gray-700 leading-relaxed text-justify mt-2"><strong>Importante:</strong> Se a
+                        transferência se tornar definitiva, cessa o direito ao adicional, não havendo mais integração à
+                        remuneração para o cálculo das verbas futuras (Súmula 29 do TST).</p>
+                </div>
+            </div>
+            <div id="calculadora-transferencia-drawer" class="drawer-container">
+                <div id="calculadora-transferencia-header" class="drawer-header">
+                    <h4 class="text-xl font-semibold text-[#00678F]">Calculadora (Simulação)</h4>
+                    <svg class="arrow-icon w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path>
+                    </svg>
+                </div>
+                <div id="calculadora-transferencia-content" class="drawer-content">
+                    <p class="text-gray-700 leading-relaxed text-justify mt-4">Utilize esta ferramenta para calcular o
+                        valor do seu adicional de transferência. O percentual deve ser de no mínimo 25%.</p>
+
+                    <div class="p-4 bg-white rounded-lg shadow-inner mt-4">
+                        <h5 class="text-md font-semibold text-gray-800">Cálculo Simples</h5>
+                        <div class="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4">
+                            <div class="flex-1">
+                                <label for="salarioBaseInput" class="block text-sm text-gray-700">Salário Base
+                                    (R$):</label>
+                                <input type="text" id="salarioBaseInput"
+                                    class="mt-1 block w-full rounded-md border-gray-300 p-2 focus:ring-[#00678F] focus:border-[#00678F]">
+                            </div>
+                            <div class="flex-1">
+                                <label for="transferenciaPercentualInput" class="block text-sm text-gray-700">Percentual
+                                    (%) (mín. 25%):</label>
+                                <input type="number" id="transferenciaPercentualInput" value="25" min="25" step="1"
+                                    class="mt-1 block w-full rounded-md border-gray-300 p-2 focus:ring-[#00678F] focus:border-[#00678F]">
+                            </div>
+                        </div>
+                        <button id="calculateTransferenciaBtn"
+                            class="mt-4 w-full px-4 py-2 bg-[#00678F] text-white rounded-md hover:bg-[#004562] transition duration-300 shadow-md">Calcular
+                            Adicional</button>
+                        <div class="mt-4">
+                            <div class="flex items-center">
+                                <p id="transferenciaResult" class="text-sm text-gray-700"></p>
+                                <button id="copyTransferencia" class="copy-btn hidden" title="Copiar valor">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                        <path
+                                            d="M16 1H4C2.9 1 2 1.9 2 3v14h2V3h12V1zm3 4H8C6.9 5 6 5.9 6 7v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z" />
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="pje-calc-drawer" class="drawer-container">
+                <div id="pje-calc-header" class="drawer-header">
+                    <h4 class="text-xl font-semibold text-[#00678F]">Lançamento no PJe-Calc </h4>
+                    <svg class="arrow-icon w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path>
+                    </svg>
+                </div>
+                <div id="pje-calc-content" class="drawer-content">
+                    <p class="text-gray-700 leading-relaxed text-justify mt-4">A seguir, confira o passo a passo para o
+                        lançamento da verba no PJe-Calc, utilizando a opção "Expresso":</p>
+
+                    <ol class="list-decimal list-inside text-gray-700 leading-relaxed mt-4 ml-4 space-y-3">
+                        <li>
+                            <strong class="text-gray-800">Acessar Verbas e Escolher Lançamento:</strong> No menu de
+                            navegação à esquerda, clique na opção <u>Verbas</u> para iniciar o lançamento. Após o
+                            comando,
+                            será exibida a tela para escolha do Lançamento da Verba. Escolha a opção <u>Expresso</u>.
+                            <img src="imagens_direitos/verbas.png"
+                                alt="Tela do PJe-Calc - Passo 1: Acessar a opção Verbas no menu lateral e clicar em Expresso na seção Lançamento."
+                                class="w-full h-auto my-4 rounded-lg shadow-md">
+                        </li>
+                        <li>
+                            <strong class="text-gray-800">Seleção da Verba:</strong> O sistema abrirá as opções de
+                            verbas, escolha a verba <u>Adicional de Transferência 25%</u> e clique no botão
+                            <u>Salvar</u>
+                            <img src="imagens_direitos/adicionaltransferencia1.png"
+                                alt="Tela do PJe-Calc - Verbas Principais: Selecionar Saldo de Salário"
+                                class="w-full h-auto my-4 rounded-lg shadow-md">
+                        </li>
+                        <li>
+                            <strong class="text-gray-800">Quadro de Verbas e Ações:</strong> O sistema exibirá um quadro
+                            com os campos:
+                            <ul class="list-disc list-inside text-gray-700 leading-relaxed mt-2 ml-4">
+                                <li class="ml-8 flex items-center">
+                                <li>Ações - contendo as opções de configurações da verba selecionada (parâmetros,
+                                    ocorrências e
+                                    exclusão)
+                                    <img src="imagens_direitos/telaacoes.png"
+                                        alt="Ícones de Ações: Parâmetros (folha com seta), Ocorrências (folha com checks), Excluir (X vermelho)"
+                                        class="icon-small" style="width: 72px; height: auto;">
+                                </li>
+                                <li class="ml-8 flex items-center">
+                                    - Parâmetros da Verba <img src="imagens_direitos/telaparametros.png"
+                                        alt="Ícone de Parâmetros" class="icon-small">
+                                </li>
+                                <li class="ml-8 flex items-center">
+                                    - Ocorrências da Verba <img src="imagens_direitos/telaocorrencias.png"
+                                        alt="Ícone de Ocorrências" class="icon-small">
+                                </li>
+                                <li class="ml-8 flex items-center">
+                                    - Excluir <img src="imagens_direitos/telaexcluir.png" alt="Ícone de Excluir"
+                                        class="icon-small">
+                                </li>
+                                <li>Verba Principal - verba selecionada para lançamento.</li>
+                                <li>Verba Reflexa - em que ao clicar no botão <u>Exibir</u> serão listadas todas as
+                                    verbas
+                                    reflexas ligadas a Verba Principal.</li>
+                            </ul>
+                            <img src="imagens_direitos/adicionaltransferencia2.png"
+                                alt="Tela do PJe-Calc - Verba Saldo de Salário selecionada com as opções de Ações e Verba Reflexa."
+                                class="w-full h-auto my-4 rounded-lg shadow-md">
+                        </li>
+                        <li>
+                            <strong class="text-gray-800">Parametrização da Verba:</strong> Ao clicar no botão
+                            <u>Parâmetros da Verba</u> serão exibidas todas as configurações necessárias para a
+                            parametrização
+                            da Verba Principal.
+                            <img src="imagens_direitos/adicionaltransferencia3.png"
+                                alt="Tela do PJe-Calc - Detalhes da Verba Saldo de Salário: Parâmetros, Base de Cálculo, Divisor e Multiplicador."
+                                class="w-full h-auto my-4 rounded-lg shadow-md">
+                        </li>
+                        <li>
+                            <strong class="text-gray-800">Registro de Ocorrências:</strong> Ao clicar no botão
+                            <u>Ocorrências da Verba</u> serão exibidas todas as configurações necessárias para registro
+                            das
+                            ocorrências da Verba Principal.
+                            <img src="imagens_direitos/adicionaltransferencia4.png"
+                                alt="Tela do PJe-Calc - Dados de Ocorrências: Detalhamento da data inicial, data final e valor calculado da verba."
+                                class="w-full h-auto my-4 rounded-lg shadow-md">
+                        </li>
+                    </ol>
+
+                </div>
+
+        </section>
+    </div>
+
+
+    <script>
+        // Função para copiar o texto de um elemento com feedback visual
+        function copyTextFromElement(elementId, buttonElement) {
+            const element = document.getElementById(elementId);
+            if (!element) return;
+            let textToCopy = element.textContent.replace('...', ''); // Remove '...' se houver
+
+            // Se for o resultado da calculadora, copia apenas o valor monetário.
+            if (elementId === 'transferenciaResult') {
+                const match = element.textContent.match(/R\$\s*([\d\.,]+)/);
+                if (match) {
+                    textToCopy = match[0].trim();
+                } else {
+                    textToCopy = element.textContent.trim();
+                }
+            }
+
+            const tempInput = document.createElement('input');
+            tempInput.value = textToCopy;
+            document.body.appendChild(tempInput);
+            tempInput.select();
+
+            try {
+                document.execCommand('copy');
+                // Criar e exibir a mensagem de sucesso
+                const message = document.createElement('span');
+                message.textContent = 'Copiado!';
+                message.className = 'copy-message';
+
+                // Anexar a mensagem ao contêiner pai do botão de cópia
+                const parent = buttonElement.parentElement;
+
+                // Posicionamento ajustado
+                message.style.position = 'absolute';
+                // Verifica se o botão está dentro de um .copy-container. Se não, ajusta a posição
+                if (parent.classList.contains('copy-container')) {
+                    message.style.left = 'calc(100% + 10px)';
+                    message.style.top = '50%';
+                } else { // Caso do botão na calculadora, que está solto no div
+                    message.style.left = 'calc(100% + 10px)';
+                    message.style.top = '50%';
+                }
+
+                parent.appendChild(message);
+
+                // Animar e remover a mensagem após 1 segundo
+                setTimeout(() => {
+                    message.style.opacity = '1';
+                }, 10);
+                setTimeout(() => {
+                    message.style.opacity = '0';
+                    setTimeout(() => message.remove(), 300);
+                }, 1000);
+
+            } catch (err) {
+                console.error('Falha ao copiar o texto:', err);
+            } finally {
+                document.body.removeChild(tempInput);
+            }
+        }
+
+
+        // Função para formatar o valor do salário conforme o usuário digita
+        function formatSalarioInput() {
+            const salarioBaseInput = document.getElementById('salarioBaseInput');
+            if (!salarioBaseInput) return;
+            salarioBaseInput.addEventListener('input', (e) => {
+                let value = e.target.value;
+                // Remove todos os caracteres que não sejam dígitos
+                value = value.replace(/\D/g, '');
+
+                // Formata com vírgula para centavos e pontos para milhares
+                if (value.length > 2) {
+                    value = value.replace(/(\d+)(\d{2})$/, '$1,$2');
+                }
+                if (value.length > 6) {
+                    value = value.replace(/(\d)(?=(\d{3})+,)/g, '$1.');
+                }
+                e.target.value = value;
+            });
+        }
+
+        // Chamada da função de formatação
+        formatSalarioInput();
+
+        // Função para calcular o adicional de transferência
+        function calculateTransferencia() {
+            const salarioBaseInput = document.getElementById('salarioBaseInput');
+            const percentualInput = document.getElementById('transferenciaPercentualInput');
+            const resultDiv = document.getElementById('transferenciaResult');
+            const copyBtn = document.getElementById('copyTransferencia');
+
+            const rawSalarioBase = salarioBaseInput.value.replace(/\./g, '').replace(',', '.');
+            const salarioBase = parseFloat(rawSalarioBase);
+            const percentual = parseFloat(percentualInput.value);
+
+            if (isNaN(salarioBase) || salarioBase <= 0) {
+                resultDiv.textContent = 'Por favor, insira um salário base válido.';
+                copyBtn.classList.add('hidden');
+                return;
+            }
+
+            if (isNaN(percentual) || percentual < 25) {
+                resultDiv.textContent = 'O percentual mínimo legal para o adicional é de 25%. Ajuste o valor.';
+                copyBtn.classList.add('hidden');
+                return;
+            }
+
+            // O cálculo usa o percentual fornecido pelo usuário (que deve ser >= 25)
+            const valorAdicional = salarioBase * (percentual / 100);
+
+            resultDiv.textContent = `Valor do Adicional de Transferência (${percentual}%): ${valorAdicional.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}`;
+            copyBtn.classList.remove('hidden');
+        }
+
+        // Adiciona os event listeners aos botões (IDs atualizados)
+        document.getElementById('calculateTransferenciaBtn').addEventListener('click', calculateTransferencia);
+        document.getElementById('copyTransferencia').addEventListener('click', (e) => copyTextFromElement('transferenciaResult', e.currentTarget));
+
+
+        // Lógica para as gavetas expansíveis
+        function setupDrawer(drawerId) {
+            const header = document.getElementById(`${drawerId}-header`);
+            const content = document.getElementById(`${drawerId}-content`);
+
+            if (!header || !content) return;
+
+            header.addEventListener('click', () => {
+                const isExpanded = header.classList.toggle('active');
+                if (isExpanded) {
+                    // Define a altura máxima para o scrollHeight, permitindo a expansão
+                    content.style.maxHeight = content.scrollHeight + 30 + "px"; // Adicionada margem de segurança
+                } else {
+                    content.style.maxHeight = '0';
+                }
+            });
+        }
+
+        setupDrawer('base-legal-jurisprudencia');
+        setupDrawer('calculo-deducoes'); // Base de Cálculo e Deduções
+        setupDrawer('verbas-reflexas');
+        setupDrawer('calculadora-transferencia');
+        setupDrawer('pje-calc');
+    </script>
+</body>
+
+</html>

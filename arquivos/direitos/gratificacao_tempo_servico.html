@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gratificação por Tempo de Serviço</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f4f8;
+            color: #1a202c;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 2rem;
+            background-color: #ffffff;
+            border-radius: 1rem;
+            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.05);
+        }
+
+        .copy-container {
+            display: flex;
+            align-items: center;
+            position: relative;
+        }
+
+        .copy-btn {
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
+            padding: 0;
+            margin-left: 0.5rem;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .copy-btn svg {
+            width: 1.5rem;
+            height: 1.5rem;
+            fill: #00678F;
+            transition: fill 0.3s ease;
+        }
+
+        .copy-btn:hover svg {
+            fill: #004562;
+        }
+
+        .copy-message {
+            position: absolute;
+            left: 100%;
+            top: 50%;
+            transform: translate(10px, -50%);
+            background-color: #00678F;
+            color: white;
+            padding: 0.25rem 0.5rem;
+            border-radius: 0.5rem;
+            font-size: 0.75rem;
+            white-space: nowrap;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        /* MODIFICAÇÃO: Aplicando fundo cinza claro (#f0f4f8) e sombra aos contêineres */
+        .drawer-container {
+            padding: 1rem;
+            background-color: #f0f4f8;
+            /* Fundo cinza claro da tabela */
+            border-radius: 0.75rem;
+            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+            /* Sombra sutil */
+            margin-top: 1.5rem;
+        }
+
+        .drawer-header {
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .drawer-content {
+            overflow: hidden;
+            transition: all 0.5s ease-in-out;
+            max-height: 0;
+        }
+
+        .drawer-header .arrow-icon {
+            transition: transform 0.5s ease-in-out;
+        }
+
+        .drawer-header.active .arrow-icon {
+            transform: rotate(180deg);
+        }
+
+        .table-responsive {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th,
+        td {
+            padding: 0.75rem;
+            text-align: left;
+            border-bottom: 1px solid #d1d5db;
+        }
+
+        th {
+            background-color: #00678F;
+            color: white;
+        }
+
+        tr:nth-child(odd) {
+            background-color: #f0f4f8;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container my-8 relative">
+        <img src="https://site.trt19.jus.br/sites/default/files/logo-trt19.png" alt="Logo do TRT19"
+            class="absolute top-4 right-4 w-36 h-auto">
+
+        <section id="gratificacao-servico" class="content-section">
+            <h2 class="text-3xl font-bold text-[#00678F] mb-4">Gratificação por Tempo de Serviço</h2>
+            <p class="text-gray-700 leading-relaxed text-justify">A Gratificação por Tempo de Serviço (GTS), também
+                conhecida como "anuênio" ou "biênio", é um adicional salarial concedido ao empregado em razão do tempo
+                de serviço dedicado à empresa. Ela é uma forma de premiar a lealdade e a permanência do trabalhador no
+                quadro funcional.</p>
+
+            <p class="text-gray-700 leading-relaxed text-justify mt-4">A GTS não possui previsão na Consolidação das
+                Leis do Trabalho (CLT), sendo um direito criado e regulamentado, na maioria das vezes, por meio de
+                Convenções Coletivas de Trabalho (CCT), Acordos Coletivos (ACT) ou por Regulamento Interno da
+                Empresa.</p>
+            <p class="text-gray-700 leading-relaxed text-justify mt-4">Por ser uma parcela paga habitualmente e em
+                decorrência do contrato de trabalho, a gratificação por tempo de serviço possui Natureza Salarial e,
+                portanto, integra a remuneração para todos os efeitos legais, gerando reflexos
+                sobre as demais verbas.</p>
+            <div id="base-legal-drawer" class="drawer-container">
+                <div id="base-legal-header" class="drawer-header">
+                    <h4 class="text-xl font-semibold text-[#00678F]">Base Legal e Jurisprudência</h4>
+                    <svg class="arrow-icon w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                    </svg>
+                </div>
+                <div id="base-legal-content" class="drawer-content">
+                    <p class="text-gray-700 leading-relaxed text-justify mt-4">A natureza salarial da Gratificação por
+                        Tempo de Serviço (GTS) é o fundamento para a integração na remuneração, conforme a legislação e
+                        jurisprudência a seguir:</p>
+
+                    <h5 class="text-lg font-semibold text-gray-800 mt-4">Fontes Normativas</h5>
+
+                    <hr class="my-4 border-gray-300">
+                    <h5 class="text-base font-semibold text-gray-800">Consolidação das Leis do Trabalho (CLT):</h5>
+                    <ul class="list-disc list-inside text-gray-700 leading-relaxed mt-2 ml-4 space-y-3">
+                        <li>
+                            <strong>Art. 457, § 1º:</strong>
+                            <p class="text-sm italic mt-1 ml-4 border-l-2 border-gray-400 pl-3">"Integram o salário a
+                                importância fixa estipulada, as gratificações legais e as comissões pagas pelo
+                                empregador."</p>
+                        </li>
+                        <li>
+                            <strong>Art. 468:</strong>
+                            <p class="text-sm italic mt-1 ml-4 border-l-2 border-gray-400 pl-3">"Nos contratos
+                                individuais de trabalho só é lícita a alteração das respectivas condições por mútuo
+                                consentimento, e ainda assim desde que não resultem, direta ou indiretamente, prejuízos
+                                ao empregado, sob pena de nulidade da cláusula. (Princípio da inalterabilidade
+                                contratual lesiva)"</p>
+                        </li>
+                    </ul>
+
+                    <hr class="my-6 border-gray-300">
+
+                    <h5 class="text-lg font-semibold text-gray-800">Jurisprudência</h5>
+
+                    <h6 class="text-base font-semibold text-gray-800 mt-4">Súmula nº 203 do TST (Incorporação):</h6>
+                    <div class="p-4 bg-gray-100 rounded-md mt-2 border border-gray-300">
+                        <p class="font-bold text-sm">Tese Consolidada:</p>
+                        <p class="text-sm mt-1 italic">"A gratificação por tempo de serviço integra o salário para todos
+                            os efeitos legais."</p>
+                    </div>
+
+                </div>
+            </div>
+
+            <div id="base-calculo-drawer" class="drawer-container">
+                <div id="base-calculo-header" class="drawer-header">
+                    <h4 class="text-xl font-semibold text-[#00678F]">Base de Cálculo e Deduções</h4>
+                    <svg class="arrow-icon w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                    </svg>
+                </div>
+                <div id="base-calculo-content" class="drawer-content">
+
+                    <div class="p-3 mt-4 mb-4 bg-yellow-50 border-l-4 border-yellow-500 rounded-r-md">
+                        <p class="text-gray-900 leading-relaxed text-justify font-medium">
+                            IMPORTANTE: A Gratificação por Tempo de Serviço (GTS) deve integrar o valor da Remuneração
+                            Total (Salário-Base + Adicionais + H. Extras + Gratificações ) para fins de cálculo das
+                            deduções obrigatórias fiscais e para formação da base de cálculo das Verbas Reflexas.
+                        </p>
+                    </div>
+
+                    <hr class="mb-6 mt-0 border-[#00678F]">
+                    <h4 class="text-xl font-semibold text-[#00678F]">Definição e Critérios da Base de Cálculo</h4>
+                    <p class="text-gray-700 leading-relaxed text-justify mt-2">O cálculo da Gratificação por Tempo de
+                        Serviço (GTS) varia conforme a norma coletiva (CCT/ACT) ou o regulamento interno da empresa.
+                        Geralmente, ela é paga como
+                        um percentual (Ex: 1%, 2%, 5%) sobre o salário-base do empregado por cada período de tempo de
+                        serviço (Ex: anuênio, biênio, triênio).</p>
+
+                    <p class="text-gray-700 leading-relaxed text-justify mt-2">Base de Cálculo da GTS sendo o
+                        Salário-Base:</p>
+
+                    <ul class="list-disc list-inside text-gray-700 leading-relaxed mt-2 pl-4 space-y-2">
+                        <li><strong>Base Principal:</strong> <span class="underline font-bold">Salário Base</span>.
+                        </li>
+                        <li><strong>Fórmula de Cálculo:</strong> Salário Base * % Gratificação.</li>
+                    </ul>
+
+                    <div class="p-3 mt-4 bg-gray-100 border-l-4 border-[#00678F]/50 rounded-r-md">
+                        <p class="text-sm text-gray-700 leading-relaxed text-justify">
+                            <strong class="text-gray-900">Observação:</strong> Em algumas negociações coletivas (CCTs),
+                            a base de cálculo pode ser uma "remuneração-base" que inclui outras parcelas fixas. Consulte
+                            a norma aplicável ao seu caso.
+                        </p>
+                    </div>
+
+                    <hr class="my-4 border-gray-300">
+                    <h5 class="text-lg font-semibold text-gray-800">Exemplo Prático (Valor Bruto)</h5>
+                    <p class="text-gray-700 leading-relaxed text-justify mt-2">
+                        Cálculo da Gratificação por Tempo de Serviço (GTS) considerando um Salário-Base de R$ 3.000,00 e
+                        5 anos de serviço (5 anuênios) com percentual de 1% por ano:
+                    </p>
+
+                    <table
+                        class="w-full mt-4 text-sm text-gray-700 border-collapse border border-gray-300 rounded-md overflow-hidden">
+                        <thead>
+                            <tr class="bg-gray-200">
+                                <th class="py-2 px-4 text-left border-b border-gray-300">Item</th>
+                                <th class="py-2 px-4 text-left border-b border-gray-300">Valor / Detalhe</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="border-b border-gray-300">
+                                <td class="py-2 px-4">Salário-Base (Base de Cálculo)</td>
+                                <td class="py-2 px-4">R$ 3.000,00</td>
+                            </tr>
+                            <tr class="border-b border-gray-300">
+                                <td class="py-2 px-4">Percentual por Ano (Anuênio)</td>
+                                <td class="py-2 px-4">1%</td>
+                            </tr>
+                            <tr class="border-b border-gray-300">
+                                <td class="py-2 px-4">Tempo de Serviço (Anuênios)</td>
+                                <td class="py-2 px-4">5 anos</td>
+                            </tr>
+                            <tr class="border-b border-gray-300">
+                                <td class="py-2 px-4">Percentual Total (5 x 1%)</td>
+                                <td class="py-2 px-4">5% (0,05)</td>
+                            </tr>
+                            <tr class="border-b border-gray-300">
+                                <td class="py-2 px-4">Cálculo</td>
+                                <td class="py-2 px-4">R$ 3.000,00 * 0,05</td>
+                            </tr>
+                            <tr>
+                                <td class="py-2 px-4 font-bold bg-gray-100">Valor Bruto da GTS</td>
+                                <td class="py-2 px-4 font-bold bg-gray-100">R$ 150,00</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <hr class="my-6 border-[#00678F]">
+
+                    <h4 class="text-xl font-semibold text-[#00678F]">Deduções da Base de Cálculo</h4>
+
+                    <h6 class="text-lg font-bold text-[#00678F] mt-4">Deduções Fiscais e Previdenciárias:</h6>
+                    <p class="text-gray-700 leading-relaxed text-justify mt-2">Por possuir natureza salarial, a
+                        Gratificação por Tempo de Serviço integra a base de cálculo para as deduções legais, como a
+                        contribuição para o INSS e o Imposto de Renda (IRPF). O cálculo incide sobre a remuneração total
+                        (salário base + GTS + outras verbas salariais).</p>
+
+                    <h6 class="text-lg font-bold text-[#00678F] mt-4">Deduções de Valores Pagos (Compensação -
+                        Adiantamento):</h6>
+                    <ul class="list-disc list-inside text-gray-700 leading-relaxed mt-2 pl-4 space-y-2">
+                        <li><strong>Adiantamentos Salariais:</strong> Valores antecipados ao empregado no mês da
+                            rescisão ou em meses anteriores.</li>
+                    </ul>
+
+                    <hr class="my-4 border-gray-300">
+                    <h5 class="text-lg font-semibold text-gray-800">Exemplo Prático (Valor Bruto - Deduções = Valor
+                        Líquido)</h5>
+                    <p class="text-gray-700 leading-relaxed text-justify mt-2">Abaixo, a simulação da aplicação das
+                        deduções fiscais e previdenciárias sobre a remuneração total, considerando Salário-Base de R$
+                        3.000,00 e GTS de R$ 150,00 (Remuneração Total de R$ 3.150,00), sem considerar as deduções de
+                        valores já pagos:</p>
+
+                    <table
+                        class="w-full mt-4 text-sm text-gray-700 border-collapse border border-gray-300 rounded-md overflow-hidden">
+                        <thead>
+                            <tr class="bg-gray-200">
+                                <th class="py-2 px-4 text-left border-b border-gray-300">Item</th>
+                                <th class="py-2 px-4 text-left border-b border-gray-300">Valor</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="border-b border-gray-300">
+                                <td class="py-2 px-4 font-bold bg-gray-50">Remuneração Total (Base de Cálculo)</td>
+                                <td class="py-2 px-4 font-bold bg-gray-50">R$ 3.150,00</td>
+                            </tr>
+                            <tr class="border-b border-gray-300">
+                                <td class="py-2 px-4 text-red-600">(-) Dedução INSS (Simulado)</td>
+                                <td class="py-2 px-4 text-red-600">R$ 250,00</td>
+                            </tr>
+                            <tr class="border-b border-gray-300">
+                                <td class="py-2 px-4 text-red-600">(-) Dedução IRPF (Simulado)</td>
+                                <td class="py-2 px-4 text-red-600">R$ 100,00</td>
+                            </tr>
+                            <tr>
+                                <td class="py-2 px-4 font-bold bg-gray-100">Total Deduções (Fiscais/Previdenciárias)
+                                </td>
+                                <td class="py-2 px-4 font-bold bg-gray-100">R$ 350,00</td>
+                            </tr>
+                            <tr>
+                                <td class="py-2 px-4 font-bold bg-[#00678F]/10 text-[#00678F]">Remuneração Líquida
+                                    (Parcial)</td>
+                                <td class="py-2 px-4 font-bold bg-[#00678F]/10 text-[#00678F]">R$ 2.800,00</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <p class="text-gray-700 leading-relaxed text-justify mt-4">As alíquotas e as faixas de dedução do
+                        INSS e do IRPF mudam periodicamente. O exemplo acima é apenas uma simulação.</p>
+
+                </div>
+            </div>
+
+            <div id="verbas-reflexas-drawer" class="drawer-container">
+                <div id="verbas-reflexas-header" class="drawer-header">
+                    <h4 class="text-xl font-semibold text-[#00678F]">Verbas Reflexas</h4> <svg
+                        class="arrow-icon w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                    </svg>
+                </div>
+                <div id="verbas-reflexas-content" class="drawer-content">
+                    <p class="text-gray-700 leading-relaxed text-justify">A Gratificação por Tempo de Serviço (GTS)
+                        possui natureza salarial (Art. 457, § 1º, da CLT) e, por isso, seu valor deve ser adicionado ao
+                        salário base para apurar todas as verbas que têm a remuneração como base de cálculo.</p>
+                    <p class="text-gray-700 leading-relaxed text-justify mt-2">A integração da GTS garante que o cálculo
+                        de verbas rescisórias e contratuais reflita a real base remuneratória do empregado. Confira
+                        abaixo as principais verbas que recebem o reflexo da GTS:</p>
+
+                    <table
+                        class="w-full mt-4 text-sm text-gray-700 border-collapse border border-gray-300 rounded-md overflow-hidden">
+                        <thead>
+                            <tr class="bg-gray-200">
+                                <th class="py-2 px-4 text-left border-b border-gray-300 w-1/3">Verba Trabalhista</th>
+                                <th class="py-2 px-4 text-left border-b border-gray-300 w-2/3">Reflexo da GTS</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="border-b border-gray-300">
+                                <td class="py-2 px-4 font-medium">13º Salário</td>
+                                <td class="py-2 px-4">A GTS integra o cálculo do 13º Salário (integral e proporcional).
+                                </td>
+                            </tr>
+                            <tr class="border-b border-gray-300">
+                                <td class="py-2 px-4 font-medium">Férias + 1/3</td>
+                                <td class="py-2 px-4">A GTS integra o cálculo das Férias (vencidas e proporcionais) e o
+                                    adicional de 1/3.</td>
+                            </tr>
+                            <tr class="border-b border-gray-300">
+                                <td class="py-2 px-4 font-medium">Aviso Prévio</td>
+                                <td class="py-2 px-4">O valor da GTS integra a base de remuneração para cálculo do Aviso
+                                    Prévio (trabalhado ou indenizado).</td>
+                            </tr>
+                            <tr>
+                                <td class="py-2 px-4 font-medium">FGTS (Depósito Mensal e Multa)</td>
+                                <td class="py-2 px-4">A GTS integra a base de cálculo para o depósito mensal de 8% do
+                                    FGTS e também para o cálculo da Multa de 40% (ou 20%).</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <hr class="my-4 border-gray-300">
+                    <p class="text-gray-700 leading-relaxed text-justify mt-2"><strong>Atenção:</strong> A natureza
+                        salarial da Gratificação por Tempo de Serviço (GTS), conforme a Súmula 203 do TST, garante a
+                        integração do seu valor na base de cálculo de todas as verbas salariais e rescisórias.</p>
+                </div>
+            </div>
+
+            <div id="calculadora-gts-drawer" class="drawer-container">
+                <div id="calculadora-gts-header" class="drawer-header">
+                    <h4 class="text-xl font-semibold text-[#00678F]">Calculadora (Simulação)</h4>
+                    <svg class="arrow-icon w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                    </svg>
+                </div>
+                <div id="calculadora-gts-content" class="drawer-content">
+                    <p class="text-gray-700 leading-relaxed text-justify mt-4">Utilize esta ferramenta para calcular o
+                        valor bruto mensal da Gratificação por Tempo de Serviço (GTS) com base no seu salário-base,
+                        percentual do anuênio/biênio e tempo de serviço acumulado.</p>
+
+                    <div class="p-4 bg-white rounded-lg shadow-inner mt-4">
+                        <h5 class="text-md font-semibold text-gray-800">Cálculo Simples (Valor Bruto da GTS)</h5>
+                        <p class="text-gray-600 text-sm mb-4">GTS = Salário-Base * (Percentual por Período
+                            * Número de Períodos)</p>
+
+                        <div class="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4">
+                            <div class="flex-1">
+                                <label for="salarioBaseInput" class="block text-sm text-gray-700">Salário-Base
+                                    (R$):</label>
+                                <input type="text" id="salarioBaseInput"
+                                    class="mt-1 block w-full rounded-md border-gray-300 p-2 focus:ring-[#00678F] focus:border-[#00678F]"
+                                    placeholder="Ex: 3.000,00">
+                            </div>
+                            <div class="flex-1">
+                                <label for="percentualPeriodoInput" class="block text-sm text-gray-700">Percentual por
+                                    Período (%):</label>
+                                <input type="number" id="percentualPeriodoInput"
+                                    class="mt-1 block w-full rounded-md border-gray-300 p-2 focus:ring-[#00678F] focus:border-[#00678F]"
+                                    placeholder="Ex: 1 (para 1% - anuênio)">
+                            </div>
+                            <div class="flex-1">
+                                <label for="numeroPeriodosInput" class="block text-sm text-gray-700">Tempo de Serviço
+                                    (Número de Períodos):</label>
+                                <input type="number" id="numeroPeriodosInput"
+                                    class="mt-1 block w-full rounded-md border-gray-300 p-2 focus:ring-[#00678F] focus:border-[#00678F]"
+                                    placeholder="Ex: 5 (para 5 anos)">
+                            </div>
+                        </div>
+                        <button id="calculateGTSBtn"
+                            class="mt-4 w-full px-4 py-2 bg-[#00678F] text-white rounded-md hover:bg-[#004562] transition duration-300 shadow-md flex items-center justify-center">
+                            <span>Calcular GTS Bruta</span>
+                        </button>
+                        <div class="mt-4">
+                            <div class="flex items-center copy-container">
+                                <p id="gtsResult" class="text-base font-bold text-gray-800"></p>
+                                <button id="copyGTSResult" class="copy-btn hidden" aria-label="Copiar valor">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                        <path
+                                            d="M16 1H4C2.9 1 2 1.9 2 3v14h2V3h12V1zm3 4H8C6.9 5 6 5.9 6 7v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z" />
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="pje-calc-drawer" class="drawer-container">
+                <div id="pje-calc-header" class="drawer-header">
+                    <h4 class="text-xl font-semibold text-[#00678F]">Lançamento no PJe-Calc </h4>
+                    <svg class="arrow-icon w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                    </svg>
+                </div>
+                <div id="pje-calc-content" class="drawer-content">
+                    <p class="text-gray-700 leading-relaxed text-justify mt-4">A seguir, confira o passo a passo para o
+                        lançamento da verba no PJe-Calc, utilizando a opção "Expresso":</p>
+
+                    <ol class="list-decimal list-inside text-gray-700 leading-relaxed mt-4 ml-4 space-y-3">
+                        <li>
+                            <strong class="text-gray-800">Acessar Verbas e Escolher Lançamento:</strong> No menu de
+                            navegação à esquerda, clique na opção <u>Verbas</u> para iniciar o lançamento. Após o
+                            comando,
+                            será exibida a tela para escolha do Lançamento da Verba. Escolha a opção <u>Expresso</u>.
+                            <img src="imagens_direitos/verbas.png"
+                                alt="Tela do PJe-Calc - Passo 1: Acessar a opção Verbas no menu lateral e clicar em Expresso na seção Lançamento."
+                                class="w-full h-auto my-4 rounded-lg shadow-md">
+                        </li>
+                        <li>
+                            <strong class="text-gray-800">Seleção da Verba:</strong> O sistema abrirá as opções de
+                            verbas, escolha a verba <u>Gratificação por Tempo de Serviço</u> e clique no botão
+                            <u>Salvar</u>
+                            <img src="imagens_direitos/gratificacaotemposervico1.png"
+                                alt="Tela do PJe-Calc - Verbas Principais: Selecionar Saldo de Salário"
+                                class="w-full h-auto my-4 rounded-lg shadow-md">
+                        </li>
+                        <li>
+                            <strong class="text-gray-800">Quadro de Verbas e Ações:</strong> O sistema exibirá um quadro
+                            com os campos:
+                            <ul class="list-disc list-inside text-gray-700 leading-relaxed mt-2 ml-4">
+                                <li class="ml-8 flex items-center">
+                                <li>Ações - contendo as opções de configurações da verba selecionada (parâmetros,
+                                    ocorrências e
+                                    exclusão)
+                                    <img src="imagens_direitos/telaacoes.png"
+                                        alt="Ícones de Ações: Parâmetros (folha com seta), Ocorrências (folha com checks), Excluir (X vermelho)"
+                                        class="icon-small" style="width: 72px; height: auto;">
+                                </li>
+                                <li class="ml-8 flex items-center">
+                                    - Parâmetros da Verba <img src="imagens_direitos/telaparametros.png"
+                                        alt="Ícone de Parâmetros" class="icon-small">
+                                </li>
+                                <li class="ml-8 flex items-center">
+                                    - Ocorrências da Verba <img src="imagens_direitos/telaocorrencias.png"
+                                        alt="Ícone de Ocorrências" class="icon-small">
+                                </li>
+                                <li class="ml-8 flex items-center">
+                                    - Excluir <img src="imagens_direitos/telaexcluir.png" alt="Ícone de Excluir"
+                                        class="icon-small">
+                                </li>
+                                <li>Verba Principal - verba selecionada para lançamento.</li>
+                                <li>Verba Reflexa - em que ao clicar no botão <u>Exibir</u> serão listadas todas as
+                                    verbas
+                                    reflexas ligadas a Verba Principal.</li>
+                            </ul>
+                            <img src="imagens_direitos/gratificacaotemposervico2.png"
+                                alt="Tela do PJe-Calc - Verba Saldo de Salário selecionada com as opções de Ações e Verba Reflexa."
+                                class="w-full h-auto my-4 rounded-lg shadow-md">
+                        </li>
+                        <li>
+                            <strong class="text-gray-800">Parametrização da Verba:</strong> Ao clicar no botão
+                            <u>Parâmetros da Verba</u> serão exibidas todas as configurações necessárias para a
+                            parametrização
+                            da Verba Principal.
+                            <img src="imagens_direitos/gratificacaotemposervico3.png"
+                                alt="Tela do PJe-Calc - Detalhes da Verba Saldo de Salário: Parâmetros, Base de Cálculo, Divisor e Multiplicador."
+                                class="w-full h-auto my-4 rounded-lg shadow-md">
+                        </li>
+                        <li>
+                            <strong class="text-gray-800">Registro de Ocorrências:</strong> Ao clicar no botão
+                            <u>Ocorrências da Verba</u> serão exibidas todas as configurações necessárias para registro
+                            das
+                            ocorrências da Verba Principal.
+                            <img src="imagens_direitos/gratificacaotemposervico4.png"
+                                alt="Tela do PJe-Calc - Dados de Ocorrências: Detalhamento da data inicial, data final e valor calculado da verba."
+                                class="w-full h-auto my-4 rounded-lg shadow-md">
+                        </li>
+                    </ol>
+
+                </div>
+
+        </section>
+    </div>
+
+    <script>
+        // Função para formatar o número para o padrão monetário brasileiro (R$ X.XXX,XX)
+        function formatToBRL(value) {
+            if (isNaN(value)) return "R$ 0,00";
+            return "R$ " + value.toFixed(2).replace('.', ',').replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.');
+        }
+
+        // Função para converter o texto formatado para um número (float)
+        function parseBRL(text) {
+            // Remove R$, pontos de milhar e substitui vírgula decimal por ponto
+            return parseFloat(text.replace('R$', '').replace(/\./g, '').replace(',', '.'));
+        }
+
+        // Função para formatar a entrada conforme o usuário digita (padrão BRL)
+        function formatInput(inputElement) {
+            inputElement.addEventListener('input', (e) => {
+                let value = e.target.value;
+                // Remove R$, pontos de milhar e substitui vírgula decimal por ponto para manipulação
+                let numericValue = value.replace(/[^\d]/g, '');
+
+                if (numericValue.length === 0) {
+                    e.target.value = '';
+                    return;
+                }
+
+                // Adiciona a vírgula de centavos
+                let cents = numericValue.slice(-2);
+                let integerPart = numericValue.slice(0, -2);
+
+                if (integerPart.length === 0) {
+                    integerPart = '0';
+                }
+
+                // Adiciona pontos de milhar
+                let formattedInteger = '';
+                for (let i = 0; i < integerPart.length; i++) {
+                    formattedInteger = integerPart[integerPart.length - 1 - i] + formattedInteger;
+                    if ((i + 1) % 3 === 0 && (i + 1) !== integerPart.length) {
+                        formattedInteger = '.' + formattedInteger;
+                    }
+                }
+
+                // Formato final
+                e.target.value = formattedInteger + ',' + cents;
+            });
+        }
+
+        // Função para copiar o texto de um elemento com feedback visual
+        function copyTextFromElement(elementId, buttonElement) {
+            const element = document.getElementById(elementId);
+            if (!element) return;
+            // Pega apenas o texto do resultado (Ex: R$ 150,00)
+            const textToCopy = element.textContent.trim();
+
+            const tempInput = document.createElement('input');
+            tempInput.value = textToCopy;
+            document.body.appendChild(tempInput);
+            tempInput.select();
+
+            try {
+                document.execCommand('copy');
+                // Criar e exibir a mensagem de sucesso
+                const message = document.createElement('span');
+                message.textContent = 'Copiado!';
+                message.className = 'copy-message';
+
+                // Ajusta a posição da mensagem de cópia
+                const parent = buttonElement.parentElement;
+                parent.style.position = 'relative'; // Garante que o pai seja o referencial
+                message.style.position = 'absolute';
+                message.style.left = 'calc(100% + 10px)';
+                message.style.top = '50%';
+
+                buttonElement.parentElement.appendChild(message);
+
+                // Animar e remover a mensagem após 1 segundo
+                setTimeout(() => {
+                    message.style.opacity = '1';
+                }, 10);
+                setTimeout(() => {
+                    message.style.opacity = '0';
+                    setTimeout(() => message.remove(), 300);
+                }, 1000);
+
+            } catch (err) {
+                console.error('Falha ao copiar o texto:', err);
+            } finally {
+                document.body.removeChild(tempInput);
+            }
+        }
+
+        // Lógica da Calculadora GTS
+        function setupGTSCalculator() {
+            const salarioBaseInput = document.getElementById('salarioBaseInput');
+            const percentualPeriodoInput = document.getElementById('percentualPeriodoInput');
+            const numeroPeriodosInput = document.getElementById('numeroPeriodosInput');
+            const calculateBtn = document.getElementById('calculateGTSBtn');
+            const resultElement = document.getElementById('gtsResult');
+            const copyBtn = document.getElementById('copyGTSResult');
+
+            // Aplica a formatação BRL
+            formatInput(salarioBaseInput);
+
+            calculateBtn.addEventListener('click', () => {
+                const salarioBaseText = salarioBaseInput.value;
+                const percentualPeriodo = parseFloat(percentualPeriodoInput.value) || 0;
+                const numeroPeriodos = parseInt(numeroPeriodosInput.value) || 0;
+
+                // Converte o salário base para float, usando a função de parse
+                const salarioBase = parseBRL(salarioBaseText) || 0;
+
+                if (salarioBase <= 0 || percentualPeriodo <= 0 || numeroPeriodos <= 0) {
+                    resultElement.textContent = 'Preencha todos os campos com valores válidos.';
+                    copyBtn.classList.add('hidden');
+                    return;
+                }
+
+                // Cálculo: Salario Base * (Percentual / 100) * Número de Períodos
+                const percentualTotal = (percentualPeriodo / 100) * numeroPeriodos;
+                const gtsBruta = salarioBase * percentualTotal;
+
+                resultElement.textContent = `Valor Bruto da GTS: ${formatToBRL(gtsBruta)}`;
+
+                // Mostra o botão de copiar
+                copyBtn.classList.remove('hidden');
+                copyBtn.onclick = () => copyTextFromElement('gtsResult', copyBtn);
+            });
+        }
+
+        // Lógica para as gavetas expansíveis
+        function setupDrawer(drawerId) {
+            const header = document.getElementById(`${drawerId}-header`);
+            const content = document.getElementById(`${drawerId}-content`);
+            if (header && content) {
+                header.addEventListener('click', () => {
+                    const isExpanded = header.classList.toggle('active');
+                    if (isExpanded) {
+                        // Calcula a altura do conteúdo com margem de segurança
+                        content.style.maxHeight = content.scrollHeight + 30 + "px";
+                    } else {
+                        content.style.maxHeight = '0';
+                    }
+                });
+            }
+        }
+
+        // Configura as gavetas
+        setupDrawer('base-legal');
+        setupDrawer('base-calculo');
+        setupDrawer('verbas-reflexas');
+        setupDrawer('calculadora-gts'); // Configuração da nova gaveta
+        setupDrawer('pje-calc');
+
+        // Configura a calculadora
+        setupGTSCalculator();
+    </script>
+</body>
+
+</html>

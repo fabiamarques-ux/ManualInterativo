@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lançamento do Seguro-desemprego</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f1f5f9;
+        }
+
+        .text-justify {
+            text-align: justify;
+        }
+
+        .aside-bg {
+            background-color: #005a62;
+        }
+
+        /* Estilo para a Logo */
+        .logo-trt {
+            max-height: 60px;
+            width: auto;
+        }
+
+        /* Estilos e Transições para o Acordeão PRINCIPAL */
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out, padding 0.3s ease-out;
+            padding-top: 0;
+            padding-bottom: 0;
+            background-color: #f0f4f8;
+        }
+
+        .accordion-content.active {
+            max-height: 20000px;
+            padding-top: 1rem;
+            padding-bottom: 1rem;
+        }
+
+        .accordion-header {
+            background-color: #f0f4f8;
+        }
+
+        .accordion-icon {
+            transition: transform 0.3s ease;
+            font-size: 1.5rem;
+            line-height: 1;
+        }
+
+        .accordion-icon.rotate {
+            transform: rotate(45deg);
+        }
+
+        /* Estilos e Transições para o SUB-ACORDEÃO (Modalidades) */
+        .sub-acordeon-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out, padding 0.3s ease-out;
+            padding-top: 0;
+            padding-bottom: 0;
+        }
+
+        .sub-acordeon-content.active {
+            max-height: 20000px;
+            padding-top: 1rem;
+            padding-bottom: 1rem;
+        }
+
+        /* Estilo para imagens no conteúdo do acordeão */
+        .content-image {
+            max-width: 100%;
+            height: auto;
+            border: 1px solid #ccc;
+            border-radius: 0.5rem;
+            margin-top: 1rem;
+            margin-bottom: 1rem;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="p-4 md:p-8">
+        <div class="max-w-4xl mx-auto bg-white rounded-xl shadow-xl p-6 md:p-10 border border-gray-200">
+            <div class="flex justify-center mb-6">
+                <img src="https://site.trt19.jus.br/portalTRT19/sites/default/files/logo-trt19.png" alt="Logo do TRT19"
+                    class="logo-trt w-auto object-contain">
+            </div>
+            <h1 class="text-3xl md:text-4xl text-center mb-6 text-[#007380]">Manual Interativo de Cálculos Trabalhistas
+            </h1>
+            <p class="text-center text-gray-600 mb-8">Um guia completo e interativo para entender os cálculos na esfera
+                judicial trabalhista.</p>
+
+            <section id="liquidacao-verbas-content" class="content-section">
+                <h2 class="sr-only">Lançamento do Seguro-desemprego</h2>
+                <div class="space-y-4">
+                    <p class="text-gray-700 text-justify">O módulo de Seguro-desemprego no PJe-Calc serve para apurar se o reclamante faz jus ao benefício e calcular a indenização substitutiva, caso o juiz determine o pagamento em pecúnia por culpa do empregador.</p>
+
+                            <div class="space-y-4 mt-4">
+                                <div class="sub-acordeon-item border border-gray-300 rounded-lg">
+                                    <button
+                                        class="sub-acordeon-header w-full flex justify-between items-center p-3 bg-blue-50 text-blue-800 text-left font-medium rounded-t-lg focus:outline-none">
+                                        <span>Lançamento dos Dados para Apuração</span>
+                                        <span class="sub-acordeon-icon text-lg">+</span>
+                                    </button>
+                                    <div class="sub-acordeon-content p-3 text-gray-700">
+                                        <ul class="list-disc list-inside space-y-1">
+                                            <li>Para iniciar a apuração, marque o checkbox "Apurar Seguro-desemprego".</li>
+                                            <li>Selecione o Tipo de Solicitação (Primeira Solicitação, Segunda ou Mais, etc.).</li>
+                                            <li>Defina a base para a Remuneração Mensal - Salários Pagos (Nenhum, Maior Remuneração, Histórico Salarial).</li>
+                                            <li>Para a Remuneração Mensal - Salários Devidos, é possível selecionar uma Verba*(ex: Salário Base) e indicar se ela deve ser Integralizada ou não.</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                
+                                <div class="border p-2 rounded-lg bg-white">
+                                    <p class="text-sm text-center text-gray-500 mb-2">Tela Principal de Configuração do Seguro-desemprego</p>
+                                    <img src="imagens_liquidacao/seguro_desemprego1.png" alt="Tela de Seguro-desemprego com campos para apuração, tipo de solicitação e remuneração mensal" class="w-full h-auto">
+                                </div>
+                                
+                                <div class="border p-2 rounded-lg bg-white">
+                                    <p class="text-sm text-center text-gray-500 mb-2">Detalhe dos Campos de Remuneração Mensal</p>
+                                    <img src="imagens_liquidacao/seguro_desemprego2.png" alt="Detalhe dos campos de Remuneração Mensal Salários Pagos e Salários Devidos" class="w-full h-auto">
+                                </div>
+                            </div>
+                </div>
+            </section>
+        </div>
+    </div>
+
+
+</body>
+
+</html>

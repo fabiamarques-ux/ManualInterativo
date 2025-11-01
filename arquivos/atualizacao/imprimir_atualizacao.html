@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Funcionalidade de Imprimir Atualização</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f1f5f9;
+        }
+
+        .text-justify {
+            text-align: justify;
+        }
+
+        .aside-bg {
+            background-color: #005a62;
+        }
+
+        /* Estilo para a Logo */
+        .logo-trt {
+            max-height: 60px;
+            width: auto;
+        }
+
+        /* Estilos e Transições para o Acordeão PRINCIPAL */
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out, padding 0.3s ease-out;
+            padding-top: 0;
+            padding-bottom: 0;
+            background-color: #f0f4f8;
+        }
+
+        .accordion-content.active {
+            max-height: 20000px;
+            padding-top: 1rem;
+            padding-bottom: 1rem;
+        }
+
+        .accordion-header {
+            background-color: #f0f4f8;
+        }
+
+        .accordion-icon {
+            transition: transform 0.3s ease;
+            font-size: 1.5rem;
+            line-height: 1;
+        }
+
+        .accordion-icon.rotate {
+            transform: rotate(45deg);
+        }
+
+        /* Estilos e Transições para o SUB-ACORDEÃO (Modalidades) */
+        .sub-acordeon-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out, padding 0.3s ease-out;
+            padding-top: 0;
+            padding-bottom: 0;
+        }
+
+        .sub-acordeon-content.active {
+            max-height: 20000px;
+            padding-top: 1rem;
+            padding-bottom: 1rem;
+        }
+
+        /* Estilo para imagens no conteúdo do acordeão */
+        .content-image {
+            max-width: 100%;
+            height: auto;
+            border: 1px solid #ccc;
+            border-radius: 0.5rem;
+            margin-top: 1rem;
+            margin-bottom: 1rem;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="p-4 md:p-8">
+        <div class="max-w-4xl mx-auto bg-white rounded-xl shadow-xl p-6 md:p-10 border border-gray-200">
+            <div class="flex justify-center mb-6">
+                <img src="https://site.trt19.jus.br/portalTRT19/sites/default/files/logo-trt19.png" alt="Logo do TRT19"
+                    class="logo-trt w-auto object-contain">
+            </div>
+            <h1 class="text-3xl md:text-4xl text-center mb-6 text-[#007380]">Manual Interativo de Cálculos Trabalhistas
+            </h1>
+            <p class="text-center text-gray-600 mb-8">Um guia completo e interativo para entender os cálculos na esfera
+                judicial trabalhista.</p>
+
+            <section id="imprimir-atualizacao-content" class="content-section">
+                <h2 class="text-2xl md:text-3xl font-bold mb-4 text-[#007380]">Funcionalidade Imprimir Atualização</h2>
+                <div class="space-y-4">
+                    <p class="text-gray-700 text-justify">
+                        A função Imprimir Atualização, localizada no menu Atualização, permite gerar
+                        o relatório final do cálculo, essencial para juntada aos autos do processo (PJe).
+                        O relatório deve ser emitido após o cálculo ter sido liquidado e, se necessário,
+                        atualizado até a data-base desejada.
+                    </p>
+
+                    <h4 class="text-lg text-[#007380] font-semibold mt-4">1. Formato de Saída e Seleção dos Dados</h4>
+                    <p class="text-gray-700 text-justify">
+                        A primeira escolha é o Formato de Saída do Relatório, geralmente PDF, o mais adequado para
+                        juntada no PJe, mas o formato HTML também está disponível.
+                    </p>
+                    <p class="text-gray-700 text-justify">
+                        É possível selecionar quais informações farão parte do relatório final. Clique em "Selecionar Todos"
+                        para um relatório completo, ou marque as opções individualmente, conforme a necessidade.
+                    </p>
+                    <img src="imagens_atualizacao/imprimir_atualizacao.png"
+                        alt="Tela de Imprimir Atualização, mostrando as opções de formato (PDF/HTML) e a lista de documentos que podem ser selecionados para impressão."
+                        class="content-image max-w-3xl mx-auto">
+
+                    <h4 class="text-lg text-[#007380] font-semibold mt-4">2. Documentos Essenciais para Impressão</h4>
+                    <p class="text-gray-700 text-justify">
+                        Os documentos mais importantes para a execução são:
+                    </p>
+                    <ul class="list-disc list-inside text-gray-700 ml-4">
+                        <li>Resumo da Atualização: Apresenta o valor total liquidado, atualizado e as deduções.</li>
+                        <li>Atualização: O detalhamento da correção monetária e juros.</li>
+                        <li>Contribuição Social e Imposto de Renda: Detalhamento dos valores de encargos fiscais e previdenciários.</li>
+                        <li>Custas Judiciais: Detalhamento das custas processuais devidas.</li>
+                        <li>Critério da Atualização e Fundamentação Legal: Informa os índices e a base legal utilizados.</li>
+                    </ul>
+
+                    <p class="text-gray-700 text-justify mt-4">
+                        Após selecionar os documentos desejados, clique no botão "Imprimir" para gerar o arquivo final.
+                    </p>
+                </div>
+            </section>
+        </div>
+    </div>
+</body>
+
+</html>

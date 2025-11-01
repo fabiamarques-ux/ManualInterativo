@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adicional de Periculosidade</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f4f8;
+            color: #1a202c;
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 2rem;
+            background-color: #ffffff;
+            border-radius: 1rem;
+            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.05);
+        }
+        /* INÍCIO DO CSS ADICIONAL/ATUALIZADO PARA ESTILO (Copy) */
+        .copy-btn {
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
+            padding: 0;
+            margin-left: 0.5rem; /* Ajustado para consistência */
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .copy-btn svg {
+            width: 1.5rem;
+            height: 1.5rem;
+            fill: #00678F;
+            transition: fill 0.3s ease;
+        }
+        .copy-btn:hover svg {
+            fill: #004562;
+        }
+        .copy-message {
+            position: absolute;
+            left: 100%;
+            top: 50%;
+            transform: translate(10px, -50%);
+            background-color: #00678F;
+            color: white;
+            padding: 0.25rem 0.5rem;
+            border-radius: 0.5rem;
+            font-size: 0.75rem;
+            white-space: nowrap;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        /* FIM DO CSS ADICIONAL/ATUALIZADO PARA ESTILO (Copy) */
+        
+        .drawer-container {
+            padding: 1rem;
+            background-color: #f0f4f8;
+            border-radius: 0.75rem;
+            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+            margin-top: 1.5rem;
+        }
+        .drawer-header {
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .drawer-content {
+            overflow: hidden;
+            transition: all 0.5s ease-in-out;
+            max-height: 0;
+        }
+        .drawer-header .arrow-icon {
+            transition: transform 0.5s ease-in-out;
+        }
+        .drawer-header.active .arrow-icon {
+            transform: rotate(180deg);
+        }
+        .table-responsive {
+            overflow-x: auto;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 0.75rem;
+            text-align: left;
+            border-bottom: 1px solid #d1d5db;
+        }
+        th {
+            background-color: #00678F;
+            color: white;
+        }
+        tr:nth-child(odd) {
+            background-color: #f0f4f8;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container my-8 relative">
+        <img src="https://site.trt19.jus.br/sites/default/files/logo-trt19.png" alt="Logo do TRT19" class="absolute top-4 right-4 w-36 h-auto">
+        
+        <section id="adicional-periculosidade" class="content-section">
+            <h2 class="text-3xl font-bold text-[#00678F] mb-4">Adicional de Periculosidade</h2>
+            <p class="text-gray-700 leading-relaxed text-justify">O adicional de periculosidade é uma compensação financeira para o empregado que atua em contato permanente com atividades ou operações que apresentem risco acentuado à sua vida ou integridade física. Esse adicional está previsto no <strong>Artigo 193 da Consolidação das Leis do Trabalho (CLT)</strong> e detalhado na <strong>Norma Regulamentadora 16 (NR-16)</strong> do Ministério do Trabalho.</p>
+            <p class="text-gray-700 leading-relaxed text-justify mt-4">O cálculo do adicional de periculosidade é um <strong>percentual fixo de 30%</strong> aplicado sobre o salário-base do empregado, sem a inclusão de gratificações, prêmios ou outros adicionais. Diferentemente de outros adicionais, não existe variação de grau (mínimo, médio ou máximo), sendo sempre de 30%.</p>
+            <p class="text-gray-700 leading-relaxed text-justify mt-4">É importante não confundir periculosidade com insalubridade. A <strong>periculosidade (NR-16)</strong> está relacionada a riscos imediatos de acidentes, como explosões, incêndios, roubos ou choques elétricos. Já a <strong>insalubridade (NR-15)</strong> refere-se a condições de trabalho que podem causar danos à saúde a médio ou longo prazo, como exposição a ruído excessivo ou agentes químicos. A lei determina que o trabalhador não pode receber os dois adicionais simultaneamente, devendo optar pelo mais vantajoso, caso se enquadre em ambas as situações.</p>
+
+            <p class="text-gray-700 leading-relaxed text-justify mt-4">Abaixo está uma tabela com as atividades e operações consideradas perigosas de acordo com a NR 16, baseada na busca anterior:</p>
+            <div class="overflow-x-auto mt-4 rounded-lg shadow-md">
+                <table class="w-full text-sm text-left text-gray-700">
+                    <thead class="text-xs text-white uppercase bg-[#00678F]">
+                        <tr>
+                            <th scope="col" class="px-6 py-3 rounded-tl-lg">Tipo de Risco</th>
+                            <th scope="col" class="px-6 py-3 rounded-tr-lg">Atividades e Operações Perigosas</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="bg-white border-b border-gray-200">
+                            <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">Inflamáveis</td>
+                            <td class="px-6 py-4">Produção, transporte, manuseio e armazenamento de líquidos ou gases inflamáveis.</td>
+                        </tr>
+                        <tr class="bg-gray-50 border-b border-gray-200">
+                            <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">Explosivos</td>
+                            <td class="px-6 py-4">Armazenamento, transporte, manuseio e operação de explosivos, incluindo detonações e destruição de materiais deteriorados.</td>
+                        </tr>
+                        <tr class="bg-white border-b border-gray-200">
+                            <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">Radiações Ionizantes ou Substâncias Radioativas</td>
+                            <td class="px-6 py-4">Atividades que envolvem a exposição a essas radiações em diversos ambientes.</td>
+                        </tr>
+                        <tr class="bg-gray-50 border-b border-gray-200">
+                            <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">Segurança Pessoal ou Patrimonial</td>
+                            <td class="px-6 py-4">Atividades de profissionais expostos a roubos ou outras formas de violência física, como seguranças ou vigilantes.</td>
+                        </tr>
+                        <tr class="bg-white border-b border-gray-200">
+                            <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">Energia Elétrica</td>
+                            <td class="px-6 py-4">Trabalhos em instalações ou equipamentos elétricos energizados em alta tensão.</td>
+                        </tr>
+                        <tr class="bg-gray-50 border-b border-gray-200">
+                            <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">Motocicleta</td>
+                            <td class="px-6 py-4">Atividades que exigem o uso de motocicleta ou motoneta para o deslocamento em vias públicas.</td>
+                        </tr>
+                        <tr class="bg-white">
+                            <td class="px-6 py-4 font-medium text-gray-900 whitespace-now-wrap">Agentes de Trânsito</td>
+                            <td class="px-6 py-4">Atividades de fiscalização, abordagem e controle de tráfego que expõem o profissional a riscos de colisões, atropelamentos e violência.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <div id="base-legal-jurisprudencia-drawer" class="drawer-container">
+                <div id="base-legal-jurisprudencia-header" class="drawer-header">
+                    <h4 class="text-xl font-semibold text-[#00678F]">Base Legal e Jurisprudência</h4>
+                    <svg class="arrow-icon w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                    </svg>
+                </div>
+                <div id="base-legal-jurisprudencia-content" class="drawer-content">
+                    <p class="text-gray-700 leading-relaxed text-justify mt-4">O direito ao recebimento do Adicional de Periculosidade tem por base a legislação e os entendimentos a seguir:</p>
+
+                    <h5 class="text-lg font-semibold text-gray-800 mt-4">Fontes Normativas</h5>
+                    <hr class="my-4 border-gray-300">
+
+                    <h5 class="text-base font-semibold text-gray-800">Consolidação das Leis do Trabalho (CLT) - Art. 193:</h5>
+                    <ul class="list-disc list-inside text-gray-700 leading-relaxed mt-2 ml-4 space-y-3">
+                        <li><strong>Direito ao Adicional:</strong>
+                            <p class="text-sm italic mt-1 ml-4 border-l-2 border-gray-400 pl-3">Estabelece o direito ao adicional de periculosidade para empregados expostos a condições de risco acentuado à vida ou integridade física.</p>
+                        </li>
+                        <li><strong>Percentual Fixo:</strong>
+                            <p class="text-sm italic mt-1 ml-4 border-l-2 border-gray-400 pl-3">Define o percentual fixo de 30% sobre o salário-base.</p>
+                        </li>
+                    </ul>
+                    
+
+                    <hr class="my-4 border-gray-300">
+                    <h5 class="text-base font-semibold text-gray-800">Norma Regulamentadora nº 16 (NR 16):</h5>
+                    <ul class="list-disc list-inside text-gray-700 leading-relaxed mt-2 ml-4 space-y-3">
+                        <li><strong>Regulamentação:</strong>
+                            <p class="text-sm italic mt-1 ml-4 border-l-2 border-gray-400 pl-3">É a norma técnica que detalha e classifica as atividades e operações consideradas perigosas para fins de concessão do adicional.</p>
+                        </li>
+                    </ul>
+                    
+
+                    <hr class="my-6 border-gray-300">
+
+                    <h5 class="text-lg font-semibold text-gray-800">Jurisprudência Consolidada</h5>
+
+                    <h6 class="text-base font-semibold text-gray-800 mt-4">Súmula 364 do TST</h6>
+                    <div class="p-4 bg-gray-100 rounded-md mt-2 border border-gray-300">
+                        <p class="font-bold text-sm">Tese (Exposição Intermitente):</p>
+                        <p class="text-sm mt-1 italic">Considera devido o adicional quando a exposição ao risco, ainda que não seja permanente, seja habitual e cause risco de dano grave, como no caso de eletricitários que, de forma intermitente, ingressam na área de risco.</p>
+                    </div>
+                    
+
+                    <h6 class="text-base font-semibold text-gray-800 mt-6">Súmula 132 do TST</h6>
+                    <div class="p-4 bg-gray-100 rounded-md mt-2 border border-gray-300">
+                        <p class="font-bold text-sm">Tese (Base de Cálculo):</p>
+                        <p class="text-sm mt-1 italic">O adicional de periculosidade integra a remuneração para todos os efeitos, mas é calculado apenas sobre o salário-base, sem a inclusão de gratificações, prêmios ou participações nos lucros da empresa.</p>
+                    </div>
+                    
+                    
+                    <h6 class="text-base font-semibold text-gray-800 mt-6">OJ 324 da SDI-1 do TST</h6>
+                    <div class="p-4 bg-gray-100 rounded-md mt-2 border border-gray-300">
+                        <p class="font-bold text-sm">Tese (Energia Elétrica):</p>
+                        <p class="text-sm mt-1 italic">O adicional de periculosidade é devido a empregados que trabalham em contato com sistema elétrico de potência, mesmo que em unidade consumidora, e que realizam atividades ou operações no sistema elétrico predial.</p>
+                    </div>
+                    
+                </div>
+            </div>
+            <div id="base-calculo-drawer" class="drawer-container">
+                <div id="base-calculo-header" class="drawer-header">
+                    <h4 class="text-xl font-semibold text-[#00678F]">Base de Cálculo e Deduções</h4>
+                    <svg class="arrow-icon w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                    </svg>
+                </div>
+                <div id="base-calculo-content" class="drawer-content">
+                    <p class="text-gray-700 leading-relaxed text-justify mt-4">A base de cálculo do adicional de periculosidade é o <strong>salário base do empregado</strong>, <strong>excluindo gratificações, prêmios ou participações nos lucros da empresa</strong>. Este conceito é fundamental, pois o cálculo não incide sobre o valor total da remuneração, mas apenas sobre a parcela fixa do salário.</p>
+                    <p class="text-gray-700 leading-relaxed text-justify mt-4">O <strong>salário base</strong> refere-se ao valor fixo mensal acordado no contrato de trabalho, sem qualquer acréscimo de outras verbas. Ou seja, não são incluídas parcelas como horas extras, comissões, adicionais noturnos ou de insalubridade, dentre outras.</p>
+                    <p class="text-gray-700 leading-relaxed text-justify mt-4"><strong>Exemplo de Cálculo do Adicional:</strong> Se um trabalhador tem um salário base de R$ 3.000,00, o cálculo do adicional de periculosidade será:</p>
+                    <div class="mt-2 p-4 bg-gray-100 rounded-md">
+                        <p class="font-mono text-sm">R$ 3.000,00 (Salário Base) x 30% = R$ 900,00</p>
+                        <p class="font-mono text-sm mt-1">Valor do Adicional de Periculosidade: R$ 900,00</p>
+                    </div>
+                    
+                    <h5 class="text-lg font-semibold text-gray-800 mt-6">Deduções da Base de Cálculo</h5>
+                    <p class="text-gray-700 leading-relaxed text-justify mt-4">Sobre o valor do adicional de periculosidade incidem as deduções legais, como a contribuição para o <strong>INSS (Instituto Nacional do Seguro Social)</strong> e o <strong>Imposto de Renda (IRPF)</strong>. Essas deduções são aplicadas de acordo com as tabelas progressivas vigentes, sendo calculadas sobre o valor total da remuneração, que inclui o salário base e o adicional.</p>
+                    <p class="text-gray-700 leading-relaxed text-justify mt-4"><strong>Exemplo de Base de Cálculo para Deduções:</strong> Considerando o salário base de R$ 3.000,00 e o adicional de R$ 900,00:</p>
+                    <ul class="list-disc list-inside mt-2 p-4 bg-gray-100 rounded-md">
+                        <li><strong>Remuneração total:</strong> R$ 3.000,00 + R$ 900,00 = R$ 3.900,00</li>
+                        <li>As alíquotas de INSS e IRPF incidirão sobre a remuneração total de R$ 3.900,00, e não apenas sobre o adicional de periculosidade.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div id="verbas-reflexas-drawer" class="drawer-container">
+                <div id="verbas-reflexas-header" class="drawer-header">
+                    <h4 class="text-xl font-semibold text-[#00678F]">Verbas Reflexas</h4>
+                    <svg class="arrow-icon w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                    </svg>
+                </div>
+                <div id="verbas-reflexas-content" class="drawer-content">
+                    <p class="text-gray-700 leading-relaxed text-justify mt-4">O Adicional de Periculosidade, por possuir **natureza salarial** (Art. 193 da CLT e Súmula 132 do TST), integra a remuneração para todos os efeitos legais, gerando reflexos nas verbas abaixo. O adicional deverá ser pago integralmente se o contato com o agente perigoso for habitual ou intermitente, nos termos da Súmula 364 do TST.</p>
+                    <p class="text-gray-700 leading-relaxed text-justify mt-2">O cálculo dos reflexos é feito pela integração do adicional ao salário-base, resultando na **remuneração completa** que serve como base de cálculo das verbas. (Ex: Salário-Base + 30% de Periculosidade).</p>
+
+                    <table
+                        class="w-full mt-4 text-sm text-gray-700 border-collapse border border-gray-300 rounded-md overflow-hidden">
+                        <thead>
+                            <tr class="bg-gray-200">
+                                <th class="py-2 px-4 text-left border-b border-gray-300 w-1/3">Verba Trabalhista</th>
+                                <th class="py-2 px-4 text-left border-b border-gray-300 w-2/3">Reflexo do Adicional de Periculosidade</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="border-b border-gray-300">
+                                <td class="py-2 px-4 font-medium">13º Salário</td>
+                                <td class="py-2 px-4">Integra a base de cálculo do 13º Salário (integral e proporcional), computando-se o adicional pago em cada mês do ano.</td>
+                            </tr>
+                            <tr class="border-b border-gray-300">
+                                <td class="py-2 px-4 font-medium">Férias + 1/3</td>
+                                <td class="py-2 px-4">Integra a base de cálculo das Férias (vencidas e proporcionais) e o adicional constitucional de 1/3.</td>
+                            </tr>
+                            <tr class="border-b border-gray-300">
+                                <td class="py-2 px-4 font-medium">Aviso Prévio</td>
+                                <td class="py-2 px-4">Integra a base de remuneração para cálculo do Aviso Prévio (trabalhado ou indenizado).</td>
+                            </tr>
+                            <tr class="border-b border-gray-300">
+                                <td class="py-2 px-4 font-medium">FGTS (Depósito Mensal e Multa)</td>
+                                <td class="py-2 px-4">Incide sobre o valor do adicional, compondo a base de cálculo para o depósito mensal de 8% e para a Multa de 40% (Súmula 63 do TST).</td>
+                            </tr>
+                            <tr>
+                                <td class="py-2 px-4 font-medium">Horas Extras</td>
+                                <td class="py-2 px-4">Integra o salário-hora para fins de cálculo de Horas Extras e Adicional Noturno, aumentando o valor da hora normal (Súmula 264 do TST).</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <hr class="my-4 border-gray-300">
+                    <p class="text-gray-700 leading-relaxed text-justify mt-2"><strong>Importante:</strong> O Adicional de Periculosidade não é devido durante afastamentos por acidente de trabalho ou doença ocupacional, se houver suspensão do contrato de trabalho (diferente do Adicional de Insalubridade, que pode ser devido em alguns casos de afastamento).</p>
+                </div>
+            </div>
+            <div id="calculadora-periculosidade-drawer" class="drawer-container">
+                <div id="calculadora-periculosidade-header" class="drawer-header">
+                    <h4 class="text-xl font-semibold text-[#00678F]">Calculadora (Simulação)</h4>
+                    <svg class="arrow-icon w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                    </svg>
+                </div>
+                <div id="calculadora-periculosidade-content" class="drawer-content">
+                    <p class="text-gray-700 leading-relaxed text-justify mt-4">Utilize esta ferramenta para calcular o valor do seu adicional de periculosidade.</p>
+                    
+                    <div class="p-4 bg-white rounded-lg shadow-inner mt-4">
+                        <h5 class="text-md font-semibold text-gray-800">Cálculo Simples</h5>
+                        <p class="text-gray-600 text-sm mb-2">Informe o salário base. O adicional é de 30%.</p>
+                        <div class="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4">
+                            <div class="flex-1">
+                                <label for="salarioBaseInput" class="block text-sm text-gray-700">Salário Base (R$):</label>
+                                <input type="text" id="salarioBaseInput" class="mt-1 block w-full rounded-md border-gray-300 p-2 focus:ring-[#00678F] focus:border-[#00678F]">
+                            </div>
+                            <div class="flex-1">
+                                <label for="periculosidadePercentual" class="block text-sm text-gray-700">Percentual:</label>
+                                <div class="mt-1 block w-full rounded-md border-gray-300 p-2 text-gray-500 bg-gray-100 cursor-not-allowed">30% (Fixo)</div>
+                            </div>
+                        </div>
+                        <button id="calculatePericulosidadeBtn" class="mt-4 w-full px-4 py-2 bg-[#00678F] text-white rounded-md hover:bg-[#004562] transition duration-300 shadow-md">Calcular Adicional</button>
+                        <div class="mt-4">
+                            <div class="flex items-center">
+                                <p id="periculosidadeResult" class="text-sm text-gray-700"></p>
+                                <button id="copyPericulosidade" class="copy-btn hidden" title="Copiar valor">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="pje-calc-drawer" class="drawer-container">
+                <div id="pje-calc-header" class="drawer-header">
+                    <h4 class="text-xl font-semibold text-[#00678F]">Lançamento no PJe-Calc </h4>
+                    <svg class="arrow-icon w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                    </svg>
+                </div>
+                <div id="pje-calc-content" class="drawer-content">
+                    <p class="text-gray-700 leading-relaxed text-justify mt-4">A seguir, confira o passo a passo para o
+                        lançamento da verba no PJe-Calc, utilizando a opção "Expresso":</p>
+
+                    <ol class="list-decimal list-inside text-gray-700 leading-relaxed mt-4 ml-4 space-y-3">
+                        <li>
+                            <strong class="text-gray-800">Acessar Verbas e Escolher Lançamento:</strong> No menu de
+                            navegação à esquerda, clique na opção <u>Verbas</u> para iniciar o lançamento. Após o
+                            comando,
+                            será exibida a tela para escolha do Lançamento da Verba. Escolha a opção <u>Expresso</u>.
+                            <img src="imagens_direitos/verbas.png"
+                                alt="Tela do PJe-Calc - Passo 1: Acessar a opção Verbas no menu lateral e clicar em Expresso na seção Lançamento."
+                                class="w-full h-auto my-4 rounded-lg shadow-md">
+                        </li>
+                        <li>
+                            <strong class="text-gray-800">Seleção da Verba:</strong> O sistema abrirá as opções de
+                            verbas, escolha a verba <u>Adicional de Periculosidade 30%</u> e clique no botão <u>Salvar</u>
+                            <img src="imagens_direitos/adicionalpericulosidade1.png"
+                                alt="Tela do PJe-Calc - Verbas Principais: Selecionar Saldo de Salário"
+                                class="w-full h-auto my-4 rounded-lg shadow-md">
+                        </li>
+                        <li>
+                            <strong class="text-gray-800">Quadro de Verbas e Ações:</strong> O sistema exibirá um quadro
+                            com os campos:
+                            <ul class="list-disc list-inside text-gray-700 leading-relaxed mt-2 ml-4">
+                                <li class="ml-8 flex items-center">
+                                <li>Ações - contendo as opções de configurações da verba selecionada (parâmetros,
+                                    ocorrências e
+                                    exclusão)
+                                    <img src="imagens_direitos/telaacoes.png"
+                                        alt="Ícones de Ações: Parâmetros (folha com seta), Ocorrências (folha com checks), Excluir (X vermelho)"
+                                        class="icon-small" style="width: 72px; height: auto;">
+                                </li>
+                                <li class="ml-8 flex items-center">
+                                    - Parâmetros da Verba <img src="imagens_direitos/telaparametros.png"
+                                        alt="Ícone de Parâmetros" class="icon-small">
+                                </li>
+                                <li class="ml-8 flex items-center">
+                                    - Ocorrências da Verba <img src="imagens_direitos/telaocorrencias.png"
+                                        alt="Ícone de Ocorrências" class="icon-small">
+                                </li>
+                                <li class="ml-8 flex items-center">
+                                    - Excluir <img src="imagens_direitos/telaexcluir.png" alt="Ícone de Excluir"
+                                        class="icon-small">
+                                </li>
+                                <li>Verba Principal - verba selecionada para lançamento.</li>
+                                <li>Verba Reflexa - em que ao clicar no botão <u>Exibir</u> serão listadas todas as
+                                    verbas
+                                    reflexas ligadas a Verba Principal.</li>
+                            </ul>
+                            <img src="imagens_direitos/adicionalpericulosidade2.png"
+                                alt="Tela do PJe-Calc - Verba Saldo de Salário selecionada com as opções de Ações e Verba Reflexa."
+                                class="w-full h-auto my-4 rounded-lg shadow-md">
+                        </li>
+                        <li>
+                            <strong class="text-gray-800">Parametrização da Verba:</strong> Ao clicar no botão
+                            <u>Parâmetros da Verba</u> serão exibidas todas as configurações necessárias para a
+                            parametrização
+                            da Verba Principal.
+                            <img src="imagens_direitos/adicionalpericulosidade3.png"
+                                alt="Tela do PJe-Calc - Detalhes da Verba Saldo de Salário: Parâmetros, Base de Cálculo, Divisor e Multiplicador."
+                                class="w-full h-auto my-4 rounded-lg shadow-md">
+                        </li>
+                        <li>
+                            <strong class="text-gray-800">Registro de Ocorrências:</strong> Ao clicar no botão
+                            <u>Ocorrências da Verba</u> serão exibidas todas as configurações necessárias para registro
+                            das
+                            ocorrências da Verba Principal.
+                            <img src="imagens_direitos/adicionalpericulosidade4.png"
+                                alt="Tela do PJe-Calc - Dados de Ocorrências: Detalhamento da data inicial, data final e valor calculado da verba."
+                                class="w-full h-auto my-4 rounded-lg shadow-md">
+                        </li>
+                    </ol>
+
+                </div>
+
+        </section>
+    </div>
+
+
+    <script>
+        // Função para copiar o texto de um elemento com feedback visual
+        function copyTextFromElement(elementId, buttonElement) {
+            const element = document.getElementById(elementId);
+            if (!element) return;
+            let textToCopy = element.textContent.replace('...', ''); // Remove '...' se houver
+
+            // Se for o resultado da calculadora, copia apenas o valor monetário.
+            if (elementId === 'periculosidadeResult') {
+                const match = element.textContent.match(/R\$\s*([\d\.,]+)/);
+                if (match) {
+                    textToCopy = match[0].trim();
+                } else {
+                    textToCopy = element.textContent.trim();
+                }
+            }
+
+            const tempInput = document.createElement('input');
+            tempInput.value = textToCopy;
+            document.body.appendChild(tempInput);
+            tempInput.select();
+            
+            try {
+                document.execCommand('copy');
+                // Criar e exibir a mensagem de sucesso
+                const message = document.createElement('span');
+                message.textContent = 'Copiado!';
+                message.className = 'copy-message';
+                
+                // Anexar a mensagem ao contêiner pai do botão de cópia
+                const parent = buttonElement.parentElement;
+                
+                // Posicionamento ajustado
+                message.style.position = 'absolute';
+                message.style.left = 'calc(100% + 10px)';
+                message.style.top = '50%';
+                
+                
+                parent.appendChild(message);
+                
+                // Animar e remover a mensagem após 1 segundo
+                setTimeout(() => {
+                    message.style.opacity = '1';
+                }, 10);
+                setTimeout(() => {
+                    message.style.opacity = '0';
+                    setTimeout(() => message.remove(), 300);
+                }, 1000);
+
+            } catch (err) {
+                console.error('Falha ao copiar o texto:', err);
+            } finally {
+                document.body.removeChild(tempInput);
+            }
+        }
+    
+        // Função para formatar o valor do salário conforme o usuário digita
+        function formatSalarioInput() {
+            const salarioBaseInput = document.getElementById('salarioBaseInput');
+            if (salarioBaseInput) {
+                salarioBaseInput.addEventListener('input', (e) => {
+                    let value = e.target.value;
+                    // Remove todos os caracteres que não sejam dígitos
+                    value = value.replace(/\D/g, '');
+                    
+                    // Formata com vírgula para centavos e pontos para milhares
+                    if (value.length > 2) {
+                        value = value.replace(/(\d+)(\d{2})$/, '$1,$2');
+                    }
+                    if (value.length > 6) {
+                        value = value.replace(/(\d)(?=(\d{3})+,)/g, '$1.');
+                    }
+                    e.target.value = value;
+                });
+            }
+        }
+        
+        // Chamada da função de formatação
+        formatSalarioInput();
+
+        // Função para calcular o adicional de periculosidade
+        function calculatePericulosidade() {
+            const salarioBaseInput = document.getElementById('salarioBaseInput');
+            const resultDiv = document.getElementById('periculosidadeResult');
+            const copyBtn = document.getElementById('copyPericulosidade');
+
+            // Substitui pontos por nada e vírgula por ponto para parsear como float
+            const rawSalarioBase = salarioBaseInput.value.replace(/\./g, '').replace(',', '.');
+            const salarioBase = parseFloat(rawSalarioBase);
+            const percentual = 0.30; // Fixo para adicional de periculosidade
+
+            if (isNaN(salarioBase) || salarioBase <= 0) {
+                resultDiv.textContent = 'Por favor, insira um salário base válido.';
+                copyBtn.classList.add('hidden');
+                return;
+            }
+
+            const valorAdicional = salarioBase * percentual;
+            
+            // Define o resultado formatado para Real Brasileiro
+            resultDiv.textContent = `Valor do Adicional de Periculosidade: ${valorAdicional.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}`;
+            copyBtn.classList.remove('hidden');
+        }
+
+        // Adiciona os event listeners aos botões
+        document.getElementById('calculatePericulosidadeBtn').addEventListener('click', calculatePericulosidade);
+        
+        // Atualiza o listener para usar a nova função copyTextFromElement com feedback
+        const copyPericBtn = document.getElementById('copyPericulosidade');
+        if (copyPericBtn) {
+            copyPericBtn.addEventListener('click', (e) => {
+                copyTextFromElement('periculosidadeResult', e.currentTarget);
+            });
+        }
+        
+        // Lógica para as gavetas expansíveis
+        function setupDrawer(drawerId) {
+            const header = document.getElementById(`${drawerId}-header`);
+            const content = document.getElementById(`${drawerId}-content`);
+            if (header && content) {
+                header.addEventListener('click', () => {
+                    const isExpanded = header.classList.toggle('active');
+                    if (isExpanded) {
+                        // Calcula a altura do conteúdo com margem de segurança
+                        content.style.maxHeight = content.scrollHeight + 30 + "px"; 
+                    } else {
+                        // Redefine maxHeight para zero para fechar a gaveta
+                        content.style.maxHeight = '0';
+                    }
+                });
+            }
+        }
+
+        // Configuração das gavetas 
+        setupDrawer('base-legal-jurisprudencia');
+        setupDrawer('base-calculo'); // Contém Base de Cálculo e Deduções
+        setupDrawer('verbas-reflexas'); 
+        setupDrawer('calculadora-periculosidade');
+        setupDrawer('pje-calc');
+    </script>
+</body>
+</html>

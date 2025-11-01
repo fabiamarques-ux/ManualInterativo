@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multa do Artigo 477 da CLT</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f4f8;
+            color: #1a202c;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 2rem;
+            background-color: #ffffff;
+            border-radius: 1rem;
+            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.05);
+        }
+
+        .loading-spinner {
+            border: 4px solid rgba(0, 103, 143, 0.1);
+            border-top: 4px solid #00678F;
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            animation: spin 1s linear infinite;
+            margin-right: 0.5rem;
+            display: none;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        .drawer-container {
+            padding: 1rem;
+            background-color: #f0f4f8;
+            border-radius: 0.75rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+            margin-top: 1.5rem;
+        }
+
+        .drawer-header {
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .drawer-content {
+            overflow: hidden;
+            transition: all 0.5s ease-in-out;
+            max-height: 0;
+        }
+
+        .drawer-header .arrow-icon {
+            transition: transform 0.5s ease-in-out;
+        }
+
+        .drawer-header.active .arrow-icon {
+            transform: rotate(180deg);
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container my-8 relative">
+        <img src="https://site.trt19.jus.br/sites/default/files/logo-trt19.png" alt="Logo do TRT19"
+            class="absolute top-4 right-4 w-36 h-auto">
+
+        <section id="multa-477" class="content-section">
+            <h2 class="text-3xl font-bold text-[#00678F] mb-4">Multa do Artigo 477 da CLT</h2>
+            <p class="text-gray-700 leading-relaxed text-justify">A multa prevista no Art. 477, § 8º, da Consolidação
+                das Leis do Trabalho (CLT) é uma penalidade aplicada ao empregador que atrasar o pagamento das verbas
+                rescisórias, o que inclui a não entrega dos documentos de rescisão nos prazos legais. A infração do
+                prazo estabelecido no § 6º do mesmo artigo sujeita o empregador a pagar, a favor do empregado, uma
+                multa em valor equivalente ao seu salário.</p>
+
+            <div class="mt-4 p-4 bg-gray-100 rounded-lg border border-gray-300">
+                <h3 class="text-xl font-bold text-gray-800 mb-2">Base Legal e Fato Gerador</h3>
+                <p class="text-gray-700 leading-relaxed text-justify mt-2"><strong>CLT - Art. 477, § 6º e § 8º:</strong>
+                </p>
+                <ul class="list-disc list-inside text-gray-700 leading-relaxed pl-4">
+                    <li>O prazo para pagamento das verbas rescisórias e entrega dos documentos é de 10 (dez)
+                        dias contados a partir do término do contrato (incluindo o aviso prévio, trabalhado ou
+                        indenizado).</li>
+                    <li>O fato gerador da multa é o mero descumprimento do prazo do § 6º. A multa equivale a um
+                        salário do empregado, devidamente corrigido.</li>
+                    <li>Exceção à Multa: A multa não será aplicada quando, comprovadamente, o trabalhador der causa
+                        à mora, por exemplo, não comparecendo para receber ou assinar a documentação.</li>
+                </ul>
+                <p class="text-gray-700 leading-relaxed text-justify mt-4">Em resumo, trata-se de uma penalidade de
+                    natureza indenizatória, que visa punir o empregador pela mora no acerto final. O valor é fixo e
+                    corresponde ao último salário do empregado.</p>
+            </div>
+
+            <div id="equip-salarial-drawer" class="drawer-container">
+                <div id="equip-salarial-header" class="drawer-header">
+                    <h4 class="text-xl font-semibold text-[#00678F]">Base Legal e Jurisprudência</h4>
+                    <svg class="arrow-icon w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                    </svg>
+                </div>
+                <div id="equip-salarial-content" class="drawer-content">
+                    <p class="text-gray-700 leading-relaxed text-justify mt-4">O direito à Multa do Art. 477 da CLT é
+                        fundamentado na legislação e consolidado pela jurisprudência do Tribunal Superior do Trabalho
+                        (TST), focando no prazo de pagamento e na base de cálculo da penalidade.</p>
+                    <h5 class="text-lg font-semibold text-gray-800 mt-4">Fontes Normativas (CLT)</h5>
+
+                    <hr class="my-4 border-gray-300">
+                    <h5 class="text-base font-semibold text-gray-800">Consolidação das Leis do Trabalho (CLT):</h5>
+                    <ul class="list-disc list-inside text-gray-700 leading-relaxed mt-2 ml-4">
+                        <li><strong>Art. 477, § 6º (Prazo):</strong>
+                            <p class="text-sm italic mt-1 ml-4 border-l-2 border-gray-400 pl-3">A entrega ao empregado
+                                de
+                                documentos que comprovem a comunicação da extinção contratual aos órgãos competentes e o
+                                pagamento dos valores constantes do instrumento de rescisão ou recibo de quitação
+                                deverão
+                                ser efetuados até dez dias contados a partir do término do contrato.</p>
+                        </li>
+                        <li><strong>Art. 477, § 8º (Penalidade):</strong>
+                            <p class="text-sm italic mt-1 ml-4 border-l-2 border-gray-400 pl-3">A inobservância ao
+                                disposto no
+                                § 6º deste artigo sujeitará o infrator a pagar ao trabalhador uma multa, a favor do
+                                empregado, em valor equivalente ao seu salário, devidamente corrigido pelo índice
+                                oficial
+                                de inflação.</p>
+                        </li>
+                    </ul>
+
+                    <hr class="my-6 border-gray-300">
+
+                    <h5 class="text-lg font-semibold text-gray-800">Jurisprudência (Súmulas e Orientações
+                        Jurisprudenciais do TST)</h5>
+
+                    <h6 class="text-base font-semibold text-gray-800 mt-4">Fato Gerador da Multa</h6>
+                    <div class="p-4 bg-gray-100 rounded-md mt-2 border border-gray-300">
+                        <p class="font-bold text-sm">Súmula nº 330, II, do TST (Valor Base):</p>
+                        <p class="text-sm mt-1 italic">"O valor a ser considerado para a multa a que se refere o § 8º do
+                            art. 477 da CLT é o maior salário contratual (remuneração)."</p>
+                        <p class="font-bold text-sm mt-3">Súmula nº 387, TST (Mora):</p>
+                        <p class="text-sm mt-1 italic">O simples ajuizamento de ação judicial por parte do empregado
+                            para questionar o valor ou a natureza de verbas rescisórias não afasta, por si só, a
+                            incidência da multa do art. 477, § 8º, da CLT, exceto se comprovada a mora do empregado.</p>
+                    </div>
+
+                    <h6 class="text-base font-semibold text-gray-800 mt-6">Controvérsias e Exceções</h6>
+                    <div class="p-4 bg-gray-100 rounded-md mt-2 border border-gray-300">
+                        <p class="font-bold text-sm">Súmula nº 405 do STJ (Antiga Lei 7.855/89):</p>
+                        <p class="text-sm mt-1 italic">A Súmula do STJ (e o entendimento consolidado na Justiça do
+                            Trabalho) estabelece que a multa não é devida quando o empregado é quem dá causa ao atraso
+                            no recebimento das verbas rescisórias (ex.: ausência injustificada no ato da homologação,
+                            etc.).</p>
+                    </div>
+                </div>
+            </div>
+            <div id="calculo-deducoes-drawer" class="drawer-container">
+                <div id="calculo-deducoes-header" class="drawer-header">
+                    <h4 class="text-xl font-semibold text-[#00678F]">Base de Cálculo e Deduções</h4>
+                    <svg class="arrow-icon w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                    </svg>
+                </div>
+                <div id="calculo-deducoes-content" class="drawer-content">
+
+                    <div class="p-3 mt-2 mb-4 bg-yellow-50 border-l-4 border-yellow-500 rounded-r-md">
+                        <p class="text-gray-900 leading-relaxed text-justify font-medium">
+                            IMPORTANTE: A Multa do Art. 477 tem natureza indenizatória. Por isso, não há
+                            incidência de Imposto de Renda Retido na Fonte (IRRF) ou contribuição para o Instituto
+                            Nacional do Seguro Social (INSS).
+                        </p>
+                    </div>
+
+                    <hr class="mb-6 mt-0 border-[#00678F]">
+                    <h4 class="text-xl font-semibold text-[#00678F]">Definição do Valor</h4>
+                    <p class="text-gray-700 leading-relaxed text-justify mt-2">
+                        O valor da multa é equivalente a um mês de salário do empregado, conforme Súmula 330, II, do
+                        TST, que considera o maior salário contratual.
+                    </p>
+                    <p class="text-gray-700 leading-relaxed text-justify mt-2">
+                        O cálculo é direto: o último salário (remuneração) que serviu de base para a rescisão é o valor
+                        da multa.
+                    </p>
+
+                    <h6 class="text-lg font-bold text-[#00678F] mt-4">Composição do Salário Base:</h6>
+
+                    <p class="text-gray-700 leading-relaxed text-justify mt-2">
+                        O salário deve ser entendido em seu sentido mais amplo (Remuneração), incluindo:
+                    </p>
+
+                    <ul class="list-disc list-inside text-gray-700 leading-relaxed mt-2 pl-4 space-y-2">
+                        <li>Salário Base.
+                        </li>
+                        <li>Comissões, gratificações, ou adicionais habituais (como horas extras, adicional noturno,
+                            insalubridade, etc.).</li>
+                    </ul>
+
+                    <hr class="my-4 border-gray-300">
+                    <h5 class="text-lg font-semibold text-gray-800 mt-4">Exemplo Prático (Valor Bruto)</h5>
+                    <p class="text-gray-700 leading-relaxed text-justify mt-2">Se a última remuneração do empregado foi
+                        de R$ 2.500,00, este será o valor da multa:</p>
+                    <hr class="my-4 border-gray-300">
+                    <p class="text-gray-700 leading-relaxed text-justify mt-2">Remuneração Média (Salário) do Empregado:
+                        R$ 2.500,00
+                    </p>
+                    <p class="text-gray-700 mt-2 font-semibold">Valor da Multa do Art. 477 da CLT = R$ 2.500,00</p>
+                    <p class="text-gray-700 leading-relaxed text-justify mt-2">Dessa forma, o valor da multa é R$
+                        2.500,00, sem aplicação de descontos obrigatórios (INSS e IRRF).
+                    </p>
+                    <hr class="my-4 border-gray-300">
+                    <table
+                        class="w-full mt-4 text-sm text-gray-700 border-collapse border border-gray-300 rounded-md overflow-hidden">
+                        <thead>
+                            <tr class="bg-gray-200">
+                                <th class="py-2 px-4 text-left border-b border-gray-300">Item</th>
+                                <th class="py-2 px-4 text-left border-b border-gray-300">Valor</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="border-b border-gray-300">
+                                <td class="py-2 px-4">Salário/Remuneração Base</td>
+                                <td class="py-2 px-4">R$ 2.500,00</td>
+                            </tr>
+                            <tr class="border-b border-gray-300">
+                                <td class="py-2 px-4">Dedução INSS e IRPF</td>
+                                <td class="py-2 px-4">R$ 0,00</td>
+                            </tr>
+                            <tr>
+                                <td class="py-2 px-4 font-bold bg-gray-100">Valor Líquido da Multa</td>
+                                <td class="py-2 px-4 font-bold bg-gray-100">R$ 2.500,00</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+
+
+            <div id="calculadora-drawer" class="drawer-container">
+                <div id="calculadora-header" class="drawer-header">
+                    <h4 class="text-xl font-semibold text-[#00678F]">Calculadora (Simulação)</h4>
+                    <svg class="arrow-icon w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path>
+                    </svg>
+                </div>
+                <div id="calculadora-content" class="drawer-content">
+                    <p class="text-gray-700 leading-relaxed text-justify mt-4">Utilize esta ferramenta para estimar o
+                        valor da Multa do Art. 477 da CLT, que é equivalente a um salário do empregado.</p>
+                    <div class="mt-4 grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="md:col-span-2">
+                            <label for="seu-salario" class="block text-sm font-medium text-gray-700">Seu Último
+                                Salário/Remuneração (R$)</label>
+                            <input type="number" id="seu-salario"
+                                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-2" placeholder="0.00">
+                        </div>
+                        <div class="hidden">
+                            <input type="number" id="salario-paradigma" value="0">
+                        </div>
+                        <div class="hidden">
+                            <input type="number" id="periodo" value="1">
+                        </div>
+
+                    </div>
+                    <button id="calcular-btn"
+                        class="mt-4 w-full px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 transition duration-300 shadow-md">
+                        Calcular Multa 477
+                    </button>
+                    <div id="resultado-calculadora" class="mt-4 p-4 bg-white rounded-lg border border-gray-200">
+                        <h5 class="text-lg font-semibold text-gray-800">Resultados:</h5>
+                        <p id="diferenca-mensal" class="text-gray-700 mt-2">Valor da Multa: R$ 0,00</p>
+                        <p id="diferenca-total" class="text-gray-700 hidden">Diferença Total: R$ 0,00</p>
+                    </div>
+                </div>
+            </div>
+
+            <div id="pje-calc-drawer" class="drawer-container">
+                <div id="pje-calc-header" class="drawer-header">
+                    <h4 class="text-xl font-semibold text-[#00678F]">Lançamento no PJe-Calc</h4>
+                    <svg class="arrow-icon w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                    </svg>
+                </div>
+                <div id="pje-calc-content" class="drawer-content">
+                    <p class="text-gray-700 leading-relaxed text-justify mt-4">A seguir, confira o passo a passo para o
+                        lançamento da verba MULTA DO ARTIGO 477 DA CLT no PJe-Calc, utilizando a opção "Expresso":
+                    </p>
+
+                    <ol class="list-decimal list-inside text-gray-700 leading-relaxed mt-4 ml-4 space-y-3">
+                        <li>
+                            <strong class="text-gray-800">Acessar Verbas e Escolher Lançamento:</strong> No menu de
+                            navegação à esquerda, clique na opção <u>Verbas</u> para iniciar o lançamento. Após o
+                            comando,
+                            será exibida a tela para escolha do Lançamento da Verba. Escolha a opção <u>Expresso</u>.
+                            <img src="imagens_direitos/verbas.png"
+                                alt="Tela do PJe-Calc - Passo 1: Acessar a opção Verbas no menu lateral e clicar em Expresso na seção Lançamento."
+                                class="w-full h-auto my-4 rounded-lg shadow-md">
+                        </li>
+                        <li>
+                            <strong class="text-gray-800">Seleção da Verba:</strong> O sistema abrirá as opções de
+                            verbas, escolha a verba <u>Multa do Artigo 477 da CLT</u> e clique no botão <u>Salvar</u>
+                            <img src="imagens_direitos/multa477.1.png"
+                                alt="Tela do PJe-Calc - Verbas Principais: Selecionar Saldo de Salário"
+                                class="w-full h-auto my-4 rounded-lg shadow-md">
+                        </li>
+                        <li>
+                            <strong class="text-gray-800">Quadro de Verbas e Ações:</strong> O sistema exibirá um quadro
+                            com os campos:
+                            <ul class="list-disc list-inside text-gray-700 leading-relaxed mt-2 ml-4">
+                                <li class="ml-8 flex items-center">
+                                <li>Ações - contendo as opções de configurações da verba selecionada (parâmetros,
+                                    ocorrências e
+                                    exclusão)
+                                    <img src="imagens_direitos/telaacoes.png"
+                                        alt="Ícones de Ações: Parâmetros (folha com seta), Ocorrências (folha com checks), Excluir (X vermelho)"
+                                        class="icon-small" style="width: 72px; height: auto;">
+                                </li>
+                                <li class="ml-8 flex items-center">
+                                    - Parâmetros da Verba <img src="imagens_direitos/telaparametros.png"
+                                        alt="Ícone de Parâmetros" class="icon-small">
+                                </li>
+                                <li class="ml-8 flex items-center">
+                                    - Ocorrências da Verba <img src="imagens_direitos/telaocorrencias.png"
+                                        alt="Ícone de Ocorrências" class="icon-small">
+                                </li>
+                                <li class="ml-8 flex items-center">
+                                    - Excluir <img src="imagens_direitos/telaexcluir.png" alt="Ícone de Excluir"
+                                        class="icon-small">
+                                </li>
+                                <li>Verba Principal - verba selecionada para lançamento.</li>
+                                <li>Verba Reflexa - em que ao clicar no botão <u>Exibir</u> serão listadas todas as
+                                    verbas
+                                    reflexas ligadas a Verba Principal.</li>
+                            </ul>
+                            <img src="imagens_direitos/multa477.2.png"
+                                alt="Tela do PJe-Calc - Verba Saldo de Salário selecionada com as opções de Ações e Verba Reflexa."
+                                class="w-full h-auto my-4 rounded-lg shadow-md">
+                        </li>
+                        <li>
+                            <strong class="text-gray-800">Parametrização da Verba:</strong> Ao clicar no botão
+                            <u>Parâmetros da Verba</u> serão exibidas todas as configurações necessárias para a
+                            parametrização
+                            da Verba Principal.
+                            <img src="imagens_direitos/multa477.3.png"
+                                alt="Tela do PJe-Calc - Detalhes da Verba Saldo de Salário: Parâmetros, Base de Cálculo, Divisor e Multiplicador."
+                                class="w-full h-auto my-4 rounded-lg shadow-md">
+                        </li>
+                        <li>
+                            <strong class="text-gray-800">Registro de Ocorrências:</strong> Ao clicar no botão
+                            <u>Ocorrências da Verba</u> serão exibidas todas as configurações necessárias para registro
+                            das
+                            ocorrências da Verba Principal.
+                            <img src="imagens_direitos/multa477.4.png"
+                                alt="Tela do PJe-Calc - Dados de Ocorrências: Detalhamento da data inicial, data final e valor calculado da verba."
+                                class="w-full h-auto my-4 rounded-lg shadow-md">
+                        </li>
+
+                    </ol>
+
+                </div>
+            </div>
+
+        </section>
+    </div>
+
+    <script>
+        // Logic for expandable drawers
+        function setupDrawer(drawerId) {
+            const header = document.getElementById(`${drawerId}-header`);
+            const content = document.getElementById(`${drawerId}-content`);
+
+            if (!header || !content) return;
+
+            header.addEventListener('click', () => {
+                const isExpanded = header.classList.toggle('active');
+                if (isExpanded) {
+                    // Set max-height to scrollHeight to animate the open state
+                    // We add a small buffer (e.g., 20px) to ensure content + padding is fully visible.
+                    content.style.maxHeight = content.scrollHeight + 20 + "px";
+                } else {
+                    // Reset max-height to 0 to animate the close state
+                    content.style.maxHeight = '0';
+                }
+            });
+
+            // Recalculate max-height on resize in case content changes
+            window.addEventListener('resize', () => {
+                if (header.classList.contains('active')) {
+                    content.style.maxHeight = content.scrollHeight + 20 + "px";
+                }
+            });
+        }
+
+        // Setup Drawers
+        setupDrawer('calculo-deducoes');
+        setupDrawer('equip-salarial'); // O drawer reintroduzido/adaptado
+        setupDrawer('calculadora');
+        setupDrawer('pje-calc');
+
+        // Calculator logic adjusted for Multa 477 (fixed value = one month's salary)
+        document.getElementById('calcular-btn').addEventListener('click', () => {
+            const seuSalario = parseFloat(document.getElementById('seu-salario').value.replace(',', '.'));
+
+            const multaEl = document.getElementById('diferenca-mensal');
+            // const diferencaTotalEl = document.getElementById('diferenca-total'); // Hidden
+
+            if (isNaN(seuSalario) || seuSalario <= 0) {
+                multaEl.textContent = 'Valor da Multa: R$ 0,00';
+                return;
+            }
+
+            const valorMulta = seuSalario; // Multa is one month's salary
+
+            multaEl.textContent = `Valor da Multa: R$ ${valorMulta.toFixed(2).replace('.', ',')}`;
+            // diferencaTotalEl.textContent = `Diferença Total: R$ ${valorMulta.toFixed(2).replace('.', ',')}`;
+        });
+    </script>
+</body>
+
+</html>

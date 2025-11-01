@@ -1,0 +1,705 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gratificação por Produtividade</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f4f8;
+            color: #1a202c;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 2rem;
+            background-color: #ffffff;
+            border-radius: 1rem;
+            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.05);
+        }
+
+        .copy-container {
+            display: flex;
+            align-items: center;
+            position: relative;
+        }
+
+        .copy-btn {
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
+            padding: 0;
+            margin-left: 0.5rem;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .copy-btn svg {
+            width: 1.5rem;
+            height: 1.5rem;
+            fill: #00678F;
+            transition: fill 0.3s ease;
+        }
+
+        .copy-btn:hover svg {
+            fill: #004562;
+        }
+
+        .copy-message {
+            position: absolute;
+            left: 100%;
+            top: 50%;
+            transform: translate(10px, -50%);
+            background-color: #00678F;
+            color: white;
+            padding: 0.25rem 0.5rem;
+            border-radius: 0.5rem;
+            font-size: 0.75rem;
+            white-space: nowrap;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        /* MODIFICAÇÃO: Aplicando fundo cinza claro (#f0f4f8) e sombra aos contêineres */
+        .drawer-container {
+            padding: 1rem;
+            background-color: #f0f4f8;
+            /* Fundo cinza claro da tabela */
+            border-radius: 0.75rem;
+            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+            /* Sombra sutil */
+            margin-top: 1.5rem;
+        }
+
+        .drawer-header {
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .drawer-content {
+            overflow: hidden;
+            transition: all 0.5s ease-in-out;
+            max-height: 0;
+        }
+
+        .drawer-header .arrow-icon {
+            transition: transform 0.5s ease-in-out;
+        }
+
+        .drawer-header.active .arrow-icon {
+            transform: rotate(180deg);
+        }
+
+        .table-responsive {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th,
+        td {
+            padding: 0.75rem;
+            text-align: left;
+            border-bottom: 1px solid #d1d5db;
+        }
+
+        th {
+            background-color: #00678F;
+            color: white;
+        }
+
+        tr:nth-child(odd) {
+            background-color: #f0f4f8;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container my-8 relative">
+        <img src="https://site.trt19.jus.br/sites/default/files/logo-trt19.png" alt="Logo do TRT19"
+            class="absolute top-4 right-4 w-36 h-auto">
+
+        <section id="gratificacao-produtividade" class="content-section">
+            <h2 class="text-3xl font-bold text-[#00678F] mb-4">Gratificação por Produtividade</h2>
+            <p class="text-gray-700 leading-relaxed text-justify">A Gratificação por Produtividade é um adicional salarial
+                concedido ao empregado como reconhecimento e prêmio pelo atingimento de metas, superação de resultados ou
+                melhoria de desempenho individual ou coletivo, conforme critérios pré-estabelecidos. Ela visa estimular e
+                recompensar o desempenho superior do trabalhador.</p>
+
+            <p class="text-gray-700 leading-relaxed text-justify mt-4">A Gratificação por Produtividade é tipicamente um
+                direito estabelecido por meio de Convenções Coletivas
+                de Trabalho (CCT), Acordos Coletivos (ACT) ou por Regulamento Interno da Empresa.</p>
+            <p class="text-gray-700 leading-relaxed text-justify mt-4">A definição de sua natureza jurídica (salarial
+                ou indenizatória) é crucial para a incidência de encargos e para a integração à remuneração para fins
+                de cálculo de outras verbas, sendo este um dos pontos mais afetados pela Reforma Trabalhista de 2017.</p>
+
+            <div class="table-responsive mt-4">
+                <table class="w-full text-sm">
+                    <thead>
+
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-gray-200">
+                        <tr>
+
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div id="base-legal-drawer" class="drawer-container">
+                <div id="base-legal-header" class="drawer-header">
+                    <h4 class="text-xl font-semibold text-[#00678F]">Base Legal e Jurisprudência
+                    </h4>
+                    <svg class="arrow-icon w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                    </svg>
+                </div>
+                <div id="base-legal-content" class="drawer-content">
+                    <p class="text-gray-700 leading-relaxed text-justify mt-4">
+                        <strong>Base Legal</strong>
+                        <br><br>
+                        O direito e os critérios para a Gratificação por Produtividade devem ser verificados na CCT/ACT da
+                        categoria ou no Regulamento da Empresa.
+                        <br><br>
+                    <h5 class="text-base font-semibold text-gray-800">Consolidação das Leis do Trabalho (CLT) - Regras
+                        Cruciais:</h5>
+                    <ul class="list-disc list-inside mt-2 text-gray-700 leading-relaxed ml-4 space-y-3">
+                        <li>
+                            <strong>Artigo 457, § 1º (Regra de Integração Salarial - Pré-Reforma):</strong>
+                            <p class="text-sm italic mt-1 ml-4 border-l-2 border-gray-400 pl-3">"Integram o salário, não
+                                só a importância fixa estipulada, como também as comissões, percentagens, gratificações
+                                ajustadas, diárias para viagens e abonos pagos pelo empregador."</p>
+                            <p class="text-xs font-semibold text-gray-600 mt-1 ml-4">
+                                Fundamentação Jurisprudencial (Pré-Reforma): Pelo TST, a regra era: se a gratificação
+                                era paga com habitualidade, ela tinha natureza salarial (Princípio da
+                                Habitualidade - Art. 457, § 1º, da CLT).
+                            </p>
+                        </li>
+                        <li>
+                            <strong>Artigo 457, § 2º (Natureza Indenizatória - Pós-Reforma):</strong>
+                            <p class="text-sm italic mt-1 ml-4 border-l-2 border-gray-400 pl-3">"As importâncias, ainda
+                                que habituais, pagas a título de ajuda de custo, auxílio-alimentação, vedado seu
+                                pagamento em dinheiro, diárias para viagem, prêmios e abonos não integram a
+                                remuneração do empregado, não se incorporam ao contrato de trabalho e não constituem base
+                                de incidência de qualquer encargo trabalhista e previdenciário."</p>
+                        </li>
+                        <li>
+                            <strong>Artigo 457, § 4º (Regra dos Prêmios - Pós-Reforma):</strong>
+                            <p class="text-sm italic mt-1 ml-4 border-l-2 border-gray-400 pl-3">"Consideram-se prêmios as
+                                liberalidades concedidas pelo empregador em forma de bens, serviços ou valor em dinheiro a
+                                empregado ou a grupo de empregados, em razão de desempenho superior ao ordinariamente
+                                esperado no exercício de suas atividades."</p>
+                        </li>
+                    </ul>
+                    <br>
+                    <hr class="my-6 border-gray-300">
+                    <h5 class="text-base font-semibold text-gray-800">Entendimento Jurisprudencial (Natureza Jurídica)
+                    </h5>
+                    <p class="text-gray-700 leading-relaxed text-justify mt-4">
+                        A análise da natureza jurídica (salarial ou indenizatória) da Gratificação por Produtividade é a
+                        chave para o cálculo de reflexos e deduções, sendo o marco da Reforma Trabalhista
+                        (11/11/2017) fundamental:
+                    </p>
+                    <ul class="list-disc list-inside mt-2 text-gray-700 leading-relaxed ml-4 space-y-3">
+                        <li>
+                            <strong>Período Anterior à Reforma (Até 10/11/2017): Natureza Salarial (Habitualidade)</strong>
+                            <p class="text-sm italic mt-1 ml-4 border-l-2 border-gray-400 pl-3">A jurisprudência
+                                majoritária (baseada no Art. 457, § 1º, da CLT) entendia que, se a gratificação por
+                                produtividade fosse paga de forma habitual, ela possuía natureza salarial,
+                                integrando a remuneração para todos os efeitos (cálculo de férias, 13º, FGTS, etc.).</p>
+                            <p class="text-xs font-semibold text-gray-600 mt-1 ml-4">
+                                Súmula TST nº 203 (Analogia): "A gratificação por tempo de serviço integra o salário
+                                para todos os efeitos legais." (Reforça o princípio da integração salarial das
+                                gratificações habituais).</p>
+                        </li>
+                        <li>
+                            <strong>Período Posterior à Reforma (A partir de 11/11/2017): Natureza Indenizatória (Prêmio)</strong>
+                            <p class="text-sm italic mt-1 ml-4 border-l-2 border-gray-400 pl-3">O novo § 2º do Art. 457
+                                da CLT e o novo § 4º (que define o prêmio) permitem ao empregador classificar a parcela
+                                como de natureza indenizatória, desde que ela se enquadre como um prêmio por
+                                desempenho superior ao ordinariamente esperado (e não salário habitual) e que essa
+                                natureza esteja prevista em norma coletiva ou regulamento. O TST vem aplicando a
+                                legislação atual desde que a verba não configure fraude ou disfarce salarial.</p>
+                        </li>
+                    </ul>
+                    <div class="p-4 bg-yellow-100 rounded-md mt-4 border border-yellow-500">
+                        <p class="font-bold text-sm">Resumo:</p>
+                        <p class="text-sm mt-1 italic">Para o período pós-Reforma, se a verba for corretamente
+                            configurada como prêmio por desempenho superior (Art. 457, §§ 2º e 4º), ela terá
+                            natureza indenizatória e não gerará reflexos. Caso contrário, ou se houver
+                            desvirtuamento, a natureza salarial poderá ser reconhecida judicialmente.</p>
+                    </div>
+
+                    </p>
+                </div>
+            </div>
+            <div id="base-calculo-drawer" class="drawer-container">
+                <div id="base-calculo-header" class="drawer-header">
+                    <h4 class="text-xl font-semibold text-[#00678F]">Base de Cálculo e Deduções</h4>
+                    <svg class="arrow-icon w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                    </svg>
+                </div>
+                <div id="base-calculo-content" class="drawer-content">
+                    <h5 class="text-lg font-semibold text-black mt-2">Base de Cálculo</h5>
+                    <p class="text-gray-700 leading-relaxed text-justify mt-2">O cálculo da Gratificação por Produtividade
+                        é definido pela norma coletiva ou regulamento da empresa. Pode ser um valor fixo, um percentual
+                        sobre o salário-base ou vinculado ao atingimento de metas ou indicadores (mensal, trimestral,
+                        anual).</p>
+
+                    <p class="text-gray-700 leading-relaxed text-justify mt-4">Exemplo Simplificado de Cálculo (Valor
+                        Fixo por Meta):</p>
+                    <p class="text-gray-700 leading-relaxed text-justify">Considerando um valor fixo mensal de R$
+                        500,00 para o empregado que atingir a meta individual do mês.</p>
+                    <ul class="list-disc list-inside text-gray-700 mt-2">
+                        <li>Meta Atingida (100% ou mais): R$ 500,00</li>
+                        <li>Meta Não Atingida: R$ 0,00</li>
+                    </ul>
+
+                    <h5 class="text-lg font-semibold text-black mt-6">Deduções</h5>
+                    <p class="text-gray-700 leading-relaxed text-justify mt-2">A incidência de encargos é totalmente
+                        dependente da sua natureza jurídica:</p>
+                    <ul class="list-disc list-inside text-gray-700 leading-relaxed ml-4 space-y-3">
+                        <li>Se tiver natureza salarial (ou se a verba for anterior à Reforma e habitual), ela
+                            integrará a base de cálculo para as deduções legais, como a contribuição para o INSS e o
+                            Imposto de Renda (IRPF).</li>
+                        <li>Se for qualificada como prêmio/liberalidade em razão de desempenho superior (Art. 457, §
+                            2º e § 4º da CLT, pós-Reforma), terá natureza indenizatória e não incidirá INSS e
+                            IRPF sobre ela.</li>
+                    </ul>
+                    <p class="text-gray-700 leading-relaxed text-justify mt-4 font-semibold">
+                        A verificação da natureza jurídica da Gratificação por Produtividade é crucial para determinar a
+                        incidência de INSS e IRPF.
+                    </p>
+                </div>
+            </div>
+
+            <div id="verbas-reflexas-drawer" class="drawer-container">
+                <div id="verbas-reflexas-header" class="drawer-header">
+                    <h4 class="text-xl font-semibold text-[#00678F]">Verbas Reflexas</h4>
+                    <svg class="arrow-icon w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                    </svg>
+                </div>
+                <div id="verbas-reflexas-content" class="drawer-content">
+                    <p class="text-gray-700 leading-relaxed text-justify mt-4">A Gratificação por Produtividade somente
+                        gerará reflexos se lhe for reconhecida a natureza salarial (Art. 457, § 1º, da CLT -
+                        habitualidade, ou se anterior à Reforma) ou se a norma coletiva que a criou determinar
+                        expressamente a sua integração. Se tiver natureza indenizatória como prêmio (Art. 457, § 2º e
+                        § 4º), não haverá reflexos.</p>
+                    <p class="text-gray-700 leading-relaxed text-justify mt-2">O valor a ser integrado será calculado
+                        pela média dos valores recebidos no período de apuração, se for variável.</p>
+
+                    <table
+                        class="w-full mt-4 text-sm text-gray-700 border-collapse border border-gray-300 rounded-md overflow-hidden">
+                        <thead>
+                            <tr class="bg-gray-200">
+                                <th class="py-2 px-4 text-left border-b border-gray-300 w-1/3">Verba Trabalhista</th>
+                                <th class="py-2 px-4 text-left border-b border-gray-300 w-2/3">Possível Reflexo da
+                                    Gratificação por Produtividade (Se Salarial)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="border-b border-gray-300">
+                                <td class="py-2 px-4 font-medium">13º Salário</td>
+                                <td class="py-2 px-4">Integra o cálculo do 13º Salário (integral e proporcional) pela
+                                    média duodecimal (se salarial).</td>
+                            </tr>
+                            <tr class="border-b border-gray-300">
+                                <td class="py-2 px-4 font-medium">Férias + 1/3</td>
+                                <td class="py-2 px-4">Integra o cálculo das Férias (vencidas e proporcionais) e o
+                                    adicional de 1/3 pela média do período aquisitivo (se salarial).</td>
+                            </tr>
+                            <tr class="border-b border-gray-300">
+                                <td class="py-2 px-4 font-medium">Aviso Prévio</td>
+                                <td class="py-2 px-4">Integra a base de remuneração para cálculo do Aviso Prévio
+                                    (trabalhado ou indenizado) pela média duodecimal (se salarial).</td>
+                            </tr>
+                            <tr class="border-b border-gray-300">
+                                <td class="py-2 px-4 font-medium">FGTS (Depósito Mensal e Multa)</td>
+                                <td class="py-2 px-4">Incide sobre o valor da gratificação (se salarial), compondo a
+                                    base de cálculo para o depósito mensal de 8% e para a Multa de 40%.</td>
+                            </tr>
+                            <tr>
+                                <td class="py-2 px-4 font-medium">Horas Extras</td>
+                                <td class="py-2 px-4">Integra a base de cálculo da hora extra.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <hr class="my-4 border-gray-300">
+                    <p class="text-gray-700 leading-relaxed text-justify mt-2"><strong>Fundamentação de Reflexos
+                            (Habitualidade Salarial):</strong></p>
+                    <ul class="list-disc list-inside text-gray-700 leading-relaxed mt-2 ml-4 space-y-3">
+                        <li>
+                            <strong class="text-gray-800">Súmula TST nº 264:</strong> "A remuneração do serviço
+                            suplementar é composta do valor da hora normal, integrado por parcelas de natureza
+                            salarial e acrescido do adicional previsto em lei, contrato, acordo, convenção coletiva ou
+                            sentença normativa." (Garante que a gratificação salarial deve integrar o cálculo das Horas
+                            Extras).
+                        </li>
+                        <li>
+                            <strong class="text-gray-800">Súmula TST nº 63:</strong> "A contribuição para o Fundo de
+                            Garantia do Tempo de Serviço incide sobre a remuneração mensal devida ao empregado, inclusive
+                            horas extras e adicionais eventuais." (Aplica-se ao valor salarial da gratificação).
+                        </li>
+                    </ul>
+
+                    <p class="text-gray-700 leading-relaxed text-justify mt-4 font-semibold">
+                        A análise da natureza jurídica da Gratificação por Produtividade (salarial ou indenizatória,
+                        especialmente após a Reforma Trabalhista) é indispensável, pois a determinação de sua natureza
+                        indenizatória, como prêmio, afasta a incidência de todos os reflexos acima listados.
+                    </p>
+                </div>
+            </div>
+
+            <div id="simulacao-drawer" class="drawer-container">
+                <div id="simulacao-header" class="drawer-header">
+                    <h4 class="text-xl font-semibold text-[#00678F]">Calculadora (Simulação)</h4>
+                    <svg class="arrow-icon w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                    </svg>
+                </div>
+                <div id="simulacao-content" class="drawer-content">
+                    <p class="text-gray-700 leading-relaxed text-justify mt-4">Simule o cálculo da Gratificação por
+                        Produtividade no mês com base em uma política de metas. Regra Simples: Atingir 100% ou mais da
+                        meta resulta no valor integral da gratificação.</p>
+
+                    <div class="mt-4">
+                        <label for="valorGratificacaoInput"
+                            class="block text-sm font-medium text-gray-700">Valor Base Mensal da Gratificação (Meta
+                            100%)</label>
+                        <input type="text" id="valorGratificacaoInput"
+                            class="mt-1 block w-full rounded-md border-gray-300 p-2 focus:ring-[#00678F] focus:border-[#00678F]"
+                            placeholder="Ex: 500,00" value="500,00">
+                        <p class="text-xs text-gray-500 mt-1">Insira o valor integral previsto para o atingimento da
+                            meta.</p>
+                    </div>
+
+                    <div class="mt-4">
+                        <label for="percentualMetaInput" class="block text-sm font-medium text-gray-700">Percentual da
+                            Meta Atingida no Mês (%)</label>
+                        <input type="number" id="percentualMetaInput"
+                            class="mt-1 block w-full rounded-md border-gray-300 p-2 focus:ring-[#00678F] focus:border-[#00678F]"
+                            placeholder="100" min="0" value="100">
+                        <p class="text-xs text-gray-500 mt-1">Se a regra da empresa for proporcional, insira a
+                            porcentagem.</p>
+                    </div>
+
+                    <div class="mt-4 flex items-center">
+                        <button id="calculateProdutividadeBtn"
+                            class="px-4 py-2 bg-[#00678F] text-white rounded-md hover:bg-[#004562] transition duration-300 shadow-md">
+                            Calcular Gratificação
+                        </button>
+                    </div>
+                    <div id="produtividadeResult" class="mt-4 p-4 bg-white rounded-lg border border-gray-200">
+                        Seus resultados aparecerão aqui.
+                    </div>
+                </div>
+            </div>
+            <div id="pje-calc-drawer" class="drawer-container">
+                <div id="pje-calc-header" class="drawer-header">
+                    <h4 class="text-xl font-semibold text-[#00678F]">Lançamento no PJe-Calc </h4>
+                    <svg class="arrow-icon w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                    </svg>
+                </div>
+                <div id="pje-calc-content" class="drawer-content">
+                    <p class="text-gray-700 leading-relaxed text-justify mt-4">A seguir, confira o passo a passo para o
+                        lançamento da verba no PJe-Calc.</p>
+
+                    <div class="p-3 my-4 bg-yellow-100 border-l-4 border-yellow-500 text-yellow-800 rounded-md">
+                        <p class="font-bold leading-relaxed">
+                            ATENÇÃO: Recomenda-se o cadastro da "Gratificação por Produtividade" via opção
+                            "Manual", pois sua parametrização (natureza salarial/indenizatória e base de cálculo)
+                            depende de regras específicas da CCT/ACT ou do Regulamento da Empresa, especialmente a análise
+                            da natureza jurídica pré e pós-Reforma.
+                        </p>
+                    </div>
+
+                    <ol class="list-decimal list-inside text-gray-700 leading-relaxed mt-4 ml-4 space-y-3">
+                        <li>
+                            <strong class="text-gray-800">Acessar Verbas e Escolher Lançamento:</strong> No menu de
+                            navegação à esquerda, clique na opção <u>Verbas</u> para iniciar o lançamento. Após o
+                            comando, será exibida a tela para escolha do Lançamento da Verba. Escolha a opção
+                            <u>Manual</u>.
+                            <img src="imagens_direitos/cadastronovaverba1.png"
+                                alt="Tela do PJe-Calc - Passo 1: Acessar a opção Verbas no menu lateral e clicar em Manual na seção Lançamento."
+                                class="w-full h-auto my-4 rounded-lg shadow-md">
+                        </li>
+                        <li>
+                            <strong class="text-gray-800">Acessar o cadastro de configuação da Verba:</strong> O sistema
+                            exibirá a tela de parâmetros da verba com os campos em branco para preenchimento. Cadastre o
+                            nome da verba, por exemplo, "Gratificação por Produtividade", e escolha entre os Assuntos
+                            CNJ a opção relativa ao novo cadastro. Preencha
+                            devidamente os demais parâmetros (em especial a natureza salarial/indenizatória) e ao final
+                            clique no botão <u>Salvar</u>.
+                            <img src="imagens_direitos/cadastronovaverba2.png"
+                                alt="Tela do PJe-Calc - Passo 2: Configuração da Gratificação por Produtividade via lançamento Manual."
+                                class="w-full h-auto my-4 rounded-lg shadow-md">
+                        </li>
+                        <li>
+                            <strong class="text-gray-800">Quadro de Verbas e Ações:</strong> Após o cadastramento da
+                            nova verba, o sistema exibirá um quadro
+                            com os campos:
+                            <ul class="list-disc list-inside text-gray-700 leading-relaxed mt-2 ml-4">
+                                <li class="ml-8 flex items-center">
+                                <li>Ações - contendo as opções de configurações da verba selecionada (parâmetros,
+                                    ocorrências e exclusão)
+                                    <img src="imagens_direitos/telaacoes.png"
+                                        alt="Ícones de Ações: Parâmetros (folha com seta), Ocorrências (folha com checks), Excluir (X vermelho)"
+                                        class="icon-small" style="width: 72px; height: auto;">
+                                </li>
+                                <li class="ml-8 flex items-center">
+                                    - Parâmetros da Verba <img src="imagens_direitos/telaparametros.png"
+                                        alt="Ícone de Parâmetros" class="icon-small">
+                                </li>
+                                <li class="ml-8 flex items-center">
+                                    - Ocorrências da Verba <img src="imagens_direitos/telaocorrencias.png"
+                                        alt="Ícone de Ocorrências" class="icon-small">
+                                </li>
+                                <li class="ml-8 flex items-center">
+                                    - Excluir <img src="imagens_direitos/telaexcluir.png" alt="Ícone de Excluir"
+                                        class="icon-small">
+                                </li>
+                                <li>Verba Principal - verba selecionada para lançamento (Gratificação por
+                                    Produtividade).
+                                </li>
+                                <li>Verba Reflexa - em que ao clicar no botão <u>Exibir</u> serão listadas todas as
+                                    verbas
+                                    reflexas ligadas a Verba Principal.</li>
+                            </ul>
+                            <img src="imagens_direitos/assiduidade1.png"
+                                alt="Tela do PJe-Calc - Verba Gratificação por Produtividade selecionada com as opções de Ações e Verba Reflexa."
+                                class="w-full h-auto my-4 rounded-lg shadow-md">
+                        </li>
+                        <li>
+                            <strong class="text-gray-800">Parametrização da Verba:</strong> Ao clicar no botão
+                            <u>Parâmetros da Verba</u> serão exibidas todas as configurações necessárias para a
+                            parametrização
+                            da Verba Principal.
+                            <img src="imagens_direitos/assiduidade2.png"
+                                alt="Tela do PJe-Calc - Detalhes da Verba Gratificação por Produtividade: Parâmetros, Base de Cálculo, Divisor e Multiplicador."
+                                class="w-full h-auto my-4 rounded-lg shadow-md">
+                        </li>
+                        <li>
+                            <strong class="text-gray-800">Registro de Ocorrências:</strong> Ao clicar no botão
+                            <u>Ocorrências da Verba</u> serão exibidas todas as configurações necessárias para registro
+                            das
+                            ocorrências da Verba Principal.
+                            <img src="imagens_direitos/assiduidade3.png"
+                                alt="Tela do PJe-Calc - Dados de Ocorrências da Gratificação por Produtividade."
+                                class="w-full h-auto my-4 rounded-lg shadow-md">
+                        </li>
+                    </ol>
+
+                </div>
+
+        </section>
+    </div>
+
+    <script>
+        // Função para copiar o texto de um elemento com feedback visual
+        function copyTextFromElement(elementId, buttonElement) {
+            const element = document.getElementById(elementId);
+            if (!element) return;
+            const textToCopy = element.textContent.replace('...', ''); // Remove '...' para copiar o link completo
+
+            const tempInput = document.createElement('input');
+            tempInput.value = textToCopy;
+            document.body.appendChild(tempInput);
+            tempInput.select();
+
+            try {
+                document.execCommand('copy');
+                // Criar e exibir a mensagem de sucesso
+                const message = document.createElement('span');
+                message.textContent = 'Copiado!';
+                message.className = 'copy-message';
+                // Posicionamento ajustado para funcionar dentro da gaveta
+                message.style.position = 'absolute';
+                message.style.left = 'calc(100% + 10px)';
+                message.style.top = '50%';
+
+                buttonElement.parentElement.appendChild(message);
+
+                // Animar e remover a mensagem após 1 segundo
+                setTimeout(() => {
+                    message.style.opacity = '1';
+                }, 10);
+                setTimeout(() => {
+                    message.style.opacity = '0';
+                    setTimeout(() => message.remove(), 300);
+                }, 1000);
+
+            } catch (err) {
+                console.error('Falha ao copiar o texto:', err);
+            } finally {
+                document.body.removeChild(tempInput);
+            }
+        }
+
+        // Função para formatar o valor de entrada
+        function formatInput(inputElement) {
+            let value = inputElement.value;
+            // Remove tudo que não for dígito e vírgula
+            value = value.replace(/[^\d,]/g, '');
+
+            // Substitui a vírgula por ponto para cálculo
+            value = value.replace(',', '.');
+
+            // Permite apenas um ponto decimal
+            const parts = value.split('.');
+            if (parts.length > 2) {
+                value = parts.shift() + '.' + parts.join('');
+            }
+
+            return parseFloat(value) || 0;
+        }
+
+
+        // Lógica da Calculadora de Gratificação por Produtividade
+        document.addEventListener('DOMContentLoaded', () => {
+            const valorGratificacaoInput = document.getElementById('valorGratificacaoInput');
+            const percentualMetaInput = document.getElementById('percentualMetaInput');
+            const calculateBtn = document.getElementById('calculateProdutividadeBtn');
+            const resultDiv = document.getElementById('produtividadeResult');
+
+            // Função auxiliar para formatar em R$
+            const formatCurrency = (value) => {
+                return value.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+            };
+
+
+            // Adiciona a lógica da calculadora
+            if (calculateBtn) {
+                calculateBtn.addEventListener('click', () => {
+                    // 1. Coletar e validar dados
+                    const valorGratificacao = formatInput(valorGratificacaoInput);
+                    const percentualMeta = parseFloat(percentualMetaInput.value) || 0;
+
+                    if (valorGratificacao <= 0) {
+                        resultDiv.innerHTML = `<p class="text-red-600">⚠️ Por favor, insira um valor base para a gratificação.</p>`;
+                        return;
+                    }
+
+                    let valorFinalGratificacao = 0;
+                    let mensagem = "";
+
+                    // 2. Lógica da Gratificação por Produtividade (Regra: proporcional ao percentual da meta)
+                    if (percentualMeta >= 100) {
+                        valorFinalGratificacao = valorGratificacao;
+                        mensagem = `✅ O empregado atingiu ou superou a meta de 100%. A gratificação é devida no valor integral.`;
+                    } else if (percentualMeta > 0) {
+                        // Calcula valor proporcional (ex: 80% da meta = 80% do valor da gratificação)
+                        valorFinalGratificacao = (valorGratificacao * percentualMeta) / 100;
+                        mensagem = `⚠️ O empregado atingiu ${percentualMeta}% da meta. A gratificação é devida proporcionalmente.`;
+                    }
+                    else {
+                        valorFinalGratificacao = 0;
+                        mensagem = `❌ O empregado não atingiu a meta mínima de produtividade. Conforme a regra simulada, a gratificação não é devida.`;
+                    }
+
+
+                    // 3. Exibir Resultados
+                    resultDiv.innerHTML = `
+                        <h5 class="font-bold text-[#00678F] mb-3">Resultado do Cálculo da Gratificação (Mês)</h5>
+                        <div class="space-y-2">
+                            <p class="font-medium text-gray-800">Valor Base (Meta 100%): <span class="text-sm font-normal">${formatCurrency(valorGratificacao)}</span></p>
+                            <p class="font-medium text-gray-800">Percentual da Meta Atingida: <span class="text-sm font-normal">${percentualMeta}%</span></p>
+                            <hr class="my-2 border-gray-300">
+
+                            <p class="text-lg font-bold text-gray-900">Valor Final da Gratificação Devida:</p>
+                            <p class="text-3xl font-extrabold ${valorFinalGratificacao > 0 ? 'text-green-700' : 'text-red-700'}">${formatCurrency(valorFinalGratificacao)}</p>
+
+                            <div class="p-3 bg-gray-100 rounded-md mt-4 text-sm border border-gray-300">
+                                <p class="font-bold">Regra Aplicada:</p>
+                                <p>${mensagem}</p>
+                                <p class="mt-2 text-xs italic">Atenção: A regra de cálculo (proporcional, integral por faixa, ou outra) é uma simulação. O regramento exato deve ser verificado na CCT/ACT ou Regulamento da Empresa.</p>
+                            </div>
+                        </div>
+                    `;
+                });
+            }
+
+            // Function to set up the visual formatting on blur/initial load
+            function setupInputFormatting() {
+                if (!valorGratificacaoInput) return;
+
+                // Configura input de valor (Gratificação)
+                valorGratificacaoInput.addEventListener('blur', (e) => {
+                    const value = formatInput(e.target);
+                    e.target.value = value.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+                });
+
+                // Mantém a formatação ao digitar para o valor da gratificação
+                valorGratificacaoInput.addEventListener('input', (e) => {
+                    let value = e.target.value.replace(/[^\d,]/g, '');
+
+                    // Remove vírgula se houver mais de uma
+                    const parts = value.split(',');
+                    if (parts.length > 2) {
+                        value = parts[0] + ',' + parts.slice(1).join('');
+                    }
+
+                    e.target.value = value;
+                });
+
+                // Inicializa os valores com o formato brasileiro
+                const initialValue = 500.00; // Valor inicial padrao
+                valorGratificacaoInput.value = initialValue.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+            }
+
+            setupInputFormatting();
+
+        });
+
+
+        // Lógica para as gavetas expansíveis
+        function setupDrawer(drawerId) {
+            const header = document.getElementById(`${drawerId}-header`);
+            const content = document.getElementById(`${drawerId}-content`);
+            if (header && content) {
+                header.addEventListener('click', () => {
+                    const isExpanded = header.classList.toggle('active');
+                    if (isExpanded) {
+                        // Calcula a altura do conteúdo com margem de segurança
+                        content.style.maxHeight = content.scrollHeight + 30 + "px";
+                    } else {
+                        content.style.maxHeight = '0';
+                    }
+                });
+            }
+        }
+
+        // Configura as gavetas
+        setupDrawer('base-legal');
+        setupDrawer('base-calculo');
+        setupDrawer('verbas-reflexas');
+        setupDrawer('simulacao'); // Adiciona a nova gaveta da simulação/calculadora
+        setupDrawer('pje-calc');
+    </script>
+</body>
+
+</html>

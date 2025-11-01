@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Funcionalidade de Fechar Cálculo</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f1f5f9;
+        }
+
+        .text-justify {
+            text-align: justify;
+        }
+
+        .aside-bg {
+            background-color: #005a62;
+        }
+
+        /* Estilo para a Logo */
+        .logo-trt {
+            max-height: 60px;
+            width: auto;
+        }
+
+        /* Estilos e Transições para o Acordeão PRINCIPAL */
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out, padding 0.3s ease-out;
+            padding-top: 0;
+            padding-bottom: 0;
+            background-color: #f0f4f8;
+        }
+
+        .accordion-content.active {
+            max-height: 20000px;
+            padding-top: 1rem;
+            padding-bottom: 1rem;
+        }
+
+        .accordion-header {
+            background-color: #f0f4f8;
+        }
+
+        .accordion-icon {
+            transition: transform 0.3s ease;
+            font-size: 1.5rem;
+            line-height: 1;
+        }
+
+        .accordion-icon.rotate {
+            transform: rotate(45deg);
+        }
+
+        /* Estilos e Transições para o SUB-ACORDEÃO (Modalidades) */
+        .sub-acordeon-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out, padding 0.3s ease-out;
+            padding-top: 0;
+            padding-bottom: 0;
+        }
+
+        .sub-acordeon-content.active {
+            max-height: 20000px;
+            padding-top: 1rem;
+            padding-bottom: 1rem;
+        }
+
+        /* Estilo para imagens no conteúdo do acordeão */
+        .content-image {
+            max-width: 100%;
+            height: auto;
+            border: 1px solid #ccc;
+            border-radius: 0.5rem;
+            margin-top: 1rem;
+            margin-bottom: 1rem;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="p-4 md:p-8">
+        <div class="max-w-4xl mx-auto bg-white rounded-xl shadow-xl p-6 md:p-10 border border-gray-200">
+            <div class="flex justify-center mb-6">
+                <img src="https://site.trt19.jus.br/portalTRT19/sites/default/files/logo-trt19.png" alt="Logo do TRT19"
+                    class="logo-trt w-auto object-contain">
+            </div>
+            <h1 class="text-3xl md:text-4xl text-center mb-6 text-[#007380]">Manual Interativo de Cálculos Trabalhistas
+            </h1>
+            <p class="text-center text-gray-600 mb-8">Um guia completo e interativo para entender os cálculos na esfera
+                judicial trabalhista.</p>
+
+            <section id="fechar-calculo-content" class="content-section">
+                <h2 class="text-2xl md:text-3xl font-bold mb-4 text-[#007380]">Funcionalidade Fechar Cálculo</h2>
+                <div class="space-y-4">
+                    <p class="text-gray-700 text-justify">
+                        A opção "Fechar", localizada no menu lateral esquerdo (dentro de "Operações"),
+                        tem a função de encerrar a edição do cálculo atual e retornar à tela inicial do
+                        sistema. É um passo importante para garantir que os dados lançados sejam
+                        devidamente salvos e para preparar o sistema para a abertura de um novo cálculo.
+                    </p>
+
+                    <h4 class="text-lg text-[#007380] font-semibold mt-4">1. Fechando o Cálculo e Voltando à Tela de Verbas</h4>
+                    <p class="text-gray-700 text-justify">
+                        Ao clicar em "Fechar" no menu, o sistema geralmente retorna à última tela de
+                        edição do cálculo, que é a tela de listagem de Verbas. Neste ponto, é importante
+                        garantir que todas as alterações nas verbas e ocorrências tenham sido salvas.
+                    </p>
+                    <img src="imagens_liquidacao/fechar1.png"
+                        alt="Tela de Verbas do PJe-Calc Cidadão, geralmente a última visualizada antes de fechar o cálculo. Mostra as opções de Lançamento e Regeração de Ocorrências."
+                        class="content-image max-w-3xl mx-auto">
+
+                    <h4 class="text-lg text-[#007380] font-semibold mt-4">2. Regeração de Ocorrências</h4>
+                    <p class="text-gray-700 text-justify">
+                        Antes de finalizar, verifique a seção Regeração de Ocorrências. Se houver
+                        dúvida sobre a integridade dos dados, é recomendado clicar em "Regerar"
+                        escolhendo a opção "Sobrescrever alterações realizadas nas ocorrências".
+                        Se tiver certeza das alterações manuais, escolha "Manter alterações realizadas nas ocorrências".
+                    </p>
+
+                    <h4 class="text-lg text-[#007380] font-semibold mt-4">3. Retorno à Tela Inicial</h4>
+                    <p class="text-gray-700 text-justify">
+                        Após garantir que tudo foi salvo e, se necessário, regerado, clique em "Retornar Menu" (no canto superior esquerdo) ou feche a aba. Ao reabrir o sistema, ou após o fechamento completo, a tela inicial será exibida, permitindo Criar Novo Cálculo, Buscar Cálculo ou Importar Cálculo.
+                    </p>
+                    <img src="imagens_liquidacao/fechar2.png"
+                        alt="Tela inicial do PJe-Calc Cidadão, mostrando as opções 'Criar Novo Cálculo', 'Buscar Cálculo' e 'Importar Cálculo'."
+                        class="content-image max-w-3xl mx-auto">
+
+                    <p class="text-gray-700 text-justify mt-4">
+                        É fundamental Liquidar e Imprimir o cálculo antes de fechar para
+                        gerar o PDF final com os resultados.
+                    </p>
+                </div>
+            </section>
+        </div>
+    </div>
+</body>
+
+</html>

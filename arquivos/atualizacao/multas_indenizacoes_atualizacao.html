@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lançamento de Multas e Indenizações</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f1f5f9;
+        }
+
+        .text-justify {
+            text-align: justify;
+        }
+
+        .aside-bg {
+            background-color: #005a62;
+        }
+
+        /* Estilo para a Logo */
+        .logo-trt {
+            max-height: 60px;
+            width: auto;
+        }
+
+        /* Estilos e Transições para o Acordeão PRINCIPAL */
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out, padding 0.3s ease-out;
+            padding-top: 0;
+            padding-bottom: 0;
+            background-color: #f0f4f8;
+        }
+
+        .accordion-content.active {
+            max-height: 20000px;
+            padding-top: 1rem;
+            padding-bottom: 1rem;
+        }
+
+        .accordion-header {
+            background-color: #f0f4f8;
+        }
+
+        .accordion-icon {
+            transition: transform 0.3s ease;
+            font-size: 1.5rem;
+            line-height: 1;
+        }
+
+        .accordion-icon.rotate {
+            transform: rotate(45deg);
+        }
+
+        /* Estilos e Transições para o SUB-ACORDEÃO (Modalidades) */
+        .sub-acordeon-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out, padding 0.3s ease-out;
+            padding-top: 0;
+            padding-bottom: 0;
+        }
+
+        .sub-acordeon-content.active {
+            max-height: 20000px;
+            padding-top: 1rem;
+            padding-bottom: 1rem;
+        }
+
+        /* Estilo para imagens no conteúdo do acordeão */
+        .content-image {
+            max-width: 100%;
+            height: auto;
+            border: 1px solid #ccc;
+            border-radius: 0.5rem;
+            margin-top: 1rem;
+            margin-bottom: 1rem;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="p-4 md:p-8">
+        <div class="max-w-4xl mx-auto bg-white rounded-xl shadow-xl p-6 md:p-10 border border-gray-200">
+            <div class="flex justify-center mb-6">
+                <img src="https://site.trt19.jus.br/portalTRT19/sites/default/files/logo-trt19.png" alt="Logo do TRT19"
+                    class="logo-trt w-auto object-contain">
+            </div>
+            <h1 class="text-3xl md:text-4xl text-center mb-6 text-[#007380]">Manual Interativo de Cálculos Trabalhistas
+            </h1>
+            <p class="text-center text-gray-600 mb-8">Um guia completo e interativo para entender os cálculos na esfera
+                judicial trabalhista.</p>
+
+            <section id="multas-indenizacoes-content" class="content-section">
+                <h2 class="text-2xl md:text-3xl font-bold mb-4 text-[#007380]">Lançamento de Multas e Indenizações (Atualização)</h2>
+                <div class="space-y-4">
+                    <p class="text-gray-700 text-justify">
+                        O módulo de Multas e Indenizações, acessado via Atualização, é utilizado para
+                        lançar quaisquer valores devidos que não sejam verbas salariais ou rescisórias,
+                        tais como multas normativas, multas por atraso (CLT, art. 467/477), indenizações
+                        por danos morais ou materiais, e outras cominações judiciais.
+                    </p>
+
+                    <h4 class="text-lg text-[#007380] font-semibold mt-4">1. Acesso e Inclusão de Novo Item</h4>
+                    <p class="text-gray-700 text-justify">
+                        Na tela inicial do módulo, após a Atualização, é exibida a lista de multas e indenizações
+                        já cadastradas. Para incluir uma nova cominação, utilize o botão "Novo".
+                    </p>
+                    <img src="imagens_atualizacao/multas_indenizacoes_atualizacao1.png"
+                        alt="Tela inicial do módulo Multas e Indenizações com o botão Novo para incluir um novo registro."
+                        class="content-image max-w-3xl mx-auto">
+
+                    <h4 class="text-lg text-[#007380] font-semibold mt-4">2. Configuração dos Dados da Multa</h4>
+                    <p class="text-gray-700 text-justify">
+                        Ao criar um novo registro, você deve preencher os seguintes campos essenciais:
+                    </p>
+                    <ul class="list-disc list-inside text-gray-700 ml-4">
+                        <li>Descrição: Nome da multa ou indenização (Ex: Multa art. 477 CLT, Indenização por Dano Moral).</li>
+                        <li>Credor/Devedor: Define-se quem paga e quem recebe o valor (Geralmente Reclamante e Reclamado).</li>
+                        <li>Valor: Pode ser Informado (valor fixo) ou Calculado (se for um percentual sobre uma base).</li>
+                    </ul>
+
+                    <img src="imagens_atualizacao/multas_indenizacoes_atualizacao2.png"
+                        alt="Tela de cadastro de Multas e Indenizações, mostrando os campos de Descrição, Credor/Devedor, Valor e Base de Cálculo."
+                        class="content-image max-w-3xl mx-auto">
+
+                    <h4 class="text-lg text-[#007380] font-semibold mt-4">3. Parâmetros de Cálculo</h4>
+                    <p class="text-gray-700 text-justify">
+                        * Data do Evento: A data a partir da qual o valor da multa deve ser atualizado.
+                        * Base: Se o valor for Calculado, selecione a base (Ex: Principal, Salário) sobre a qual a alíquota incidirá.
+                        * Alíquota (%): O percentual da multa, se for o caso.
+                    </p>
+
+                    <p class="text-gray-700 text-justify mt-4">
+                        Após preencher todos os dados conforme a sentença, clique em "Salvar". Para incluir esses valores atualizados no total devido, é necessário retornar e clicar em "Liquidar Atualização" no menu lateral.
+                    </p>
+                </div>
+            </section>
+        </div>
+    </div>
+</body>
+
+</html>

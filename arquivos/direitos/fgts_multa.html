@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Saque e Multa de 40% do FGTS</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f4f8;
+            color: #1a202c;
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 2rem;
+            background-color: #ffffff;
+            border-radius: 1rem;
+            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.05);
+        }
+        /* Estilo do Spinner de Carregamento */
+        .loading-spinner {
+            border: 4px solid rgba(0, 103, 143, 0.1);
+            border-top: 4px solid #00678F;
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            animation: spin 1s linear infinite;
+            margin-right: 0.5rem;
+            display: none; /* Inicia oculto */
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        /* Estilos para os Drawers (Acordeão) */
+        .drawer-container {
+            padding: 1rem;
+            background-color: #f0f4f8;
+            border-radius: 0.75rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+            margin-top: 1.5rem;
+        }
+        .drawer-header {
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .drawer-content {
+            overflow: hidden;
+            transition: all 0.5s ease-in-out;
+            max-height: 0;
+        }
+        .drawer-header.active .arrow-icon {
+            transition: transform 0.5s ease-in-out;
+        }
+        .drawer-header.active .arrow-icon {
+            transform: rotate(180deg);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container my-8 relative">
+        <img src="https://site.trt19.jus.br/sites/default/files/logo-trt19.png" alt="Logo do TRT19" class="absolute top-4 right-4 w-36 h-auto">
+        
+        <section id="secao-indenizacoes" class="content-section">
+            <h2 class="text-3xl font-bold text-[#00678F] mb-4">Saque e Multa de 40% do FGTS</h2>
+            
+            
+            <h3 class="text-xl font-bold text-[#00678F] mb-2">Resgate dos Depósitos do FGTS em Casos de Rescisão</h3>
+            
+            <p class="text-gray-700 leading-relaxed text-justify mb-3">O direito ao saque do saldo dos depósitos de FGTS é determinado pela modalidade de extinção do contrato, conforme detalhado abaixo:</p>
+                
+            <div class="mt-4 mb-4 p-4 border-l-4 border-[#00678F] bg-[#f0f4f8] rounded-r-md shadow-sm">
+                <ul class="list-none list-inside text-gray-700 leading-relaxed pl-4 space-y-3">
+                    <li>
+                        <p><strong class="text-[#004562]">1. Saque Integral (100% dos Depósitos):</strong> Ocorre em caso de Dispensa Sem Justa Causa (pelo empregador) ou Rescisão Indireta. O trabalhador saca todo o saldo da conta vinculada, acrescido da multa de 40%.</p>
+                    </li>
+                    <li>
+                        <p><strong class="text-[#004562]">2. Saque Parcial (80% dos Depósitos):</strong> Aplica-se na Rescisão por Comum Acordo (Art. 484-A CLT). O trabalhador tem direito a sacar 80% do saldo do FGTS, além de receber a multa reduzida de 20%.</p>
+                    </li>
+                    <li>
+                        <p><strong class="text-[#004562]">3. Saque Parcial (50% dos Depósitos):</strong> Ocorre na Culpa Recíproca, reconhecida judicialmente. O trabalhador saca 50% do saldo do FGTS, além da multa de 20%.</p>
+                    </li>
+                </ul>
+            </div>
+            <h3 class="text-xl font-bold text-[#00678F] mb-2 border-t pt-6 border-gray-200">Multa Rescisória (40% e 20%)</h3>
+
+            <p class="text-gray-700 leading-relaxed text-justify mb-6 font-normal">A multa rescisória do Fundo de Garantia por Tempo de Serviço (FGTS) é uma indenização devida pelo empregador. Ela incide sobre o montante total dos depósitos de FGTS realizados e varia conforme a modalidade da extinção contratual, o que impacta diretamente a liberação do saldo para o trabalhador.</p>
+
+
+            <div class="mt-8 mb-6 p-4 border-l-4 border-[#00678F] bg-[#f0f4f8] rounded-r-md shadow-sm">
+                <h3 class="text-xl font-bold text-[#00678F] mb-2">Diferenciais: Percentual da Multa x Tipo de Rescisão</h3>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm text-gray-700">
+                    <div>
+                        <p class="font-semibold text-gray-800 text-lg mb-1 border-b border-gray-300 pb-1">40% do FGTS (Rescisão Integral)</p>
+                        <ul class="list-none ml-2 space-y-1">
+                            <li class="font-medium text-gray-900">1. Dispensa Unilateral Sem Justa Causa:</li>
+                            <li class="ml-4 text-xs">Ato exclusivo e imotivado do empregador.</li>
+                            <li class="font-medium text-gray-900 mt-2">2. Rescisão Indireta (Justa Causa do Empregador):</li>
+                            <li class="ml-4 text-xs">Reconhecida judicialmente por falta grave do empregador.</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <p class="font-semibold text-gray-800 text-lg mb-1 border-b border-gray-300 pb-1">20% do FGTS (Rescisão Reduzida)</p>
+                        <ul class="list-none ml-2 space-y-1">
+                            <li class="font-medium text-gray-900">1. Rescisão por Comum Acordo (Art. 484-A CLT):</li>
+                            <li class="ml-4 text-xs">Acordo consensual entre empregado e empregador (Lei 13.467/17).</li>
+                            <li class="font-4 text-gray-900 mt-2">2. Culpa Recíproca:</li>
+                            <li class="ml-4 text-xs">Quando ambas as partes cometem falta grave, reconhecida por decisão judicial.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div id="base-legal-drawer" class="drawer-container">
+                <div id="base-legal-header" class="drawer-header">
+                    <h4 class="text-xl font-semibold text-[#00678F]">Base Legal e Jurisprudência</h4>
+                    <svg class="arrow-icon w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                    </svg>
+                </div>
+                <div id="base-legal-content" class="drawer-content">
+                    <h5 class="text-lg font-semibold text-gray-800 mt-4">Normas Legais Primárias</h5>
+                    <ul class="list-none list-inside text-gray-700 leading-relaxed mt-2 pl-4 space-y-3">
+                        <li>
+                            <p><span class="text-[#00678F]">Lei nº 8.036/90 (Lei do FGTS) - Art. 18, §§ 1º e 2º:</span> É o fundamento legal direto que estabelece a obrigação do empregador de pagar a indenização de 40% (quarenta por cento) sobre o montante de todos os depósitos de FGTS, corrigidos monetariamente, realizados na conta vinculada do trabalhador, em caso de dispensa sem justa causa.</p>
+                        </li>
+                        <li>
+                            <p><span class="text-[#00678F]">CLT (Decreto-Lei nº 5.452/43) - Art. 484-A:</span> Dispositivo adicionado pela Reforma Trabalhista (Lei nº 13.467/17) que permite a extinção do contrato de trabalho por comum acordo, estabelecendo que a multa do FGTS será de **20%** sobre o total depositado.</p>
+                        </li>
+                    </ul>
+
+                    <hr class="my-4 border-gray-300">
+
+                    <h5 class="text-lg font-semibold text-gray-800">Principais Entendimentos Jurisprudenciais (TST)</h5>
+                    <ul class="list-none list-inside text-gray-700 leading-relaxed mt-2 pl-4 space-y-3">
+                        <li>
+                            <p><span class="text-[#00678F]">Súmula nº 46 do TST:</span> Confirma que a multa de 40% (quarenta por cento) é devida sobre o **total dos depósitos realizados**, durante a vigência do contrato de trabalho, devidamente corrigidos monetariamente, reafirmando que a base de cálculo é o acumulado histórico, não apenas o saldo atual.</p>
+                        </li>
+                        <li>
+                            <p><span class="text-[#00678F]">Orientação Jurisprudencial (OJ) 349 da SDI-1 do TST:</span> Estabelece que saques do FGTS, seja para adesão a Plano de Demissão Voluntária (PDV) ou para aquisição de moradia, **não alteram** a base de cálculo da multa rescisória de 40% devida em caso de posterior dispensa sem justa causa. O cálculo incide sobre o total depositado no período.</p>
+                        </li>
+                        <li>
+                            <p><span class="text-[#00678F]">Súmula nº 304 do TST:</span> (Embora não trate diretamente da base, o princípio do TST é que o valor devido é integral sobre o total corrigido, sendo fundamental para o entendimento consolidado da matéria.)</p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div id="base-calculo-drawer" class="drawer-container">
+                <div id="base-calculo-header" class="drawer-header">
+                    <h4 class="text-xl font-semibold text-[#00678F]">Base de Cálculo e Deduções</h4>
+                    <svg class="arrow-icon w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                    </svg>
+                </div>
+                <div id="base-calculo-content" class="drawer-content">
+                    <p class="text-gray-700 leading-relaxed text-justify mt-4">A multa rescisória (40% ou 20%) é aplicada sobre o montante total de depósitos devidamente corrigidos. É fundamental entender os componentes dessa base e as regras de dedução:</p>
+                    
+                    <hr class="my-4 border-gray-300">
+
+                    <h5 class="text-lg font-semibold text-gray-800">Cálculo e Composição da Base</h5>
+                    <ul class="list-none list-inside text-gray-700 leading-relaxed mt-2 pl-4">
+                        <li><strong class="text-gray-900">Total dos Depósitos:</strong> Soma de todos os valores recolhidos mensalmente pelo empregador (8% da remuneração) desde o início do contrato.</li>
+                        <li><strong class="text-gray-900">Correções Monetárias:</strong> A base deve incluir as atualizações e juros aplicados pela Caixa Econômica Federal.</li>
+                        <li><strong class="text-gray-900">Inclusão de Saques:</strong> A multa é calculada sobre todos os depósitos realizados no contrato, incluindo aqueles que o empregado possa ter sacado para fins específicos (como moradia ou aposentadoria), desde que devidamente corrigidos.</li>
+                    </ul>
+                    <h5 class="text-lg font-semibold text-gray-800 mt-4">Regra de Não Dedução (Saques Anteriores)</h5>
+                    <div class="p-4 bg-yellow-50 rounded-md mt-2 border border-yellow-300">
+                        <p class="font-bold text-sm text-yellow-800">Movimentações do Saldo:</p>
+                        <p class="text-sm mt-1 text-yellow-800">Os saques realizados pelo empregado (ex: moradia própria, aposentadoria) **não diminuem a base de cálculo da multa**. A indenização continua incidindo sobre o total depositado e corrigido durante o contrato, mesmo que o saldo atual na conta do FGTS esteja zerado.</p>
+                    </div>
+                </div>
+            </div>
+            <div id="reflexo-verbas-drawer" class="drawer-container">
+                <div id="reflexo-verbas-header" class="drawer-header">
+                    <h4 class="text-xl font-semibold text-[#00678F]">Verbas Reflexas</h4>
+                    <svg class="arrow-icon w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                    </svg>
+                </div>
+                <div id="reflexo-verbas-content" class="drawer-content">
+                    <p class="text-gray-700 leading-relaxed text-justify mt-4">A incidência do FGTS e da sua respectiva multa de 40% (ou 20%) sobre outras parcelas salariais é um ponto crucial em cálculos judiciais, especialmente quando são deferidas verbas com natureza salarial em sentença.</p>
+                    
+                    <hr class="my-4 border-gray-300">
+
+                    <h5 class="text-lg font-semibold text-gray-800">Cadeia de Incidências</h5>
+                    <ul class="list-none list-inside text-gray-700 leading-relaxed mt-2 pl-4 space-y-3">
+                        <li><strong class="text-gray-900">FGTS sobre Verbas Deferidas:</strong> O **FGTS (8%)** deve incidir sobre toda verba salarial deferida em juízo que integre a remuneração (ex: horas extras, adicional noturno, periculosidade, etc.).</li>
+                        <li><strong class="text-gray-900">Multa sobre o Novo FGTS:</strong> Consequentemente, a **multa rescisória (40% ou 20%)** deve incidir sobre o valor do FGTS calculado sobre essas novas verbas salariais (reflexo sobre reflexo).</li>
+                        <li><strong class="text-gray-900">A Multa Não Gera Reflexo:</strong> A própria multa de 40% (ou 20%) possui natureza indenizatória e **não integra a base de cálculo** para FGTS, férias, 13º salário, aviso prévio ou qualquer outra verba.</li>
+                    </ul>
+                    
+                    <div class="p-4 bg-indigo-50 rounded-md mt-4 border border-indigo-300">
+                        <p class="font-bold text-sm text-indigo-800">Base Legal Adicional (Súmula 63 do TST):</p>
+                        <p class="text-sm mt-1 text-indigo-800">A Súmula 63 do TST estabelece que a contribuição para o Fundo de Garantia por Tempo de Serviço (FGTS) é devida sobre a remuneração percebida no período do contrato de trabalho, o que fundamenta a incidência sobre as verbas salariais reconhecidas judicialmente.</p>
+                    </div>
+                </div>
+            </div>
+            <div id="calculadora-drawer" class="drawer-container">
+                <div id="calculadora-header" class="drawer-header">
+                    <h4 class="text-xl font-semibold text-[#00678F]">Calculadora (Simulação)</h4>
+                    <svg class="arrow-icon w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                    </svg>
+                </div>
+                <div id="calculadora-content" class="drawer-content">
+                    <p class="text-gray-700 leading-relaxed text-justify mt-4">Esta calculadora simula o valor da multa e o total que será liberado para saque com base no montante total dos depósitos de FGTS feitos durante o contrato e o tipo de rescisão. **Atenção:** os resultados representam o valor total bruto (base + multa).</p>
+                    <div class="p-6 bg-white rounded-xl shadow-lg border border-gray-200 mt-4">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <label for="fgtsTotalDepositado" class="block text-sm font-medium text-gray-700">Total de Depósitos de FGTS Corrigido (R$)</label>
+                                <input type="number" id="fgtsTotalDepositado" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-3 border focus:ring-[#00678F] focus:border-[#00678F]" placeholder="Ex: 25000.00" min="0">
+                            </div>
+                            <div>
+                                <label for="tipoRescisao" class="block text-sm font-medium text-gray-700">Tipo de Rescisão (Percentual da Multa)</label>
+                                <select id="tipoRescisao" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-3 border bg-white focus:ring-[#00678F] focus:border-[#00678F]">
+                                    <option value="0">Selecione...</option>
+                                    <option value="0.40">Dispensa sem Justa Causa (40%)</option>
+                                    <option value="0.20">Dispensa por Acordo ou Culpa Recíproca (20%)</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <button id="calcularSimulacaoBtn" class="mt-6 w-full px-4 py-3 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 transition duration-300 shadow-lg font-bold">
+                            Calcular Multa e Saque
+                        </button>
+
+                        <div class="mt-6 pt-4 border-t border-gray-200 space-y-3">
+                            <h5 class="text-lg font-semibold text-gray-800">Resultados do Cálculo:</h5>
+                            
+                            <div class="p-3 bg-blue-50 rounded-md border-l-4 border-blue-500">
+                                <p class="text-sm font-medium text-blue-800">Valor da Multa Rescisória (40% ou 20%):</p>
+                                <p id="resultadoMulta" class="text-xl font-bold text-blue-900 mt-1">R$ 0,00</p>
+                            </div>
+                            
+                            <div class="p-3 bg-blue-50 rounded-md border-l-4 border-blue-500">
+                                <p class="text-sm font-medium text-blue-800">Total Bruto (Depósitos + Multa):</p>
+                                <p id="resultadoTotal" class="text-xl font-bold text-blue-900 mt-1">R$ 0,00</p>
+                            </div>
+                            
+                            <p class="text-xs text-gray-500 mt-4 italic">O valor final a sacar é ajustado conforme a regra de saque do FGTS (100%, 80% ou 50% dos depósitos), somado ao valor total da multa.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="pje-calc-drawer" class="drawer-container">
+                <div id="pje-calc-header" class="drawer-header">
+                    <h4 class="text-xl font-semibold text-[#00678F]">Lançamento no PJe-Calc</h4>
+                    <svg class="arrow-icon w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                    </svg>
+                </div>
+                <div id="pje-calc-content" class="drawer-content">
+                    <p class="text-gray-700 leading-relaxed text-justify mt-4">No sistema PJe-Calc, a Multa de 40% (ou 20%) do FGTS é geralmente calculada a partir dos dados do contrato de trabalho e dos valores de depósitos informados, ou de forma manual, quando os dados da CTPS ou dos extratos são insuficientes.</p>
+                    
+                    <hr class="my-4 border-gray-300">
+
+                    <h5 class="text-lg font-semibold text-gray-800">Passos Comuns para o Cálculo Judicial</h5>
+                    <ul class="list-none list-inside text-gray-700 leading-relaxed mt-2 pl-4 space-y-3">
+                        <li><strong class="text-gray-900">1. Tela de Dados do FGTS (Passo Inicial):</strong> Acesse a aba "FGTS" no menu lateral. É possível visualizar a área de cálculo com o destino ("Pagar" ou "Recolher"), a opção "Multa" e os percentuais (20% ou 40%) e o período de incidência.
+                            <img src="imagens_direitos/fgts1.png" alt="Tela inicial de dados do FGTS no PJe-Calc" class="mt-3 rounded-lg shadow-md border border-gray-300 w-full h-auto">
+                        </li>
+                        <li><strong class="text-gray-900">2. Configuração de Multa e Incidência:</strong> Marque a opção "Multa" e selecione o percentual (20% ou 40%) e o tipo de incidência ("Sobre devido" é o mais comum, mas há outras opções). A opção de deduzir o FGTS do saldo/saque também está presente.
+                            <img src="imagens_direitos/fgts2.png" alt="Configuração da Multa de 20% no PJe-Calc" class="mt-3 rounded-lg shadow-md border border-gray-300 w-full h-auto">
+                        </li>
+                         <li><strong class="text-gray-900">3. Detalhe da Configuração (Período):</strong> A tela mostra a configuração da Multa em 20% com incidência "Sobre devido" para o período de 04/11/2020 a 06/09/2025.
+                            <img src="imagens_direitos/fgts3.png" alt="Detalhe da configuração da Multa no PJe-Calc" class="mt-3 rounded-lg shadow-md border border-gray-300 w-full h-auto">
+                        </li>
+                        <li><strong class="text-gray-900">4. Lançamento dos Valores (Ocorrências):</strong> Na aba "Ocorrências", o usuário insere os valores de Base (Histórico) e Recolhido para cada competência, permitindo o cálculo do valor devido.
+                            <img src="imagens_direitos/fgts4.png" alt="Tela de Ocorrências do FGTS no PJe-Calc" class="mt-3 rounded-lg shadow-md border border-gray-300 w-full h-auto">
+                        </li>
+                        <li><strong class="text-gray-900">5. Juros e Correção Monetária:</strong> O PJe-Calc aplica a correção monetária e os juros de mora (a partir do ajuizamento da ação) sobre o valor da multa, conforme os índices judiciais aplicáveis ao Título Executivo Judicial (sentença).</li>
+                    </ul>
+                    
+                    <div class="p-4 bg-red-50 rounded-md mt-4 border border-red-300">
+                        <p class="font-bold text-sm text-red-800">Atenção Judicial:</p>
+                        <p class="text-sm mt-1 text-red-800">Em cálculos de **Rescisão Indireta**, o percentual de 40% deve ser lançado sobre a base corrigida. Em caso de **Culpa Recíproca** ou **Comum Acordo**, o percentual deve ser de 20%, conforme o entendimento legal.</p>
+                    </div>
+                </div>
+            </div>
+            </section>
+    </div>
+
+    <script>
+        // Função para formatar números como moeda BRL
+        const formatter = new Intl.NumberFormat('pt-BR', {
+            style: 'currency',
+            currency: 'BRL',
+            minimumFractionDigits: 2,
+        });
+        
+        function calculateSimulation() {
+            const totalDepositadoInput = document.getElementById('fgtsTotalDepositado');
+            const tipoRescisaoSelect = document.getElementById('tipoRescisao');
+            
+            const resultadoMulta = document.getElementById('resultadoMulta');
+            const resultadoTotal = document.getElementById('resultadoTotal');
+
+            // 1. Coleta e validação dos inputs
+            const totalDepositado = parseFloat(totalDepositadoInput.value) || 0;
+            const multiplicadorMulta = parseFloat(tipoRescisaoSelect.value) || 0;
+
+            if (totalDepositado <= 0) {
+                resultadoMulta.textContent = 'R$ 0,00 (Informe o total depositado)';
+                resultadoTotal.textContent = 'R$ 0,00';
+                return;
+            }
+
+            // 2. Cálculo da Multa Rescisória (40% ou 20%)
+            if (multiplicadorMulta === 0) {
+                resultadoMulta.textContent = 'R$ 0,00 (Selecione o Tipo de Rescisão)';
+                resultadoTotal.textContent = formatter.format(totalDepositado); // Mantém o saldo, mas a multa é zero
+                return;
+            }
+
+            const valorMulta = totalDepositado * multiplicadorMulta;
+            resultadoMulta.textContent = formatter.format(valorMulta);
+
+            // 3. Cálculo do Saldo Total Liberado (Depósitos + Multa)
+            // Esta simulação mostra o total bruto (base + multa). O usuário deve aplicar a regra de saque (100%, 80% ou 50%) para obter o valor real a sacar.
+            const totalLiberadoBruto = totalDepositado + valorMulta;
+            resultadoTotal.textContent = formatter.format(totalLiberadoBruto);
+            
+        }
+
+        // Configuração dos Event Listeners para a Calculadora
+        document.getElementById('calcularSimulacaoBtn').addEventListener('click', calculateSimulation);
+        
+        // Lógica para os drawers expansíveis
+        function setupDrawer(drawerId, startOpen = false) {
+            const header = document.getElementById(`${drawerId}-header`);
+            const content = document.getElementById(`${drawerId}-content`);
+
+            if (startOpen) {
+                header.classList.add('active');
+                content.style.maxHeight = content.scrollHeight + "px";
+            } else {
+                header.classList.remove('active');
+                content.style.maxHeight = "0";
+            }
+
+            header.addEventListener('click', () => {
+                const isExpanded = header.classList.toggle('active');
+                content.style.maxHeight = isExpanded ? content.scrollHeight + "px" : "0";
+            });
+        }
+
+        // Inicializa os drawers
+        setupDrawer('base-legal', false); // Mantém fechado ao carregar
+        setupDrawer('base-calculo');
+    </script>
+</body>
+</html>

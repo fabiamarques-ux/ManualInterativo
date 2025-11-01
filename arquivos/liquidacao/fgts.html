@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lançamento do FGTS</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f1f5f9;
+        }
+
+        .text-justify {
+            text-align: justify;
+        }
+
+        .aside-bg {
+            background-color: #005a62;
+        }
+
+        /* Estilo para a Logo */
+        .logo-trt {
+            max-height: 60px;
+            width: auto;
+        }
+
+        /* Estilos e Transições para o Acordeão PRINCIPAL */
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out, padding 0.3s ease-out;
+            padding-top: 0;
+            padding-bottom: 0;
+            background-color: #f0f4f8;
+        }
+
+        .accordion-content.active {
+            max-height: 20000px;
+            padding-top: 1rem;
+            padding-bottom: 1rem;
+        }
+
+        .accordion-header {
+            background-color: #f0f4f8;
+        }
+
+        .accordion-icon {
+            transition: transform 0.3s ease;
+            font-size: 1.5rem;
+            line-height: 1;
+        }
+
+        .accordion-icon.rotate {
+            transform: rotate(45deg);
+        }
+
+        /* Estilos e Transições para o SUB-ACORDEÃO (Modalidades) */
+        .sub-acordeon-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out, padding 0.3s ease-out;
+            padding-top: 0;
+            padding-bottom: 0;
+        }
+
+        .sub-acordeon-content.active {
+            max-height: 20000px;
+            padding-top: 1rem;
+            padding-bottom: 1rem;
+        }
+
+        /* Estilo para imagens no conteúdo do acordeão */
+        .content-image {
+            max-width: 100%;
+            height: auto;
+            border: 1px solid #ccc;
+            border-radius: 0.5rem;
+            margin-top: 1rem;
+            margin-bottom: 1rem;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="p-4 md:p-8">
+        <div class="max-w-4xl mx-auto bg-white rounded-xl shadow-xl p-6 md:p-10 border border-gray-200">
+            <div class="flex justify-center mb-6">
+                <img src="https://site.trt19.jus.br/portalTRT19/sites/default/files/logo-trt19.png" alt="Logo do TRT19"
+                    class="logo-trt w-auto object-contain">
+            </div>
+            <h1 class="text-3xl md:text-4xl text-center mb-6 text-[#007380]">Manual Interativo de Cálculos Trabalhistas
+            </h1>
+            <p class="text-center text-gray-600 mb-8">Um guia completo e interativo para entender os cálculos na esfera
+                judicial trabalhista.</p>
+
+            <section id="liquidacao-verbas-content" class="content-section">
+                <h2 class="sr-only">Lançamento do FGTS</h2>
+                <div class="space-y-4">
+                    <p class="text-gray-700 text-justify">
+                        O módulo FGTS é crucial para a apuração dos depósitos devidos e da multa de 40% (ou 20%, se for o caso)
+                        sobre o total do FGTS, incluindo as parcelas não depositadas durante o contrato de trabalho e o reflexo
+                        do FGTS sobre as verbas rescisórias deferidas.
+                    </p>
+                    <h4 class="text-lg text-[#007380] font-semibold mt-4">1. Lançamento da Base de Cálculo e Multas</h4>
+                    <p class="text-gray-700 text-justify">
+                        Na tela de FGTS, você deve configurar os parâmetros para apuração.
+                    </p>
+                    <ul class="list-disc list-inside text-gray-700 text-justify text-sm mt-2">
+                        <li>Multa: Marque o checkbox "Calcular Multa" e defina o percentual devido (40%, 20% ou outro).</li>
+                        <li>Base de Cálculo: Selecione as verbas que servirão de base para o cálculo do FGTS (ex: Salário Devido, Salário Pago). Verbas já marcadas como incidência de FGTS no Histórico Salarial ou nas Verbas aparecerão automaticamente.</li>
+                        <li>Depósitos: Indique se houve ou não a comprovação dos depósitos (ex: "Depositar diferenças, não houve depósitos").</li>
+                    </ul>
+                    <img src="imagens_liquidacao/fgts1.png" alt="Tela de FGTS, mostrando a configuração de Multa, Base de Cálculo e Opções de Depósitos"
+                        class="content-image max-w-xl">
+                    <h4 class="text-lg text-[#007380] font-semibold mt-4">2. Detalhamento dos Cálculos</h4>
+                    <p class="text-gray-700 text-justify">
+                        Após configurar e salvar, o sistema calculará o FGTS incidente sobre o salário do período contratual
+                        (se não depositado) e sobre o reflexo das verbas principais deferidas (ex: 13º salário, aviso prévio,
+                        horas extras).
+                    </p>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const headers = document.querySelectorAll('.accordion-header');
+
+            headers.forEach(header => {
+                const content = header.nextElementSibling;
+                const icon = header.querySelector('.accordion-icon');
+
+                content.classList.remove('active');
+                content.style.maxHeight = '0';
+                content.style.paddingTop = '0';
+                content.style.paddingBottom = '0';
+                icon.innerHTML = '+';
+
+                header.addEventListener('click', () => {
+                    document.querySelectorAll('.accordion-header').forEach(otherHeader => {
+                        if (otherHeader !== header) {
+                            const otherContent = otherHeader.nextElementSibling;
+                            const otherIcon = otherHeader.querySelector('.accordion-icon');
+                            if (otherContent.classList.contains('active')) {
+                                otherContent.style.maxHeight = '0';
+                                otherContent.style.paddingTop = '0';
+                                otherContent.style.paddingBottom = '0';
+                                otherIcon.innerHTML = '+';
+                                otherIcon.classList.remove('rotate');
+                                otherContent.classList.remove('active');
+                            }
+                        }
+                    });
+
+                    if (content.classList.contains('active')) {
+                        content.style.maxHeight = '0';
+                        content.style.paddingTop = '0';
+                        content.style.paddingBottom = '0';
+                        icon.innerHTML = '+';
+                        icon.classList.remove('rotate');
+                        content.classList.remove('active');
+                    } else {
+                        content.classList.add('active');
+                        content.style.maxHeight = '20000px';
+                        content.style.paddingTop = '1rem';
+                        content.style.paddingBottom = '1rem';
+                        icon.innerHTML = '-';
+                        icon.classList.add('rotate');
+                    }
+                });
+            });
+
+            const subHeaders = document.querySelectorAll('.sub-acordeon-header');
+
+            subHeaders.forEach(header => {
+                const content = header.nextElementSibling;
+                const icon = header.querySelector('.sub-acordeon-icon');
+
+                content.classList.remove('active');
+                content.style.maxHeight = '0';
+                content.style.paddingTop = '0';
+                content.style.paddingBottom = '0';
+                icon.innerHTML = '+';
+
+                header.addEventListener('click', () => {
+                    if (content.classList.contains('active')) {
+                        content.style.maxHeight = '0';
+                        content.style.paddingTop = '0';
+                        content.style.paddingBottom = '0';
+                        icon.innerHTML = '+';
+                        content.classList.remove('active');
+                    } else {
+                        content.classList.add('active');
+                        content.style.maxHeight = '20000px';
+                        content.style.paddingTop = '1rem';
+                        content.style.paddingBottom = '1rem';
+                        icon.innerHTML = '-';
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>

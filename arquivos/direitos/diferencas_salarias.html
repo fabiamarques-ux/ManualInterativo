@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diferenças Salariais</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f4f8;
+            color: #1a202c;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 2rem;
+            background-color: #ffffff;
+            border-radius: 1rem;
+            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.05);
+        }
+
+        .loading-spinner {
+            border: 4px solid rgba(0, 103, 143, 0.1);
+            border-top: 4px solid #00678F;
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            animation: spin 1s linear infinite;
+            margin-right: 0.5rem;
+            display: none;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        .drawer-container {
+            padding: 1rem;
+            background-color: #f0f4f8;
+            border-radius: 0.75rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+            margin-top: 1.5rem;
+        }
+
+        .drawer-header {
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .drawer-content {
+            overflow: hidden;
+            transition: all 0.5s ease-in-out;
+            max-height: 0;
+        }
+
+        .drawer-header .arrow-icon {
+            transition: transform 0.5s ease-in-out;
+        }
+
+        .drawer-header.active .arrow-icon {
+            transform: rotate(180deg);
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container my-8 relative">
+        <img src="https://site.trt19.jus.br/sites/default/files/logo-trt19.png" alt="Logo do TRT19"
+            class="absolute top-4 right-4 w-36 h-auto">
+
+        <section id="diferencas-salariais" class="content-section">
+            <h2 class="text-3xl font-bold text-[#00678F] mb-4">Diferenças Salariais</h2>
+            <p class="text-gray-700 leading-relaxed text-justify">A diferença salarial refere-se à variação na
+                remuneração paga a indivíduos, que pode ocorrer por diversos motivos. É importante distinguir entre a
+                disparidade salarial justificada e a desigualdade salarial discriminatória. Aqui, você encontrará uma
+                análise detalhada das diferentes espécies de diferenças salariais e como elas impactam os cálculos
+                trabalhistas.</p>
+
+            <div class="mt-4 p-4 bg-gray-100 rounded-lg border border-gray-300">
+                <h3 class="text-xl font-bold text-gray-800 mb-2">Tipos de Variação Salarial</h3>
+                <p class="text-gray-700 leading-relaxed text-justify mt-2"><strong>Diferença Salarial Justificada (ou
+                        Disparidade Salarial Natural):</strong> É a variação de salário que é justificada por fatores
+                    objetivos e legais, como:</p>
+                <ul class="list-disc list-inside text-gray-700 leading-relaxed pl-4">
+                    <li>Nível de qualificação e experiência: Pessoas com maior formação, certificações ou mais tempo de
+                        experiência na função podem receber mais.</li>
+                    <li>Desempenho e produtividade: Diferenciais baseados em metas atingidas, qualidade do trabalho ou
+                        resultados superiores.</li>
+                    <li>Regime de trabalho: Jornada parcial versus jornada integral, ou regime de turnos específicos
+                        (que podem gerar adicionais).</li>
+                    <li>Tempo de empresa/progressão na carreira: Salários diferentes devido ao tempo que cada um está na
+                        empresa ou ao nível hierárquico alcançado.</li>
+                </ul>
+                <p class="text-gray-700 leading-relaxed text-justify mt-4"><strong>Desigualdade Salarial ou
+                        Discriminação Salarial:</strong> É a diferença de remuneração que não é justificada por
+                    critérios objetivos e se baseia em fatores discriminatórios ou sistêmicos, como:</p>
+                <ul class="list-disc list-inside text-gray-700 leading-relaxed pl-4">
+                    <li>Gênero: Homens e mulheres recebendo salários diferentes por desempenharem o mesmo trabalho ou
+                        trabalho de igual valor, com a mesma produtividade e qualificação.</li>
+                    <li>Raça ou Etnia: Indivíduos de minorias raciais ou étnicas recebendo menos que seus colegas com as
+                        mesmas qualificações e funções.</li>
+                    <li>Idade, orientação sexual, estado civil, ou origem: Qualquer diferença salarial baseada em
+                        características pessoais que não se relacionam com o trabalho executado.</li>
+                </ul>
+                <p class="text-gray-700 leading-relaxed text-justify mt-4">Em resumo, enquanto diferenças salariais
+                    podem ser legais e justas quando baseadas em critérios como qualificação e desempenho, a
+                    desigualdade salarial é o problema social e legal que ocorre quando a diferença é fruto de
+                    discriminação. A legislação busca garantir a equiparação salarial, ou seja, que para trabalho de
+                    igual valor, o salário seja igual, combatendo ativamente a discriminação salarial.</p>
+            </div>
+
+
+            <div class="mt-6 p-4 bg-blue-50 rounded-lg border border-blue-200">
+                <h3 class="text-xl font-bold text-blue-800 mb-2">Mecanismos de Correção Salarial</h3>
+                <p class="text-gray-700 leading-relaxed text-justify mb-3">Estes são os principais instrumentos
+                    jurídicos e verbas judiciais utilizadas para pleitear a correção de diferenças salariais indevidas
+                    ou discriminatórias:</p>
+                <ul class="list-disc list-inside text-gray-700 leading-relaxed pl-4">
+                    <li>
+                        <strong>Equiparação Salarial:</strong> O direito de receber o mesmo salário de um colega que
+                        exerce a mesma função.
+                    </li>
+                    <li>
+                        <strong>Desvio de Função:</strong> Quando o empregado é contratado para uma função, mas passa a
+                        exercer as tarefas de outra com salário superior.
+                    </li>
+                    <li>
+                        <strong>Acúmulo de Função:</strong> Quando o empregado realiza tarefas extras, além das
+                        originais, que são incompatíveis com seu cargo e exigem um "plus" salarial.
+                    </li>
+                    <li>
+                        <strong>Outras Diferenças Salariais:</strong> Diferenças por piso salarial, reajustes
+                        normativos, promoções não concedidas e substituições temporárias.
+                    </li>
+                </ul>
+            </div>
+
+            <div id="equip-salarial-drawer" class="drawer-container">
+                <div id="equip-salarial-header" class="drawer-header">
+                    <h4 class="text-xl font-semibold text-[#00678F]">Base Legal e Jurisprudência</h4>
+                    <svg class="arrow-icon w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                    </svg>
+                </div>
+                <div id="equip-salarial-content" class="drawer-content">
+                    <p class="text-gray-700 leading-relaxed text-justify mt-4">O direito ao recebimento de Diferenças
+                        Salarias tem por base a legislação a seguir:</p>
+                    <h5 class="text-lg font-semibold text-gray-800 mt-4">Fontes Normativas</h5>
+
+                    <hr class="my-4 border-gray-300">
+                    <h5 class="text-base font-semibold text-gray-800">Constituição Federal (CF/88):</h5>
+                    <ul class="list-disc list-inside text-gray-700 leading-relaxed mt-2 ml-4 space-y-3">
+                        <li><strong>Art. 5º, caput e I:</strong>
+                            <p class="text-sm italic mt-1 ml-4 border-l-2 border-gray-400 pl-3">Todos são iguais
+                                perante a lei, sem distinção de qualquer natureza, garantindo-se aos brasileiros e aos
+                                estrangeiros residentes no País a inviolabilidade do direito à vida, à liberdade, à
+                                igualdade, à segurança e à propriedade, nos termos seguintes: I - homens e mulheres são
+                                iguais em direitos e obrigações, nos termos desta Constituição;</p>
+                        </li>
+                        <li><strong>Art. 7º, XXX:</strong>
+                            <p class="text-sm italic mt-1 ml-4 border-l-2 border-gray-400 pl-3">Art. 7º São direitos dos trabalhadores urbanos e rurais, além de outros que visem à melhoria de sua condição social:<p>
+                            <p class="text-sm italic mt-1 ml-4 border-l-2 border-gray-400 pl-3">proibição de diferença
+                                de salários, de exercício de funções e de critério de admissão por motivo de sexo,
+                                idade, cor ou estado civil;</p>
+                        </li>
+                    </ul>
+
+                    <hr class="my-4 border-gray-300">
+                    <h5 class="text-base font-semibold text-gray-800">Consolidação das Leis do Trabalho (CLT):</h5>
+                    <ul class="list-disc list-inside text-gray-700 leading-relaxed mt-2 ml-4">
+                        <li><strong>Art. 461 (Equiparação Salarial):</strong>
+                            <p class="text-sm italic mt-1 ml-4 border-l-2 border-gray-400 pl-3">Sendo idêntica a
+                                função, a todo trabalho de igual valor, prestado ao mesmo empregador, no mesmo
+                                estabelecimento, corresponderá igual salário, sem distinção de sexo, etnia,
+                                nacionalidade ou idade.</p>
+                        </li>
+                    </ul>
+
+                    <hr class="my-4 border-gray-300">
+                    <h5 class="text-base font-semibold text-gray-800">Lei nº 14.611/2023 (Igualdade Salarial e de
+                        Critérios Remuneratórios):</h5>
+                    <ul class="list-disc list-inside text-gray-700 leading-relaxed mt-2 ml-4">
+                        <li><strong>Art. 1º, caput:</strong>
+                            <p class="text-sm italic mt-1 ml-4 border-l-2 border-gray-400 pl-3">Esta Lei dispõe sobre a
+                                igualdade salarial e de critérios remuneratórios entre mulheres e homens para a
+                                realização de trabalho de igual valor ou no exercício da mesma função.</p>
+                        </li>
+                    </ul>
+
+                    <hr class="my-6 border-gray-300">
+
+                    <h5 class="text-lg font-semibold text-gray-800">Jurisprudência</h5>
+
+                    <h6 class="text-base font-semibold text-gray-800 mt-4">Equiparação Salarial</h6>
+                    <div class="p-4 bg-gray-100 rounded-md mt-2 border border-gray-300">
+                        <p class="font-bold text-sm">Súmula nº 6 do TST (Principais Incisos):</p>
+                        <p class="text-sm mt-1 italic">I - Para os fins previstos no § 2º do art. 461 da CLT, só é
+                            relevante a experiência na função e não no emprego. III - A equiparação salarial só é
+                            possível se o empregado e o paradigma exercerem a mesma função, desempenhando as mesmas
+                            tarefas, independentemente da denominação dada aos cargos. VIII - Em caso de equiparação
+                            salarial, o ônus da prova do fato impeditivo, modificativo ou extintivo da equiparação
+                            salarial é do empregador (art. 818 da CLT). X - O conceito de "mesmo estabelecimento" a que
+                            se refere o art. 461 da CLT, diz respeito ao mesmo local de trabalho, independentemente da
+                            jurisdição do Tribunal Regional do Trabalho.</p>
+                    </div>
+
+                    <h6 class="text-base font-semibold text-gray-800 mt-6">Desvio de Função</h6>
+                    <div class="p-4 bg-gray-100 rounded-md mt-2 border border-gray-300">
+                        <p class="font-bold text-sm">Princípio do TST Consolidado (Vedação ao Enriquecimento Sem Causa -
+                            Art. 884 CC):</p>
+                        <p class="text-sm mt-1 italic">"O desvio de função, que ocorre quando o empregado é contratado
+                            para uma função, mas exerce tarefas de outra com salário superior, não gera direito ao
+                            reenquadramento no cargo, mas sim o direito ao pagamento das diferenças salariais entre o
+                            salário do cargo contratado e o da função efetivamente exercida, enquanto perdurar o
+                            desvio."</p>
+                        <p class="text-xs mt-2 text-gray-600">*(Nota: Este entendimento é pacífico no TST para o setor
+                            privado e tem como base o princípio da vedação ao enriquecimento ilícito do empregador.
+                            Precedente histórico: OJ nº 125 da SDI-1 do TST, cancelada por razões específicas do setor
+                            público).*</p>
+                    </div>
+
+                    <h6 class="text-base font-semibold text-gray-800 mt-6">Acúmulo de Função</h6>
+                    <div class="p-4 bg-gray-100 rounded-md mt-2 border border-gray-300">
+                        <p class="font-bold text-sm">Jurisprudência Consolidada e CLT Art. 456, parágrafo único:</p>
+                        <p class="text-sm mt-1 italic">A jurisprudência majoritária reconhece o acúmulo de função e
+                            arbitra um *plus* salarial (geralmente percentual sobre o salário) apenas quando há
+                            acréscimo de tarefas de maior complexidade, incompatíveis com o cargo contratado, ou que
+                            exijam um esforço superior ao ajustado.</p>
+                        <p class="text-sm mt-1 italic border-l-2 border-gray-400 pl-3">CLT, Art. 456, parágrafo único:
+                            "A anotação na Carteira de Trabalho e Previdência Social será feita mediante a apresentação
+                            de documento comprobatório. Parágrafo único. A prestação de serviços a mais de um
+                            empregador, por si só, não caracteriza acúmulo de funções, salvo se houver incompatibilidade
+                            de horários ou se as atividades forem inerentes a dois cargos distintos."</p>
+                    </div>
+
+                </div>
+            </div>
+
+            <div id="calculo-deducoes-drawer" class="drawer-container">
+                <div id="calculo-deducoes-header" class="drawer-header">
+                    <h4 class="text-xl font-semibold text-[#00678F]">Base de Cálculo e Deduções</h4>
+                    <svg class="arrow-icon w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                    </svg>
+                </div>
+                <div id="calculo-deducoes-content" class="drawer-content">
+
+                                        <div class="p-3 mt-2 mb-4 bg-yellow-50 border-l-4 border-yellow-500 rounded-r-md">
+                        <p class="text-gray-900 leading-relaxed text-justify font-medium">
+                            IMPORTANTE: As Diferenças Salariais devem integrar o valor da Remuneração
+                            Total (Salário-Base + Adicionais + H. Extras + Gratificações ) para fins de cálculo das
+                            deduções obrigatórias fiscais e para formação da base de cálculo das Verbas Reflexas.
+                        </p>
+                    </div>
+
+                    <hr class="mb-6 mt-0 border-[#00678F]">
+                    <h4 class="text-xl font-semibold text-[#00678F]">Definição da Base de Cálculo</h4>
+                    <p class="text-gray-700 leading-relaxed text-justify mt-2">
+                        A base de cálculo é o montante sobre o qual incidirão os cálculos para apurar o valor devido.
+                    </p>
+                    <p class="text-gray-700 leading-relaxed text-justify mt-2">
+                        Para calcular a Diferença Salarial, considera-se o valor devido a título de salário que deixou
+                        de ser pago. Por ter natureza salarial, ela serve de base de cálculo para diversas outras
+                        verbas.
+                    </p>
+
+                    <h6 class="text-lg font-bold text-[#00678F] mt-4">Composição da Base de Cálculo:</h6>
+
+                    <p class="text-gray-700 leading-relaxed text-justify mt-2">
+                        A Base de Cálculo da Diferença Salarial é formada pelo somatório das bases:
+                    </p>
+
+                    <ul class="list-disc list-inside text-gray-700 leading-relaxed mt-2 pl-4 space-y-2">
+                        <li><strong>Base Principal:</strong> Diferença do Salário Base (Salário Devido - Salário Pago)
+                        </li>
+                        <li><strong>Bases Adicionais:</strong> A mudança de valor no salário base impacta nas verbas de
+                            natureza salarial:</li>
+                        <ul class="list-disc list-inside text-gray-700 leading-relaxed mt-1 ml-6 space-y-1">
+                            <li>Comissões.</li>
+                            <li>Adicionais (Insalubridade, Periculosidade, Noturno, Horas Extras Habitualizadas).</li>
+                        </ul>
+                    </ul>
+
+                    <div class="p-3 mt-4 bg-gray-100 border-l-4 border-[#00678F]/50 rounded-r-md">
+                        <p class="text-sm text-gray-700 leading-relaxed text-justify">
+                            <strong class="text-gray-900">Obs.:</strong> No sistema do PJe somente é necessário
+                            cadastrar a Diferença Salarial do Salário Base. Em relação as demais verbas impactadas
+                            (comissões, adicionais, horas extras), estas encontram-se parametrizadas para que, quando
+                            for lançada a Diferença Salarial, haja repercussão nas referidas verbas.
+                        </p>
+                    </div>
+
+
+                    <p class="text-gray-700 leading-relaxed text-justify mt-4"><strong>Importante:</strong> Para o
+                        cálculo judicial, o período de apuração deve respeitar a data da propositura da ação e o prazo
+                        prescricional (geralmente cinco anos). </p>
+
+                    <hr class="my-4 border-gray-300">
+
+                    <h5 class="text-lg font-semibold text-gray-800 mt-4">Exemplo Prático (Valor Bruto Mensal)</h5>
+                    <p class="text-gray-700 leading-relaxed text-justify mt-2">O cálculo da diferença salarial é a
+                        subtração direta entre o valor de salário devido e o valor de salário efetivamente pago.</p>
+                    <hr class="my-4 border-gray-300">
+                    <p class="text-gray-700 leading-relaxed text-justify mt-2">Um empregado deveria receber R$ 3.100,00,
+                        mas recebia R$ 2.000,00 (Salário do Reclamante). A diferença salarial mensal é:
+                    </p>
+                    <p class="text-gray-700 mt-2 font-semibold">Diferença Salarial Bruta = R$ 3.100,00 (Devido) - R$
+                        2.000,00 (Pago) =
+                        R$ 1.100,00</p>
+                    <p class="text-gray-700 leading-relaxed text-justify mt-2">Dessa forma, o valor da diferença
+                        salarial bruta mensal devida é de R$ 1.100,00, que será multiplicado pelo período de apuração.
+                    </p>
+                    <hr class="my-4 border-gray-300">
+                    <table
+                        class="w-full mt-4 text-sm text-gray-700 border-collapse border border-gray-300 rounded-md overflow-hidden">
+                        <thead>
+                            <tr class="bg-gray-200">
+                                <th class="py-2 px-4 text-left border-b border-gray-300">Item</th>
+                                <th class="py-2 px-4 text-left border-b border-gray-300">Valor</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="border-b border-gray-300">
+                                <td class="py-2 px-4">Salário Devido (Paradigma)</td>
+                                <td class="py-2 px-4">R$ 3.100,00</td>
+                            </tr>
+                            <tr class="border-b border-gray-300">
+                                <td class="py-2 px-4">Salário Pago (Reclamante)</td>
+                                <td class="py-2 px-4">R$ 2.000,00</td>
+                            </tr>
+                            <tr class="border-b border-gray-300">
+                                <td class="py-2 px-4">Período de Apuração (Exemplo)</td>
+                                <td class="py-2 px-4">12 meses</td>
+                            </tr>
+                            <tr>
+                                <td class="py-2 px-4 font-bold bg-gray-100">Diferença Salarial Bruta Total</td>
+                                <td class="py-2 px-4 font-bold bg-gray-100">R$ 13.200,00</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <hr class="my-6 border-[#00678F]">
+
+                    <h4 class="text-xl font-semibold text-[#00678F]">Deduções da Base de Cálculo</h4>
+
+                    <h6 class="text-lg font-bold text-[#00678F] mt-4">Deduções Fiscais e Previdenciárias:</h6>
+                    <p class="text-gray-700 leading-relaxed text-justify mt-2">O desconto da contribuição para o
+                        Instituto Nacional do Seguro Social (INSS) e do Imposto de Renda Retido na Fonte (IRRF) é
+                        obrigatório, pois a diferença salarial possui natureza salarial e remuneratória.</p>
+
+                    <h6 class="text-lg font-bold text-[#00678F] mt-4">Deduções/Compensações Possíveis:</h6>
+                    <ul class="list-disc list-inside text-gray-700 leading-relaxed mt-2 pl-4 space-y-2">
+                        <li><strong>Valores Pagos a Título Idêntico:</strong> Se o empregador já pagou valores que se
+                            confundem com a verba principal ou reflexa pleiteada, há compensação.</li>
+                        <li><strong>Parcelas de natureza Indenizatórias:</strong> Parcelas indenizatórias (como multas)
+                            não sofrem desconto de INSS e IRRF, mas podem ter deduções específicas.</li>
+                    </ul>
+
+                    <hr class="my-4 border-gray-300">
+                    <h5 class="text-lg font-semibold text-gray-800">Exemplo Prático (Diferença Mensal Bruta - Deduções =
+                        Líquido)</h5>
+                    <p class="text-gray-700 leading-relaxed text-justify mt-2">Considerando a Diferença Salarial Mensal
+                        Bruta de R$ 1.100,00 (apenas o valor principal) para demonstrar a aplicação de descontos
+                        obrigatórios:</p>
+                    <table
+                        class="w-full mt-4 text-sm text-gray-700 border-collapse border border-gray-300 rounded-md overflow-hidden">
+                        <thead>
+                            <tr class="bg-gray-200">
+                                <th class="py-2 px-4 text-left border-b border-gray-300">Item</th>
+                                <th class="py-2 px-4 text-left border-b border-gray-300">Valor</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="border-b border-gray-300">
+                                <td class="py-2 px-4 font-bold bg-gray-50">Diferença Salarial Bruta (Mensal)</td>
+                                <td class="py-2 px-4 font-bold bg-gray-50">R$ 1.100,00</td>
+                            </tr>
+                            <tr class="border-b border-gray-300">
+                                <td class="py-2 px-4 text-red-600">(-) Dedução INSS (7,5% da faixa)</td>
+                                <td class="py-2 px-4 text-red-600">R$ 82,50</td>
+                            </tr>
+                            <tr class="border-b border-gray-300">
+                                <td class="py-2 px-4 text-gray-700">Base de Cálculo IRPF (R$ 1.100,00 - R$ 82,50)</td>
+                                <td class="py-2 px-4 text-gray-700">R$ 1.017,50</td>
+                            </tr>
+                            <tr class="border-b border-gray-300">
+                                <td class="py-2 px-4 text-red-600">(-) Dedução IRPF (Isento nesta faixa)</td>
+                                <td class="py-2 px-4 text-red-600">R$ 0,00</td>
+                            </tr>
+                            <tr>
+                                <td class="py-2 px-4 font-bold bg-gray-100">Total Deduções (INSS + IRPF)
+                                </td>
+                                <td class="py-2 px-4 font-bold bg-gray-100">R$ 82,50</td>
+                            </tr>
+                            <tr>
+                                <td class="py-2 px-4 font-bold bg-[#00678F]/10 text-[#00678F]">Diferença Salarial
+                                    Líquida (Mensal)
+                                </td>
+                                <td class="py-2 px-4 font-bold bg-[#00678F]/10 text-[#00678F]">R$ 1.017,50</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div id="reflexos-drawer" class="drawer-container">
+                <div id="reflexos-header" class="drawer-header">
+                    <h4 class="text-xl font-semibold text-[#00678F]">Verbas Reflexas</h4>
+                    <svg class="arrow-icon w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                    </svg>
+                </div>
+                <div id="reflexos-content" class="drawer-content">
+                    <p class="text-gray-700 leading-relaxed text-justify mt-4">
+                        A Diferença Salarial, por representar a remuneração, serve como base de cálculo para outras
+                        verbas rescisórias. Seu valor entra no cálculo de verbas como:
+                    </p>
+
+                    <table
+                        class="w-full mt-4 text-sm text-gray-700 border-collapse border border-gray-300 rounded-md overflow-hidden">
+                        <thead>
+                            <tr class="bg-gray-200">
+                                <th class="py-2 px-4 text-left border-b border-gray-300">Verbas Reflexas</th>
+                                <th class="py-2 px-4 text-left border-b border-gray-300">Cálculo do Reflexo</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="border-b border-gray-300">
+                                <td class="py-2 px-4">Descanso Semanal Remunerado (DSR)</td>
+                                <td class="py-2 px-4">Incide sobre horas extras e outros adicionais habituais
+                                    recalculados.</td>
+                            </tr>
+                            <tr class="border-b border-gray-300">
+                                <td class="py-2 px-4">Férias + 1/3 Constitucional</td>
+                                <td class="py-2 px-4">A remuneração das férias é calculada com o novo
+                                    salário/remuneração.</td>
+                            </tr>
+                            <tr class="border-b border-gray-300">
+                                <td class="py-2 px-4">13º Salário (Gratificação Natalina)</td>
+                                <td class="py-2 px-4">A base de cálculo do 13º é o novo salário/remuneração.</td>
+                            </tr>
+                            <tr class="border-b border-gray-300">
+                                <td class="py-2 px-4">Aviso Prévio (se trabalhado)</td>
+                                <td class="py-2 px-4">O valor do aviso prévio (trabalhado) é o novo salário.</td>
+                            </tr>
+                            <tr class="border-b border-gray-300">
+                                <td class="py-2 px-4">Fundo de Garantia por Tempo de Serviço (FGTS)</td>
+                                <td class="py-2 px-4">Incide 8% sobre o valor principal da diferença salarial e sobre
+                                    todos os seus reflexos que possuem natureza salarial (horas extras, adicionais, 13º
+                                    salário, etc.).</td>
+                            </tr>
+                            <tr>
+                                <td class="py-2 px-4">Multa de 40% sobre o FGTS</td>
+                                <td class="py-2 px-4">Reaplicada sobre a diferença de FGTS depositada.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="my-4 border-gray-300">
+                        <p class="text-gray-900 leading-relaxed text-justify font-medium">
+                            <strong class="text-gray-900">Atenção:</strong> A Diferença de Salário é uma verba
+                            principal. Os reflexos mencionados acima são cálculos que dependem da existência das verbas
+                            principais.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div id="calculadora-drawer" class="drawer-container">
+                <div id="calculadora-header" class="drawer-header">
+                    <h4 class="text-xl font-semibold text-[#00678F]">Calculadora (Simulação)</h4>
+                    <svg class="arrow-icon w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                    </svg>
+                </div>
+                <div id="calculadora-content" class="drawer-content">
+                    <p class="text-gray-700 leading-relaxed text-justify mt-4">Utilize esta ferramenta para estimar o
+                        valor das diferenças salariais de forma rápida. Atenção: Esta calculadora não inclui reflexos,
+                        juros, ou correção monetária.</p>
+                    <div class="mt-4 grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <label for="seu-salario" class="block text-sm font-medium text-gray-700">Seu Salário
+                                (R$)</label>
+                            <input type="number" id="seu-salario"
+                                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-2" placeholder="0.00">
+                        </div>
+                        <div>
+                            <label for="salario-paradigma" class="block text-sm font-medium text-gray-700">Salário do
+                                Paradigma (R$)</label>
+                            <input type="number" id="salario-paradigma"
+                                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-2" placeholder="0.00">
+                        </div>
+                        <div class="md:col-span-2">
+                            <label for="periodo" class="block text-sm font-medium text-gray-700">Período (meses)</label>
+                            <input type="number" id="periodo"
+                                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-2"
+                                placeholder="Ex: 60 (5 anos)">
+                        </div>
+                    </div>
+                    <button id="calcular-btn"
+                        class="mt-4 w-full px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 transition duration-300 shadow-md">
+                        Calcular Diferença
+                    </button>
+                    <div id="resultado-calculadora" class="mt-4 p-4 bg-white rounded-lg border border-gray-200">
+                        <h5 class="text-lg font-semibold text-gray-800">Resultados:</h5>
+                        <p id="diferenca-mensal" class="text-gray-700 mt-2">Diferença Mensal: R$ 0,00</p>
+                        <p id="diferenca-total" class="text-gray-700">Diferença Total: R$ 0,00</p>
+                    </div>
+                </div>
+            </div>
+
+            <div id="pje-calc-drawer" class="drawer-container">
+                <div id="pje-calc-header" class="drawer-header">
+                    <h4 class="text-xl font-semibold text-[#00678F]">Lançamento no PJe-Calc </h4>
+                    <svg class="arrow-icon w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                    </svg>
+                </div>
+                <div id="pje-calc-content" class="drawer-content">
+                    <p class="text-gray-700 leading-relaxed text-justify mt-4">A seguir, confira o passo a passo para o
+                        lançamento da verba no PJe-Calc, utilizando a opção "Expresso":</p>
+
+                    <ol class="list-decimal list-inside text-gray-700 leading-relaxed mt-4 ml-4 space-y-3">
+                        <li>
+                            <strong class="text-gray-800">Acessar Verbas e Escolher Lançamento:</strong> No menu de
+                            navegação à esquerda, clique na opção <u>Verbas</u> para iniciar o lançamento. Após o
+                            comando,
+                            será exibida a tela para escolha do Lançamento da Verba. Escolha a opção <u>Expresso</u>.
+                            <img src="imagens_direitos/verbas.png"
+                                alt="Tela do PJe-Calc - Passo 1: Acessar a opção Verbas no menu lateral e clicar em Expresso na seção Lançamento."
+                                class="w-full h-auto my-4 rounded-lg shadow-md">
+                        </li>
+                        <li>
+                            <strong class="text-gray-800">Seleção da Verba:</strong> O sistema abrirá as opções de
+                            verbas, escolha a verba <u>Diferença Salarial</u> e clique no botão <u>Salvar</u>
+                            <img src="imagens_direitos/diferencasalarial1.png"
+                                alt="Tela do PJe-Calc - Verbas Principais: Selecionar Saldo de Salário"
+                                class="w-full h-auto my-4 rounded-lg shadow-md">
+                        </li>
+                        <li>
+                            <strong class="text-gray-800">Quadro de Verbas e Ações:</strong> O sistema exibirá um quadro
+                            com os campos:
+                            <ul class="list-disc list-inside text-gray-700 leading-relaxed mt-2 ml-4">
+                                <li class="ml-8 flex items-center">
+                                <li>Ações - contendo as opções de configurações da verba selecionada (parâmetros,
+                                    ocorrências e
+                                    exclusão)
+                                    <img src="imagens_direitos/telaacoes.png"
+                                        alt="Ícones de Ações: Parâmetros (folha com seta), Ocorrências (folha com checks), Excluir (X vermelho)"
+                                        class="icon-small" style="width: 72px; height: auto;">
+                                </li>
+                                <li class="ml-8 flex items-center">
+                                    - Parâmetros da Verba <img src="imagens_direitos/telaparametros.png"
+                                        alt="Ícone de Parâmetros" class="icon-small">
+                                </li>
+                                <li class="ml-8 flex items-center">
+                                    - Ocorrências da Verba <img src="imagens_direitos/telaocorrencias.png"
+                                        alt="Ícone de Ocorrências" class="icon-small">
+                                </li>
+                                <li class="ml-8 flex items-center">
+                                    - Excluir <img src="imagens_direitos/telaexcluir.png" alt="Ícone de Excluir"
+                                        class="icon-small">
+                                </li>
+                                <li>Verba Principal - verba selecionada para lançamento.</li>
+                                <li>Verba Reflexa - em que ao clicar no botão <u>Exibir</u> serão listadas todas as
+                                    verbas
+                                    reflexas ligadas a Verba Principal.</li>
+                            </ul>
+                            <img src="imagens_direitos/diferencasalarial2.png"
+                                alt="Tela do PJe-Calc - Verba Saldo de Salário selecionada com as opções de Ações e Verba Reflexa."
+                                class="w-full h-auto my-4 rounded-lg shadow-md">
+                        </li>
+                        <li>
+                            <strong class="text-gray-800">Parametrização da Verba:</strong> Ao clicar no botão
+                            <u>Parâmetros da Verba</u> serão exibidas todas as configurações necessárias para a
+                            parametrização
+                            da Verba Principal.
+                            <img src="imagens_direitos/diferencasalarial3.png"
+                                alt="Tela do PJe-Calc - Detalhes da Verba Saldo de Salário: Parâmetros, Base de Cálculo, Divisor e Multiplicador."
+                                class="w-full h-auto my-4 rounded-lg shadow-md">
+                        </li>
+                        <li>
+                            <strong class="text-gray-800">Registro de Ocorrências:</strong> Ao clicar no botão
+                            <u>Ocorrências da Verba</u> serão exibidas todas as configurações necessárias para registro
+                            das
+                            ocorrências da Verba Principal.
+                            <img src="imagens_direitos/diferencasalarial4.png"
+                                alt="Tela do PJe-Calc - Dados de Ocorrências: Detalhamento da data inicial, data final e valor calculado da verba."
+                                class="w-full h-auto my-4 rounded-lg shadow-md">
+                        </li>
+                    </ol>
+
+                </div>
+
+        </section>
+    </div>
+
+    <script>
+        // Logic for expandable drawers
+        function setupDrawer(drawerId) {
+            const header = document.getElementById(`${drawerId}-header`);
+            const content = document.getElementById(`${drawerId}-content`);
+
+            if (!header || !content) return;
+
+            header.addEventListener('click', () => {
+                const isExpanded = header.classList.toggle('active');
+                if (isExpanded) {
+                    // Set max-height to scrollHeight to animate the open state
+                    // We add a small buffer (e.g., 20px) to ensure content + padding is fully visible.
+                    content.style.maxHeight = content.scrollHeight + 20 + "px";
+                } else {
+                    // Reset max-height to 0 to animate the close state
+                    content.style.maxHeight = '0';
+                }
+            });
+
+            // Recalculate max-height on resize in case content changes
+            window.addEventListener('resize', () => {
+                if (header.classList.contains('active')) {
+                    content.style.maxHeight = content.scrollHeight + 20 + "px";
+                }
+            });
+        }
+
+        setupDrawer('equip-salarial');
+        setupDrawer('calculo-deducoes');
+        setupDrawer('reflexos');
+        setupDrawer('calculadora');
+        setupDrawer('pje-calc');
+
+        // Calculator logic
+        document.getElementById('calcular-btn').addEventListener('click', () => {
+            const seuSalario = parseFloat(document.getElementById('seu-salario').value.replace(',', '.'));
+            const salarioParadigma = parseFloat(document.getElementById('salario-paradigma').value.replace(',', '.'));
+            const periodo = parseInt(document.getElementById('periodo').value);
+
+            const diferencaMensalEl = document.getElementById('diferenca-mensal');
+            const diferencaTotalEl = document.getElementById('diferenca-total');
+
+            if (isNaN(seuSalario) || isNaN(salarioParadigma) || isNaN(periodo) || periodo <= 0) {
+                diferencaMensalEl.textContent = 'Diferença Mensal: R$ 0,00';
+                diferencaTotalEl.textContent = 'Diferença Total: R$ 0,00';
+                return;
+            }
+
+            const diferencaMensal = salarioParadigma - seuSalario;
+            const diferencaTotal = diferencaMensal * periodo;
+
+            diferencaMensalEl.textContent = `Diferença Mensal: R$ ${diferencaMensal.toFixed(2).replace('.', ',')}`;
+            diferencaTotalEl.textContent = `Diferença Total: R$ ${diferencaTotal.toFixed(2).replace('.', ',')}`;
+        });
+    </script>
+</body>
+
+</html>

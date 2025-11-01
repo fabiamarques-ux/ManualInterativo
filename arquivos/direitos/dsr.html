@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guia de RSR - TRT19</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f4f8;
+            color: #1a202c;
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 2rem;
+            background-color: #ffffff;
+            border-radius: 1rem;
+            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.05);
+        }
+        .copy-btn {
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
+            padding: 0;
+            margin-left: 1rem;
+            transition: transform 0.2s ease-in-out;
+        }
+        .copy-btn svg {
+            width: 1.5rem;
+            height: 1.5rem;
+            fill: #00678F;
+            transition: fill 0.3s ease;
+        }
+        .copy-btn:hover svg {
+            fill: #004562;
+        }
+        .loading-spinner {
+            border: 4px solid rgba(0, 103, 143, 0.2);
+            border-top: 4px solid #00678F;
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            animation: spin 1s linear infinite;
+            margin-left: 0.5rem;
+            display: none;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        .drawer-container {
+            padding: 1rem;
+            background-color: #f0f4f8;
+            border-radius: 0.75rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+            margin-top: 1.5rem;
+        }
+        .drawer-header {
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .drawer-content {
+            overflow: hidden;
+            transition: max-height 0.5s ease-in-out, padding 0.5s ease-in-out;
+            max-height: 0;
+            padding-top: 0;
+        }
+        .drawer-header.active .arrow-icon {
+            transform: rotate(180deg);
+        }
+        .drawer-content-inner {
+            padding-top: 1.5rem;
+        }
+        .pje-calc-image {
+            width: 100%;
+            height: auto;
+            margin-top: 1.5rem;
+            border: 1px solid #ccc;
+            border-radius: 0.5rem;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container relative">
+        <img src="https://site.trt19.jus.br/sites/default/files/logo-trt19.png" alt="Logo do TRT19" class="absolute top-4 right-4 w-28 h-auto opacity-75 md:w-36">
+        
+        <section id="rsr-semanal" class="content-section">
+            <h1 class="text-4xl font-bold text-[#00678F] mb-6">Repouso Semanal Remunerado (RSR)</h1>
+            
+            <p class="text-gray-700 leading-relaxed text-justify">O **Repouso Semanal Remunerado (RSR)** é um direito de todo trabalhador, garantido para proporcionar descanso após uma semana de trabalho. A legislação brasileira estabelece que o RSR deve ser concedido preferencialmente aos domingos.</p>
+            
+            <div class="mt-8 p-4 bg-yellow-50 border-l-4 border-yellow-500 rounded-md">
+                <h2 class="text-2xl font-bold text-yellow-700 mb-2">Regras sobre a Perda da Remuneração (Desconto)</h2>
+                <p class="text-gray-700 leading-relaxed text-justify">
+                    A dúvida sobre "deduções da base de cálculo do RSR" geralmente está relacionada a quando o empregado perde o direito à remuneração do DSR, ou seja, quando há o desconto correspondente ao repouso semanal no salário. O trabalhador perde a remuneração do RSR (o valor correspondente ao dia de descanso é descontado) quando ele não cumpre a jornada integral de trabalho na semana anterior, sem uma justificativa legal.
+                </p>
+                <h3 class="text-lg font-semibold text-gray-800 mt-4">Principais Causas de Desconto do RSR (ou DSR)</h3>
+                <ul class="list-disc list-inside text-gray-700 leading-relaxed mt-2 ml-4">
+                    <li><strong>Faltas Injustificadas:</strong> O empregado que falta ao trabalho sem apresentar um atestado médico ou outra justificativa legalmente aceita perde o direito à remuneração do RSR daquela semana.</li>
+                    <li><strong>Atrasos Não Compensados:</strong> Atrasos e saídas antecipadas não compensadas que ultrapassem o limite de tolerância legal (geralmente 5 minutos por ponto, limitado a 10 minutos diários) podem resultar na perda da remuneração do RSR.</li>
+                </ul>
+                <p class="text-gray-700 leading-relaxed text-justify mt-4">
+                    É importante ressaltar que a perda do direito à remuneração do RSR (o desconto) não significa que o empregado perde o dia de descanso. Ele ainda tem o direito ao descanso físico, mas não será remunerado por aquele dia.
+                </p>
+            </div>
+            
+            <div id="base-legal-drawer" class="drawer-container">
+                <div id="base-legal-header" class="drawer-header">
+                    <h4 class="text-xl font-semibold text-[#00678F]">Base Legal e Jurisprudência</h4>
+                    <svg class="arrow-icon w-6 h-6 text-[#00678F] transform transition-transform duration-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                    </svg>
+                </div>
+                <div id="base-legal-content" class="drawer-content">
+                    <div class="drawer-content-inner">
+                        <p class="text-gray-700 leading-relaxed text-justify mt-4">O direito ao Repouso Semanal Remunerado está previsto na legislação trabalhista brasileira, com as seguintes fontes:</p>
+                        
+                        <h5 class="text-lg font-semibold text-gray-800 mt-4">Fontes Normativas</h5>
+                        <hr class="my-4 border-gray-300">
+                        
+                        <h5 class="text-base font-semibold text-gray-800">Constituição Federal de 1988 (CF/88):</h5>
+                        <ul class="list-disc list-inside text-gray-700 leading-relaxed mt-2 ml-4 space-y-3">
+                            <li><strong>Artigo 7º, inciso XV:</strong>
+                                <p class="text-sm italic mt-1 ml-4 border-l-2 border-gray-400 pl-3">Garante o repouso semanal remunerado, preferencialmente aos domingos.</p>
+                            </li>
+                        </ul>
+
+                        <hr class="my-4 border-gray-300">
+                        <h5 class="text-base font-semibold text-gray-800">Consolidação das Leis do Trabalho (CLT):</h5>
+                        <ul class="list-disc list-inside text-gray-700 leading-relaxed mt-2 ml-4">
+                            <li><strong>Artigo 67:</strong>
+                                <p class="text-sm italic mt-1 ml-4 border-l-2 border-gray-400 pl-3">Estabelece que todo empregado tem direito ao RSR de 24 (vinte e quatro) horas consecutivas, que, salvo motivo de conveniência pública ou necessidade imperiosa do serviço, deverá coincidir com o domingo.</p>
+                            </li>
+                        </ul>
+                        
+                        <hr class="my-6 border-gray-300">
+
+                        <h5 class="text-lg font-semibold text-gray-800">Jurisprudência</h5>
+                        
+                        <h6 class="text-base font-semibold text-gray-800 mt-4">Súmulas e Orientações Jurisprudenciais do TST:</h6>
+                        <div class="p-4 bg-gray-100 rounded-md mt-2 border border-gray-300">
+                            <p class="font-bold text-sm">Súmula nº 172 do TST:</p>
+                            <p class="text-sm mt-1 italic">Computam-se no cálculo do RSR as horas extras habitualmente prestadas.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="base-calculo-rsr-drawer" class="drawer-container">
+                <div id="base-calculo-rsr-header" class="drawer-header">
+                    <h2 class="text-xl font-semibold text-[#00678F]">Base de Cálculo e Deduções</h2>
+                    <svg class="arrow-icon w-6 h-6 text-[#00678F] transform transition-transform duration-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                    </svg>
+                </div>
+                <div id="base-calculo-rsr-content" class="drawer-content">
+                    <div class="drawer-content-inner">
+                        <p class="text-gray-700 leading-relaxed text-justify mt-4">O Repouso Semanal Remunerado (RSR), também conhecido como Descanso Semanal Remunerado (DSR), é um direito do trabalhador e o seu pagamento já está incluso no salário mensal para os mensalistas e quinzenalistas.</p>
+                        
+                        <h3 class="text-lg font-semibold text-gray-800 mt-4">Parcelas que Integram a Base de Cálculo:</h3>
+                        <p class="text-gray-700 leading-relaxed text-justify mt-2">A base de cálculo do RSR é composta por todas as parcelas de natureza salarial pagas ao empregado de forma habitual, como:</p>
+                        <ul class="list-disc list-inside text-gray-700 leading-relaxed mt-2 ml-4">
+                            <li><strong>Salário-base.</strong></li>
+                            <li><strong>Comissões.</strong></li>
+                            <li><strong>Horas extras habituais.</strong> (Súmula 172 do TST)</li>
+                            <li><strong>Adicional noturno.</strong></li>
+                            <li><strong>Adicionais de insalubridade e periculosidade.</strong></li>
+                            <li><strong>Prêmios e gratificações pagas de forma habitual.</strong></li>
+                        </ul>
+                        <p class="text-gray-700 leading-relaxed text-justify mt-4">Ou seja, tudo o que o empregado recebe de forma habitual e tem natureza de contraprestação pelo trabalho entra na base de cálculo para a integração do RSR.</p>
+
+                        <hr class="my-6 border-gray-300">
+                        
+                        <h3 class="text-lg font-semibold text-gray-800">Parcelas Excluídas (Não Integram a Base):</h3>
+                        <p class="text-gray-700 leading-relaxed text-justify mt-2">Algumas parcelas recebidas pelo empregado não são consideradas de natureza salarial e, por isso, não integram a base de cálculo para o RSR:</p>
+                        <ul class="list-disc list-inside text-gray-700 leading-relaxed mt-2 ml-4">
+                            <li><strong>Gorjetas</strong> (Súmula TST nº 354).</li>
+                            <li><strong>Gratificações por Tempo de Serviço e Produtividade</strong> pagas mensalmente (Resolução TST nº 14/85).</li>
+                            <li><strong>Diárias para viagem</strong> (desde que não excedam 50% do salário do empregado).</li>
+                            <li><strong>Ajuda de custo.</strong></li>
+                            <li><strong>Vale-transporte e vale-refeição/alimentação</strong> (quando o benefício não é considerado de natureza salarial).</li>
+                            <li><strong>Participação nos lucros e resultados (PLR).</strong></li>
+                        </ul>
+                        
+                        <hr class="my-6 border-gray-300">
+                        
+                        <h3 class="text-lg font-semibold text-gray-800">Cálculo e Exemplos</h3>
+                        <p class="text-gray-700 leading-relaxed text-justify mt-4">O valor do RSR para empregados mensalista já está incluído no salário, mas para aqueles com remuneração variável (ex: comissões, horas extras habituais), o cálculo é necessário. A fórmula é a seguinte: </p>
+                        <p class="text-gray-700 mt-2 font-mono">RSR = (Valor total da remuneração variável / número de dias úteis no mês) x número de dias de descanso remunerado no mês</p>
+                        <h3 class="text-lg font-semibold text-gray-800">Exemplo Prático:</h3>
+                        <p class="text-gray-700 leading-relaxed text-justify mt-2">Um vendedor com salário fixo de R$ 2.000,00 e comissões de R$ 800,00 em um mês com 25 dias úteis e 5 dias de descanso remunerado. O cálculo do RSR sobre as comissões é:</p>
+                        <ul class="list-disc list-inside text-gray-700 leading-relaxed mt-2 ml-4">
+                            <li><strong>Valor do RSR:</strong> (R$ 800,00 / 25) x 5 = **R$ 160,00**</li>
+                        </ul>
+                        <p class="text-gray-700 leading-relaxed text-justify mt-2">Este valor é somado ao salário fixo, totalizando R$ 2.960,00 (2000+800+160).</p>
+
+                        <hr class="my-6 border-gray-300">
+                        
+                        <h3 class="text-lg font-semibold text-gray-800">Incidências (Impostos e Contribuições)</h3>
+                        <p class="text-gray-700 leading-relaxed text-justify mt-4">O RSR tem natureza salarial e, portanto, é considerado para a base de cálculo de:</p>
+                        <ul class="list-disc list-inside text-gray-700 leading-relaxed mt-2">
+                            <li><strong>Imposto de Renda Retido na Fonte (IRRF):</strong> O valor do RSR compõe o rendimento tributável do trabalhador, sendo somado aos demais rendimentos brutos para o cálculo do imposto devido.</li>
+                            <li><strong>Contribuição Previdenciária (INSS):</strong> O RSR também integra a base de cálculo da contribuição do INSS devida pelo empregado.</li>
+                            <li><strong>Fundo de Garantia por Tempo de Serviço (FGTS):</strong> O RSR entra na base de cálculo para o depósito do FGTS (8% sobre o total da remuneração), que é uma obrigação do empregador.</li>
+                        </ul>
+                        <p class="text-gray-700 leading-relaxed text-justify mt-4">Resumindo: O RSR é uma verba salarial e, por isso, a regra geral é que ele está sujeito à tributação normal (INSS e IRRF), assim como o salário-base e outros adicionais.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div id="reflexos-rsr-drawer" class="drawer-container">
+                <div id="reflexos-rsr-header" class="drawer-header">
+                    <h2 class="text-xl font-semibold text-[#00678F]">Verbas Reflexas</h2>
+                    <svg class="arrow-icon w-6 h-6 text-[#00678F] transform transition-transform duration-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                    </svg>
+                </div>
+                <div id="reflexos-rsr-content" class="drawer-content">
+                    <div class="drawer-content-inner">
+                        <p class="text-gray-700 leading-relaxed text-justify mt-4">Os valores de RSR calculados sobre remuneração variável, como horas extras e comissões, refletem em outras verbas contratuais e rescisórias. O cálculo deve ser realizado em cada verba de forma específica, considerando a média dos valores de RSR recebidos no período.</p>
+                        
+                        <table
+                            class="w-full mt-4 text-sm text-gray-700 border-collapse border border-gray-300 rounded-md overflow-hidden">
+                            <thead>
+                                <tr class="bg-gray-200">
+                                    <th class="py-2 px-4 text-left border-b border-gray-300 w-1/3">Verba Reflexa</th>
+                                    <th class="py-2 px-4 text-left border-b border-gray-300 w-2/3">Relação com o RSR (Variável)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="border-b border-gray-300">
+                                    <td class="py-2 px-4 font-medium">13º Salário</td>
+                                    <td class="py-2 px-4">O RSR sobre variáveis integra a base de cálculo para o 13º salário, geralmente pela média dos valores recebidos no ano.</td>
+                                </tr>
+                                <tr class="border-b border-gray-300">
+                                    <td class="py-2 px-4 font-medium">Férias + 1/3 Constitucional</td>
+                                    <td class="py-2 px-4">O RSR sobre variáveis integra a base de cálculo das férias (aquisitivas e proporcionais) e do terço constitucional, pela média dos valores do período aquisitivo.</td>
+                                </tr>
+                                <tr class="border-b border-gray-300">
+                                    <td class="py-2 px-4 font-medium">Aviso Prévio Indenizado</td>
+                                    <td class="py-2 px-4">O RSR sobre variáveis integra a base de cálculo para o pagamento do Aviso Prévio Indenizado (juntamente com as demais verbas salariais).</td>
+                                </tr>
+                                <tr class="border-b border-gray-300">
+                                    <td class="py-2 px-4 font-medium">Depósito FGTS (8%)</td>
+                                    <td class="py-2 px-4">O valor do RSR (fixo e variável) integra a base de cálculo para o depósito obrigatório de 8% do FGTS.</td>
+                                </tr>
+                                <tr>
+                                    <td class="py-2 px-4 font-medium">Multa de 40% do FGTS</td>
+                                    <td class="py-2 px-4">O RSR (fixo e variável) integra o cálculo da base de depósito para apuração da Multa Rescisória de 40%.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <p class="text-gray-700 leading-relaxed text-justify mt-4">
+                            <strong>Exemplo Prático:</strong> Empregado que recebe R$ 160,00 de RSR por mês (sobre comissões), terá um reflexo no 13º salário (se considerado o ano completo) de R$ 160,00 x 12 meses / 12 meses = R$ 160,00.
+                        </p>
+                        
+                        <hr class="my-4 border-gray-300">
+
+                    </div>
+                </div>
+            </div>
+
+            <div id="calculadora-rsr-drawer" class="drawer-container">
+                <div id="calculadora-rsr-header" class="drawer-header">
+                    <h2 class="text-xl font-semibold text-[#00678F]">Calculadora (Simulação)</h2>
+                    <svg class="arrow-icon w-6 h-6 text-[#00678F] transform transition-transform duration-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                    </svg>
+                </div>
+                <div id="calculadora-rsr-content" class="drawer-content">
+                    <div class="drawer-content-inner">
+                        <p class="text-gray-700 leading-relaxed text-justify mt-4">Utilize esta ferramenta para calcular o valor do RSR sobre remuneração variável.</p>
+                        
+                        <div class="p-6 bg-white rounded-xl shadow-inner mt-4">
+                            <h3 class="text-md font-semibold text-gray-800 mb-2">Cálculo Simples</h3>
+                            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                                <div class="flex-1">
+                                    <label for="remuneracaoVariavelInput" class="block text-sm text-gray-700 font-medium">Remuneração Variável (R$):</label>
+                                    <input type="text" id="remuneracaoVariavelInput" class="mt-1 block w-full rounded-md border border-gray-300 p-2 focus:ring-[#00678F] focus:border-[#00678F] transition duration-200">
+                                </div>
+                                <div class="flex-1">
+                                    <label for="diasUteisInput" class="block text-sm text-gray-700 font-medium">Dias Úteis no Mês:</label>
+                                    <input type="number" id="diasUteisInput" class="mt-1 block w-full rounded-md border border-gray-300 p-2 focus:ring-[#00678F] focus:border-[#00678F] transition duration-200">
+                                </div>
+                                <div class="flex-1">
+                                    <label for="diasDescansoInput" class="block text-sm text-gray-700 font-medium">Dias de Descanso:</label>
+                                    <input type="number" id="diasDescansoInput" class="mt-1 block w-full rounded-md border border-gray-300 p-2 focus:ring-[#00678F] focus:border-[#00678F] transition duration-200">
+                                </div>
+                            </div>
+                            <button id="calculateRSRBtn" class="mt-6 w-full px-4 py-3 bg-[#00678F] text-white rounded-xl font-semibold hover:bg-[#004562] transition duration-300 shadow-lg flex items-center justify-center">
+                                <span id="rsrButtonText">Calcular RSR</span>
+                                <div id="rsrLoadingSpinner" class="loading-spinner"></div>
+                            </button>
+                            <div class="mt-6 p-4 bg-gray-50 rounded-lg border border-gray-200 text-center">
+                                <p id="rsrResult" class="text-lg font-bold text-gray-800"></p>
+                                <button id="copyRSR" class="copy-btn hidden" aria-label="Copiar valor">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="pje-calc-drawer" class="drawer-container">
+                <div id="pje-calc-header" class="drawer-header">
+                    <h4 class="text-xl font-semibold text-[#00678F]">Lançamento no PJe-Calc </h4>
+                    <svg class="arrow-icon w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                    </svg>
+                </div>
+                <div id="pje-calc-content" class="drawer-content">
+                    <p class="text-gray-700 leading-relaxed text-justify mt-4">A seguir, confira o passo a passo para o
+                        lançamento da verba no PJe-Calc, utilizando a opção "Expresso":</p>
+
+                    <ol class="list-decimal list-inside text-gray-700 leading-relaxed mt-4 ml-4 space-y-3">
+                        <li>
+                            <strong class="text-gray-800">Acessar Verbas e Escolher Lançamento:</strong> No menu de
+                            navegação à esquerda, clique na opção <u>Verbas</u> para iniciar o lançamento. Após o
+                            comando, será exibida a tela para escolha do Lançamento da Verba. Escolha a opção <u>Expresso</u>.
+                            <img src="imagens_direitos/verbas.png"
+                                alt="Tela do PJe-Calc - Passo 1: Acessar a opção Verbas no menu lateral e clicar em Expresso na seção Lançamento."
+                                class="w-full h-auto my-4 rounded-lg shadow-md">
+                        </li>
+                        <li>
+                            <strong class="text-gray-800">Seleção da Verba:</strong> O sistema abrirá as opções de
+                            verbas, escolha a verba <u>Repouso Semanal Remunerado</u> e clique no botão <u>Salvar</u>
+                            <img src="imagens_direitos/rsr1.png"
+                                alt="Tela do PJe-Calc - Verbas Principais: Selecionar Saldo de Salário"
+                                class="w-full h-auto my-4 rounded-lg shadow-md">
+                        </li>
+                        <li>
+                            <strong class="text-gray-800">Quadro de Verbas e Ações:</strong> O sistema exibirá um quadro
+                            com os campos:
+                            <ul class="list-disc list-inside text-gray-700 leading-relaxed mt-2 ml-4">
+                                <li class="ml-8 flex items-center">
+                                <li>Ações - contendo as opções de configurações da verba selecionada (parâmetros,
+                                    ocorrências e
+                                    exclusão)
+                                    <img src="imagens_direitos/telaacoes.png"
+                                        alt="Ícones de Ações: Parâmetros (folha com seta), Ocorrências (folha com checks), Excluir (X vermelho)"
+                                        class="icon-small" style="width: 72px; height: auto;">
+                                </li>
+                                <li class="ml-8 flex items-center">
+                                    - Parâmetros da Verba <img src="imagens_direitos/telaparametros.png"
+                                        alt="Ícone de Parâmetros" class="icon-small">
+                                </li>
+                                <li class="ml-8 flex items-center">
+                                    - Ocorrências da Verba <img src="imagens_direitos/telaocorrencias.png"
+                                        alt="Ícone de Ocorrências" class="icon-small">
+                                </li>
+                                <li class="ml-8 flex items-center">
+                                    - Excluir <img src="imagens_direitos/telaexcluir.png" alt="Ícone de Excluir"
+                                        class="icon-small">
+                                </li>
+                                <li>Verba Principal - verba selecionada para lançamento.</li>
+                                <li>Verba Reflexa - em que ao clicar no botão <u>Exibir</u> serão listadas todas as
+                                    verbas
+                                    reflexas ligadas a Verba Principal.</li>
+                            </ul>
+                            <img src="imagens_direitos/rsr2.png"
+                                alt="Tela do PJe-Calc - Verba Saldo de Salário selecionada com as opções de Ações e Verba Reflexa."
+                                class="w-full h-auto my-4 rounded-lg shadow-md">
+                        </li>
+                        <li>
+                            <strong class="text-gray-800">Parametrização da Verba:</strong> Ao clicar no botão
+                            <u>Parâmetros da Verba</u> serão exibidas todas as configurações necessárias para a
+                            parametrização
+                            da Verba Principal.
+                            <img src="imagens_direitos/rsr3.png"
+                                alt="Tela do PJe-Calc - Detalhes da Verba Saldo de Salário: Parâmetros, Base de Cálculo, Divisor e Multiplicador."
+                                class="w-full h-auto my-4 rounded-lg shadow-md">
+                        </li>
+                        <li>
+                            <strong class="text-gray-800">Registro de Ocorrências:</strong> Ao clicar no botão
+                            <u>Ocorrências da Verba</u> serão exibidas todas as configurações necessárias para registro
+                            das
+                            ocorrências da Verba Principal.
+                            <img src="imagens_direitos/rsr4.png"
+                                alt="Tela do PJe-Calc - Dados de Ocorrências: Detalhamento da data inicial, data final e valor calculado da verba."
+                                class="w-full h-auto my-4 rounded-lg shadow-md">
+                        </li>
+                    </ol>
+
+                </div>
+
+        </section>
+    </div>
+
+
+    <script>
+        // Função para formatar o valor do salário conforme o usuário digita
+        function formatSalarioInput(inputElement) {
+            inputElement.addEventListener('input', (e) => {
+                let value = e.target.value;
+                // Remove todos os caracteres que não sejam dígitos
+                value = value.replace(/\D/g, '');
+                
+                // Formata com vírgula para centavos e pontos para milhares
+                if (value.length > 2) {
+                    value = value.replace(/(\d+)(\d{2})$/, '$1,$2');
+                }
+                if (value.length > 5) {
+                    value = value.replace(/(\d)(?=(\d{3})+,)/g, '$1.');
+                }
+                e.target.value = value;
+            });
+        }
+        
+        // Chamada da função de formatação para os inputs existentes
+        formatSalarioInput(document.getElementById('remuneracaoVariavelInput'));
+
+        // Função para calcular o RSR
+        function calculateRSR() {
+            const remuneracaoVariavelInput = document.getElementById('remuneracaoVariavelInput');
+            const diasUteisInput = document.getElementById('diasUteisInput');
+            const diasDescansoInput = document.getElementById('diasDescansoInput');
+            const resultDiv = document.getElementById('rsrResult');
+            const copyBtn = document.getElementById('copyRSR');
+            const calculateBtn = document.getElementById('calculateRSRBtn');
+            const loadingSpinner = document.getElementById('rsrLoadingSpinner');
+            const buttonText = document.getElementById('rsrButtonText');
+        
+            calculateBtn.disabled = true;
+            loadingSpinner.style.display = 'block';
+            buttonText.textContent = 'Calculando...';
+            
+            // Simula um pequeno delay para a UX
+            setTimeout(() => {
+                const rawRemuneracao = remuneracaoVariavelInput.value.replace(/\./g, '').replace(',', '.');
+                const remuneracaoVariavel = parseFloat(rawRemuneracao);
+                const diasUteis = parseInt(diasUteisInput.value);
+                const diasDescanso = parseInt(diasDescansoInput.value);
+            
+                if (isNaN(remuneracaoVariavel) || remuneracaoVariavel < 0 || isNaN(diasUteis) || diasUteis <= 0 || isNaN(diasDescanso) || diasDescanso < 0) {
+                    resultDiv.textContent = 'Por favor, insira valores válidos.';
+                    copyBtn.classList.add('hidden');
+                    calculateBtn.disabled = false;
+                    loadingSpinner.style.display = 'none';
+                    buttonText.textContent = 'Calcular RSR';
+                    return;
+                }
+            
+                const rsr = (remuneracaoVariavel / diasUteis) * diasDescanso;
+                
+                resultDiv.textContent = `Total: ${rsr.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}`;
+                copyBtn.classList.remove('hidden');
+                calculateBtn.disabled = false;
+                    loadingSpinner.style.display = 'none';
+                buttonText.textContent = 'Calcular RSR';
+            }, 500); // Adicionado um pequeno atraso para a animação de carregamento
+        }
+
+        // Função para copiar o texto
+        function copyText(elementId) {
+            const element = document.getElementById(elementId);
+            if (!element) return;
+            const textToCopy = element.textContent;
+
+            const tempInput = document.createElement('input');
+            tempInput.value = textToCopy;
+            document.body.appendChild(tempInput);
+            tempInput.select();
+            try {
+                document.execCommand('copy');
+            } catch (err) {
+                console.error('Falha ao copiar o texto:', err);
+            } finally {
+                document.body.removeChild(tempInput);
+            }
+        }
+        
+        // Adiciona os event listeners aos botões
+        document.getElementById('calculateRSRBtn').addEventListener('click', calculateRSR);
+        document.getElementById('copyRSR').addEventListener('click', () => copyText('rsrResult'));
+        
+        // Lógica para as gavetas expansíveis
+        function setupDrawer(drawerId) {
+            const header = document.getElementById(`${drawerId}-header`);
+            const content = document.getElementById(`${drawerId}-content`);
+            if (header && content) {
+                header.addEventListener('click', () => {
+                    const isExpanded = header.classList.toggle('active');
+                    if (isExpanded) {
+                        // Faz um pequeno ajuste para garantir que todo o conteúdo (e margens/paddings) caibam
+                        // O cálculo scrollHeight garante que ele se ajustará ao conteúdo, incluindo as novas imagens.
+                        content.style.maxHeight = content.scrollHeight + 30 + "px"; 
+                        content.style.paddingTop = '1.5rem';
+                    } else {
+                        content.style.maxHeight = '0';
+                        content.style.paddingTop = '0';
+                    }
+                });
+            }
+        }
+
+        setupDrawer('base-legal'); // ID corrigido e simplificado
+        setupDrawer('base-calculo-rsr'); 
+        setupDrawer('reflexos-rsr');
+        setupDrawer('calculadora-rsr'); 
+        setupDrawer('pje-calc'); 
+    </script>
+</body>
+</html>

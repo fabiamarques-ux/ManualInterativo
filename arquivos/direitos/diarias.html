@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diárias Trabalhistas</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f4f8;
+            color: #1a202c;
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 2rem;
+            background-color: #ffffff;
+            border-radius: 1rem;
+            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.05);
+        }
+        /* Estilos para os Drawers (Acordeão) */
+        .drawer-container {
+            padding: 1rem;
+            background-color: #f0f4f8;
+            border-radius: 0.75rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+            margin-top: 1.5rem;
+        }
+        .drawer-header {
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .drawer-content {
+            overflow: hidden;
+            transition: all 0.5s ease-in-out;
+            max-height: 0;
+        }
+        .drawer-header .arrow-icon {
+            transition: transform 0.5s ease-in-out;
+        }
+        .drawer-header.active .arrow-icon {
+            transform: rotate(180deg);
+        }
+        /* Estilo para as Imagens dentro do PJe-Calc */
+        .pje-calc-image-container {
+            margin: 1.5rem 0;
+            padding: 1rem;
+            background-color: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 0.5rem;
+            text-align: center;
+        }
+        .pje-calc-image-container img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 0.375rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+        .pje-calc-image-container p {
+            margin-top: 0.5rem;
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: #4a5568;
+        }
+        /* Estilos de ícones para o PJe-Calc, se necessário */
+        .icon-small {
+            width: 72px; 
+            height: auto;
+            display: inline-block; /* Para ser exibido ao lado do texto */
+            margin-left: 0.5rem;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container my-8 relative">
+        <img src="https://site.trt19.jus.br/sites/default/files/logo-trt19.png" alt="Logo do TRT19" class="absolute top-4 right-4 w-36 h-auto">
+        
+        <section id="secao-diarias" class="content-section">
+            <h2 class="text-3xl font-bold text-[#00678F] mb-4">Diárias Trabalhistas</h2>
+            <p class="text-gray-700 leading-relaxed text-justify">As diárias para viagem são valores pagos pelo empregador ao trabalhador para cobrir despesas de deslocamento, hospedagem e alimentação fora do local de trabalho. Sua natureza jurídica (salarial ou indenizatória) depende do seu valor em relação ao salário do empregado.</p>
+            
+            <div class="mt-4 mb-6 p-4 border-l-4 border-[#00678F] bg-[#f0f4f8] rounded-r-md shadow-sm">
+                <h3 class="text-xl font-bold text-[#00678F] mb-2">Natureza Jurídica (Diárias de Viagem)</h3>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm text-gray-700">
+                    <div>
+                        <p class="font-semibold text-gray-800">1. Natureza Indenizável (Regra Geral)</p>
+                        <p class="text-xs italic mt-1">Conforme Art. 457, §2º da CLT e Súmula 101 do TST. Não integra a remuneração.</p>
+                        <ul class="list-disc list-inside ml-4 mt-2">
+                            <li>Valor total das diárias não excede 50% do salário.</li>
+                            <li>Natureza mantida mesmo se pagas habitualmente.</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <p class="font-semibold text-gray-800">2. Natureza Salarial (Excedente)</p>
+                        <p class="text-xs italic mt-1">Aplica-se ao valor que ultrapassar o limite de 50% do salário base do empregado.</p>
+                        <ul class="list-disc list-inside ml-4 mt-2">
+                            <li>O excedente integra o salário para todos os fins.</li>
+                            <li>Em casos antigos, a descaracterização pode levar à integração total.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <h5 class="text-xl font-bold text-gray-800 mt-6 mb-2">Aspectos Fundamentais das Diárias de Viagem:</h5>
+            <div class="p-4 bg-yellow-50 rounded-md mt-2 border border-yellow-300">
+                <p class="font-medium text-gray-800 mb-1">A principal distinção no cálculo é se o valor total das diárias de viagem ultrapassa 50% do salário do empregado.</p>
+                <ul class="list-disc list-inside text-sm text-gray-700 ml-4">
+                    <li><b>Indenizatório:</b> Não há reflexos em nenhuma verba acessória (até o limite de 50%).</li>
+                    <li><b>Salarial (porção):</b> O valor que exceder 50% do salário integra a remuneração para todos os fins, conforme a Súmula 101 do TST.</li>
+                </ul>
+            </div>
+            
+            <div id="base-legal-drawer" class="drawer-container">
+                <div id="base-legal-header" class="drawer-header"> 
+                    <h4 class="text-xl font-semibold text-[#00678F]">Base Legal e Jurisprudência</h4>
+                    <svg class="arrow-icon w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                    </svg>
+                </div>
+                <div id="base-legal-content" class="drawer-content">
+                    <p class="text-gray-700 leading-relaxed text-justify mt-4">O regime jurídico das Diárias de Viagem é determinado pela CLT e pela jurisprudência consolidada do TST, principalmente em relação ao limite de 50% do salário para a definição da natureza salarial.</p>
+                    
+                    <h5 class="text-lg font-semibold text-gray-800 mt-4">Fontes Normativas</h5>
+                    
+                    <hr class="my-4 border-gray-300">
+                    
+                    <h5 class="text-base font-semibold text-gray-800">Consolidação das Leis do Trabalho (CLT):</h5>
+                    <ul class="list-disc list-inside text-gray-700 leading-relaxed mt-2 ml-4 space-y-3">
+                        <li>
+                            <strong>Art. 457, §2º da CLT:</strong>
+                            <p class="text-sm italic mt-1 ml-4 border-l-2 border-gray-400 pl-3">"Não se incluem nos salários as ajudas de custo, o auxílio-alimentação, vedado seu pagamento em dinheiro, <strong>as diárias para viagem</strong>, os prêmios e os abonos."</p>
+                        </li>
+                    </ul>
+
+                    <hr class="my-6 border-gray-300">
+
+                    <h5 class="text-lg font-semibold text-gray-800">Jurisprudência</h5>
+                    
+                    <h6 class="text-base font-semibold text-gray-800 mt-4">Súmula nº 101 do TST (Integração Salarial)</h6>
+                    <div class="p-4 bg-gray-100 rounded-md mt-2 border border-gray-300">
+                        <p class="font-bold text-sm">Súmula nº 101 do TST:</p>
+                        <p class="text-sm mt-1 italic">"Integram o salário, pelo seu valor total e para todos os efeitos legais, as diárias de viagem que excedam a 50% (cinquenta por cento) do salário do empregado, enquanto perdurarem as viagens."</p>
+                        <p class="text-xs mt-2 text-gray-600">*(Nota: Precedente fundamental para determinar a integração salarial e a base de cálculo de reflexos.)*</p>
+                    </div>
+                </div>
+            </div>
+            <div id="calculo-base-drawer" class="drawer-container">
+                <div id="calculo-base-header" class="drawer-header">
+                    <h4 class="text-xl font-semibold text-[#00678F]">Base de Cálculo e Deduções</h4>
+                    <svg class="arrow-icon w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                    </svg>
+                </div>
+                <div id="calculo-base-content" class="drawer-content">
+                    <p class="text-gray-700 leading-relaxed text-justify mt-4">As Diárias de Viagem, se mantida sua natureza indenizatória (até 50% do salário), <b>não integram a base de cálculo</b> de nenhuma verba (salário, férias, 13º, FGTS, INSS e IRRF).</p>
+                    
+                    <hr class="my-4 border-gray-300">
+
+                    <h5 class="text-lg font-bold text-gray-800">Cálculo da Porção Salarial das Diárias (Excedente a 50%)</h5>
+                    <p class="text-gray-700 leading-relaxed text-justify mt-2">O valor das diárias de viagem que exceder a 50% (cinquenta por cento) do salário do empregado integra o cálculo:</p>
+
+                    <ul class="list-disc list-inside text-gray-700 leading-relaxed mt-2 pl-4">
+                        <li>O valor excedente a 50% entra como base de cálculo para os reflexos (13º, férias, etc.).</li>
+                        <li>Passa a incidir INSS e IRRF sobre a parcela salarial, devendo ser calculados os recolhimentos correspondentes.</li>
+                    </ul>
+
+                    <div class="p-4 bg-blue-50 rounded-md mt-4 border border-blue-300">
+                        <p class="font-bold text-sm text-blue-800">Fórmula de Integração:</p>
+                        <p class="text-sm mt-1">Valor Salarial = Valor Total das Diárias - (Salário Base x 50%). Se o resultado for positivo, este é o valor que integra o salário.</p>
+                    </div>
+                </div>
+            </div>
+            <div id="reflexos-verbas-drawer" class="drawer-container">
+                <div id="reflexos-verbas-header" class="drawer-header">
+                    <h4 class="text-xl font-semibold text-[#00678F]">Verbas Reflexas</h4>
+                    <svg class="arrow-icon w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                    </svg>
+                </div>
+                <div id="reflexos-verbas-content" class="drawer-content">
+                    <p class="text-gray-700 leading-relaxed text-justify mt-4">A parcela das Diárias de Viagem reconhecida como salarial (valor excedente a 50% do salário) gera reflexos sobre as verbas acessórias devidas ao empregado, retroativamente, pelo princípio da habitualidade.</p>
+                    
+                    <hr class="my-4 border-gray-300">
+                    
+                    <h5 class="text-lg font-bold text-gray-800">Reflexos Comuns (em caso de integração salarial)</h5>
+                    <div class="mt-4 space-y-3">
+                        <div class="p-3 bg-white rounded-md border border-gray-200">
+                            <p class="font-semibold text-gray-800">1. 13º Salário:</p>
+                            <p class="text-sm mt-1 text-gray-700">O valor salarial das Diárias, deve integrar o cálculo do 13º salário, na proporção de 1/12 por mês.</p>
+                        </div>
+                        <div class="p-3 bg-white rounded-md border border-gray-200">
+                            <p class="font-semibold text-gray-800">2. Férias e Terço Constitucional:</p>
+                            <p class="text-sm mt-1 text-gray-700">O valor salarial das Diárias deve compor a base de cálculo para as férias e o adicional de 1/3.</p>
+                        </div>
+                        <div class="p-3 bg-white rounded-md border border-gray-200">
+                            <p class="font-semibold text-gray-800">3. FGTS (Fundo de Garantia por Tempo de Serviço):</p>
+                            <p class="text-sm mt-1 text-gray-700">Se reconhecida a natureza salarial (o excedente a 50%), o empregador deverá recolher o FGTS (8%) sobre esse valor.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="calculadora-simulacao-drawer" class="drawer-container">
+                <div id="calculadora-simulacao-header" class="drawer-header">
+                    <h4 class="text-xl font-semibold text-[#00678F]">Calculadora (Simulação)</h4>
+                    <svg class="arrow-icon w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                    </svg>
+                </div>
+                <div id="calculadora-simulacao-content" class="drawer-content">
+                    <p class="text-gray-700 leading-relaxed text-justify mt-4">Esta seção seria utilizada para simular os reflexos salariais das Diárias de Viagem em casos de integração (excedente a 50% do salário).</p>
+
+                    <div class="p-6 bg-white rounded-xl shadow-lg border border-gray-200 mt-4">
+                        <p class="text-center font-bold text-gray-700">Ferramenta de Simulação para Reflexos de Diárias de Viagem não implementada.</p>
+                        <p class="text-xs text-gray-500 mt-4 italic text-center">O cálculo depende do salário base do empregado e da apuração do valor total das diárias mês a mês para determinar o excedente que será integrado.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div id="pje-calc-salario-drawer" class="drawer-container">
+                <div id="pje-calc-salario-header" class="drawer-header">
+                    <h4 class="text-xl font-semibold text-[#00678F]">Lançamento no PJe-Calc: Diárias - Integração ao Salário</h4>
+                    <svg class="arrow-icon w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                    </svg>
+                </div>
+                <div id="pje-calc-salario-content" class="drawer-content">
+                    <p class="text-gray-700 leading-relaxed text-justify mt-4">Para lançar corretamente as diárias que devem integrar o salário e seus reflexos no PJe-Calc, utilize a verba DIÁRIAS - INTEGRAÇÃO AO SALÁRIO" e siga os passos essenciais, ilustrados nas imagens:</p>
+                    
+                    <ol class="list-decimal list-inside text-gray-700 leading-relaxed mt-4 pl-4 space-y-3">
+                        <li>
+                            <p class="font-bold">1 - Verbas: Acesso e Lançamento</p>
+                            <p class="text-sm">No menu lateral, clique em "Verbas" para iniciar o processo de cadastro e lançamento de valores.</p>
+                            <img src="imagens_direitos/verbas.png" alt="Tela inicial do PJe-Calc com o item Verbas selecionado" class="mt-2 mb-4 max-w-full h-auto border border-gray-300 rounded-md">
+                        </li>
+                        <li>
+                            <p class="font-bold">2 - Lançamento da Verba Principal</p>
+                            <p class="text-sm">Dentro da seção "Verbas", utilize a opção de "Lançamento Expresso" e selecione a rubrica "DIÁRIAS - INTEGRAÇÃO AO SALÁRIO" para inclusão no cálculo.</p>
+                            <img src="imagens_direitos/diariasalario1.png" alt="Tela de Lançamento Expresso com a opção DIÁRIAS - INTEGRAÇÃO AO SALÁRIO marcada" class="mt-2 mb-4 max-w-full h-auto border border-gray-300 rounded-md">
+                        </li>
+                        <li>
+                            <p class="font-bold">3 - Verbas Reflexas</p>
+                            <p class="text-sm">Após selecionar a verba e salvar/regerar, o sistema exibirá as verbas reflexas. Marque as verbas deferidas que devem receber o reflexo das Diárias (ex: 13º Salário sobre Diárias, Férias + 1/3 sobre Diárias).</p>
+                            <img src="imagens_direitos/diariasalario2.png" alt="Tela de listagem de verbas com Diárias - Integração ao Salário e as opções de Verba Reflexa como 13º Salário sobre Diárias e Férias" class="mt-2 mb-4 max-w-full h-auto border border-gray-300 rounded-md">
+                        </li>
+                        <li>
+                            <p class="font-bold">4 - Acesso aos Parâmetros da Verba</p>
+                            <p class="text-sm">Na tela de listagem de verbas, clique em "Exibir" ou no ícone para acessar os "Parâmetros da Verba" da Diária - Integração ao Salário.</p>
+                            <img src="imagens_direitos/diariasalario3.png" alt="Tela de listagem de verbas com opção Exibir selecionada e botão Parâmetros da Verba visível" class="mt-2 mb-4 max-w-full h-auto border border-gray-300 rounded-md">
+                        </li>
+                        <li>
+                            <p class="font-bold">5 - Configuração das Incidências e Base</p>
+                            <p class="text-sm">Na tela de Parâmetros da Verba, configure o período de apuração, a base de cálculo (tipicamente Histórico Salarial ou Informada), e marque as incidências de IRPF, Contribuição Social (INSS) e FGTS, garantindo a natureza salarial da verba.</p>
+                            <img src="imagens_direitos/diariasalario4.png" alt="Tela de Parâmetros da Verba Diárias - Integração ao Salário, mostrando as opções de incidência e Base de Cálculo como Histórico Salarial" class="mt-2 mb-4 max-w-full h-auto border border-gray-300 rounded-md">
+                        </li>
+                        <li>
+                            <p class="font-bold">6 - Acesso às Ocorrências</p>
+                            <p class="text-sm">Retorne à listagem de verbas (ou prossiga para a próxima etapa) e acesse as "Ocorrências da Verba" para realizar o lançamento mensal dos valores.</p>
+                            <img src="imagens_direitos/diariasalario5.png" alt="Tela de listagem de verbas com botão Ocorrências da Verba visível" class="mt-2 mb-4 max-w-full h-auto border border-gray-300 rounded-md">
+                        </li>
+                         <li>
+                            <p class="font-bold">7 - Lançamento dos Valores Mensais</p>
+                            <p class="text-sm">Insira mês a mês os valores brutos das diárias devidas no campo "Valor" (se a base for "Informada") ou verifique os valores "Calculados" se a verba utilizar um multiplicador sobre o Histórico Salarial.</p>
+                            <img src="imagens_direitos/diariasalario6.png" alt="Tela de Ocorrências da Verba, mostrando o lançamento mensal das Diárias com Data Inicial e Data Final, e o campo Valor como Calculado" class="mt-2 mb-4 max-w-full h-auto border border-gray-300 rounded-md">
+                        </li>
+                    </ol>
+                </div>
+            </div>
+
+            <div id="pje-calc-pagamento-drawer" class="drawer-container">
+                <div id="pje-calc-pagamento-header" class="drawer-header">
+                    <h4 class="text-xl font-semibold text-[#00678F]">Lançamento no PJe-Calc: Diárias de Pagamento</h4>
+                    <svg class="arrow-icon w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                    </svg>
+                </div>
+                <div id="pje-calc-pagamento-content" class="drawer-content">
+                    <p class="text-gray-700 leading-relaxed text-justify mt-4">A seguir, confira o passo a passo para o
+                        lançamento da verba "DIÁRIAS - PAGAMENTO" no PJe-Calc, utilizando a opção "Expresso":</p>
+
+                    <ol class="list-decimal list-inside text-gray-700 leading-relaxed mt-4 ml-4 space-y-3">
+                        <li>
+                            <strong class="text-gray-800">Acessar Verbas e Escolher Lançamento:</strong> No menu de
+                            navegação à esquerda, clique na opção <u>Verbas</u> para iniciar o lançamento. Após o
+                            comando,
+                            será exibida a tela para escolha do Lançamento da Verba. Escolha a opção <u>Expresso</u>.
+                            <img src="imagens_direitos/verbas.png"
+                                alt="Tela do PJe-Calc - Passo 1: Acessar a opção Verbas no menu lateral e clicar em Expresso na seção Lançamento."
+                                class="w-full h-auto my-4 rounded-lg shadow-md">
+                        </li>
+                        <li>
+                            <strong class="text-gray-800">Seleção da Verba:</strong> O sistema abrirá as opções de
+                            verbas, escolha a verba <u>Diárias</u> e clique no botão <u>Salvar</u>
+                            <img src="imagens_direitos/diaria1.png"
+                                alt="Tela do PJe-Calc - Verbas Principais: Selecionar Diárias"
+                                class="w-full h-auto my-4 rounded-lg shadow-md">
+                        </li>
+                        <li>
+                            <strong class="text-gray-800">Quadro de Verbas e Ações:</strong> O sistema exibirá um quadro
+                            com os campos:
+                            <ul class="list-disc list-inside text-gray-700 leading-relaxed mt-2 ml-4">
+                                <li class="ml-8 flex items-center">
+                                <li>Ações - contendo as opções de configurações da verba selecionada (parâmetros,
+                                    ocorrências e
+                                    exclusão)
+                                    <img src="imagens_direitos/telaacoes.png"
+                                        alt="Ícones de Ações: Parâmetros (folha com seta), Ocorrências (folha com checks), Excluir (X vermelho)"
+                                        class="icon-small" style="width: 72px; height: auto;">
+                                </li>
+                                <li class="ml-8 flex items-center">
+                                    - Parâmetros da Verba <img src="imagens_direitos/telaparametros.png"
+                                        alt="Ícone de Parâmetros" class="icon-small">
+                                </li>
+                                <li class="ml-8 flex items-center">
+                                    - Ocorrências da Verba <img src="imagens_direitos/telaocorrencias.png"
+                                        alt="Ícone de Ocorrências" class="icon-small">
+                                </li>
+                                <li class="ml-8 flex items-center">
+                                    - Excluir <img src="imagens_direitos/telaexcluir.png" alt="Ícone de Excluir"
+                                        class="icon-small">
+                                </li>
+                                <li>Verba Principal - verba selecionada para lançamento.</li>
+                                <li>Verba Reflexa - em que ao clicar no botão <u>Exibir</u> serão listadas todas as
+                                    verbas
+                                    reflexas ligadas a Verba Principal.</li>
+                            </ul>
+                            <img src="imagens_direitos/diaria2.png"
+                                alt="Tela do PJe-Calc - Verba Diárias selecionada com as opções de Ações e Verba Reflexa."
+                                class="w-full h-auto my-4 rounded-lg shadow-md">
+                        </li>
+                        <li>
+                            <strong class="text-gray-800">Parametrização da Verba:</strong> Ao clicar no botão
+                            <u>Parâmetros da Verba</u> serão exibidas todas as configurações necessárias para a
+                            parametrização
+                            da Verba Principal.
+                            <img src="imagens_direitos/diaria3.png"
+                                alt="Tela do PJe-Calc - Detalhes da Verba Diárias: Parâmetros, Base de Cálculo, Divisor e Multiplicador."
+                                class="w-full h-auto my-4 rounded-lg shadow-md">
+                        </li>
+                        <li>
+                            <strong class="text-gray-800">Registro de Ocorrências:</strong> Ao clicar no botão
+                            <u>Ocorrências da Verba</u> serão exibidas todas as configurações necessárias para registro
+                            das
+                            ocorrências da Verba Principal.
+                            <img src="imagens_direitos/diaria4.png"
+                                alt="Tela do PJe-Calc - Dados de Ocorrências: Detalhamento da data inicial, data final e valor calculado da verba."
+                                class="w-full h-auto my-4 rounded-lg shadow-md">
+                        </li>
+                    </ol>
+
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        // Função para formatar números como moeda BRL (Não é usada diretamente no script, mas é mantida por consistência)
+        const formatter = new Intl.NumberFormat('pt-BR', {
+            style: 'currency',
+            currency: 'BRL',
+            minimumFractionDigits: 2,
+        });
+        
+        // Função de cálculo mantida inativa, pois a verba não possui fórmula padrão complexa
+        function calculateSimulation() {
+            // Placeholder/inativa para Diárias
+            alert('A simulação de Diárias de Viagem exige a entrada do salário base e a aplicação do limite de 50%, critérios não automatizados nesta versão.');
+        }
+
+        const calcularBtn = document.getElementById('calcularSimulacaoBtn');
+        if (calcularBtn) {
+             calcularBtn.addEventListener('click', calculateSimulation);
+        }
+       
+        /**
+         * Lógica de Acordeão (Drawer) unificada
+         * Inclui a funcionalidade de reajuste em redimensionamento de conteúdo interno
+         */
+        function setupDrawer(id, startOpened = false) {
+            const header = document.getElementById(id + '-header');
+            const content = document.getElementById(id + '-content');
+
+            if (!header || !content) return; 
+
+            // Se for para iniciar aberto (não se aplica por padrão a este arquivo, mas mantém a lógica)
+            if (startOpened) {
+                header.classList.add('active');
+                setTimeout(() => {
+                    content.style.maxHeight = content.scrollHeight + "px";
+                }, 100);
+            }
+            
+            header.addEventListener('click', () => {
+                const isExpanded = header.classList.toggle('active');
+                if (isExpanded) {
+                    content.style.maxHeight = content.scrollHeight + "px";
+                } else {
+                    content.style.maxHeight = '0';
+                }
+                // Ajusta a altura de todos os drawers abertos após a expansão de um, para evitar corte.
+                document.querySelectorAll('.drawer-content').forEach(dc => {
+                    const dh = document.getElementById(dc.id.replace('-content', '-header'));
+                    if (dh && dh.classList.contains('active')) {
+                        dc.style.maxHeight = dc.scrollHeight + "px";
+                    }
+                });
+            });
+            
+            // Adiciona listener para reajustar altura em caso de redimensionamento de conteúdo interno
+            new ResizeObserver(() => {
+                if (header.classList.contains('active')) {
+                    content.style.maxHeight = content.scrollHeight + "px";
+                }
+            }).observe(content);
+        }
+
+        // Inicializa os drawers do arquivo
+        setupDrawer('base-legal');
+        setupDrawer('calculo-base'); 
+        setupDrawer('reflexos-verbas'); // O ID não mudou, mas o título no HTML sim.
+        setupDrawer('calculadora-simulacao');
+        // Inicializa os dois novos drawers de PJe-Calc
+        setupDrawer('pje-calc-salario');
+        setupDrawer('pje-calc-pagamento');
+    </script>
+</body>
+</html>

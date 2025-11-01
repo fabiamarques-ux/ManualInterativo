@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Configuração do Imposto de Renda</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f1f5f9;
+        }
+
+        .text-justify {
+            text-align: justify;
+        }
+
+        .aside-bg {
+            background-color: #005a62;
+        }
+
+        /* Estilo para a Logo */
+        .logo-trt {
+            max-height: 60px;
+            width: auto;
+        }
+
+        /* Estilos e Transições para o Acordeão PRINCIPAL */
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out, padding 0.3s ease-out;
+            padding-top: 0;
+            padding-bottom: 0;
+            background-color: #f0f4f8;
+        }
+
+        .accordion-content.active {
+            max-height: 20000px;
+            padding-top: 1rem;
+            padding-bottom: 1rem;
+        }
+
+        .accordion-header {
+            background-color: #f0f4f8;
+        }
+
+        .accordion-icon {
+            transition: transform 0.3s ease;
+            font-size: 1.5rem;
+            line-height: 1;
+        }
+
+        .accordion-icon.rotate {
+            transform: rotate(45deg);
+        }
+
+        /* Estilos e Transições para o SUB-ACORDEÃO (Modalidades) */
+        .sub-acordeon-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out, padding 0.3s ease-out;
+            padding-top: 0;
+            padding-bottom: 0;
+        }
+
+        .sub-acordeon-content.active {
+            max-height: 20000px;
+            padding-top: 1rem;
+            padding-bottom: 1rem;
+        }
+
+        /* Estilo para imagens no conteúdo do acordeão */
+        .content-image {
+            max-width: 100%;
+            height: auto;
+            border: 1px solid #ccc;
+            border-radius: 0.5rem;
+            margin-top: 1rem;
+            margin-bottom: 1rem;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="p-4 md:p-8">
+        <div class="max-w-4xl mx-auto bg-white rounded-xl shadow-xl p-6 md:p-10 border border-gray-200">
+            <div class="flex justify-center mb-6">
+                <img src="https://site.trt19.jus.br/portalTRT19/sites/default/files/logo-trt19.png" alt="Logo do TRT19"
+                    class="logo-trt w-auto object-contain">
+            </div>
+            <h1 class="text-3xl md:text-4xl text-center mb-6 text-[#007380]">Manual Interativo de Cálculos Trabalhistas
+            </h1>
+            <p class="text-center text-gray-600 mb-8">Um guia completo e interativo para entender os cálculos na esfera
+                judicial trabalhista.</p>
+
+            <section id="imposto-renda-content" class="content-section">
+                <h2 class="text-2xl md:text-3xl font-bold mb-4 text-[#007380]">Configuração do Imposto de Renda (IR)</h2>
+                <div class="space-y-4">
+                    <p class="text-gray-700 text-justify">
+                        O módulo de Imposto de Renda permite configurar os parâmetros para o cálculo das
+                        deduções fiscais incidentes sobre os valores devidos, conforme a legislação vigente e
+                        a determinação da sentença. É crucial selecionar corretamente as opções para garantir
+                        a apuração exata do tributo.
+                    </p>
+
+                    <h4 class="text-lg text-[#007380] font-semibold mt-4">1. Dados Principais e Opções de Dedução</h4>
+                    <p class="text-gray-700 text-justify">
+                        Ao acessar o módulo, deve-se marcar a opção **"Apuração Imposto de Renda"** para
+                        ativar o cálculo. Na sequência, é necessário definir quais valores serão deduzidos
+                        da Base de Cálculo do IR.
+                    </p>
+                    <p class="text-gray-700 text-justify font-semibold">
+                        As opções de dedução incluem:
+                    </p>
+                    <ul class="list-disc list-inside text-gray-700 ml-4">
+                        <li>Contribuição Social devida pelo Reclamante</li>
+                        <li>Previdência Privada</li>
+                        <li>Pensão Alimentícia</li>
+                        <li>Honorários devidos pelo Reclamante</li>
+                        <li>Aposentado maior de 65 Anos</li>
+                        <li>Dependentes</li>
+                    </ul>
+
+                    <img src="imagens_liquidacao/imposto_renda.png"
+                        alt="Tela de configuração do Imposto de Renda no PJe-Calc Cidadão, mostrando as opções de dedução da base de cálculo."
+                        class="content-image max-w-4xl mx-auto">
+
+                    <h4 class="text-lg text-[#007380] font-semibold mt-4">2. Opções Adicionais de Tributação</h4>
+                    <p class="text-gray-700 text-justify">
+                        Outras opções importantes a serem avaliadas e marcadas, se aplicável, são:
+                    </p>
+                    <ul class="list-disc list-inside text-gray-700 ml-4">
+                        <li>Incidir sobre Juros de Mora</li>
+                        <li>Cobrar do Reclamado</li>
+                        <li>Tributação Exclusiva (RRA - Rendimentos Recebidos Acumuladamente)</li>
+                        <li>Tributação em Separado</li>
+                        <li>Aplicar Regime de Caixa</li>
+                    </ul>
+
+                    <p class="text-gray-700 text-justify mt-4">
+                        Após configurar todas as opções conforme a decisão judicial e a natureza das verbas, clique em **"Salvar"**.
+                    </p>
+                </div>
+            </section>
+        </div>
+    </div>
+</body>
+
+</html>

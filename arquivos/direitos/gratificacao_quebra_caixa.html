@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gratificação de Caixa (Quebra de Caixa)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f4f8;
+            color: #1a202c;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 2rem;
+            background-color: #ffffff;
+            border-radius: 1rem;
+            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.05);
+        }
+
+        .copy-container {
+            display: flex;
+            align-items: center;
+            position: relative;
+        }
+
+        .copy-btn {
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
+            padding: 0;
+            margin-left: 0.5rem;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .copy-btn svg {
+            width: 1.5rem;
+            height: 1.5rem;
+            fill: #00678F;
+            transition: fill 0.3s ease;
+        }
+
+        .copy-btn:hover svg {
+            fill: #004562;
+        }
+
+        .copy-message {
+            position: absolute;
+            left: 100%;
+            top: 50%;
+            transform: translate(10px, -50%);
+            background-color: #00678F;
+            color: white;
+            padding: 0.25rem 0.5rem;
+            border-radius: 0.5rem;
+            font-size: 0.75rem;
+            white-space: nowrap;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        /* MODIFICAÇÃO: Aplicando fundo cinza claro (#f0f4f8) e sombra aos contêineres */
+        .drawer-container {
+            padding: 1rem;
+            background-color: #f0f4f8;
+            /* Fundo cinza claro da tabela */
+            border-radius: 0.75rem;
+            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+            /* Sombra sutil */
+            margin-top: 1.5rem;
+        }
+
+        .drawer-header {
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .drawer-content {
+            overflow: hidden;
+            transition: all 0.5s ease-in-out;
+            max-height: 0;
+        }
+
+        .drawer-header .arrow-icon {
+            transition: transform 0.5s ease-in-out;
+        }
+
+        .drawer-header.active .arrow-icon {
+            transform: rotate(180deg);
+        }
+
+        .table-responsive {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th,
+        td {
+            padding: 0.75rem;
+            text-align: left;
+            border-bottom: 1px solid #d1d5db;
+        }
+
+        th {
+            background-color: #00678F;
+            color: white;
+        }
+
+        tr:nth-child(odd) {
+            background-color: #f0f4f8;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container my-8 relative">
+        <img src="https://site.trt19.jus.br/sites/default/files/logo-trt19.png" alt="Logo do TRT19"
+            class="absolute top-4 right-4 w-36 h-auto">
+
+        <section id="quebra-de-caixa" class="content-section">
+            <h2 class="text-3xl font-bold text-[#00678F] mb-4">Gratificação de Caixa (Quebra de Caixa)</h2>
+            <p class="text-gray-700 leading-relaxed text-justify">A Gratificação de Quebra de Caixa é uma parcela
+                salarial paga habitualmente ao empregado que lida com manuseio de dinheiro (Ex: caixa de banco,
+                comércio) para cobrir eventuais diferenças ou erros no fechamento do caixa. Seu objetivo é compensar o
+                risco financeiro do empregado.</p>
+
+            <p class="text-gray-700 leading-relaxed text-justify mt-4">A Quebra de Caixa, embora não encontre disposição especifica na CLT, possui entendimento jurisprudencial de quando paga com habitualidade,
+                possui natureza salarial e, por isso, integra o salário para todos os efeitos legais, gerando reflexos
+                em verbas como 13º salário, férias e FGTS, conforme o entendimento da justiça majoritário (exceto
+                se houver cláusula expressa em norma coletiva em sentido contrário).</p>
+
+            <div id="base-legal-drawer" class="drawer-container">
+                <div id="base-legal-header" class="drawer-header">
+                    <h4 class="text-xl font-semibold text-[#00678F]">Base Legal e Jurisprudência</h4>
+                    <svg class="arrow-icon w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                    </svg>
+                </div>
+                <div id="base-legal-content" class="drawer-content">
+                    <p class="text-gray-700 leading-relaxed text-justify mt-4">A natureza salarial da gratificação de quebra de caixa, quando paga com habitualidade, é regulamentada pela CLT.</p>
+                    <h5 class="text-lg font-semibold text-gray-800 mt-4">Fontes Normativas</h5>
+                    
+                    <hr class="my-4 border-gray-300">
+                    <h5 class="text-base font-semibold text-gray-800">Consolidação das Leis do Trabalho (CLT):</h5>
+                    <ul class="list-disc list-inside text-gray-700 leading-relaxed mt-2 ml-4 space-y-3">
+                        <li><strong>Artigo 457, § 1º:</strong>
+                            <p class="text-sm italic mt-1 ml-4 border-l-2 border-gray-400 pl-3">"Integram o salário a importância fixa estipulada, as gratificações legais e as comissões pagas pelo empregador."</p>
+                        </li>
+                    </ul>
+
+                    <hr class="my-6 border-gray-300">
+
+                    <h5 class="text-lg font-semibold text-gray-800">Jurisprudência</h5>
+                    
+                    <h6 class="text-base font-semibold text-gray-800 mt-4">Natureza Salarial </h6>
+                    <div class="p-4 bg-gray-100 rounded-md mt-2 border border-gray-300">
+                        <p class="font-bold text-sm">Súmula nº 247 do TST</p>
+                        <p class="text-sm mt-1 italic">QUEBRA DE CAIXA. NATUREZA SALARIAL.A parcela paga aos bancários sob a denominação "quebra de caixa" possui natureza salarial, integrando o salário do prestador de serviços, para todos os efeitos legais.</p>
+                        <br> 
+                        <p class="font-bold text-sm">Observação: Destaca-se que o entedimento mencionado acima é utilizado por analogia por outras atividades, portanto, não sendo um direito único para bancários.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div id="base-calculo-drawer" class="drawer-container">
+                <div id="base-calculo-header" class="drawer-header">
+                    <h4 class="text-xl font-semibold text-[#00678F]">Base de Cálculo e Deduções</h4>
+                    <svg class="arrow-icon w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                    </svg>
+                </div>
+                <div id="base-calculo-content" class="drawer-content">
+                    <h5 class="text-lg font-semibold text-black mt-2">Base de Cálculo</h5>
+                    <p class="text-gray-700 leading-relaxed text-justify mt-2">A Gratificação de Quebra de Caixa é um
+                        valor geralmente fixo pago mensalmente. Para o cálculo dos reflexos (Ex: 13º salário, férias),
+                        usa-se o valor nominal da gratificação no mês da apuração da verba ou a média, se o valor for
+                        variável.</p>
+
+                    <h5 class="text-lg font-semibold text-black mt-6">Deduções</h5>
+                    <p class="text-gray-700 leading-relaxed text-justify mt-2">Por ter natureza salarial, a Quebra de
+                        Caixa incide no cálculo das deduções legais, como a contribuição para o **INSS (Instituto
+                        Nacional do Seguro Social)** e o **Imposto de Renda (IRPF)**. Essas deduções são aplicadas sobre
+                        o valor total da remuneração, que é a soma do salário base e da gratificação de caixa.</p>
+                    <p class="text-gray-700 leading-relaxed text-justify mt-4">**Exemplo de Deduções (INSS e IR):**</p>
+                    <p class="text-gray-700 leading-relaxed text-justify">Vamos considerar um salário-base de **R$
+                        3.500,00** e uma gratificação de quebra de caixa de **R$ 500,00** no mês.</p>
+                    <ul class="list-disc list-inside text-gray-700 mt-2">
+                        <li>**Remuneração total (Base de Cálculo):** R$ 3.500,00 + R$ 500,00 = **R$ 4.000,00**</li>
+                        <li>**Dedução de INSS:** Com base na tabela progressiva, a alíquota de INSS para essa faixa de
+                            remuneração (considerando a regra do teto e alíquotas) seria de, por exemplo, **R$ 480,00**.
+                        </li>
+                        <li>**Base de cálculo para IRPF:** A remuneração total menos a dedução do INSS: R$ 4.000,00 - R$
+                            480,00 = **R$ 3.520,00**.</li>
+                        <li>**Dedução de IRPF:** Se a alíquota for de, por exemplo, **15%** e a parcela a deduzir for de
+                            **R$ 370,40** (valores hipotéticos), o IR será: (R$ 3.520,00 x 0,15) - R$ 370,40 = **R$
+                            528,00** - R$ 370,40 = **R$ 157,60**.</li>
+                    </ul>
+                    <p class="text-gray-700 leading-relaxed text-justify mt-4">As alíquotas e as faixas de dedução do
+                        INSS e do IRPF mudam periodicamente. O exemplo acima é apenas uma simulação.</p>
+                </div>
+            </div>
+
+            <div id="verbas-reflexas-drawer" class="drawer-container">
+                <div id="verbas-reflexas-header" class="drawer-header">
+                    <h4 class="text-xl font-semibold text-[#00678F]">Verbas Reflexas</h4>
+                    <svg class="arrow-icon w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                    </svg>
+                </div>
+                <div id="verbas-reflexas-content" class="drawer-content">
+                    <p class="text-gray-700 leading-relaxed text-justify mt-4">A Quebra de Caixa, por possuir natureza salarial quando paga com habitualidade, deve ser adicionada ao salário base para calcular todas as verbas que são apuradas sobre a remuneração (Art. 457, § 1º, da CLT). Confira as principais verbas reflexas:</p>
+                    <p class="text-gray-700 leading-relaxed text-justify mt-2">A integração da Quebra de Caixa na remuneração é essencial para garantir que o cálculo de verbas contratuais e rescisórias reflita a correta base remuneratória do empregado. Confira as principais verbas que recebem o reflexo da Quebra de Caixa:</p>
+
+                    <table
+                        class="w-full mt-4 text-sm text-gray-700 border-collapse border border-gray-300 rounded-md overflow-hidden">
+                        <thead>
+                            <tr class="bg-gray-200">
+                                <th class="py-2 px-4 text-left border-b border-gray-300 w-1/3">Verba Trabalhista</th>
+                                <th class="py-2 px-4 text-left border-b border-gray-300 w-2/3">Reflexo da Quebra de Caixa</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="border-b border-gray-300">
+                                <td class="py-2 px-4 font-medium">13º Salário</td>
+                                <td class="py-2 px-4">Integra o cálculo do 13º Salário (integral e proporcional).</td>
+                            </tr>
+                            <tr class="border-b border-gray-300">
+                                <td class="py-2 px-4 font-medium">Férias + 1/3</td>
+                                <td class="py-2 px-4">Integra o cálculo das Férias (vencidas e proporcionais) e o adicional de 1/3.</td>
+                            </tr>
+                            <tr class="border-b border-gray-300">
+                                <td class="py-2 px-4 font-medium">Aviso Prévio</td>
+                                <td class="py-2 px-4">Integra a base de remuneração para cálculo do Aviso Prévio (trabalhado ou indenizado).</td>
+                            </tr>
+                            <tr class="border-b border-gray-300">
+                                <td class="py-2 px-4 font-medium">FGTS (Depósito Mensal e Multa)</td>
+                                <td class="py-2 px-4">Incide sobre a gratificação, compondo a base de cálculo para o depósito mensal de 8% e para a Multa de 40%.</td>
+                            </tr>
+                            <tr>
+                                <td class="py-2 px-4 font-medium">Horas Extras</td>
+                                <td class="py-2 px-4">Compõe o salário-hora para o cálculo, se devidas.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <hr class="my-4 border-gray-300">
+                    <p class="text-gray-700 leading-relaxed text-justify mt-2"><strong>Atenção:</strong> A Gratificação de Quebra de Caixa, por ter natureza salarial (Art. 457, § 1º, da CLT), integra o cálculo de todas as verbas que são calculadas sobre a remuneração, exceto se houver cláusula expressa em norma coletiva em sentido contrário.</p>
+                </div>
+            </div>
+            <div id="calculadora-reflexos-drawer" class="drawer-container">
+                <div id="calculadora-reflexos-header" class="drawer-header">
+                    <h4 class="text-xl font-semibold text-[#00678F]">Calculadora (Simulação)</h4>
+                    <svg class="arrow-icon w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                    </svg>
+                </div>
+                <div id="calculadora-reflexos-content" class="drawer-content">
+                    <p class="text-gray-700 leading-relaxed text-justify mt-4">Utilize esta ferramenta para simular o valor do 13º Salário, incluindo o reflexo da Quebra de Caixa, considerando a média se a gratificação não foi paga durante todo o ano.</p>
+
+                    <div class="p-4 bg-white rounded-lg shadow-inner mt-4">
+                        <h5 class="text-md font-semibold text-gray-800">Fórmula de Cálculo </h5>
+                        <p class="text-gray-600 text-sm mb-4">Salário-Base + (Valor Quebra de Caixa / Meses Pagos / 12)</p>
+
+                        <div class="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4">
+                            <div class="flex-1">
+                                <label for="salarioBaseCalcInput" class="block text-sm text-gray-700">Salário-Base Mensal (R$):</label>
+                                <input type="text" id="salarioBaseCalcInput"
+                                    class="mt-1 block w-full rounded-md border-gray-300 p-2 focus:ring-[#00678F] focus:border-[#00678F]"
+                                    placeholder="Ex: 3.500,00">
+                            </div>
+                            <div class="flex-1">
+                                <label for="gratificacaoMensalInput" class="block text-sm text-gray-700">Valor Mensal Quebra de Caixa (R$):</label>
+                                <input type="text" id="gratificacaoMensalInput"
+                                    class="mt-1 block w-full rounded-md border-gray-300 p-2 focus:ring-[#00678F] focus:border-[#00678F]"
+                                    placeholder="Ex: 500,00">
+                            </div>
+                            <div class="flex-1">
+                                <label for="mesesPagosInput" class="block text-sm text-gray-700">Meses Pagos (1 a 12):</label>
+                                <input type="number" id="mesesPagosInput"
+                                    class="mt-1 block w-full rounded-md border-gray-300 p-2 focus:ring-[#00678F] focus:border-[#00678F]"
+                                    placeholder="Ex: 6">
+                            </div>
+                        </div>
+                        <button id="calculateReflexoBtn"
+                            class="mt-4 w-full px-4 py-2 bg-[#00678F] text-white rounded-md hover:bg-[#004562] transition duration-300 shadow-md flex items-center justify-center">
+                            <span>Calcular 13º Salário Base</span>
+                        </button>
+                        <div class="mt-4">
+                            <div class="flex items-center copy-container">
+                                <p id="reflexoResult" class="text-base font-bold text-gray-800"></p>
+                                <button id="copyReflexoResult" class="copy-btn hidden" aria-label="Copiar valor">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                        <path
+                                            d="M16 1H4C2.9 1 2 1.9 2 3v14h2V3h12V1zm3 4H8C6.9 5 6 5.9 6 7v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z" />
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="pje-calc-drawer" class="drawer-container">
+                <div id="pje-calc-header" class="drawer-header">
+                    <h4 class="text-xl font-semibold text-[#00678F]">Lançamento no PJe-Calc </h4>
+                    <svg class="arrow-icon w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                    </svg>
+                </div>
+                <div id="pje-calc-content" class="drawer-content">
+                    <p class="text-gray-700 leading-relaxed text-justify mt-4">A seguir, confira o passo a passo para o
+                        lançamento da verba no PJe-Calc.</p>
+
+                    <div class="p-3 my-4 bg-yellow-100 border-l-4 border-yellow-500 text-yellow-800 rounded-md">
+                        <p class="font-bold leading-relaxed">
+                            ATENÇÃO: Como a verba "Quebra de Caixa" não está cadastrada no PJe-Calc,
+                            faz-se necessário cadastra-lá. Para isso utiliza-se a opção "Manual".
+                        </p>
+                    </div>
+
+                    <ol class="list-decimal list-inside text-gray-700 leading-relaxed mt-4 ml-4 space-y-3">
+                        <li>
+                            <strong class="text-gray-800">Acessar Verbas e Escolher Lançamento:</strong> No menu de
+                            navegação à esquerda, clique na opção <u>Verbas</u> para iniciar o lançamento. Após o
+                            comando, será exibida a tela para escolha do Lançamento da Verba. Escolha a opção
+                            <u>Manual</u>.
+                            <img src="imagens_direitos/cadastronovaverba1.png"
+                                alt="Tela do PJe-Calc - Passo 1: Acessar a opção Verbas no menu lateral e clicar em Expresso na seção Lançamento."
+                                class="w-full h-auto my-4 rounded-lg shadow-md">
+                        </li>
+                        <li>
+                            <strong class="text-gray-800">Acessar o cadastro de configuação da Verba:</strong> O sistema
+                            exibirá a tela de parâmetros da verba com os campos em branco para preenchimento. Cadastre o
+                            nome da verba e escolha entre os Assuntos CNJ a opção relativa ao novo cadastro. Preencha
+                            devidamente os demais parâmetros e ao final clique no botão <u>Salvar</u>.
+                            <img src="imagens_direitos/cadastronovaverba2.png"
+                                alt="Tela do PJe-Calc - Passo 1: Acessar a opção Verbas no menu lateral e clicar em Expresso na seção Lançamento."
+                                class="w-full h-auto my-4 rounded-lg shadow-md">
+                        </li>
+                        <li>
+                            <strong class="text-gray-800">Quadro de Verbas e Ações:</strong> Após o cadastramento da
+                            nova verba, o sistema exibirá um quadro
+                            com os campos:
+                            <ul class="list-disc list-inside text-gray-700 leading-relaxed mt-2 ml-4">
+                                <li class="ml-8 flex items-center">
+                                <li>Ações - contendo as opções de configurações da verba selecionada (parâmetros,
+                                    ocorrências e exclusão)
+                                    <img src="imagens_direitos/telaacoes.png"
+                                        alt="Ícones de Ações: Parâmetros (folha com seta), Ocorrências (folha com checks), Excluir (X vermelho)"
+                                        class="icon-small" style="width: 72px; height: auto;">
+                                </li>
+                                <li class="ml-8 flex items-center">
+                                    - Parâmetros da Verba <img src="imagens_direitos/telaparametros.png"
+                                        alt="Ícone de Parâmetros" class="icon-small">
+                                </li>
+                                <li class="ml-8 flex items-center">
+                                    - Ocorrências da Verba <img src="imagens_direitos/telaocorrencias.png"
+                                        alt="Ícone de Ocorrências" class="icon-small">
+                                </li>
+                                <li class="ml-8 flex items-center">
+                                    - Excluir <img src="imagens_direitos/telaexcluir.png" alt="Ícone de Excluir"
+                                        class="icon-small">
+                                </li>
+                                <li>Verba Principal - verba selecionada para lançamento.</li>
+                                <li>Verba Reflexa - em que ao clicar no botão <u>Exibir</u> serão listadas todas as
+                                    verbas
+                                    reflexas ligadas a Verba Principal.</li>
+                            </ul>
+                            <img src="imagens_direitos/quebradecaixa1.png"
+                                alt="Tela do PJe-Calc - Verba Quebra de Caixa selecionada com as opções de Ações e Verba Reflexa."
+                                class="w-full h-auto my-4 rounded-lg shadow-md">
+                        </li>
+                        <li>
+                            <strong class="text-gray-800">Parametrização da Verba:</strong> Ao clicar no botão
+                            <u>Parâmetros da Verba</u> serão exibidas todas as configurações necessárias para a
+                            parametrização
+                            da Verba Principal.
+                            <img src="imagens_direitos/quebradecaixa2.png"
+                                alt="Tela do PJe-Calc - Detalhes da Verba Saldo de Salário: Parâmetros, Base de Cálculo, Divisor e Multiplicador."
+                                class="w-full h-auto my-4 rounded-lg shadow-md">
+                        </li>
+                        <li>
+                            <strong class="text-gray-800">Registro de Ocorrências:</strong> Ao clicar no botão
+                            <u>Ocorrências da Verba</u> serão exibidas todas as configurações necessárias para registro
+                            das
+                            ocorrências da Verba Principal.
+                            <img src="imagens_direitos/quebradecaixa3.png"
+                                alt="Tela do PJe-Calc - Dados de Ocorrências: Detalhamento da data inicial, data final e valor calculado da verba."
+                                class="w-full h-auto my-4 rounded-lg shadow-md">
+                        </li>
+                    </ol>
+
+                </div>
+
+        </section>
+    </div>
+
+    <script>
+        // Função para copiar o texto de um elemento com feedback visual
+        function copyTextFromElement(elementId, buttonElement) {
+            const element = document.getElementById(elementId);
+            if (!element) return;
+            const textToCopy = element.textContent.replace('...', ''); // Remove '...' para copiar o link completo
+
+            const tempInput = document.createElement('input');
+            tempInput.value = textToCopy;
+            document.body.appendChild(tempInput);
+            tempInput.select();
+
+            try {
+                document.execCommand('copy');
+                // Criar e exibir a mensagem de sucesso
+                const message = document.createElement('span');
+                message.textContent = 'Copiado!';
+                message.className = 'copy-message';
+                // Posicionamento ajustado para funcionar dentro da gaveta
+                message.style.position = 'absolute';
+                message.style.left = 'calc(100% + 10px)';
+                message.style.top = '50%';
+                
+                // Remover mensagem antiga se houver
+                const oldMessage = buttonElement.parentElement.querySelector('.copy-message');
+                if (oldMessage) oldMessage.remove();
+
+                buttonElement.parentElement.appendChild(message);
+
+                // Animar e remover a mensagem após 1 segundo
+                setTimeout(() => {
+                    message.style.opacity = '1';
+                }, 10);
+                setTimeout(() => {
+                    message.style.opacity = '0';
+                    setTimeout(() => message.remove(), 300);
+                }, 1000);
+
+            } catch (err) {
+                console.error('Falha ao copiar o texto:', err);
+            } finally {
+                document.body.removeChild(tempInput);
+            }
+        }
+        
+        // Função para copiar o resultado da calculadora (texto arbitrário)
+        function copyResultToClipboard(textToCopy, buttonElement) {
+            const tempInput = document.createElement('input');
+            tempInput.value = textToCopy.replace('Base de Cálculo do 13º Salário: ', '').trim(); // Limpa o texto para copiar só o valor
+            document.body.appendChild(tempInput);
+            tempInput.select();
+
+            try {
+                document.execCommand('copy');
+                const message = document.createElement('span');
+                message.textContent = 'Copiado!';
+                message.className = 'copy-message';
+                message.style.position = 'absolute';
+                message.style.left = 'calc(100% + 10px)';
+                message.style.top = '50%';
+
+                const oldMessage = buttonElement.parentElement.querySelector('.copy-message');
+                if (oldMessage) oldMessage.remove();
+                
+                buttonElement.parentElement.appendChild(message);
+
+                setTimeout(() => {
+                    message.style.opacity = '1';
+                }, 10);
+                setTimeout(() => {
+                    message.style.opacity = '0';
+                    setTimeout(() => message.remove(), 300);
+                }, 1000);
+
+            } catch (err) {
+                console.error('Falha ao copiar o texto:', err);
+            } finally {
+                document.body.removeChild(tempInput);
+            }
+        }
+
+
+        // Função para formatar o valor de entrada conforme o usuário digita
+        function formatInput() {
+            // Seleciona todos os inputs de texto, incluindo os da calculadora
+            const inputElements = document.querySelectorAll('input[type="text"]');
+            inputElements.forEach(input => {
+                input.addEventListener('input', (e) => {
+                    let value = e.target.value;
+                    // Remove todos os caracteres que não sejam dígitos
+                    value = value.replace(/\D/g, '');
+
+                    // Formata com vírgula para centavos e pontos para milhares
+                    if (value.length > 2) {
+                        value = value.replace(/(\d+)(\d{2})$/, '$1,$2');
+                    }
+                    if (value.length > 6) {
+                        value = value.replace(/(\d)(?=(\d{3})+,)/g, '$1.');
+                    }
+                    e.target.value = value;
+                });
+            });
+        }
+
+        // Função de Cálculo do Reflexo no 13º Salário
+        function calculateReflexo() {
+            // Helper para limpar entrada de moeda
+            function cleanCurrency(value) {
+                if (!value) return 0;
+                // Remove separador de milhar (ponto) e substitui vírgula por ponto decimal
+                return parseFloat(value.replace(/\./g, '').replace(',', '.')); 
+            }
+
+            const salarioBaseInput = document.getElementById('salarioBaseCalcInput').value;
+            const gratificacaoMensalInput = document.getElementById('gratificacaoMensalInput').value;
+            const mesesPagosInput = document.getElementById('mesesPagosInput').value;
+            const reflexoResultElement = document.getElementById('reflexoResult');
+            const copyBtn = document.getElementById('copyReflexoResult');
+
+            const salarioBase = cleanCurrency(salarioBaseInput);
+            const gratificacaoMensal = cleanCurrency(gratificacaoMensalInput);
+            const mesesPagos = parseInt(mesesPagosInput, 10);
+
+            if (isNaN(salarioBase) || isNaN(gratificacaoMensal) || isNaN(mesesPagos) || mesesPagos < 1 || mesesPagos > 12) {
+                reflexoResultElement.textContent = 'Erro: Preencha todos os campos corretamente (Meses Pagos deve ser entre 1 e 12).';
+                copyBtn.classList.add('hidden');
+                return;
+            }
+
+            // Cálculo: Base 13º = Salário-Base + (Valor Quebra de Caixa * Meses Pagos / 12)
+            const mediaGratificacao = (gratificacaoMensal * mesesPagos) / 12;
+            const base13 = salarioBase + mediaGratificacao;
+
+            // Formata o resultado para moeda BRL
+            const formattedResult = base13.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+            
+            const resultText = `Base de Cálculo do 13º Salário: ${formattedResult}`;
+            reflexoResultElement.textContent = resultText;
+            copyBtn.classList.remove('hidden');
+
+            // Adiciona listener ao botão de cópia dinamicamente
+            copyBtn.onclick = function() {
+                copyResultToClipboard(resultText, this);
+            };
+        }
+
+
+        // Chamada da função de formatação
+        formatInput();
+
+        // Lógica para as gavetas expansíveis
+        // A função foi modificada para aceitar um parâmetro 'startOpen'
+        function setupDrawer(drawerId, startOpen = false) {
+            const header = document.getElementById(`${drawerId}-header`);
+            const content = document.getElementById(`${drawerId}-content`);
+            if (header && content) {
+
+                // Lógica adicionada para abrir a gaveta na inicialização se startOpen for true
+                if (startOpen) {
+                    header.classList.add('active');
+                    // Usa setTimeout para garantir que o scrollHeight seja calculado após o render
+                    setTimeout(() => {
+                        content.style.maxHeight = content.scrollHeight + 30 + "px";
+                    }, 50);
+                }
+
+                header.addEventListener('click', () => {
+                    const isExpanded = header.classList.toggle('active');
+                    if (isExpanded) {
+                        // Calcula a altura do conteúdo com margem de segurança
+                        content.style.maxHeight = content.scrollHeight + 30 + "px";
+                    } else {
+                        content.style.maxHeight = '0';
+                    }
+                });
+            }
+        }
+
+        // Configura as gavetas
+        setupDrawer('base-legal');
+        setupDrawer('base-calculo');
+        setupDrawer('verbas-reflexas'); // Verbas Reflexas (ID ATUALIZADO)
+        setupDrawer('calculadora-reflexos'); // Nova Calculadora
+        setupDrawer('pje-calc'); 
+
+        // Adiciona o listener para o botão da calculadora
+        document.getElementById('calculateReflexoBtn').addEventListener('click', calculateReflexo);
+    </script>
+</body>
+
+</html>

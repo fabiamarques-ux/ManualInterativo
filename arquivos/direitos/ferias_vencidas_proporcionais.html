@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cálculo de Férias Proporcionais e Vencidas + 1/3</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f4f8;
+            color: #1a202c;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 2rem;
+            background-color: #ffffff;
+            border-radius: 1rem;
+            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.05);
+        }
+
+        .copy-btn {
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
+            padding: 0;
+            margin-left: 1rem;
+        }
+
+        .copy-btn svg {
+            width: 1.5rem;
+            height: 1.5rem;
+            fill: #00678F;
+            transition: fill 0.3s ease;
+        }
+
+        .copy-btn:hover svg {
+            fill: #004562;
+        }
+
+        .loading-spinner {
+            border: 4px solid rgba(0, 103, 143, 0.1);
+            border-top: 4px solid #00678F;
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            animation: spin 1s linear infinite;
+            margin-right: 0.5rem;
+            display: none;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        .drawer-container {
+            padding: 1rem;
+            background-color: #f0f4f8;
+            border-radius: 0.75rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+            margin-top: 1.5rem;
+        }
+
+        .drawer-header {
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .drawer-content {
+            overflow: hidden;
+            transition: all 0.5s ease-in-out;
+            max-height: 0;
+        }
+
+        .drawer-header.active .arrow-icon {
+            transform: rotate(180deg);
+        }
+
+        .table-container {
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .custom-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.875rem;
+        }
+
+        .custom-table th,
+        .custom-table td {
+            border: 1px solid #d1d5db;
+            padding: 0.75rem;
+            text-align: center;
+        }
+
+        .custom-table th {
+            background-color: #00678F;
+            color: #ffffff;
+            font-weight: 600;
+        }
+
+        .image-container {
+            margin: 1.5rem 0;
+            border: 1px solid #d1d5db;
+            border-radius: 0.5rem;
+            overflow: hidden;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container my-8 relative">
+        <img src="https://site.trt19.jus.br/sites/default/files/logo-trt19.png" alt="[Imagem do logo TRT19]"
+            class="absolute top-4 right-4 w-36 h-auto">
+
+        <section id="ferias" class="content-section">
+            <h2 class="text-3xl font-bold text-[#00678F] mb-6 border-b-2 border-gray-200 pb-2">Férias Proporcionais e
+                Vencidas + 1/3</h2>
+            <p class="text-gray-700 leading-relaxed text-justify mb-4">
+                O pagamento de férias na rescisão do contrato de trabalho compreende as **férias vencidas** (se houver)
+                e as **férias proporcionais**, ambas acrescidas de um terço constitucional. As férias vencidas são
+                devidas quando o período aquisitivo de 12 meses já foi completado, mas o período de descanso não foi
+                usufruído.
+            </p>
+            <hr class="my-6 border-gray-300">
+
+            <h3 class="text-xl font-bold text-gray-800 mt-6 mb-4">1. Férias Proporcionais</h3>
+            <p class="text-gray-700 leading-relaxed text-justify mb-2">
+                As férias proporcionais são devidas ao empregado que é desligado antes de completar o período aquisitivo
+                de 12 meses. Elas representam o direito adquirido em meses de serviço, calculado na base de 1/12 avos
+                por mês trabalhado (ou fração igual ou superior a 15 dias).
+            </p>
+            <h5 class="text-lg font-semibold text-gray-900 mt-4">Fórmula de Cálculo</h5>
+            <div class="p-4 bg-blue-50 border border-[#00678F]/20 rounded-lg text-center my-4">
+                <strong class="font-mono text-lg text-gray-900 block">Férias Proporcionais Brutas = (Salário Bruto / 12)
+                    x Meses Trabalhados</strong>
+            </div>
+
+            <h3 class="text-xl font-bold text-gray-800 mt-8 mb-4">2. Férias Vencidas (Simples ou Dobradas)</h3>
+            <p class="text-gray-700 leading-relaxed text-justify mb-2">
+                As férias vencidas referem-se ao período aquisitivo de 12 meses já completo, para o qual o período
+                concessivo de 12 meses para gozo já se iniciou (ou terminou, se for o caso de dobra).
+            </p>
+            <h5 class="text-lg font-semibold text-gray-900 mt-4">Fórmula de Cálculo</h5>
+            <p class="text-gray-700 leading-relaxed text-justify mt-2 mb-4">
+                O valor corresponde a 100% da remuneração, mais o 1/3 constitucional. Se o período concessivo tiver se
+                esgotado, as férias serão devidas em dobro (Súmula nº 8 do TST).
+            </p>
+            <div class="p-4 bg-blue-50 border border-[#00678F]/20 rounded-lg text-center my-4">
+                <strong class="font-mono text-lg text-gray-900 block">Férias Vencidas Brutas = Salário Bruto x (1 +
+                    1/3) x Fator de Dobra (1 ou 2)</strong>
+            </div>
+
+            <h3 class="text-xl font-bold text-gray-800 mt-8 mb-4">3. Desconto de Faltas no Período Aquisitivo</h3>
+            <p class="text-gray-700 leading-relaxed text-justify mb-2">
+                O número de dias de férias a que o empregado tem direito pode ser reduzido de acordo com o número de
+                faltas injustificadas no período aquisitivo, conforme previsto no <strong class="text-gray-800">Art. 130
+                    da CLT</strong>. Faltas justificadas e abonadas não causam redução.
+            </p>
+
+            <div class="table-container my-6">
+                <table class="custom-table border border-[#00678F] rounded-lg overflow-hidden">
+                    <thead>
+                        <tr>
+                            <th>Faltas Injustificadas no Período Aquisitivo</th>
+                            <th>Direito a Dias de Férias</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Até 5 faltas</td>
+                            <td>30 dias corridos</td>
+                        </tr>
+                        <tr>
+                            <td>De 6 a 14 faltas</td>
+                            <td>24 dias corridos</td>
+                        </tr>
+                        <tr>
+                            <td>De 15 a 23 faltas</td>
+                            <td>18 dias corridos</td>
+                        </tr>
+                        <tr>
+                            <td>De 24 a 32 faltas</td>
+                            <td>12 dias corridos</td>
+                        </tr>
+                        <tr>
+                            <td class="bg-red-50 text-red-700 font-semibold">Acima de 32 faltas</td>
+                            <td class="bg-red-50 text-red-700 font-semibold">Perde o direito ao período de férias</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h5 class="text-lg font-semibold text-gray-900 mt-6 mb-2 border-l-4 border-[#00678F] pl-3">Pontos Chave na
+                Rescisão Contratual</h5>
+            <ul class="list-disc list-inside text-gray-700 leading-relaxed mt-2 pl-4 space-y-2">
+                <li>
+                    **CLT Art. 146:** Assegura o pagamento das férias (vencidas e proporcionais) na rescisão do
+                    contrato, independentemente da causa. **Exceção:** as férias proporcionais não são devidas em casos
+                    de justa causa (as vencidas devem ser pagas mesmo na justa causa, Súmula 171 do TST).
+                </li>
+                <li>
+                    **Aviso Prévio Indenizado:** Integra o tempo de serviço para todos os efeitos legais, devendo ser
+                    considerado no cálculo do número de avos de férias proporcionais.
+                </li>
+            </ul>
+            <hr class="my-6 border-gray-300">
+
+
+            <div id="base-legal-drawer" class="drawer-container">
+                <div id="base-legal-header" class="drawer-header">
+                    <h4 class="text-xl font-semibold text-[#00678F]">Base Legal e Jurisprudência</h4>
+                    <svg class="arrow-icon w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                    </svg>
+                </div>
+                <div id="base-legal-content" class="drawer-content">
+                    <p class="text-gray-700 leading-relaxed text-justify mt-4">
+                        A legislação e a jurisprudência garantem o direito a férias como verba indenizatória na extinção
+                        do contrato de trabalho.
+                    </p>
+                    <h5 class="text-lg font-semibold text-gray-800 mt-4">Fontes Normativas</h5>
+
+                    <hr class="my-4 border-gray-300">
+                    <h5 class="text-base font-semibold text-gray-800">Consolidação das Leis do Trabalho (CLT):</h5>
+                    <ul class="list-disc list-inside text-gray-700 leading-relaxed mt-2 ml-4 space-y-3">
+                        <li><strong>Art. 130:</strong>
+                            <p class="text-sm italic mt-1 ml-4 border-l-2 border-gray-400 pl-3">Regra de concessão de
+                                férias conforme o número de faltas injustificadas ao serviço no período aquisitivo.</p>
+                        </li>
+                        <li><strong>Art. 146:</strong>
+                            <p class="text-sm italic mt-1 ml-4 border-l-2 border-gray-400 pl-3">Assegura o pagamento das
+                                férias proporcionais na rescisão do contrato, exceto em casos de justa causa.</p>
+                        </li>
+                        <li><strong>Art. 147:</strong>
+                            <p class="text-sm italic mt-1 ml-4 border-l-2 border-gray-400 pl-3">Detalha que o empregado
+                                demitido sem justa causa antes de completar 12 meses de serviço terá direito a férias
+                                proporcionais.</p>
+                        </li>
+                    </ul>
+
+                    <hr class="my-6 border-gray-300">
+
+                    <h5 class="text-lg font-semibold text-gray-800">Jurisprudência (Tribunal Superior do Trabalho - TST)
+                    </h5>
+
+                    <h6 class="text-base font-semibold text-gray-800 mt-4">Direito a Férias na Rescisão</h6>
+                    <div class="p-4 bg-gray-100 rounded-md mt-2 border border-gray-300">
+                        <p class="font-bold text-sm">Súmula nº 171 do TST:</p>
+                        <p class="text-sm mt-1 italic">"Salvo na hipótese de dispensa por justa causa, o empregado tem
+                            direito às férias vencidas e proporcionais com o acréscimo de um terço constitucional."</p>
+                        <p class="text-xs mt-2 text-gray-600">*(Nota: O entendimento consolidado do TST é que mesmo na
+                            justa causa, o empregado tem direito às férias vencidas não gozadas + 1/3, mas perde as
+                            proporcionais.)*</p>
+                    </div>
+
+                    <h6 class="text-base font-semibold text-gray-800 mt-6">Cálculo e Pagamento em Dobro</h6>
+                    <div class="p-4 bg-gray-100 rounded-md mt-2 border border-gray-300">
+                        <p class="font-bold text-sm">Súmula nº 7 do TST:</p>
+                        <p class="text-sm mt-1 italic">"A remuneração das férias indenizadas (proporcionais e vencidas)
+                            será calculada com base na remuneração do mês da rescisão."</p>
+
+                        <hr class="my-3 border-gray-300">
+
+                        <p class="font-bold text-sm">Súmula nº 8 do TST (Pagamento em Dobro):</p>
+                        <p class="text-sm mt-1 italic">"As férias cujo período concessivo se esgotou (vencidas há mais
+                            de 12 meses da aquisição) devem ser pagas em dobro na rescisão."</p>
+                    </div>
+
+                </div>
+            </div>
+
+            <div id="base-calculo-deducoes-drawer" class="drawer-container">
+                <div id="base-calculo-deducoes-header" class="drawer-header">
+                    <h4 class="text-xl font-semibold text-[#00678F]">Base de Cálculo e Deduções</h4>
+                    <svg class="arrow-icon w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                    </svg>
+                </div>
+                <div id="base-calculo-deducoes-content" class="drawer-content">
+                    <p class="text-gray-700 leading-relaxed text-justify mt-4">
+                        A base de cálculo das férias (vencidas e proporcionais) inclui o Salário-Base e as médias de
+                        verbas variáveis (como horas extras, adicionais e comissões) do respectivo período aquisitivo.
+                    </p>
+                    <h5 class="text-lg font-semibold text-gray-900 mt-4">O Adicional de 1/3 Constitucional</h5>
+                    <p class="text-gray-700 leading-relaxed text-justify mt-2">
+                        O terço constitucional (Art. 7º, XVII, da CF) incide sobre o valor bruto das férias (vencidas e
+                        proporcionais).
+                    </p>
+
+                    <h5 class="text-lg font-semibold text-[#00678F] mt-4">Deduções Obrigatórias em Férias Indenizadas
+                        (Rescisão)</h5>
+                    <p class="text-gray-700 leading-relaxed text-justify mt-4">
+                        Tanto as férias proporcionais quanto as férias vencidas pagas na rescisão possuem natureza
+                        indenizatória (são férias não gozadas), o que impacta sua tributação.
+                    </p>
+                    <ul class="list-disc list-inside text-gray-700 leading-relaxed mt-2 pl-4">
+                        <li>
+                            **Imposto de Renda Retido na Fonte (IRRF):** As férias indenizadas (vencidas e
+                            proporcionais) e o respectivo 1/3 constitucional são **isentos** de Imposto de Renda.
+                        </li>
+                        <li>
+                            **Contribuição ao INSS:** A parcela paga a título de férias indenizadas (vencidas e
+                            proporcionais) e 1/3 constitucional na rescisão também é **isenta** de Contribuição ao INSS.
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div id="reflexos-outras-verbas-drawer" class="drawer-container">
+                <div id="reflexos-outras-verbas-header" class="drawer-header">
+                    <h4 class="text-xl font-semibold text-[#00678F]">Reflexos sobre Outras Verbas</h4>
+                    <svg class="arrow-icon w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                    </svg>
+                </div>
+                <div id="reflexos-outras-verbas-content" class="drawer-content">
+                    <p class="text-gray-700 leading-relaxed text-justify mt-4">
+                        Em casos de rescisão sem justa causa, a remuneração de férias interage diretamente com o Aviso
+                        Prévio.
+                    </p>
+
+                    <h5 class="text-lg font-semibold text-[#00678F] mt-4">Aviso Prévio Indenizado</h5>
+                    <p class="text-gray-700 leading-relaxed text-justify mt-2">
+                        O aviso prévio indenizado apenas afeta o cálculo das **férias proporcionais**, aumentando o
+                        tempo de serviço e, consequentemente, o número de avos de férias proporcionais devidos. Não
+                        afeta as férias vencidas.
+                    </p>
+
+                    <h5 class="text-lg font-semibold text-[#00678F] mt-4">FGTS e Multa de 40%</h5>
+                    <p class="text-gray-700 leading-relaxed text-justify mt-2">
+                        Por terem natureza indenizatória, **não há incidência de FGTS** sobre as férias (vencidas e
+                        proporcionais) e o terço constitucional pagos na rescisão. No entanto, esses valores entram na
+                        base de cálculo da Multa de 40% sobre o FGTS (Súmula 462 do TST).
+                    </p>
+                </div>
+            </div>
+
+            <div id="calculadora-ferias-drawer" class="drawer-container">
+                <div id="calculadora-ferias-header" class="drawer-header">
+                    <h4 class="text-xl font-semibold text-[#00678F]">Calculadora (Simulação)</h4>
+                    <svg class="arrow-icon w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                    </svg>
+                </div>
+                <div id="calculadora-ferias-content" class="drawer-content">
+                    <p class="text-gray-700 leading-relaxed text-justify mt-4">Use a calculadora abaixo para estimar o
+                        valor bruto das suas férias proporcionais ou vencidas.</p>
+
+                    <div class="p-4 bg-white rounded-lg shadow-inner mt-4">
+                        <h5 class="text-md font-semibold text-gray-800">Cálculo Simples (Bruto por Avos)</h5>
+                        <p class="text-gray-600 text-sm mb-2">Este cálculo estima o valor base para férias proporcionais
+                            ou o valor total de uma férias vencida (12/12), já com o 1/3 constitucional.</p>
+                        <div class="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4">
+                            <div class="flex-1">
+                                <label for="salarioBrutoInput" class="block text-sm text-gray-700">Salário Bruto
+                                    (R$):</label>
+                                <input type="text" id="salarioBrutoInput"
+                                    class="mt-1 block w-full rounded-md border-gray-300 p-2 focus:ring-[#00678F] focus:border-[#00678F]">
+                            </div>
+                            <div class="flex-1">
+                                <label for="mesesProporcionaisInput" class="block text-sm text-gray-700">Meses
+                                    (Proporcionais 1-12 | Vencidas = 12):</label>
+                                <input type="number" id="mesesProporcionaisInput"
+                                    class="mt-1 block w-full rounded-md border-gray-300 p-2 focus:ring-[#00678F] focus:border-[#00678F]"
+                                    value="1">
+                            </div>
+                        </div>
+                        <div class="mt-4">
+                            <label for="fatorDobraInput" class="block text-sm text-gray-700">Fator de Dobra (1 = Simples
+                                | 2 = Dobro):</label>
+                            <input type="number" id="fatorDobraInput"
+                                class="mt-1 block w-full rounded-md border-gray-300 p-2 focus:ring-[#00678F] focus:border-[#00678F]"
+                                value="1" min="1" max="2">
+                        </div>
+                        <button id="calculateFeriasBtn"
+                            class="mt-4 w-full px-4 py-2 bg-[#00678F] text-white rounded-md hover:bg-[#004562] transition duration-300 shadow-md flex items-center justify-center">
+                            <span id="buttonText">Calcular Proporcional/Vencida</span>
+                            <div id="loadingSpinner" class="loading-spinner"></div>
+                        </button>
+                        <div class="mt-4">
+                            <div class="flex items-center">
+                                <p id="feriasResult" class="text-sm text-gray-700"></p>
+                                <button id="copyFerias" class="copy-btn hidden" aria-label="Copiar valor">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                        <path
+                                            d="M16 1H4C2.9 1 2 1.9 2 3v14h2V3h12V1zm3 4H8C6.9 5 6 5.9 6 7v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z" />
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="pje-calc-drawer" class="drawer-container">
+                <div id="pje-calc-header" class="drawer-header">
+                    <h4 class="text-xl font-semibold text-[#00678F]">Lançamento no PJe-Calc </h4>
+                    <svg class="arrow-icon w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                    </svg>
+                </div>
+
+                <div id="pje-calc-content" class="drawer-content">
+                    <p class="text-gray-700 leading-relaxed text-justify mt-4">Para lançar as Férias Vencidas e
+                        Proporcionais no PJe-Calc devem ser seguidos os passos a seguir:
+                    <p>
+                    <h5 class="text-md font-semibold text-[#00678F] mt-4">Verificação do Gozo de Férias</h5>
+                    <p class="text-gray-700 leading-relaxed text-justify mt-2">
+                        Primeiramente, acesse o menu <u> Férias </u> na grade lateral esquerda do sistema.<p>
+
+                    <div class="image-container flex justify-center">
+                        <img src="imagens_direitos/feriasinicial1.png"
+                            alt="Tela inicial da aba Férias do PJe-Calc, mostrando períodos aquisitivos, concessivos e a situação como 'Gozadas' e 'Indenizadas'.">
+                    </div>
+
+                    Em seguida, o sistema exibirá uma tela que mostra os períodos aquisitivos e a situação, indicando
+                    quais
+                    períodos são 'Gozadas' e quais serão pagos como 'Indenizadas' (vencidas e proporcionais na
+                    rescisão).
+                    <p>
+                        O usuário deverá preecheer os campos e indicar se há parcelas 'Em Dobro' a serem calculadas.
+                    <p>
+                        Destaca-se que o sistema traz a opção de importação dos dados dos parâmetros a serem preenchidos.
+                    </p>
+
+                    <div class="image-container flex justify-center">
+                        <img src="imagens_direitos/feriasinicial2.png"
+                            alt="Outra visualização da tela inicial da aba Férias do PJe-Calc, detalhando os períodos aquisitivos e a coluna 'Indenizadas' para os períodos vencidos e proporcional.">
+                    </div>
+
+                    <h5 class="text-md font-semibold text-[#00678F] mt-4">Lançamento das Ferias</h5>
+                    <p class="text-gray-700 leading-relaxed text-justify mt-2">
+                    </p>
+
+                    <p class="text-gray-700 leading-relaxed text-justify mt-4">A seguir, confira o passo a passo para o
+                        lançamento da verba no PJe-Calc, utilizando a opção "Expresso":</p>
+
+                    <ol class="list-decimal list-inside text-gray-700 leading-relaxed mt-4 ml-4 space-y-3">
+                        <li> <strong class="text-gray-800">Acessar Verbas e Escolher Lançamento:</strong> No menu de
+                            navegação à esquerda, clique na opção <u>Verbas</u> para iniciar o lançamento. Após o
+                            comando,
+                            será exibida a tela para escolha do Lançamento da Verba. Escolha a opção <u>Expresso</u>.
+                            <img src="imagens_direitos/verbas.png"
+                                alt="Tela do PJe-Calc - Passo 1: Acessar a opção Verbas no menu lateral e clicar em Expresso na seção Lançamento."
+                                class="w-full h-auto my-4 rounded-lg shadow-md">
+                        </li>
+                        <li> <strong class="text-gray-800">Seleção da Verba:</strong> O sistema abrirá as opções de
+                            verbas, escolha a verba <u>Ferias + 1/3</u> e clique no botão <u>Salvar</u>
+                            <img src="imagens_direitos/ferias1.png"
+                                alt="Tela do PJe-Calc - Verbas Principais: Selecionar Saldo de Salário"
+                                class="w-full h-auto my-4 rounded-lg shadow-md">
+                        </li>
+                        <li>
+                            <strong class="text-gray-800">Quadro de Verbas e Ações:</strong> O sistema exibirá um quadro
+                            com os campos:
+                            <ul class="list-disc list-inside text-gray-700 leading-relaxed mt-2 ml-4">
+                                <li class="ml-8 flex items-center">
+                                <li>Ações - contendo as opções de configurações da verba selecionada (parâmetros,
+                                    ocorrências e
+                                    exclusão)
+                                    <img src="imagens_direitos/telaacoes.png"
+                                        alt="Ícones de Ações: Parâmetros (folha com seta), Ocorrências (folha com checks), Excluir (X vermelho)"
+                                        class="icon-small" style="width: 72px; height: auto;">
+                                </li>
+                                <li class="ml-8 flex items-center">
+                                    - Parâmetros da Verba <img src="imagens_direitos/telaparametros.png"
+                                        alt="Ícone de Parâmetros" class="icon-small">
+                                </li>
+                                <li class="ml-8 flex items-center">
+                                    - Ocorrências da Verba <img src="imagens_direitos/telaocorrencias.png"
+                                        alt="Ícone de Ocorrências" class="icon-small">
+                                </li>
+                                <li class="ml-8 flex items-center">
+                                    - Excluir <img src="imagens_direitos/telaexcluir.png" alt="Ícone de Excluir"
+                                        class="icon-small">
+                                </li>
+                                <li>Verba Principal - verba selecionada para lançamento.</li>
+                                <li>Verba Reflexa - em que ao clicar no botão <u>Exibir</u> serão listadas todas as
+                                    verbas
+                                    reflexas ligadas a Verba Principal.</li>
+                            </ul>
+                            <img src="imagens_direitos/ferias2.png"
+                                alt="Tela do PJe-Calc - Verba Saldo de Salário selecionada com as opções de Ações e Verba Reflexa."
+                                class="w-full h-auto my-4 rounded-lg shadow-md">
+                        </li>
+                        <li>
+                            <strong class="text-gray-800">Parametrização da Verba:</strong> Ao clicar no botão
+                            <u>Parâmetros da Verba</u> serão exibidas todas as configurações necessárias para a
+                            parametrização
+                            da Verba Principal.
+                            <img src="imagens_direitos/ferias3.png"
+                                alt="Tela do PJe-Calc - Detalhes da Verba Saldo de Salário: Parâmetros, Base de Cálculo, Divisor e Multiplicador."
+                                class="w-full h-auto my-4 rounded-lg shadow-md">
+                        </li>
+                        <li>
+                            <strong class="text-gray-800">Registro de Ocorrências:</strong> Ao clicar no botão
+                            <u>Ocorrências da Verba</u> serão exibidas todas as configurações necessárias para registro
+                            das
+                            ocorrências da Verba Principal.
+                            <img src="imagens_direitos/ferias4.png"
+                                alt="Tela do PJe-Calc - Dados de Ocorrências: Detalhamento da data inicial, data final e valor calculado da verba."
+                                class="w-full h-auto my-4 rounded-lg shadow-md">
+                        </li>
+                    </ol>
+
+                </div>
+
+        </section>
+    </div>
+
+    <script>
+        // Função para formatar o valor do salário conforme o usuário digita
+        function formatSalarioInput() {
+            const salarioBrutoInput = document.getElementById('salarioBrutoInput');
+            salarioBrutoInput.addEventListener('input', (e) => {
+                let value = e.target.value;
+                // Remove todos os caracteres que não sejam dígitos
+                value = value.replace(/\D/g, '');
+
+                // Formata com vírgula para centavos e pontos para milhares
+                if (value.length > 2) {
+                    value = value.replace(/(\d+)(\d{2})$/, '$1,$2');
+                }
+                if (value.length > 6) {
+                    value = value.replace(/(\d)(?=(\d{3})+,)/g, '$1.');
+                }
+                e.target.value = value;
+            });
+        }
+
+        // Chamada da função de formatação
+        formatSalarioInput();
+
+        // Função para calcular o valor das férias proporcionais (adaptada para 1/12)
+        function calculateFerias() {
+            const salarioInput = document.getElementById('salarioBrutoInput');
+            const mesesInput = document.getElementById('mesesProporcionaisInput');
+            const dobraInput = document.getElementById('fatorDobraInput');
+            const resultDiv = document.getElementById('feriasResult');
+            const copyBtn = document.getElementById('copyFerias');
+
+            const rawSalario = salarioInput.value.replace(/\./g, '').replace(',', '.');
+            const salario = parseFloat(rawSalario);
+            const meses = parseInt(mesesInput.value);
+            const dobra = parseInt(dobraInput.value);
+
+            if (isNaN(salario) || salario <= 0 || isNaN(meses) || meses < 1 || meses > 12 || isNaN(dobra) || (dobra !== 1 && dobra !== 2)) {
+                resultDiv.textContent = 'Por favor, insira um salário e um número de meses (1 a 12) e fator de dobra (1 ou 2) válidos.';
+                copyBtn.classList.add('hidden');
+                return;
+            }
+
+            // Cálculo: (Salário Bruto / 12) * meses + 1/3 desse valor.
+            // O fator de dobra é aplicado sobre o valor TOTAL (Base + 1/3)
+            let valorBaseFerias = (salario / 12) * meses;
+            let valorAdicional = valorBaseFerias / 3;
+            let valorTotalFerias = (valorBaseFerias + valorAdicional) * dobra;
+
+            // Adiciona a indicação se é simples ou em dobro
+            const statusDobra = dobra === 2 ? ' em Dobro' : '';
+
+            resultDiv.textContent = `Valor Bruto Proporcional/Vencida (${meses}/12 avos)${statusDobra} com 1/3: ${valorTotalFerias.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}`;
+            copyBtn.classList.remove('hidden');
+        }
+
+        // Função para copiar o texto
+        function copyText(elementId) {
+            const element = document.getElementById(elementId);
+            if (!element) return;
+            const textToCopy = element.textContent;
+
+            const tempInput = document.createElement('input');
+            tempInput.value = textToCopy;
+            document.body.appendChild(tempInput);
+            tempInput.select();
+            try {
+                document.execCommand('copy');
+                console.log('Texto copiado com sucesso!');
+            } catch (err) {
+                console.error('Falha ao copiar o texto:', err);
+            } finally {
+                document.body.removeChild(tempInput);
+            }
+        }
+
+        // Adiciona os event listeners aos botões
+        document.getElementById('calculateFeriasBtn').addEventListener('click', calculateFerias);
+        document.getElementById('copyFerias').addEventListener('click', () => copyText('feriasResult'));
+
+        // Lógica para as gavetas expansíveis
+        function setupDrawer(drawerId) {
+            const header = document.getElementById(`${drawerId}-header`);
+            const content = document.getElementById(`${drawerId}-content`);
+
+            header.addEventListener('click', () => {
+                const isExpanded = header.classList.toggle('active');
+                if (isExpanded) {
+                    content.style.maxHeight = content.scrollHeight + "px";
+                } else {
+                    content.style.maxHeight = '0';
+                }
+            });
+        }
+        // Configuração das gavetas
+        setupDrawer('base-legal');
+        setupDrawer('base-calculo-deducoes');
+        setupDrawer('reflexos-outras-verbas');
+        setupDrawer('calculadora-ferias');
+        setupDrawer('pje-calc');
+    </script>
+</body>
+
+</html>
