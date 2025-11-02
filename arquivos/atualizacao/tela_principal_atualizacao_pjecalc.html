@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manual Interativo de Cálculos Trabalhistas - Módulo de Atualização</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f1f5f9;
+        }
+
+        /* Estilo para a Logo */
+        .logo-trt {
+            max-height: 60px;
+            width: auto;
+        }
+
+        /* Ajuste para o novo tamanho das imagens, tornando-as maiores */
+        .system-image {
+            max-width: 267px;
+            /* Tamanho da Imagem MANTIDO */
+            height: auto;
+            border: 1px solid #cbd5e1;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+        }
+
+        /* CLASSE DE CORREÇÃO: Desloca o bloco de links para baixo para alinhar com a imagem */
+        .links-start {
+            margin-top: 4.0rem; /* Ajustado para descer mais um pouco (era 3.5rem) */
+        }
+    </style>
+</head>
+
+<body>
+    <div class="p-4 md:p-8">
+        <div class="max-w-6xl mx-auto bg-white rounded-xl shadow-xl p-6 md:p-10 border border-gray-200">
+            <div class="flex justify-center mb-6">
+                <img src="https://site.trt19.jus.br/portalTRT19/sites/default/files/logo-trt19.png" alt="Logo do TRT19"
+                    class="logo-trt w-auto object-contain">
+            </div>
+            <h1 class="text-3xl md:text-4xl text-center mb-6 text-[#007380]">Módulo de Atualização da Liquidação
+            </h1>
+            <p class="text-center text-gray-600 mb-8">Navegue pelas opções de cálculo e atualização de valores para o
+                pagamento ou prosseguimento da execução.</p>
+
+            <div class="flex flex-col lg:flex-row gap-8 lg:items-start">
+
+                <div class="w-full lg:w-1/3 flex flex-col items-center">
+                    
+                    <img src="imagens_atualizacao/tela_atualizacao_liquidacao.png" alt="Menu de Atualização do PJe-Calc Cidadão"
+                        class="system-image rounded-lg mb-4" usemap="#map-atualizacao">
+
+                    <map name="map-atualizacao">
+                        <area shape="rect" coords="x1,y1,x2,y2" href="dados_pagamento_atualizacao.html"
+                            alt="Dados do Pagamento">
+                        <area shape="rect" coords="x1,y1,x2,y2" href="pensao_alimenticia_atualizacao.html"
+                            alt="Pensão Alimentícia">
+                        <area shape="rect" coords="x1,y1,x2,y2" href="multas_indenizacoes_atualizacao.html"
+                            alt="Multas e Indenizações">
+                        <area shape="rect" coords="x1,y1,x2,y2" href="honorarios_atualizacao.html"
+                            alt="Honorários">
+                        <area shape="rect" coords="x1,y1,x2,y2" href="custas_judiciais_atualizacao.html"
+                            alt="Custas Judiciais">
+                        <area shape="rect" coords="x1,y1,x2,y2" href="liquidar_atualizacao.html"
+                            alt="Liquidar Atualização">
+                        <area shape="rect" coords="x1,y1,x2,y2" href="imprimir_atualizacao.html"
+                            alt="Imprimir Atualização">
+                    </map>
+                </div>
+
+                <div class="w-full lg:w-2/3">
+
+                    <p class="text-lg text-gray-700 mb-2">
+                        A imagem ao lado representa o menu de Atualização do sistema PJe-Calc Cidadão com os
+                        submódulos disponíveis. Utilize os links abaixo para acessar os detalhes de cada um desses
+                        módulos.
+                    </p>
+
+                    <div class="flex flex-col space-y-3 links-start">
+
+                        <div class="flex items-center space-x-3">
+                            <span class="text-xl text-[#007380] font-extrabold flex-shrink-0"
+                                style="margin-left: -0.5rem;">&rarr;</span>
+                            <a href="dados_pagamento_atualizacao.html"
+                                class="block w-full py-1 px-2 bg-white rounded-lg shadow-sm hover:bg-gray-100 transition-colors border-l-4 border-[#007380]">
+                                <span class="text-[#007380] font-semibold block">Dados do Pagamento</span>
+                            </a>
+                        </div>
+                        
+                        <div class="flex items-center space-x-3">
+                            <span class="text-xl text-[#007380] font-extrabold flex-shrink-0"
+                                style="margin-left: -0.5rem;">&rarr;</span>
+                            <a href="pensao_alimenticia_atualizacao.html"
+                                class="block w-full py-1 px-2 bg-white rounded-lg shadow-sm hover:bg-gray-100 transition-colors border-l-4 border-[#007380]">
+                                <span class="text-[#007380] font-semibold block">Pensão Alimentícia</span>
+                            </a>
+                        </div>
+                        
+                        <div class="flex items-center space-x-3">
+                            <span class="text-xl text-[#007380] font-extrabold flex-shrink-0"
+                                style="margin-left: -0.5rem;">&rarr;</span>
+                            <a href="multas_indenizacoes_atualizacao.html"
+                                class="block w-full py-1 px-2 bg-white rounded-lg shadow-sm hover:bg-gray-100 transition-colors border-l-4 border-[#007380]">
+                                <span class="text-[#007380] font-semibold block">Multas e Indenizações</span>
+                            </a>
+                        </div>
+                        
+                        <div class="flex items-center space-x-3">
+                            <span class="text-xl text-[#007380] font-extrabold flex-shrink-0"
+                                style="margin-left: -0.5rem;">&rarr;</span>
+                            <a href="honorarios_atualizacao.html"
+                                class="block w-full py-1 px-2 bg-white rounded-lg shadow-sm hover:bg-gray-100 transition-colors border-l-4 border-[#007380]">
+                                <span class="text-[#007380] font-semibold block">Honorários</span>
+                            </a>
+                        </div>
+                        
+                        <div class="flex items-center space-x-3">
+                            <span class="text-xl text-[#007380] font-extrabold flex-shrink-0"
+                                style="margin-left: -0.5rem;">&rarr;</span>
+                            <a href="custas_judiciais_atualizacao.html"
+                                class="block w-full py-1 px-2 bg-white rounded-lg shadow-sm hover:bg-gray-100 transition-colors border-l-4 border-[#007380]">
+                                <span class="text-[#007380] font-semibold block">Custas Judiciais</span>
+                            </a>
+                        </div>
+                        
+                        <div class="flex items-center space-x-3">
+                            <span class="text-xl text-[#007380] font-extrabold flex-shrink-0"
+                                style="margin-left: -0.5rem;">&rarr;</span>
+                            <a href="liquidar_atualizacao.html"
+                                class="block w-full py-1 px-2 bg-white rounded-lg shadow-sm hover:bg-gray-100 transition-colors border-l-4 border-[#007380]">
+                                <span class="text-[#007380] font-semibold block">Liquidar Atualização</span>
+                            </a>
+                        </div>
+                        
+                        <div class="flex items-center space-x-3">
+                            <span class="text-xl text-[#007380] font-extrabold flex-shrink-0"
+                                style="margin-left: -0.5rem;">&rarr;</span>
+                            <a href="imprimir_atualizacao.html"
+                                class="block w-full py-1 px-2 bg-white rounded-lg shadow-sm hover:bg-gray-100 transition-colors border-l-4 border-[#007380]">
+                                <span class="text-[#007380] font-semibold block">Imprimir Atualização</span>
+                            </a>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+</body>
+
+</html>
